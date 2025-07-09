@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ModeWatcher } from "mode-watcher"
+  //   import { ModeWatcher } from "mode-watcher"
   import type { Snippet } from "svelte"
 
   import "../app.css"
@@ -7,19 +7,19 @@
   import Header from "./Header.svelte"
 
   interface Props {
-    children: Snippet
+    children?: Snippet
     data?: any
   }
 
   let { children, data }: Props = $props()
 </script>
 
-<ModeWatcher />
+<!-- <ModeWatcher /> -->
 
 <div class="flex min-h-screen flex-col">
   <Header />
   <main class="flex-1">
-    {@render children()}
+    {@render children?.()}
   </main>
   <Footer />
 </div>
