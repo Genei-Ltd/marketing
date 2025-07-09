@@ -155,7 +155,7 @@
               {#each Object.entries(plan.allowance_units) as [key, value]}
                 <div class="flex items-start">
                   <Icons.IconPlus
-                    class="w-4 h-4 text-secondary rounded-sm mr-3 flex-shrink-0 mt-0.5  border-secondary"
+                    class="w-4 h-4 text-secondary rounded-sm mr-3 shrink-0 mt-0.5  border-secondary"
                   />
                   <span class="text-sm text-foreground mr-2">{value.delta}</span
                   >
@@ -168,7 +168,7 @@
               {#each plan.features as feature}
                 <div class="flex items-start">
                   <Icons.IconCheck
-                    class="w-4 h-4 rounded-sm text-secondary mr-3 flex-shrink-0 mt-0.5  border-secondary"
+                    class="w-4 h-4 rounded-sm text-secondary mr-3 shrink-0 mt-0.5  border-secondary"
                   />
                   <span class="text-sm text-foreground">{feature}</span>
                 </div>

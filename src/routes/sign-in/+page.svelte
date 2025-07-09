@@ -50,7 +50,7 @@
     <div id="clerk-container"></div>
   </div>
   <div
-    class=" flex-col hidden lg:flex items-center justify-between p-8 h-full w-full bg-gradient-to-br from-primary via-primary/80 to-primary/60 text-primary-foreground"
+    class=" flex-col hidden lg:flex items-center justify-between p-8 h-full w-full bg-linear-to-br from-primary via-primary/80 to-primary/60 text-primary-foreground"
   >
     <div class="flex flex-col w-full">
       <img src="/logos/white.png" alt="CoLoop" class="h-12 self-start mb-2" />

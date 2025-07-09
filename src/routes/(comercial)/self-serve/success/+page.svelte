@@ -184,13 +184,13 @@
 </svelte:head>
 
 <div
-  class="min-h-screen bg-gradient-to-br from-background via-background to-muted/20"
+  class="min-h-screen bg-linear-to-br from-background via-background to-muted/20"
 >
   <div class="container mx-auto p-4 md:p-8 max-w-4xl">
     <!-- Success Header -->
     <div class="text-center mb-16 pt-12">
       <div
-        class="relative inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full mb-8 ring-8 ring-green-200/50 shadow"
+        class="relative inline-flex items-center justify-center w-24 h-24 bg-linear-to-br from-green-100 to-emerald-100 rounded-full mb-8 ring-8 ring-green-200/50 shadow"
       >
         <IconCheck class="w-12 h-12 text-green-600" stroke-width="2.5" />
         <div
@@ -214,7 +214,7 @@
       <!-- Total Credits Added - Full Width -->
       <div class=" mx-auto">
         <Card
-          class="p-4 bg-gradient-to-br from-green-200 to-emerald-200 border border-green-500 shadow"
+          class="p-4 bg-linear-to-br from-green-200 to-emerald-200 border border-green-500 shadow"
         >
           <div class="text-center">
             <div class="text-xl font-bold text-green-700 mb-2">
@@ -239,7 +239,7 @@
         <Card class="p-0 shadow border border-border bg-white overflow-hidden">
           <!-- Receipt Header -->
           <div
-            class="bg-gradient-to-r from-gray-50 to-gray-100 p-6 border-b border-dashed border-gray-300"
+            class="bg-linear-to-r from-gray-50 to-gray-100 p-6 border-b border-dashed border-gray-300"
           >
             <div class="text-center">
               <div class="flex items-center justify-center gap-2 mb-2">

@@ -118,7 +118,7 @@
                 >
                   <div class="flex items-start h-32">
                     <div
-                      class="w-32 h-full bg-primary flex items-center justify-center flex-shrink-0 transition-colors duration-300"
+                      class="w-32 h-full bg-primary flex items-center justify-center shrink-0 transition-colors duration-300"
                     >
                       <SvelteComponent
                         class="w-18 h-18 text-primary-foreground transition-transform duration-300"
@@ -220,7 +220,7 @@
             </div>
           {:else if selectedOption?.calComEmbed}
             <div
-              class="bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-8 shadow-lg"
+              class="bg-linear-to-r from-gray-50 to-gray-100 rounded-2xl p-8 shadow-lg"
               in:scale={{ duration: 500, easing: cubicOut }}
             >
               <iframe

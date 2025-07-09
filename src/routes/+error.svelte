@@ -2,7 +2,7 @@
   import { page } from "$app/state"
 </script>
 
-<div class="flex items-center justify-center min-h-[100vh]">
+<div class="flex items-center justify-center min-h-screen">
   <div class="flex flex-col items-center p-4">
     <div class="max-w-lg text-center">
       <h1 class="text-5xl font-bold text-foreground">

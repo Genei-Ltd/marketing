@@ -246,7 +246,7 @@
           <!-- Detailed Receipt -->
           {#if data.sessionData}
             <div
-              class="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-lg shadow-2xl max-w-2xl mx-auto relative overflow-hidden"
+              class="bg-linear-to-br from-white to-gray-50 border border-gray-200 rounded-lg shadow-2xl max-w-2xl mx-auto relative overflow-hidden"
               in:fly={{ y: 30, duration: 600, delay: 600, easing: quintOut }}
               out:fly={{ y: -30, duration: 400, easing: quintOut }}
             >

@@ -61,7 +61,7 @@
   />
 </svelte:head>
 
-<div class="min-h-screen bg-gradient-to-b from-green-50 to-white">
+<div class="min-h-screen bg-linear-to-b from-green-50 to-white">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     {#if data.success}
       <!-- Success Content -->
@@ -155,7 +155,7 @@
           <div class="space-y-6">
             <div class="flex items-start">
               <div
-                class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 shrink-0"
               >
                 <IconMail class="w-4 h-4 text-blue-600" />
               </div>
@@ -172,7 +172,7 @@
 
             <div class="flex items-start">
               <div
-                class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4 shrink-0"
               >
                 <IconStar class="w-4 h-4 text-green-600" />
               </div>
@@ -187,7 +187,7 @@
 
             <div class="flex items-start">
               <div
-                class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-4 shrink-0"
               >
                 <IconReceipt class="w-4 h-4 text-purple-600" />
               </div>

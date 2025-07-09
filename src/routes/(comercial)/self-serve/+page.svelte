@@ -362,7 +362,7 @@
         role="alert"
       >
         <div class="flex items-start">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <Icons.IconAlertTriangle class="h-6 w-6 text-destructive" />
           </div>
           <div class="ml-3">
@@ -426,7 +426,7 @@
                   </p>
                 </div>
 
-                <div class="flex-shrink-0">
+                <div class="shrink-0">
                   <Icons.IconChevronRight
                     class="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-200"
                   />
@@ -478,7 +478,7 @@
               {#if item.badge}
                 <div class="absolute -top-3 left-5 z-30">
                   <span
-                    class="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground text-xs font-bold px-3 py-1.5 rounded-full shadow-lg border border-primary/20 {item.badge ===
+                    class="bg-linear-to-r from-primary to-primary/80 text-primary-foreground text-xs font-bold px-3 py-1.5 rounded-full shadow-lg border border-primary/20 {item.badge ===
                     'RECOMMENDED'
                       ? ''
                       : ''}"
@@ -492,7 +492,7 @@
                 class="bg-card rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-visible relative z-20 {item.error
                   ? 'border-destructive bg-destructive/5'
                   : item.badge
-                    ? 'border-2 border-primary/30 bg-gradient-to-br from-card to-primary/5'
+                    ? 'border-2 border-primary/30 bg-linear-to-br from-card to-primary/5'
                     : quantities[item.id] > 0
                       ? 'ring-2 ring-primary/40 border-primary/20'
                       : 'border border-border hover:border-border/60'}"
@@ -503,7 +503,7 @@
                     <div class="flex items-start justify-between gap-6">
                       <!-- Left side: Icon, Title, Description -->
                       <div class="flex items-start space-x-3 flex-1 min-w-0">
-                        <div class="flex-shrink-0 mt-0.5">
+                        <div class="shrink-0 mt-0.5">
                           <div
                             class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center ring-1 ring-primary/20"
                           >
@@ -531,7 +531,7 @@
                                   class="flex items-start text-sm text-muted-foreground"
                                 >
                                   <Icons.IconCheck
-                                    class="w-3.5 h-3.5 text-primary mr-2 flex-shrink-0 mt-0.5"
+                                    class="w-3.5 h-3.5 text-primary mr-2 shrink-0 mt-0.5"
                                   />
                                   <span class="leading-relaxed">{benefit}</span>
                                 </div>
@@ -542,7 +542,7 @@
                       </div>
 
                       <!-- Right side: Price and Quantity -->
-                      <div class="flex-shrink-0 text-right">
+                      <div class="shrink-0 text-right">
                         <!-- Price -->
                         <div class="mb-4">
                           <div
@@ -646,7 +646,7 @@
                   }}
                 >
                   <div
-                    class="bg-gradient-to-r from-muted/40 to-muted/60 backdrop-blur-sm rounded-b-xl border border-t-0 border-border/40 px-4 pt-3 pb-2 shadow-sm"
+                    class="bg-linear-to-r from-muted/40 to-muted/60 backdrop-blur-sm rounded-b-xl border border-t-0 border-border/40 px-4 pt-3 pb-2 shadow-sm"
                   >
                     <div class="flex items-center justify-between">
                       <div class="flex items-center space-x-2 text-xs">
