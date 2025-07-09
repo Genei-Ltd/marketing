@@ -1,0 +1,94 @@
+---
+description: Tailwind CSS patterns and styling guidelines for this project's custom design system
+alwaysApply: false
+---
+
+# Tailwind CSS Design System Rules
+
+## Color System (oklch-based)
+Always use semantic color tokens instead of raw colors:
+
+### Primary Colors
+- `bg-primary` / `text-primary-foreground` 
+- `bg-secondary` / `text-secondary-foreground`
+- `bg-muted` / `text-muted-foreground`
+- `bg-destructive` / `text-destructive-foreground`
+
+### UI Colors
+- `bg-background` / `text-foreground`
+- `bg-card` / `text-card-foreground`
+- `bg-popover` / `text-popover-foreground`
+- `border-border` / `border-input`
+
+### CSS Variables Usage
+Use this pattern for custom colors:
+```css
+color: hsl(var(--primary) / <alpha-value>);
+```
+
+## Radius System
+Use the custom radius variables:
+- `rounded-xs` = `calc(var(--radius) - 8px)`
+- `rounded-sm` = `calc(var(--radius) - 4px)`
+- `rounded-md` = `calc(var(--radius))`
+- `rounded-lg` = `calc(var(--radius) + 4px)`
+- `rounded-xl` = `calc(var(--radius) + 8px)`
+
+## Focus States
+Always include proper focus states:
+```css
+focus-visible:ring-[3px] focus-visible:ring-ring focus-visible:border-ring
+```
+
+## Disabled States
+Use this pattern for disabled elements:
+```css
+disabled:opacity-50 disabled:pointer-events-none
+```
+
+## Dark Mode
+- All semantic tokens automatically work with dark mode
+- Use `dark:` prefix only for exceptional cases
+- Prefer semantic tokens over manual dark mode overrides
+
+## Custom Utilities
+Available custom utilities:
+- `bg-grid` - Grid background pattern
+- `bg-grid-small` - Small grid background
+- `bg-dot` - Dot background pattern
+- `animate-marquee-left` - Marquee animation
+- `animate-marquee-up` - Vertical marquee
+
+## Responsive Design
+Use mobile-first approach:
+- `md:` - 768px and up
+- `lg:` - 1024px and up
+- `xl:` - 1280px and up
+- `2xl:` - 1536px and up
+
+## Common Patterns
+### Card Component
+```css
+bg-card text-card-foreground rounded-xl border shadow-sm
+```
+
+### Button Focus
+```css
+focus-visible:ring-[3px] focus-visible:ring-ring/50
+```
+
+### Interactive Elements
+```css
+transition-all duration-200 hover:scale-105
+```
+
+### Container
+```css
+container mx-auto px-4
+```
+
+## Performance Guidelines
+- Use `cn()` utility for class merging
+- Prefer semantic tokens for better caching
+- Avoid hardcoded color values
+- Use JIT compilation features efficiently

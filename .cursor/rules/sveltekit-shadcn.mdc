@@ -1,0 +1,118 @@
+---
+description: SvelteKit with shadcn-svelte component development patterns and Tailwind CSS guidelines
+alwaysApply: true
+---
+
+# SvelteKit + shadcn-svelte Development Rules
+
+You are an expert in SvelteKit, TypeScript, shadcn-svelte, Tailwind CSS, and modern web development.
+
+## Project Context
+- SvelteKit marketing website with TypeScript
+- shadcn-svelte UI components (NOT React shadcn/ui)  
+- Tailwind CSS v4 with custom design system
+- Component structure: module script + instance script pattern
+
+## Component Architecture Pattern
+Follow this exact structure for all UI components:
+
+```svelte
+<script lang="ts" module>
+	import { cn, type WithElementRef } from "$lib/utils.js";
+	import { type VariantProps, tv } from "tailwind-variants";
+	import type { HTMLButtonAttributes } from "svelte/elements";
+
+	export const componentVariants = tv({
+		base: "base-classes-here",
+		variants: {
+			variant: {
+				default: "default-classes",
+			},
+			size: {
+				default: "default-size",
+			},
+		},
+		defaultVariants: {
+			variant: "default",
+			size: "default",
+		},
+	});
+
+	export type ComponentProps = WithElementRef<HTMLButtonAttributes> & {
+		variant?: VariantProps<typeof componentVariants>["variant"];
+		size?: VariantProps<typeof componentVariants>["size"];
+	};
+</script>
+
+<script lang="ts">
+	let {
+		class: className,
+		variant = "default",
+		size = "default", 
+		ref = $bindable(null),
+		children,
+		...restProps
+	}: ComponentProps = $props();
+</script>
+
+<element
+	bind:this={ref}
+	class={cn(componentVariants({ variant, size }), className)}
+	{...restProps}
+>
+	{@render children?.()}
+</element>
+```
+
+## Svelte 5 Runes (Required)
+- Use `$props()` for component props
+- Use `$bindable()` for two-way binding
+- Use `$state()` for reactive state
+- Use `$derived()` for computed values
+- Use `{@render children?.()}` instead of slots
+
+## TypeScript Patterns
+- Use `WithElementRef<HTMLButtonAttributes>` for element references
+- Export component types: `export type ComponentProps = ...`
+- Use `VariantProps<typeof componentVariants>` for variant typing
+- Prefer interfaces over types for object shapes
+
+## Tailwind CSS Guidelines
+- Use semantic design tokens: `bg-primary`, `text-primary-foreground`, `border-border`
+- Leverage CSS variables: `hsl(var(--primary) / <alpha-value>)`
+- Use custom radius system: `rounded-[calc(var(--radius))]`
+- Focus states: `focus-visible:ring-[3px] focus-visible:ring-ring`
+- Dark mode: semantic tokens work automatically
+- Disabled states: `disabled:opacity-50 disabled:pointer-events-none`
+
+## File Organization
+- UI components: `src/lib/components/ui/[component-name]/`
+- Each component needs `index.ts` for exports
+- Configs: `src/lib/configs/`
+- Utils: `src/lib/utils/`
+- Use established aliases: `$lib/components`, `$lib/utils`
+
+## Design System Colors
+Available semantic tokens:
+- primary, secondary, muted, destructive
+- border, input, ring
+- background, foreground
+- card, popover
+- accent
+
+## Custom Utilities
+- Always use `cn()` for class merging
+- Use `tailwind-variants` for component variants
+- Custom background utilities: `bg-grid`, `bg-dot`
+- Radius variables: `--radius` (0.25rem base)
+
+## Icons
+- Use Tabler Icons (@tabler/icons-svelte) NOT Lucide icons
+- Import pattern: `import { IconHome, IconUser } from '@tabler/icons-svelte'`
+- Use `size-4` for default icon sizing
+
+## Accessibility Requirements
+- Include proper ARIA attributes
+- Use semantic HTML elements
+- Proper focus management with `focus-visible:ring-[3px]`
+- Include `aria-disabled` for disabled states

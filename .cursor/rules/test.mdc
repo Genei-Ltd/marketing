@@ -1,0 +1,5 @@
+---
+description: This is a test rule file.
+globs:
+alwaysApply: false
+---

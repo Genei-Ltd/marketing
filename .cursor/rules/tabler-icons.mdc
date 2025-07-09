@@ -1,0 +1,90 @@
+---
+description: Tabler icons usage patterns and import guidelines for this project
+alwaysApply: false
+---
+
+# Tabler Icons Usage Rules
+
+## Icon Library
+This project uses **Tabler Icons** (@tabler/icons-svelte), NOT Lucide icons.
+
+## Import Patterns
+Always import icons from `@tabler/icons-svelte`:
+
+```typescript
+import { IconHome, IconUser, IconSettings } from '@tabler/icons-svelte';
+```
+
+## Naming Convention
+- Use PascalCase with `Icon` prefix
+- Follow Tabler's exact naming: `IconHome`, `IconChevronDown`, `IconArrowRight`
+- Never use Lucide icon names like `Home`, `ChevronDown`, `ArrowRight`
+
+## Common Icon Usage
+```svelte
+<script lang="ts">
+	import { IconHome, IconUser, IconSettings } from '@tabler/icons-svelte';
+</script>
+
+<IconHome class="size-4" />
+<IconUser class="size-5" />
+<IconSettings class="size-6" />
+```
+
+## Icon Sizing
+Use Tailwind's size utilities:
+- `size-3` (12px) - Small icons
+- `size-4` (16px) - Default size
+- `size-5` (20px) - Medium icons
+- `size-6` (24px) - Large icons
+- `size-8` (32px) - Extra large icons
+
+## Button Component Icons
+When using icons in buttons, follow this pattern:
+```svelte
+<Button>
+	<IconPlus class="size-4" />
+	Add Item
+</Button>
+```
+
+## Icon-Only Buttons
+```svelte
+<Button variant="ghost" size="icon">
+	<IconX class="size-4" />
+</Button>
+```
+
+## Icon Colors
+Use semantic color tokens:
+- `text-muted-foreground` - Subtle icons
+- `text-foreground` - Default icons
+- `text-primary` - Primary action icons
+- `text-destructive` - Destructive action icons
+
+## Common Replacements
+When you see these Lucide references, replace with Tabler:
+- `Home` → `IconHome`
+- `User` → `IconUser`
+- `Settings` → `IconSettings`
+- `ChevronDown` → `IconChevronDown`
+- `ArrowRight` → `IconArrowRight`
+- `Plus` → `IconPlus`
+- `X` → `IconX`
+- `Search` → `IconSearch`
+- `Menu` → `IconMenu2`
+
+## Never Use
+- Lucide icons (`lucide-svelte`)
+- Heroicons
+- Feather icons
+- Any other icon library
+
+## Package Reference
+```json
+{
+  "dependencies": {
+    "@tabler/icons-svelte": "^3.33.0"
+  }
+}
+```
