@@ -2,9 +2,11 @@
   import * as NavigationMenu from "$lib/components/ui/navigation-menu/index.js"
   import { navigationMenuTriggerStyle } from "$lib/components/ui/navigation-menu/navigation-menu-trigger.svelte"
   import { cn } from "$lib/utils.js"
-  import CircleIcon from "@lucide/svelte/icons/circle"
-  import CircleCheckIcon from "@lucide/svelte/icons/circle-check"
-  import CircleHelpIcon from "@lucide/svelte/icons/circle-help"
+  import {
+    IconCircle,
+    IconCircleCheck,
+    IconHelpCircle,
+  } from "@tabler/icons-svelte"
   import type { HTMLAttributes } from "svelte/elements"
 
   const components: { title: string; href: string; description: string }[] = [
@@ -191,17 +193,17 @@
         <ul class="grid w-[200px] gap-4 p-2">
           <li>
             <NavigationMenu.Link href="#" class="flex-row items-center gap-2">
-              <CircleHelpIcon />
+              <IconHelpCircle />
               Backlog
             </NavigationMenu.Link>
 
             <NavigationMenu.Link href="#" class="flex-row items-center gap-2">
-              <CircleIcon />
+              <IconCircle />
               To Do
             </NavigationMenu.Link>
 
             <NavigationMenu.Link href="#" class="flex-row items-center gap-2">
-              <CircleCheckIcon />
+              <IconCircleCheck />
               Done
             </NavigationMenu.Link>
           </li>
