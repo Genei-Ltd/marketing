@@ -4,8 +4,11 @@
   import * as Icon from "@tabler/icons-svelte"
   import { ModeWatcher } from "mode-watcher"
   import type { Snippet } from "svelte"
+
   import { ClerkProvider, SignedIn, SignedOut, UserButton } from "svelte-clerk"
+
   import "../app.css"
+
   interface Props {
     children?: Snippet
     data?: any
@@ -20,57 +23,57 @@
   <!-- Loading Animation -->
   {#if $navigating}
     <div
-      class="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
     >
-      <div class="bg-background rounded-lg p-6 shadow-lg border border-border">
+      <div class="bg-background border-border rounded-lg border p-6 shadow-lg">
         <div class="flex items-center gap-3">
           <div class="relative">
             <div
-              class="w-8 h-8 border-4 border-primary/20 rounded-full animate-spin border-t-primary"
+              class="border-primary/20 border-t-primary h-8 w-8 animate-spin rounded-full border-4"
             ></div>
           </div>
-          <div class="text-sm text-muted-foreground">Loading...</div>
+          <div class="text-muted-foreground text-sm">Loading...</div>
         </div>
       </div>
     </div>
   {/if}
 
-  <div class="bg-background min-h-screen flex flex-col">
+  <div class="bg-background flex min-h-screen flex-col">
     {#if $page.url.pathname !== "/"}
       <SignedIn>
         <div class="flex h-screen">
           <!-- Column 1 -->
           <div
-            class="w-16 bg-muted border-r border-border flex flex-col items-center justify-between"
+            class="bg-muted border-border flex w-16 flex-col items-center justify-between border-r"
           >
             <a href="https://app.coloop.ai">
               <div class="flex flex-col items-center justify-center">
                 <img
                   src="/favicon.png"
                   alt="CoLoop Logo"
-                  class="h-8 w-8 rounded mt-4"
+                  class="mt-4 h-8 w-8 rounded"
                 />
               </div>
             </a>
-            <div class="flex flex-col items-center justify-center w-16 gap-4">
+            <div class="flex w-16 flex-col items-center justify-center gap-4">
               <a
                 href="https://community.coloop.ai"
-                class="flex flex-col items-center justify-center hover:bg-card rounded-full w-10 h-10"
+                class="hover:bg-card flex h-10 w-10 flex-col items-center justify-center rounded-full"
               >
-                <Icon.IconFlame class="w-10 h-10 p-2" />
+                <Icon.IconFlame class="h-10 w-10 p-2" />
               </a>
               <a
                 href="https://docs.coloop.ai/docs/troubleshooting"
-                class="flex flex-col items-center justify-center hover:bg-card rounded-full w-10 h-10"
+                class="hover:bg-card flex h-10 w-10 flex-col items-center justify-center rounded-full"
               >
-                <Icon.IconHelpCircle class="w-10 h-10 p-2" />
+                <Icon.IconHelpCircle class="h-10 w-10 p-2" />
               </a>
 
-              <div class="flex flex-col items-center justify-center w-16">
+              <div class="flex w-16 flex-col items-center justify-center">
                 <!-- User Section -->
                 <div class="p-4">
                   <div
-                    class="bg-muted/30 rounded-sm p-1 gap-3 flex flex-row items-center hover:bg-muted transition-colors"
+                    class="bg-muted/30 hover:bg-muted flex flex-row items-center gap-3 rounded-sm p-1 transition-colors"
                   >
                     <UserButton />
                   </div>
@@ -80,80 +83,80 @@
           </div>
 
           <!-- Sidebar -->
-          <aside class="w-64 bg-card border-r border-border flex flex-col">
+          <aside class="bg-card border-border flex w-64 flex-col border-r">
             <!-- Logo -->
-            <div class="p-6 border-b border-border">
-              <a href="/" class="flex items-start gap-2 flex-col">
+            <div class="border-border border-b p-6">
+              <a href="/" class="flex flex-col items-start gap-2">
                 <img
                   src="/logos/black.png"
                   alt="CoLoop Logo"
                   class="h-6 dark:invert"
                 />
                 <span
-                  class="text-xs -mt-1 w-full text-muted-foreground font-bold tracking-wide uppercase"
+                  class="text-muted-foreground -mt-1 w-full text-xs font-bold tracking-wide uppercase"
                   >Management Console</span
                 >
               </a>
             </div>
 
             <!-- Navigation -->
-            <nav class="flex-1 p-3 space-y-1">
+            <nav class="flex-1 space-y-1 p-3">
               <div
-                class="pt-4 text-sm font-bold text-muted-foreground uppercase"
+                class="text-muted-foreground pt-4 text-sm font-bold uppercase"
               >
                 <span class="text-sm">Workspaces</span>
               </div>
               <a
                 href="/billing"
-                class="flex items-center gap-3 px-3 py-2 text-sm rounded transition-colors {$page
+                class="flex items-center gap-3 rounded px-3 py-2 text-sm transition-colors {$page
                   .url.pathname === '/billing'
-                  ? 'bg-black/5 dark:bg-white/5 font-medium text-foreground'
+                  ? 'text-foreground bg-black/5 font-medium dark:bg-white/5'
                   : 'text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/10'}"
               >
-                <Icon.IconCreditCard class="w-4 h-4" />
+                <Icon.IconCreditCard class="h-4 w-4" />
                 Billing & Workspaces
               </a>
 
               <a
                 href="/self-serve"
-                class="flex items-center gap-3 px-3 py-2 text-sm rounded transition-colors {$page.url.pathname.startsWith(
+                class="flex items-center gap-3 rounded px-3 py-2 text-sm transition-colors {$page.url.pathname.startsWith(
                   '/self-serve',
                 )
-                  ? 'bg-black/5 dark:bg-white/5 font-medium text-foreground'
+                  ? 'text-foreground bg-black/5 font-medium dark:bg-white/5'
                   : 'text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/10'}"
               >
-                <Icon.IconShoppingCart class="w-4 h-4" />
+                <Icon.IconShoppingCart class="h-4 w-4" />
                 Buy Credits
               </a>
 
               <div
-                class="pt-4 text-sm font-bold text-muted-foreground uppercase"
+                class="text-muted-foreground pt-4 text-sm font-bold uppercase"
               >
                 <span class="text-sm">Get help</span>
               </div>
               <a
                 href="https://docs.coloop.ai/docs/troubleshooting"
-                class="flex items-center gap-3 px-3 py-2 text-sm rounded text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+                class="text-muted-foreground hover:text-foreground flex items-center gap-3 rounded px-3 py-2 text-sm transition-colors hover:bg-black/5 dark:hover:bg-white/10"
                 target="_blank"
               >
-                <Icon.IconBook class="w-4 h-4" />
+                <Icon.IconBook class="h-4 w-4" />
                 Documentation
               </a>
               <a
                 href="https://docs.coloop.ai/docs/how-to-guides"
-                class="flex items-center gap-3 px-3 py-2 text-sm rounded text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+                class="text-muted-foreground hover:text-foreground flex items-center gap-3 rounded px-3 py-2 text-sm transition-colors hover:bg-black/5 dark:hover:bg-white/10"
                 target="_blank"
               >
-                <Icon.IconStar class="w-4 h-4" />
+                <Icon.IconStar class="h-4 w-4" />
                 How-to Guides
               </a>
 
               <a
                 href="https://community.coloop.ai"
-                class="flex items-center gap-3 px-3 py-2 text-sm rounded text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+                class="text-muted-foreground hover:text-foreground flex items-center gap-3 rounded px-3 py-2 text-sm transition-colors hover:bg-black/5 dark:hover:bg-white/10"
                 target="_blank"
               >
-                <Icon.IconFlame class="w-4 h-4" />
+                <Icon.IconFlame class="h-4 w-4" />
                 Ask our community
               </a>
 
@@ -162,9 +165,9 @@
               <a
                 href="https://app.coloop.ai"
                 target="_blank"
-                class="flex items-center gap-3 px-3 py-2 text-sm rounded text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+                class="text-muted-foreground hover:text-foreground flex items-center gap-3 rounded px-3 py-2 text-sm transition-colors hover:bg-black/5 dark:hover:bg-white/10"
               >
-                <Icon.IconExternalLink class="w-4 h-4" />
+                <Icon.IconExternalLink class="h-4 w-4" />
 
                 Open CoLoop
               </a>
@@ -191,7 +194,7 @@
     {:else}
       <div class="bg-background">
         <div
-          class="flex flex-row items-center justify-between py-4 max-w-5xl mx-auto px-4"
+          class="mx-auto flex max-w-5xl flex-row items-center justify-between px-4 py-4"
         >
           <a href="/">
             <img
@@ -201,7 +204,7 @@
             />
           </a>
           <div
-            class="flex flex-row items-center justify-center gap-6 text-lg text-foreground font-semibold"
+            class="text-foreground flex flex-row items-center justify-center gap-6 text-lg font-semibold"
           >
             <a href="/company">Company</a>
             <a href="/pricing">Pricing</a>
@@ -212,7 +215,7 @@
               <!-- Button will be fixed separately -->
               <a
                 href="https://app.coloop.ai"
-                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+                class="ring-offset-background focus-visible:ring-ring border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex h-10 items-center justify-center rounded-md border px-4 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
                 >Back to app</a
               >
             {:else if $page.url.pathname.includes("/demo")}
@@ -221,7 +224,7 @@
               <!-- Button will be fixed separately -->
               <a
                 href="/demo"
-                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+                class="ring-offset-background focus-visible:ring-ring border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex h-10 items-center justify-center rounded-md border px-4 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
                 >Get Started</a
               >
             {/if}
@@ -236,9 +239,9 @@
       </main>
 
       <!-- Footer - Naturally at bottom -->
-      <div class="border-t border-border mt-12">
-        <div class="max-w-4xl mx-auto px-4 py-6">
-          <div class="text-center text-muted-foreground text-sm">
+      <div class="border-border mt-12 border-t">
+        <div class="mx-auto max-w-4xl px-4 py-6">
+          <div class="text-muted-foreground text-center text-sm">
             <p>© CoLoop {new Date().getFullYear()}</p>
             <p class="mt-1">
               AI analysis copilot for Insights & Strategy Teams
