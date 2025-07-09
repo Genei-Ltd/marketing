@@ -55,6 +55,7 @@
     "svelte-clerk": "^0.14.0",
     "svelte-eslint-parser": "^0.43.0",
     "sveltekit-superforms": "^2.27.0",
+    "tailwindcss-animate": "^1.0.7",
     "upgrade": "^1.1.0",
     "zod": "^3.25.67"
   },
