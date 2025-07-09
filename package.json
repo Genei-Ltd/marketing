@@ -17,6 +17,7 @@
     "format_check": "prettier --check --plugin prettier-plugin-svelte ./"
   },
   "devDependencies": {
+    "@lucide/svelte": "^0.525.0",
     "@sveltejs/adapter-node": "^5.2.10",
     "@sveltejs/kit": "^2.5.27",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
@@ -40,9 +41,10 @@
     "prettier-plugin-tailwindcss": "^0.6.13",
     "svelte": "^5.35.3",
     "svelte-check": "^4.0.0",
-    "tailwind-merge": "^2.5.5",
-    "tailwind-variants": "^0.2.1",
+    "tailwind-merge": "^3.3.1",
+    "tailwind-variants": "^1.0.0",
     "tailwindcss": "^4.1.11",
+    "tw-animate-css": "^1.3.5",
     "typescript": "^5.5.0",
     "vite": "^5.4.4"
   },
