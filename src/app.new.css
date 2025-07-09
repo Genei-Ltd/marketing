@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
-@import "tailwindcss/preflight";
-@import "tailwindcss/utilities";
-
 @import "tailwindcss";
 
 @layer base {
@@ -42,18 +39,38 @@
     --secondary-foreground: 270 0% 40%;
     --muted: 270 0% 15%;
     --muted-foreground: 270 0% 70%;
-    --accent: 265 100% 55%;; 
+    --accent: 265 100% 55%;
     --accent-foreground: 270 0% 90%;
     --destructive: 0 95% 65%;
     --destructive-foreground: 0 0% 100%;
     --border: 270 0% 20%;
     --input: 270 0% 20%;
-    --ring: 265 100% 55%;;
+    --ring: 265 100% 55%;
     --radius: 0.25rem;
   }
 
   * {
     border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    font-feature-settings: "ss01" 1;
+    font-family: "IBM Plex Serif", serif;
+  }
+
+  ::selection {
+    background-color: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
   }
 }
 
