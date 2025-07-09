@@ -3,56 +3,92 @@
   import * as NavigationMenu from "$lib/components/ui/navigation-menu/index.js"
   import { navigationMenuTriggerStyle } from "$lib/components/ui/navigation-menu/navigation-menu-trigger.svelte"
   import { cn } from "$lib/utils.js"
-  import {
-    IconCircle,
-    IconCircleCheck,
-    IconHelpCircle,
-  } from "@tabler/icons-svelte"
   import type { HTMLAttributes } from "svelte/elements"
-
-  const components: { title: string; href: string; description: string }[] = [
-    {
-      title: "Alert Dialog",
-      href: "/docs/components/alert-dialog",
-      description:
-        "A modal dialog that interrupts the user with important content and expects a response.",
-    },
-    {
-      title: "Hover Card",
-      href: "/docs/components/hover-card",
-      description:
-        "For sighted users to preview content available behind a link.",
-    },
-    {
-      title: "Progress",
-      href: "/docs/components/progress",
-      description:
-        "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-    },
-    {
-      title: "Scroll-area",
-      href: "/docs/components/scroll-area",
-      description: "Visually or semantically separates content.",
-    },
-    {
-      title: "Tabs",
-      href: "/docs/components/tabs",
-      description:
-        "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-    },
-    {
-      title: "Tooltip",
-      href: "/docs/components/tooltip",
-      description:
-        "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-    },
-  ]
 
   type ListItemProps = HTMLAttributes<HTMLAnchorElement> & {
     title: string
     href: string
     content: string
   }
+
+  const companyTypes = [
+    {
+      title: "Agency",
+      href: "#",
+      description: "Solutions for agencies and consultants",
+    },
+    {
+      title: "In-house team",
+      href: "#",
+      description: "Solutions for internal teams",
+    },
+    {
+      title: "Independent researcher",
+      href: "#",
+      description: "Solutions for independent researchers",
+    },
+  ]
+
+  const useCases = [
+    {
+      title: "Concept testing",
+      href: "#",
+      description: "Test and validate new concepts",
+    },
+    {
+      title: "Message testing",
+      href: "#",
+      description: "Test marketing messages and communications",
+    },
+    {
+      title: "Brand positioning",
+      href: "#",
+      description: "Research and refine brand positioning",
+    },
+    {
+      title: "Customer experience",
+      href: "#",
+      description: "Understand and improve customer experience",
+    },
+    {
+      title: "Market entry",
+      href: "#",
+      description: "Research for entering new markets",
+    },
+    {
+      title: "Pricing research",
+      href: "#",
+      description: "Research pricing strategies and models",
+    },
+  ]
+
+  const resources = [
+    {
+      title: "Guides & tutorials",
+      href: "https://docs.coloop.ai/docs/getting-started/introduction",
+      description: "Learn how to use CoLoop effectively",
+    },
+    {
+      title: "Community videos",
+      href: "https://community.coloop.ai/",
+      description: "Watch community-created content",
+    },
+    {
+      title: "Blog",
+      href: "#",
+      description: "Read our latest insights and updates",
+    },
+    {
+      title: "Careers",
+      href: "#",
+      description: "Join our team and grow with us",
+    },
+    {
+      title: "Security",
+      href: "https://trust.coloop.ai/",
+      description: "Learn about our security practices",
+    },
+  ]
 </script>
 
 <div
@@ -60,7 +96,7 @@
 >
   <div class="flex items-center gap-4">
     <a href="/" class="text-2xl font-bold">
-      <img src="/logos/black.png" alt="Logo" class="h-6" />
+      <img src="/logos/black.png" alt="Logo" class="h-6 dark:invert" />
     </a>
   </div>
 
@@ -78,14 +114,14 @@
             <a
               {href}
               class={cn(
-                "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none",
+                "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block flex min-h-[80px] flex-col justify-start space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none",
                 className,
               )}
               {...restProps}
             >
               <div class="text-sm leading-none font-medium">{title}</div>
               <p
-                class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                class="text-muted-foreground line-clamp-2 flex-1 text-sm leading-snug"
               >
                 {content}
               </p>
@@ -98,59 +134,85 @@
     <NavigationMenu.Root viewport={false} class="hidden md:block">
       <NavigationMenu.List>
         <NavigationMenu.Item>
-          <NavigationMenu.Trigger>Home</NavigationMenu.Trigger>
+          <NavigationMenu.Link>
+            {#snippet child()}
+              <a href="/product" class={navigationMenuTriggerStyle()}>Product</a
+              >
+            {/snippet}
+          </NavigationMenu.Link>
+        </NavigationMenu.Item>
+
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger>Company type</NavigationMenu.Trigger>
           <NavigationMenu.Content>
             <ul
-              class="grid gap-2 p-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]"
+              class="grid w-[240px] auto-cols-[240px] grid-flow-col grid-rows-3 justify-center gap-2 p-2"
+            >
+              {#each companyTypes as item}
+                {@render ListItem({
+                  href: item.href,
+                  title: item.title,
+                  content: item.description,
+                })}
+              {/each}
+            </ul>
+          </NavigationMenu.Content>
+        </NavigationMenu.Item>
+
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger>Use case</NavigationMenu.Trigger>
+          <NavigationMenu.Content>
+            <ul
+              class="grid w-[400px] auto-cols-[240px] grid-flow-col grid-rows-3 justify-center gap-2 p-2 md:w-[500px]"
+            >
+              {#each useCases as item}
+                {@render ListItem({
+                  href: item.href,
+                  title: item.title,
+                  content: item.description,
+                })}
+              {/each}
+            </ul>
+          </NavigationMenu.Content>
+        </NavigationMenu.Item>
+
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger>Resources</NavigationMenu.Trigger>
+          <NavigationMenu.Content>
+            <ul
+              class="grid w-[460px] grid-cols-[200px_240px] grid-rows-3 justify-start gap-2 p-2"
             >
               <li class="row-span-3">
                 <NavigationMenu.Link
-                  class="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
+                  class="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-gradient-to-b p-6 no-underline outline-none select-none focus:shadow-md"
                 >
                   {#snippet child({ props })}
-                    <a {...props} href="/">
+                    <a {...props} href="/resources">
                       <div class="mt-4 mb-2 text-lg font-medium">
-                        shadcn-svelte
+                        CoLoop Resources
                       </div>
                       <p class="text-muted-foreground text-sm leading-tight">
-                        Beautifully designed components built with Tailwind CSS.
+                        Everything you need to get started with user research.
                       </p>
                     </a>
                   {/snippet}
                 </NavigationMenu.Link>
               </li>
               {@render ListItem({
-                href: "/docs",
-                title: "Introduction",
-                content:
-                  "Re-usable components built using Bits UI and Tailwind CSS.",
+                href: "https://docs.coloop.ai/docs/getting-started/introduction",
+                title: "Guides & tutorials",
+                content: "Learn how to use CoLoop effectively",
               })}
               {@render ListItem({
-                href: "/docs/installation",
-                title: "Installation",
-                content: "How to install dependencies and structure your app.",
+                href: "https://community.coloop.ai/",
+                title: "Community videos",
+                content: "Watch community-created content",
               })}
               {@render ListItem({
-                href: "/docs/components/typography",
-                title: "Typography",
-                content: "Styles for headings, paragraphs, lists...etc",
+                href: "#",
+                title: "Blog",
+                content: "Read our latest insights and updates",
               })}
-            </ul>
-          </NavigationMenu.Content>
-        </NavigationMenu.Item>
-        <NavigationMenu.Item>
-          <NavigationMenu.Trigger>Components</NavigationMenu.Trigger>
-          <NavigationMenu.Content>
-            <ul
-              class="grid w-[400px] gap-2 p-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
-            >
-              {#each components as component, i (i)}
-                {@render ListItem({
-                  href: component.href,
-                  title: component.title,
-                  content: component.description,
-                })}
-              {/each}
             </ul>
           </NavigationMenu.Content>
         </NavigationMenu.Item>
@@ -162,79 +224,7 @@
             {/snippet}
           </NavigationMenu.Link>
         </NavigationMenu.Item>
-        <NavigationMenu.Item>
-          <NavigationMenu.Trigger>List</NavigationMenu.Trigger>
-          <NavigationMenu.Content>
-            <ul class="grid w-[300px] gap-4 p-2">
-              <li>
-                <NavigationMenu.Link href="#">
-                  <div class="font-medium">Components</div>
-                  <div class="text-muted-foreground">
-                    Browse all components in the library.
-                  </div>
-                </NavigationMenu.Link>
-                <NavigationMenu.Link href="#">
-                  <div class="font-medium">Documentation</div>
-                  <div class="text-muted-foreground">
-                    Learn how to use the library.
-                  </div>
-                </NavigationMenu.Link>
-                <NavigationMenu.Link href="#">
-                  <div class="font-medium">Blog</div>
-                  <div class="text-muted-foreground">
-                    Read our latest blog posts.
-                  </div>
-                </NavigationMenu.Link>
-              </li>
-            </ul>
-          </NavigationMenu.Content>
-        </NavigationMenu.Item>
-        <NavigationMenu.Item>
-          <NavigationMenu.Trigger>Simple</NavigationMenu.Trigger>
-          <NavigationMenu.Content>
-            <ul class="grid w-[200px] gap-4 p-2">
-              <li>
-                <NavigationMenu.Link href="#">Components</NavigationMenu.Link>
-                <NavigationMenu.Link href="#">Documentation</NavigationMenu.Link
-                >
-                <NavigationMenu.Link href="#">Blocks</NavigationMenu.Link>
-              </li>
-            </ul>
-          </NavigationMenu.Content>
-        </NavigationMenu.Item>
-        <NavigationMenu.Item>
-          <NavigationMenu.Trigger>With Icon</NavigationMenu.Trigger>
 
-          <NavigationMenu.Content>
-            <ul class="grid w-[200px] gap-4 p-2">
-              <li>
-                <NavigationMenu.Link
-                  href="#"
-                  class="flex-row items-center gap-2"
-                >
-                  <IconHelpCircle />
-                  Backlog
-                </NavigationMenu.Link>
-
-                <NavigationMenu.Link
-                  href="#"
-                  class="flex-row items-center gap-2"
-                >
-                  <IconCircle />
-                  To Do
-                </NavigationMenu.Link>
-
-                <NavigationMenu.Link
-                  href="#"
-                  class="flex-row items-center gap-2"
-                >
-                  <IconCircleCheck />
-                  Done
-                </NavigationMenu.Link>
-              </li>
-            </ul>
-          </NavigationMenu.Content>
-        </NavigationMenu.Item>
         <NavigationMenu.Item>
           <Button variant="outline" size="default" href="/login" class="m-2"
             >Login</Button
