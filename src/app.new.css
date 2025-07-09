@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer base {
+  :root {
+    --background: 270 10% 90%; 
+    --foreground: 270 0% 10%;
+    --card: 270 0% 98%;
+    --card-foreground: 270 0% 10%;
+    --popover: 270 0% 98%;
+    --popover-foreground: 270 0% 10%;
+    --primary: 270 0% 98%;
+    --primary-foreground: 270 5% 20%;
+    --secondary: 29 0% 30%; 
+    --secondary-foreground: 270 0% 90%;
+    --muted: 270 0% 92%;
+    --muted-foreground: 270 0% 40%;
+    --accent: 265 100% 55%;
+    --accent-foreground: 270 0% 10%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 270 0% 5%;
+    --input: 270 0% 85%;
+    --ring: 265 100% 55%;
+    --radius: 0.25rem;
+  }
+
+  .dark {
+    --background: 270 0% 10%; 
+    --foreground: 270 0% 90%;
+    --card: 270 0% 15%;
+    --card-foreground: 270 0% 90%;
+    --popover: 270 0% 8%;
+    --popover-foreground: 270 0% 90%;
+    --primary: 270 0% 98%;
+    --primary-foreground: 270 0% 10%;
+    --secondary: 265 0% 0%;  
+    --secondary-foreground: 270 0% 40%;
+    --muted: 270 0% 15%;
+    --muted-foreground: 270 0% 70%;
+    --accent: 265 100% 55%;; 
+    --accent-foreground: 270 0% 90%;
+    --destructive: 0 95% 65%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 270 0% 20%;
+    --input: 270 0% 20%;
+    --ring: 265 100% 55%;;
+    --radius: 0.25rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+}
+
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: sans-serif;
+    font-weight: 200 700;
+    font-display: swap;
+    src: url("/fonts/IMB_Plex_Sans/IBMPlexSans-Regular.woff2") format("woff2");
+  }
+  
+  @font-face {
+    font-family: "IBM Plex Serif";
+    font-style: serif;
+    font-weight: 200 700;
+    font-display: swap;
+    src: url("/fonts/IMB_Plex_Serif/IBMPlexSerif-Regular.woff2") format("woff2");
+  }
+
+@layer base {
+  /* Prevent FOUC (Flash of Unstyled Content) */
+  /* html {
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  html.loaded {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+  } */
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1,
+      "ss01" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    /* @apply font-bold tracking-tight; */
+    font-feature-settings: "ss01" 1;
+    font-family: "IBM Plex Serif", serif;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+  
+  /* Prevent layout shifts from images
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  } */
+  
+}
