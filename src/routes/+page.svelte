@@ -9,7 +9,7 @@
 </script>
 
 <div class=" mx-auto flex max-w-7xl flex-col items-center justify-center">
-  <h1 class="mx-16 mt-64 text-center text-6xl font-bold">
+  <h1 class="mx-16 mt-64 text-center font-serif text-6xl font-bold">
     AI-powered analysis for human-powered insights
   </h1>
   <h2
@@ -30,7 +30,7 @@
     <img src="/images/hero.png" alt="Hero" class="w-full object-contain" />
   </div>
   <div class="mt-16 mb-32 w-full">
-    <h2 class="text-center text-4xl font-bold">
+    <h2 class="text-center font-serif text-4xl font-bold">
       Trusted by leading agencies and brands
     </h2>
     <div class="mt-16 flex flex-row items-center justify-center gap-16">
