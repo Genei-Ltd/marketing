@@ -1,11 +1,7 @@
 <script lang="ts">
   import EmailSubmit from "./EmailSubmit.svelte"
 
-  interface Props {
-    form?: any
-  }
-
-  let { form }: Props = $props()
+  let { form }: { form: FormData } = $props()
 </script>
 
 <div class=" mx-auto flex max-w-7xl flex-col items-center justify-center">
@@ -30,7 +26,7 @@
     <img src="/images/hero.png" alt="Hero" class="w-full object-contain" />
   </div>
   <div class="mt-16 mb-32 w-full">
-    <h2 class="text-center font-serif text-4xl font-bold">
+    <h2 class="text-center font-serif text-4xl">
       Trusted by leading agencies and brands
     </h2>
     <div class="mt-16 flex flex-row items-center justify-center gap-16">

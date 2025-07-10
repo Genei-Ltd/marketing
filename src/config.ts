@@ -7,5 +7,4 @@ export const SUPPORT_EMAIL: string = "support@coloop.ai"
 export const DOCS_URL: string = "https://docs.coloop.ai"
 
 export const WebsiteDescription: string = "Ai Research for Insights Teams."
-export const CreateProfileStep: boolean = true
 export const LOGO: string = "/logo.png"
