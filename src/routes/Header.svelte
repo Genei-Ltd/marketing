@@ -92,7 +92,7 @@
 </script>
 
 <div
-  class="mx-auto my-4 flex w-full max-w-7xl items-center justify-between px-4"
+  class="mx-auto my-4 flex w-full max-w-7xl items-center justify-between px-4 font-serif"
 >
   <div class="flex items-center gap-4">
     <a href="/" class="text-2xl font-bold">
@@ -114,14 +114,14 @@
             <a
               {href}
               class={cn(
-                "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground  flex min-h-[80px] flex-col justify-start space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none",
+                "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground mx-2 flex min-h-[80px] select-none flex-col justify-start space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
                 className,
               )}
               {...restProps}
             >
-              <div class="text-sm leading-none font-medium">{title}</div>
+              <div class="text-sm font-medium leading-none">{title}</div>
               <p
-                class="text-muted-foreground line-clamp-2 flex-1 text-sm leading-snug"
+                class="text-muted-foreground line-clamp-2 flex-1 font-sans text-sm leading-snug"
               >
                 {content}
               </p>
@@ -136,14 +136,19 @@
         <NavigationMenu.Item>
           <NavigationMenu.Link>
             {#snippet child()}
-              <a href="/product" class={navigationMenuTriggerStyle()}>Product</a
+              <a
+                href="/product"
+                class={navigationMenuTriggerStyle() +
+                  " px-4 py-2 text-lg font-medium tracking-wide"}>Product</a
               >
             {/snippet}
           </NavigationMenu.Link>
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <NavigationMenu.Trigger>Company type</NavigationMenu.Trigger>
+          <NavigationMenu.Trigger>
+            <span class="text-lg font-medium tracking-wide">Company type</span>
+          </NavigationMenu.Trigger>
           <NavigationMenu.Content>
             <ul
               class="grid w-[240px] auto-cols-[240px] grid-flow-col grid-rows-3 justify-center gap-2 p-2"
@@ -184,11 +189,11 @@
             >
               <li class="row-span-3">
                 <NavigationMenu.Link
-                  class="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-gradient-to-b p-6 no-underline outline-none select-none focus:shadow-md"
+                  class="from-muted/50 to-muted flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b p-6 no-underline outline-none focus:shadow-md"
                 >
                   {#snippet child({ props })}
                     <a {...props} href="/resources">
-                      <div class="mt-4 mb-2 text-lg font-medium">
+                      <div class="mb-2 mt-4 text-lg font-medium">
                         CoLoop Resources
                       </div>
                       <p class="text-muted-foreground text-sm leading-tight">
@@ -226,14 +231,12 @@
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <Button variant="outline" size="default" href="/login" class="m-2"
+          <Button variant="outline" size="lg" href="/login" class="m-2"
             >Login</Button
           >
         </NavigationMenu.Item>
         <NavigationMenu.Item>
-          <Button variant="default" size="default" href="/login"
-            >Get CoLoop</Button
-          >
+          <Button variant="default" size="lg" href="/login">Get CoLoop</Button>
         </NavigationMenu.Item>
       </NavigationMenu.List>
     </NavigationMenu.Root>

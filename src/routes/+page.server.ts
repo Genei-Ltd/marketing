@@ -1,7 +1,17 @@
 import { fail } from "@sveltejs/kit"
 import type { Actions } from "./$types"
+import { getApprovedTestimonialsByPage } from "$lib/server/connectors/notion-testimonials"
 
-export const load = async ({ locals }) => {}
+export const load = async ({ locals }) => {
+  // get testimonials from notion
+  const testimonials = await getApprovedTestimonialsByPage("/", true)
+
+  console.log(testimonials)
+
+  return {
+    testimonials,
+  }
+}
 
 export const actions: Actions = {
   emailSubmit: async ({ request }) => {

@@ -8,21 +8,21 @@
       title: "Concept and message testing",
       description:
         "Quickly understand target audiences perception, and uncover what resonates. Never miss or mix up another concept with CoLoop's automatic keyword labelling.",
-      image: "/images/concept-testing.png", // You'll need to add this image
+      image: "/images/concept-testing.png",
     },
     {
       id: "customer-experience",
       title: "Customer experience",
       description:
         "Analyze open-ended feedback to reveal customer sentiment. CoLoop enables scalable CX analysis to improve customer journeys and retention.",
-      image: "/images/customer-experience.png", // You'll need to add this image
+      image: "/images/customer-experience.png",
     },
     {
       id: "competitor-analysis",
       title: "Competitor analysis",
       description:
         "Unlock the competitive edge with deeper insights into unmet needs, differentiators and white space opportunities.",
-      image: "/images/competitor-analysis.png", // You'll need to add this image
+      image: "/images/competitor-analysis.png",
     },
     {
       id: "many-more",
@@ -60,7 +60,7 @@
     {#each features as feature}
       <div
         class={cn(
-          "flex min-h-[150px] cursor-pointer flex-col justify-between rounded-lg p-6 transition-all duration-300",
+          "flex min-h-[150px] cursor-pointer flex-col justify-between  p-6 transition-all duration-300",
           activeFeature.id === feature.id
             ? "bg-primary text-primary-foreground"
             : "bg-card hover:bg-primary/10",
@@ -104,19 +104,11 @@
         <div
           class="flex aspect-video h-full w-full items-center justify-center"
         >
-          <div class="space-y-4 text-center">
-            <!-- Placeholder for actual images -->
-            <div
-              class="bg-primary/20 mx-auto flex h-32 w-32 items-center justify-center rounded"
-            >
-              <div class="text-primary font-semibold">
-                {activeFeature.title.split(" ")[0]}
-              </div>
-            </div>
-            <p class="text-muted-foreground mx-auto max-w-xs text-sm">
-              Image placeholder for {activeFeature.title}
-            </p>
-          </div>
+          <img
+            src={activeFeature.image}
+            alt={activeFeature.title}
+            class="h-full w-full object-cover object-left grayscale"
+          />
         </div>
       {/if}
     </div>
