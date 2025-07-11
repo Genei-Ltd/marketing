@@ -9,15 +9,21 @@
   import Capabilities from "./Capabilities.svelte"
   import CommitmentLetter from "./CommitmentLetter.svelte"
   import Community from "./Community.svelte"
+  import CTAdemo from "./CTAdemo.svelte"
+  import EndReveal from "./EndReveal.svelte"
+  import Methodologies from "./Methodologies.svelte"
+  import DataFeatures from "./DataFeatures.svelte"
   let {
     form,
     data,
   }: { form: FormData; data: { testimonials: Testimonial[] } } = $props()
 </script>
 
-<div class="mx-auto flex max-w-7xl flex-col items-center justify-center">
+<div
+  class="relative mx-auto flex max-w-7xl flex-col items-center justify-center"
+>
   <!-- Hero text -->
-  <h1 class="mt-54 mx-16 text-center font-serif text-7xl leading-tight">
+  <h1 class="mx-16 mt-54 text-center font-serif text-7xl leading-tight">
     AI-powered analysis <br /> for human-powered insights
   </h1>
   <h2
@@ -27,7 +33,7 @@
   </h2>
 
   <!-- Email subscribe form -->
-  <div class="mb-18 mt-16 w-full">
+  <div class="mt-16 mb-18 w-full">
     <EmailSubmit
       {form}
       placeholder="Enter your email address"
@@ -35,7 +41,7 @@
     />
   </div>
   <!-- Customer logos -->
-  <div class="mb-16 mt-16 w-full">
+  <div class="mt-16 mb-16 w-full">
     <h2 class="text-center font-serif text-2xl">
       Trusted by the brands you trust
     </h2>
@@ -53,16 +59,23 @@
   </div>
 
   <!-- Hero image -->
-  <div class="mb-32 mt-16 w-full">
+  <div class="mt-16 mb-32 w-full">
     <img
-      src="/images/hero.png"
+      src="/images/hero-bg-gray.png"
       alt="Hero"
-      class="w-full object-contain grayscale"
+      class="w-full object-contain"
     />
   </div>
 
+  <!-- CTA -->
+  <div class="mt-16 mb-32 w-full">
+    <div class="mt-8">
+      <CTAdemo />
+    </div>
+  </div>
+
   <!-- Features -->
-  <div class="mb-32 mt-16 w-full">
+  <div class="mt-16 mb-32 w-full">
     <h2 class="text-center font-serif text-3xl">
       Run every kind of study, on any kind of data
     </h2>
@@ -72,7 +85,7 @@
   </div>
 
   <!-- Success -->
-  <div class="mb-32 mt-16 w-full">
+  <div class="mt-16 mb-32 w-full">
     <h2 class="text-center font-serif text-3xl">
       Unlock the power of AI for your insights
     </h2>
@@ -82,17 +95,32 @@
   </div>
 
   <!-- Testimonials -->
-  <div class="mb-32 mt-16 w-full">
-    <h2 class="text-center font-serif text-3xl">What our customers say</h2>
+  <div class="mt-16 mb-32 w-full">
+    <h1 class="text-left font-serif text-5xl">What our customers say</h1>
     <div class="mt-16">
       <Testimonials testimonials={data.testimonials} />
     </div>
   </div>
 
   <!-- Capabilities -->
-  <div class="mb-32 mt-16 w-full">
-    <h2 class="text-center font-serif text-3xl">
-      Extensive capabilities for every use case
+  <div class="mt-16 mb-32 w-full">
+    <!-- Methodologies -->
+    <h2 class="mt-32 mb-8 text-left font-serif text-5xl">
+      Extensive capabilities for every methodology
+    </h2>
+    <div class="mt-16">
+      <Methodologies />
+    </div>
+    <!-- Data features -->
+    <h2 class="mt-32 mb-8 text-center font-serif text-3xl">
+      Run every kind of study, on any kind of data
+    </h2>
+    <div class="mt-16">
+      <DataFeatures />
+    </div>
+    <!-- Capabilities -->
+    <h2 class="mt-32 mb-8 text-center font-serif text-3xl">
+      Collaborate with your team & stakeholders
     </h2>
     <div class="mt-16">
       <Capabilities />
@@ -100,7 +128,7 @@
   </div>
 
   <!-- Success -->
-  <div class="mb-32 mt-16 w-full">
+  <div class="mt-16 mb-32 w-full">
     <h2 class="text-center font-serif text-3xl">
       Seamlessly integrated with all the tools you already use
     </h2>
@@ -110,7 +138,7 @@
   </div>
 
   <!-- Security -->
-  <div class="mb-32 mt-16 w-full">
+  <div class="mt-16 mb-32 w-full">
     <h2 class="text-center font-serif text-3xl">Enterprise-grade security</h2>
     <div class="mt-16">
       <Security />
@@ -118,24 +146,24 @@
   </div>
 
   <!-- Commitment Letter -->
-  <div class="mb-32 mt-16 w-full">
+  <div class="relative mt-16 mb-32 w-full">
     <h2 class="text-center font-serif text-3xl">
       Our commitment to human-driven insights
     </h2>
-    <div class="mt-16">
-      <CommitmentLetter />
+    <div class="relative mt-16 h-250 w-full">
+      <img
+        src="/images/amethyst-2.png"
+        alt="Commitment Letter"
+        class="z-0 my-8 h-full w-full object-cover"
+      />
+      <div class="absolute inset-0 z-10 h-full w-full py-12">
+        <CommitmentLetter />
+      </div>
     </div>
   </div>
 
   <!-- Community -->
-  <div class="mb-32 mt-16 w-full">
-    <h2 class="text-center font-serif text-3xl">
-      Join 1.5k+ others getting value from our community
-    </h2>
-    <h3 class="mt-2 w-full text-center font-serif text-lg opacity-50">
-      Connect with the best minds in the industry, gain exclusive access to our
-      events, and stay updated with the latest news
-    </h3>
+  <div class="mt-16 mb-32 w-full">
     <div class="mt-16">
       <Community />
     </div>

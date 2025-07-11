@@ -5,6 +5,7 @@
   import "../app.css"
   import Footer from "./Footer.svelte"
   import Header from "./Header.svelte"
+  import { Button } from "$components/ui/button"
 
   interface Props {
     children?: Snippet
@@ -16,10 +17,51 @@
 
 <!-- <ModeWatcher /> -->
 
-<div class="flex min-h-screen flex-col">
-  <Header />
-  <main class="flex-1">
-    {@render children?.()}
-  </main>
-  <Footer />
+<div class="bg-background relative flex min-h-screen flex-col">
+  <div class="bg-background z-20">
+    <Header />
+    <main class="flex-1">
+      {@render children?.()}
+    </main>
+    <Footer />
+  </div>
+  <!-- End Reveal -->
+  <!-- <div class="w-screen h-screen bg-transparent">
+    <h1>Hello World</h1>
+  </div> -->
+  <div class="sticky inset-0 bottom-0 h-[800px] w-screen bg-pink-700">
+    <div class="flex h-full w-full items-center justify-center">
+      <img
+        src="/images/footer.png"
+        alt="Footer"
+        class="h-full w-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black to-black/50">
+        <div class="flex h-full w-full flex-col items-center justify-center">
+          <h1
+            class="font-sans text-[100px] font-light tracking-tighter text-white"
+          >
+            Insight to Influence.
+          </h1>
+          <h1
+            class=" -mt-8 font-serif text-[90px] font-extralight tracking-tighter text-white italic"
+          >
+            Research Reimagined.
+          </h1>
+          <div class="flex flex-col items-center justify-center">
+            <span class="mt-4">
+              CoLoop has saved thousands of
+              <span class="font-serif font-semibold italic">Human</span>
+              researchers millions of hours in research. Join us.
+            </span>
+
+            <Button class="mt-8" href="/demo">Get CoLoop</Button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="mt-16"> -->
+    <!-- <EndReveal /> -->
+    <!-- </div> -->
+  </div>
 </div>

@@ -114,17 +114,17 @@
             <a
               {href}
               class={cn(
-                "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground mx-2 flex min-h-[80px] select-none flex-col justify-start space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
+                " hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground mx-2 flex min-h-[80px] select-none flex-col justify-start space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
                 className,
               )}
               {...restProps}
             >
-              <div class="text-sm font-medium leading-none">{title}</div>
-              <p
+              <div class="text-base font-medium leading-none">{title}</div>
+              <span
                 class="text-muted-foreground line-clamp-2 flex-1 font-sans text-sm leading-snug"
               >
                 {content}
-              </p>
+              </span>
             </a>
           {/snippet}
         </NavigationMenu.Link>
@@ -139,7 +139,7 @@
               <a
                 href="/product"
                 class={navigationMenuTriggerStyle() +
-                  " px-4 py-2 text-lg font-medium tracking-wide"}>Product</a
+                  " px-4 py-2 text-base font-medium tracking-wide"}>Product</a
               >
             {/snippet}
           </NavigationMenu.Link>
@@ -147,7 +147,8 @@
 
         <NavigationMenu.Item>
           <NavigationMenu.Trigger>
-            <span class="text-lg font-medium tracking-wide">Company type</span>
+            <span class="text-base font-medium tracking-wide">Company type</span
+            >
           </NavigationMenu.Trigger>
           <NavigationMenu.Content>
             <ul
@@ -187,18 +188,34 @@
             <ul
               class="grid w-[460px] grid-cols-[200px_240px] grid-rows-3 justify-start gap-2 p-2"
             >
-              <li class="row-span-3">
+              <li class="row-span-3 max-h-min grow-0">
                 <NavigationMenu.Link
-                  class="from-muted/50 to-muted flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b p-6 no-underline outline-none focus:shadow-md"
+                  class="relative flex h-full w-full select-none flex-col justify-end rounded-md bg-transparent p-6 no-underline outline-none focus:shadow-md"
                 >
                   {#snippet child({ props })}
-                    <a {...props} href="/resources">
-                      <div class="mb-2 mt-4 text-lg font-medium">
-                        CoLoop Resources
+                    <a
+                      {...props}
+                      href="/resources"
+                      class="relative flex h-full w-full select-none flex-col justify-end overflow-hidden rounded-md bg-transparent p-6 no-underline outline-none focus:shadow-md"
+                    >
+                      <img
+                        src="/images/amethyst-2.png"
+                        alt="Resources"
+                        aria-hidden="true"
+                        class="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+                      />
+                      <div
+                        class="bg-background/50 absolute bottom-0 left-0 z-10 flex h-full w-full flex-col justify-end p-6"
+                      >
+                        <div class="mb-2 mt-4 text-lg font-medium">
+                          CoLoop Resources
+                        </div>
+                        <span
+                          class="text-foreground text-sm leading-tight opacity-80"
+                        >
+                          Everything you need to get started with user research.
+                        </span>
                       </div>
-                      <p class="text-muted-foreground text-sm leading-tight">
-                        Everything you need to get started with user research.
-                      </p>
                     </a>
                   {/snippet}
                 </NavigationMenu.Link>

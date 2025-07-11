@@ -1,5 +1,6 @@
 <script lang="ts">
   import { cn } from "$lib/utils.js"
+  import { fly } from "svelte/transition"
 
   // Define the features data structure
   const features = [
@@ -8,21 +9,21 @@
       title: "Concept and message testing",
       description:
         "Quickly understand target audiences perception, and uncover what resonates. Never miss or mix up another concept with CoLoop's automatic keyword labelling.",
-      image: "/images/concept-testing.png",
+      image: "/images/chat-bg-gray-wide.png",
     },
     {
       id: "customer-experience",
       title: "Customer experience",
       description:
         "Analyze open-ended feedback to reveal customer sentiment. CoLoop enables scalable CX analysis to improve customer journeys and retention.",
-      image: "/images/customer-experience.png",
+      image: "/images/interview-bg-gray-wide.png",
     },
     {
       id: "competitor-analysis",
       title: "Competitor analysis",
       description:
         "Unlock the competitive edge with deeper insights into unmet needs, differentiators and white space opportunities.",
-      image: "/images/competitor-analysis.png",
+      image: "/images/members-bg-gray-wide.png",
     },
     {
       id: "many-more",
@@ -102,12 +103,14 @@
       {:else}
         <!-- Regular layout with image -->
         <div
-          class="flex aspect-video h-full w-full items-center justify-center"
+          class="flex aspect-video h-full w-full items-center justify-center transition-all duration-300"
         >
           <img
+            in:fly={{ y: 40, duration: 350, opacity: 0.2 }}
+            out:fly={{ y: -40, duration: 250, opacity: 0.2 }}
             src={activeFeature.image}
             alt={activeFeature.title}
-            class="h-full w-full object-cover object-left grayscale"
+            class="h-full w-full object-cover object-left"
           />
         </div>
       {/if}

@@ -96,7 +96,7 @@
     },
     {
       name: "UserTesting",
-      img_url: "/integrations/usertesting.png",
+      img_url: "/integrations/user-testing.png",
       href: null,
       hasPage: false,
     },
@@ -131,14 +131,11 @@
   {#each integrations as integration}
     <div
       class={cn(
-        " bg- border-border group relative flex h-40 w-40 flex-col items-center justify-center border border-dashed transition-all duration-200 hover:z-50 hover:shadow-lg",
-        integration.hasPage
-          ? "hover:bg-primary hover:text-primary-foreground hover:border-primary cursor-pointer"
-          : "cursor-default",
+        " bg- border-border hover:bg-primary hover:text-primary-foreground hover:border-primary group relative flex h-40 w-40 flex-col items-center justify-center border border-dashed transition-all duration-200 hover:z-50 hover:shadow-lg",
+        integration.hasPage ? " cursor-pointer" : "cursor-default",
       )}
       onclick={() => handleIntegrationClick(integration)}
       role={integration.hasPage ? "button" : "presentation"}
-      tabindex={integration.hasPage ? 0 : -1}
     >
       <!-- Logo -->
       <div class="flex items-center justify-center">
@@ -146,7 +143,7 @@
           <img
             src={integration.img_url}
             alt={integration.name}
-            class="h-8 brightness-200 saturate-0 transition-colors duration-200 group-hover:brightness-100 group-hover:saturate-100"
+            class="h-10 brightness-300 saturate-0 transition-colors duration-200 group-hover:brightness-100 group-hover:grayscale-0 group-hover:saturate-100"
           />
         </div>
       </div>
@@ -154,7 +151,7 @@
       <!-- Title -->
       <div class="absolute bottom-0 left-0 p-2 text-left">
         <h3
-          class="text-foreground group-hover:text-primary-foreground font-serif text-sm font-semibold"
+          class="text-foreground group-hover:text-primary-foreground font-serif text-xs font-semibold"
         >
           {integration.name}
         </h3>
@@ -163,7 +160,7 @@
       <!-- External Link Indicator -->
       {#if integration.hasPage}
         <div
-          class="absolute right-3 top-3 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+          class="absolute top-3 right-3 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
         >
           <IconExternalLink class="size-4" />
         </div>
