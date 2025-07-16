@@ -4,12 +4,12 @@ import { getApprovedTestimonialsByPage } from "$lib/server/connectors/notion-tes
 
 export const load = async ({ locals }) => {
   // get testimonials from notion
-  const testimonials = await getApprovedTestimonialsByPage("/", true)
-
-  console.log(testimonials)
+  const testimonials = await getApprovedTestimonialsByPage("/", false)
+  const ctaTestimonial = await getApprovedTestimonialsByPage("CTA", false)
 
   return {
     testimonials,
+    ctaTestimonial,
   }
 }
 

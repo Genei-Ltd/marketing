@@ -88,9 +88,25 @@ const config = {
           DEFAULT: "hsl(var(--muted) / <alpha-value>)",
           foreground: "hsl(var(--muted-foreground) / <alpha-value>)",
         },
-        accent: {
-          DEFAULT: "hsl(var(--accent) / <alpha-value>)",
-          foreground: "hsl(var(--accent-foreground) / <alpha-value>)",
+        brand: {
+          DEFAULT: "hsl(var(--brand) / <alpha-value>)",
+          foreground: "hsl(var(--brand-foreground) / <alpha-value>)",
+        },
+        "accent-1": {
+          DEFAULT: "hsl(var(--accent-1) / <alpha-value>)",
+          foreground: "hsl(var(--accent-1-foreground) / <alpha-value>)",
+        },
+        "accent-2": {
+          DEFAULT: "hsl(var(--accent-2) / <alpha-value>)",
+          foreground: "hsl(var(--accent-2-foreground) / <alpha-value>)",
+        },
+        "accent-3": {
+          DEFAULT: "hsl(var(--accent-3) / <alpha-value>)",
+          foreground: "hsl(var(--accent-3-foreground) / <alpha-value>)",
+        },
+        "accent-4": {
+          DEFAULT: "hsl(var(--accent-4) / <alpha-value>)",
+          foreground: "hsl(var(--accent-4-foreground) / <alpha-value>)",
         },
         popover: {
           DEFAULT: "hsl(var(--popover) / <alpha-value>)",
@@ -113,19 +129,16 @@ const config = {
         "marquee-left": "marquee-left var(--duration, 40s) linear infinite",
         "marquee-up": "marquee-up var(--duration, 40s) linear infinite",
       },
-      fontSize: {
-        xs: "0.625rem",
-        sm: "0.75rem",
-        base: "0.875rem",
-        lg: "1rem",
-        xl: "1.25rem",
-        "2xl": "1.5rem",
-        "3xl": "1.875rem",
-        "4xl": "3.25rem",
-        "5xl": "3rem",
-        "6xl": "4rem",
-        "7xl": "5rem",
-      },
+      // fontSize: {
+      //   xs: "0.625rem",
+      //   sm: "0.7953rem",
+      //   base: "1rem",
+      //   lg: "1.125rem",
+      //   xl: "1.5811rem",
+      //   "2xl": "1.9882rem",
+      //   "3xl": "2.5rem",
+      //   display: "7.5rem",
+      // },
       fontWeight: {
         light: 200,
         default: 300,

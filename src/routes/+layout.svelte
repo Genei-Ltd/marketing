@@ -18,33 +18,42 @@
 <!-- <ModeWatcher /> -->
 
 <div class="bg-background relative flex min-h-screen flex-col">
-  <div class="bg-background z-20">
-    <Header />
-    <main class="flex-1">
-      {@render children?.()}
-    </main>
-    <Footer />
+  <div class="z-20 bg-transparent">
+    <div class="bg-background z-20">
+      <Header />
+      <main class="flex-1">
+        {@render children?.()}
+      </main>
+      <Footer />
+    </div>
+    <div
+      class="from-background via-background/80 h-32 bg-gradient-to-b to-transparent"
+    ></div>
   </div>
   <!-- End Reveal -->
   <!-- <div class="w-screen h-screen bg-transparent">
     <h1>Hello World</h1>
   </div> -->
+  <!-- <div class="to-primary/50 h-16 bg-gradient-to-b from-black"></div> -->
+
   <div class="sticky inset-0 bottom-0 h-[800px] w-screen bg-pink-700">
     <div class="flex h-full w-full items-center justify-center">
       <img
-        src="/images/footer.png"
+        src="/images/wild/reveal.png"
         alt="Footer"
         class="h-full w-full object-cover"
       />
-      <div class="absolute inset-0 bg-gradient-to-b from-black to-black/50">
+      <div
+        class="from-background via-background/80 absolute inset-0 bg-gradient-to-t to-transparent"
+      >
         <div class="flex h-full w-full flex-col items-center justify-center">
           <h1
-            class="font-sans text-[100px] font-light tracking-tighter text-white"
+            class="text-foreground font-sans text-[100px] font-light tracking-tighter"
           >
             Insight to Influence.
           </h1>
           <h1
-            class=" -mt-8 font-serif text-[90px] font-extralight tracking-tighter text-white italic"
+            class=" text-foreground -mt-8 font-serif text-[90px] font-extralight tracking-tighter italic"
           >
             Research Reimagined.
           </h1>

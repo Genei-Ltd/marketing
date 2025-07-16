@@ -389,9 +389,9 @@ export async function getApprovedTestimonialsByPage(
 
     if (randomize) {
       return testimonials.sort(() => 0.5 - Math.random())
+    } else {
+      return testimonials.sort((a, b) => a.name.localeCompare(b.name))
     }
-
-    return testimonials
   } catch (error) {
     console.error("Error fetching approved testimonials from Notion:", error)
     return testimonials

@@ -92,7 +92,7 @@
 </script>
 
 <div
-  class="mx-auto my-4 flex w-full max-w-7xl items-center justify-between px-4 font-serif"
+  class="fixed top-0 z-[90] mx-auto my-4 flex w-full items-center justify-between px-4 font-serif"
 >
   <div class="flex items-center gap-4">
     <a href="/" class="text-2xl font-bold">
@@ -114,12 +114,12 @@
             <a
               {href}
               class={cn(
-                " hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground mx-2 flex min-h-[80px] select-none flex-col justify-start space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
+                " hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground mx-2 flex min-h-[80px] flex-col justify-start space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none",
                 className,
               )}
               {...restProps}
             >
-              <div class="text-base font-medium leading-none">{title}</div>
+              <div class="text-base leading-none font-medium">{title}</div>
               <span
                 class="text-muted-foreground line-clamp-2 flex-1 font-sans text-sm leading-snug"
               >
@@ -190,13 +190,13 @@
             >
               <li class="row-span-3 max-h-min grow-0">
                 <NavigationMenu.Link
-                  class="relative flex h-full w-full select-none flex-col justify-end rounded-md bg-transparent p-6 no-underline outline-none focus:shadow-md"
+                  class="relative flex h-full w-full flex-col justify-end rounded-md bg-transparent p-6 no-underline outline-none select-none focus:shadow-md"
                 >
                   {#snippet child({ props })}
                     <a
                       {...props}
                       href="/resources"
-                      class="relative flex h-full w-full select-none flex-col justify-end overflow-hidden rounded-md bg-transparent p-6 no-underline outline-none focus:shadow-md"
+                      class="relative flex h-full w-full flex-col justify-end overflow-hidden rounded-md bg-transparent p-6 no-underline outline-none select-none focus:shadow-md"
                     >
                       <img
                         src="/images/amethyst-2.png"
@@ -207,7 +207,7 @@
                       <div
                         class="bg-background/50 absolute bottom-0 left-0 z-10 flex h-full w-full flex-col justify-end p-6"
                       >
-                        <div class="mb-2 mt-4 text-lg font-medium">
+                        <div class="mt-4 mb-2 text-lg font-medium">
                           CoLoop Resources
                         </div>
                         <span

@@ -6,7 +6,7 @@
   } from "@tabler/icons-svelte"
 </script>
 
-<footer class="border-border mb-32 border-t bg-transparent py-16">
+<footer class="border-border border-t bg-transparent py-16">
   <div class="mx-auto flex max-w-7xl flex-row justify-between px-4">
     <!-- Column 1 -->
     <div class="mb-8 flex flex-col items-start gap-2">
