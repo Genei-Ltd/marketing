@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { cn } from "$lib/utils.js"
-  import { Card } from "$lib/components/ui/card"
   import {
     IconFileText,
     IconUsers,
@@ -14,6 +12,9 @@
     IconFileDescription,
     IconExternalLink,
   } from "@tabler/icons-svelte"
+
+  import { Card } from "$lib/components/ui/card"
+  import { cn } from "$lib/utils.js"
 
   // Define integration tools data
   const integrations: {

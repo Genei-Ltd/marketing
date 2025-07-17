@@ -1,8 +1,10 @@
 <script lang="ts">
-  import { enhance } from "$app/forms"
-  import { Button } from "$components/ui/button"
   import { IconCircleCheck, IconSend } from "@tabler/icons-svelte"
   import { fade, slide } from "svelte/transition"
+
+  import { Button } from "$components/ui/button"
+
+  import { enhance } from "$app/forms"
 
   interface Props {
     form?: any
@@ -51,7 +53,7 @@
       <span
         class="text-primary/80 flex w-full items-center justify-center gap-4 text-lg font-medium"
       >
-        <IconCircleCheck class=" h-6 w-6" />
+        <IconCircleCheck class="h-6 w-6 " />
         {form.message || "Thank you, we will keep you in the loop."}
       </span>
     </div>

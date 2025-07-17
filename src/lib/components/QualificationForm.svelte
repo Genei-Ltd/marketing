@@ -1,16 +1,18 @@
 <script lang="ts">
-  import { goto } from "$app/navigation"
-  import PricingTable from "$lib/components/PricingTable.svelte"
+  import * as Icons from "@tabler/icons-svelte"
+  import type { ComponentType } from "svelte"
+  import { cubicOut , fade, fly, scale } from "svelte/easing"
+
+    import PricingTable from "$lib/components/PricingTable.svelte"
   import { Card } from "$lib/components/ui/card"
   import type {
     QualificationConfig,
     QualificationOption,
   } from "$lib/configs/qualification"
-  import * as Icons from "@tabler/icons-svelte"
-  import type { ComponentType } from "svelte"
-  import { cubicOut } from "svelte/easing"
-  import { fade, fly, scale } from "svelte/transition"
+
   import Button from "./ui/button/button.svelte"
+
+  import { goto } from "$app/navigation"
 
   interface Props {
     config: QualificationConfig;

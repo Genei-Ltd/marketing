@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Testimonial } from "$lib/server/connectors/notion-testimonials"
+
   import TestimonialCard from "../blocks/TestimonialCard.svelte"
 
   interface Props {

@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { cn } from "$lib/utils.js"
   import { fly } from "svelte/transition"
+
+  import { cn } from "$lib/utils.js"
 
   // Data features for research capabilities (from Capabilities.svelte)
   interface Feature {

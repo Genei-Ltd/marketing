@@ -1,6 +1,8 @@
 import { fail } from "@sveltejs/kit"
-import type { Actions } from "./$types"
+
 import { getApprovedTestimonialsByPage } from "$lib/server/connectors/notion-testimonials"
+
+import type { Actions } from "./$types"
 
 export const load = async ({ locals }) => {
   // get testimonials from notion

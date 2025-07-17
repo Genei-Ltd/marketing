@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { cn } from "$lib/utils.js"
   import { fly } from "svelte/transition"
+
+  import { cn } from "$lib/utils.js"
 
   // Define the features data structure
   const features = [
@@ -47,22 +48,20 @@
     {#each features as feature}
       <div
         class={cn(
-          "flex min-h-[150px] cursor-pointer flex-col justify-between  p-6 transition-all duration-300",
+          "flex min-h-[150px] cursor-pointer flex-col justify-between rounded  p-6 transition-all duration-300",
           activeFeature.id === feature.id
             ? "bg-primary text-primary-foreground"
-            : "bg-card hover:bg-primary/10",
+            : "bg-card",
         )}
         onmouseenter={() => (activeFeature = feature)}
         role="button"
         tabindex="0"
       >
-        <h3
-          class="mb-3 font-serif text-xl font-semibold capitalize transition-all"
-        >
+        <h3 class="mb-3 font-medium capitalize transition-all">
           {feature.title}
         </h3>
         <p
-          class="text-sm leading-relaxed transition-all {activeFeature.id ===
+          class="pr-16 text-sm leading-relaxed transition-all {activeFeature.id ===
           feature.id
             ? 'text-primary-foreground'
             : 'text-primary/80'}"
@@ -78,33 +77,18 @@
     <div
       class="relative flex h-full w-full rounded transition-all duration-300 {activeFeature.bgColor}"
     >
-      {#if activeFeature.id === "many-more"}
-        <!-- Special layout for "many more" with text bubbles -->
-        <div class="flex min-h-[400px] flex-col justify-center p-8">
-          <div class="mx-auto grid max-w-md grid-cols-2 gap-3">
-            {#each activeFeature.bubbles ?? [] as bubble}
-              <div
-                class="bg-primary/10 text-primary rounded-full px-4 py-2 text-center text-sm font-medium"
-              >
-                {bubble}
-              </div>
-            {/each}
-          </div>
-        </div>
-      {:else}
-        <!-- Regular layout with image -->
-        <div
-          class="flex h-full w-full items-center justify-center transition-all duration-300"
-        >
-          <img
-            in:fly={{ y: 40, duration: 350, opacity: 0.2 }}
-            out:fly={{ y: -40, duration: 250, opacity: 0.2 }}
-            src={activeFeature.image}
-            alt={activeFeature.title}
-            class="w-2/3 object-contain"
-          />
-        </div>
-      {/if}
+      <!-- Regular layout with image -->
+      <div
+        class="flex h-full w-full items-center justify-center transition-all duration-300"
+      >
+        <img
+          in:fly={{ y: 40, duration: 350, opacity: 0.2 }}
+          out:fly={{ y: -40, duration: 250, opacity: 0.2 }}
+          src={activeFeature.image}
+          alt={activeFeature.title}
+          class="w-2/3 object-contain"
+        />
+      </div>
     </div>
   </div>
 </div>

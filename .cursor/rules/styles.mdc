@@ -1,0 +1,5 @@
+---
+alwaysApply: true
+---
+
+read app.css to see the available tailwind classes that are available for styling with resepect to font size and colours.

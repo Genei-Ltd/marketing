@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { cn } from "$lib/utils.js"
   import { IconUsers } from "@tabler/icons-svelte"
+
+  import { cn } from "$lib/utils.js"
 
   // Button click handler
   function handleJoinCommunity() {

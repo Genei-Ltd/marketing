@@ -1,7 +1,9 @@
 <script lang="ts" module>
-	import { cn, type WithElementRef } from "$lib/utils.js";
-	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from "svelte/elements";
-	import { type VariantProps, tv } from "tailwind-variants";
+	import { IconArrowRight } from "@tabler/icons-svelte"
+	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from "svelte/elements"
+	import { type VariantProps, tv } from "tailwind-variants"
+
+	import { cn, type WithElementRef } from "$lib/utils.js"
 
 	export const buttonVariants = tv({
 		base: "focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium outline-none transition-all focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
@@ -14,9 +16,11 @@
 					"bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 border",
 				secondary: "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
 				ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-				link: "text-primary underline-offset-4 hover:underline",
+				link: "text-primary bg-transparent hover:bg-transparent underline-offset-4 hover:underline",
+				more: "text-secondary bg-transparent hover:bg-transparent underline-offset-4 hover:underline group  opacity-60",
 			},
 			size: {
+				none: "p-0",
 				default: "h-9 px-4 py-2 has-[>svg]:px-3",
 				sm: "h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5",
 				lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
@@ -27,16 +31,16 @@
 			variant: "default",
 			size: "default",
 		},
-	});
+	})
 
-	export type ButtonVariant = VariantProps<typeof buttonVariants>["variant"];
-	export type ButtonSize = VariantProps<typeof buttonVariants>["size"];
+	export type ButtonVariant = VariantProps<typeof buttonVariants>["variant"]
+	export type ButtonSize = VariantProps<typeof buttonVariants>["size"]
 
 	export type ButtonProps = WithElementRef<HTMLButtonAttributes> &
 		WithElementRef<HTMLAnchorAttributes> & {
-			variant?: ButtonVariant;
-			size?: ButtonSize;
-		};
+			variant?: ButtonVariant
+			size?: ButtonSize
+		}
 </script>
 
 <script lang="ts">
@@ -50,7 +54,7 @@
 		disabled,
 		children,
 		...restProps
-	}: ButtonProps = $props();
+	}: ButtonProps = $props()
 </script>
 
 {#if href}
@@ -62,9 +66,13 @@
 		aria-disabled={disabled}
 		role={disabled ? "link" : undefined}
 		tabindex={disabled ? -1 : undefined}
-		{...restProps}
-	>
+		{...restProps}>
 		{@render children?.()}
+		{#if variant === "more"}
+			<IconArrowRight
+				size={8}
+				class="group-hover:translate-x-1 transition-all duration-300 ease-in-out transform" />
+		{/if}
 	</a>
 {:else}
 	<button
@@ -73,8 +81,7 @@
 		class={cn(buttonVariants({ variant, size }), className)}
 		{type}
 		{disabled}
-		{...restProps}
-	>
+		{...restProps}>
 		{@render children?.()}
 	</button>
 {/if}

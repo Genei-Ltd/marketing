@@ -1,6 +1,7 @@
-import { CLERK_SECRET_KEY } from "$env/static/private"
 import type { Organization } from "@clerk/backend"
 import { createClerkClient } from "@clerk/backend"
+
+import { CLERK_SECRET_KEY } from "$env/static/private"
 
 export class ClerkConnector {
   private client: ReturnType<typeof createClerkClient>

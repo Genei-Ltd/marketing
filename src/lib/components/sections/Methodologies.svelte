@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { cn } from "$lib/utils.js"
   import ConceptTestingDemo from "$components/animations/ConceptTestingDemo.svelte"
+  import { cn } from "$lib/utils.js"
 
   // Define the features data structure
   // Methodologies data (from Capabilities.svelte)

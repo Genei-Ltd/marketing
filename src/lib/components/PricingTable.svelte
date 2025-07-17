@@ -1,9 +1,10 @@
 <script lang="ts">
+  import * as Icons from "@tabler/icons-svelte"
+  import type { ComponentType } from "svelte"
+
   import { Button } from "$lib/components/ui/button"
   import { Card } from "$lib/components/ui/card"
   import type { PricingPlan } from "$lib/configs/pricing"
-  import * as Icons from "@tabler/icons-svelte"
-  import type { ComponentType } from "svelte"
 
   // Extended interface for enriched plans with Stripe data
   interface EnrichedPricingPlan extends PricingPlan {

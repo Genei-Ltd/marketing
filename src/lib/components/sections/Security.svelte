@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { cn } from "$lib/utils.js"
   import {
     IconShield,
     IconLock,
@@ -12,6 +11,8 @@
     IconLockAccess,
     IconPlus,
   } from "@tabler/icons-svelte"
+
+  import { cn } from "$lib/utils.js"
 
   // Security certifications with logos
   const certifications = [

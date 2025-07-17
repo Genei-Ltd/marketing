@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { cn } from "$lib/utils.js"
   import {
     IconCalendarEvent,
     IconClipboardCopy,
@@ -7,7 +6,9 @@
     IconShare,
   } from "@tabler/icons-svelte"
   import type { Component } from "svelte"
+
   import * as Demo from "$components/animations"
+  import { cn } from "$lib/utils.js"
   // import Marquee from "@selemondev/svelte-marquee"
 
   interface Feature {

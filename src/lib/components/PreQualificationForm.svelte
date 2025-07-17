@@ -1,8 +1,10 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
 
-  import { enhance } from "$app/forms"
-  import Button from "$lib/components/ui/button/button.svelte"
+  import * as Icons from "@tabler/icons-svelte"
+  import type { ComponentType } from "svelte"
+  import { createEventDispatcher, onMount , cubicOut , run , fade, fly, scale } from "svelte"
+
+        import Button from "$lib/components/ui/button/button.svelte"
   import { Card } from "$lib/components/ui/card"
   import {
     getPreQualificationConfig,
@@ -10,11 +12,8 @@
     type PreQualificationConfig,
     type PreQualificationData,
   } from "$lib/configs/pre-qualification"
-  import * as Icons from "@tabler/icons-svelte"
-  import type { ComponentType } from "svelte"
-  import { createEventDispatcher, onMount } from "svelte"
-  import { cubicOut } from "svelte/easing"
-  import { fade, fly, scale } from "svelte/transition"
+
+  import { enhance } from "$app/forms"
 
   
   interface Props {

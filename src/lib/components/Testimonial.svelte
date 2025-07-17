@@ -1,7 +1,9 @@
 <script lang="ts">
-  import Card from "$components/ui/card/card.svelte"
-  import type { Testimonial as TestimonialType } from "$lib/configs/testimonials"
   import { IconQuote, IconStar } from "@tabler/icons-svelte"
+
+  import Card from "$components/ui/card/card.svelte"
+
+  import type { Testimonial as TestimonialType } from "$lib/configs/testimonials"
 
   interface Props {
     testimonial: TestimonialType;

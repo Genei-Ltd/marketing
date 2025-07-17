@@ -2,12 +2,12 @@
 import aspectRatio from "@tailwindcss/aspect-ratio"
 import typography from "@tailwindcss/typography"
 import svgToDataUri from "mini-svg-data-uri"
-import animate from "tailwindcss-animate"
 import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette"
+import animate from "tailwindcss-animate"
 
 function addVariablesForColors({ addBase, theme }) {
-  let allColors = flattenColorPalette(theme("colors"))
-  let newVars = Object.fromEntries(
+  const allColors = flattenColorPalette(theme("colors"))
+  const newVars = Object.fromEntries(
     Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
   )
 
