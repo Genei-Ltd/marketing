@@ -21,7 +21,7 @@
 
 <div class="mt-36 max-w-4xl px-4 mx-auto">
 	<Button
-		href="/blogs"
+		href="/blog"
 		variant="link"
 		size="none"
 		class="group text-muted-foreground hover:text-foreground inline-flex items-center gap-2 mb-16">

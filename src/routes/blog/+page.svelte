@@ -66,7 +66,7 @@
 	{:else}
 		<div class="gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3 grid grid-cols-1">
 			{#each data.blogPosts as post}
-				<a href={`/blogs/${post.slug}`} class="group block">
+				<a href={`/blog/${post.slug}`} class="group block">
 					<div class="overflow-hidden rounded-md">
 						{#if post.coverImage}
 							<div class="aspect-[5/3] w-full overflow-hidden rounded-lg">

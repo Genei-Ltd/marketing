@@ -58,17 +58,13 @@
 
 	{#if data.blogPosts.length === 0}
 		<div class="py-12 text-center">
-			<p class="text-muted-foreground text-lg">
-				No blog posts available. Please check your Notion database configuration.
-			</p>
-			<p class="text-muted-foreground mt-2 text-sm">
-				Make sure to set your Notion database ID in the server file.
-			</p>
+			<p class="text-muted-foreground text-lg">No blog posts available. More coming soon.</p>
+			<p class="text-muted-foreground mt-2 text-sm">Check back soon for more articles.</p>
 		</div>
 	{:else}
 		<div class="gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3 grid grid-cols-1">
 			{#each data.blogPosts as post}
-				<a href={`/blogs/${post.slug}`} class="group block">
+				<a href={`/blog/${post.slug}`} class="group block">
 					<div class="overflow-hidden rounded-md">
 						{#if post.coverImage}
 							<div class="aspect-[5/3] w-full overflow-hidden rounded-lg">
