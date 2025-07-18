@@ -7,7 +7,7 @@
 		<!-- src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" -->
 		<img
 			alt="Castle moat"
-			src="/images/wild/super-car.png"
+			src="/images/wild/river-valley.png"
 			class="absolute inset-0 w-full h-full object-cover object-center mask-t-to-85%"
 			style="z-index: 0;" />
 		<!-- <div class="bg-gradient-to-b from-white/90 via-white/70 to-white/30 absolute inset-0" style="z-index: 1;"></div> -->

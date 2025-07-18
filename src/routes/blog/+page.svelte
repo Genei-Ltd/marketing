@@ -38,12 +38,14 @@
 </svelte:head>
 
 <div class=" max-w-6xl px-4 py-8 mx-auto mt-16">
-	<div class="mb-8">
-		<h1 class=" text-foreground mb-2 font-serif text-xl font-bold">All articles</h1>
+	<div class="my-12">
+		<h1 class=" text-foreground mb-2 font-serif font-medium capitalize">All articles</h1>
 		<p class="text-foreground opacity-60 text-base">Latest articles and insights from our team</p>
 	</div>
 
 	<div class="flex flex-row gap-4 mb-8 capitalize">
+		<Button variant="link" size="none" href={`/blog`}>All</Button>
+
 		{#each data.categories as category}
 			<Button
 				variant="link"
