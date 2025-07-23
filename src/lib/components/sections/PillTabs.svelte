@@ -12,25 +12,30 @@
 	}
 </script>
 
+<!-- Pill Title	Title	Description	CTA
+In-House Strategy Teams	In-House Strategy Teams	Move from insight to influence, unblock teams and become a critical asset to your company.	Solutions for in-house strategy teams
+Concept & Stimulus Testing	Concept & Stimulus Testing	Test messages, concepts and products with machine precision and human empathy.	Solutions for product, message & concept testing
+Survey Analysis	Survey Analysis	Generate nuanced, actionable analysis from survey open ends with human level accuracy in minutes not days.	Solutions for analysing surveys
+Research Agencies	Research Agencies	Cut manual effort, messy tool stacks and deliver unique strategic change to clients.	Solutions for research agencies & consultancies -->
 <script lang="ts">
 	let { defaultValue = "in-house-counsel", autoProgressInterval = 3000, className }: PillTabsProps = $props()
 
 	const options = [
 		{
-			id: "in-house-counsel",
-			label: "In-House Counsel",
+			id: "in-house-strategy-teams",
+			label: "In-House Strategy Teams",
 		},
 		{
-			id: "innovation-teams",
-			label: "Innovation Teams",
+			id: "concept-stimulus-testing",
+			label: "Concept & Stimulus Testing",
 		},
 		{
-			id: "transactional-work",
-			label: "Transactional Work",
+			id: "survey-analysis",
+			label: "Survey Analysis",
 		},
 		{
-			id: "litigation-work",
-			label: "Litigation Work",
+			id: "research-agencies",
+			label: "Research Agencies",
 		},
 	]
 
@@ -124,52 +129,52 @@
 
 {#snippet inHouseCounselContent()}
 	<TwoSide
-		label="In-House Counsel"
-		heading="Transform legal operations with AI-powered insights"
-		description="Streamline contract review, compliance monitoring, and legal research with intelligent automation designed for in-house legal teams."
-		buttonText="Learn More"
-		buttonHref="/in-house-counsel">
+		label="In-House Strategy Teams"
+		heading="Solutions for in-house strategy teams"
+		description="Move from insight to influence, unblock teams and become a critical asset to your company."
+		buttonText="Solutions for in-house strategy teams"
+		buttonHref="/demo">
 		<div class="flex items-center justify-center">
-			<img src="/images/features/concept.gif" alt="In-House Counsel" class="h-auto max-w-full" />
+			<img src="/images/features/concept.gif" alt="In-House Strategy Teams" class="h-auto max-w-full" />
 		</div>
 	</TwoSide>
 {/snippet}
 
 {#snippet innovationTeamsContent()}
 	<TwoSide
-		label="Innovation Teams"
-		heading="Accelerate innovation with AI-driven research"
-		description="Leverage cutting-edge AI to analyze market trends, consumer behavior, and competitive landscapes for breakthrough innovations."
-		buttonText="Explore Solutions"
-		buttonHref="/innovation-teams">
+		label="Concept & Stimulus Testing"
+		heading="Solutions for product, message & concept testing"
+		description="Test messages, concepts and products with machine precision and human empathy."
+		buttonText="Solutions for product, message & concept testing"
+		buttonHref="/demo">
 		<div class="flex items-center justify-center">
-			<img src="/images/features/image.png" alt="Innovation Teams" class="h-auto max-w-full" />
+			<img src="/images/features/image.png" alt="Concept & Stimulus Testing" class="h-auto max-w-full" />
 		</div>
 	</TwoSide>
 {/snippet}
 
 {#snippet transactionalWorkContent()}
 	<TwoSide
-		label="Transactional Work"
-		heading="Streamline due diligence and deal analysis"
-		description="Make due diligence, contract review, and analysis faster, more accurate, and less manual with AI-powered insights."
-		buttonText="See Solutions"
-		buttonHref="/transactional-work">
+		label="Survey Analysis"
+		heading="Solutions for analysing surveys"
+		description="Generate nuanced, actionable analysis from survey open ends with human level accuracy in minutes not days."
+		buttonText="Solutions for analysing surveys"
+		buttonHref="/demo">
 		<div class="flex items-center justify-center">
-			<img src="/images/features/steal.png" alt="Transactional Work" class="h-auto max-w-full" />
+			<img src="/images/features/steal.png" alt="Survey Analysis" class="h-auto max-w-full" />
 		</div>
 	</TwoSide>
 {/snippet}
 
 {#snippet litigationWorkContent()}
 	<TwoSide
-		label="Litigation Work"
-		heading="Enhance litigation strategy with AI insights"
-		description="Analyze case law, predict outcomes, and develop winning strategies with AI-powered legal research and analysis tools."
-		buttonText="Discover More"
-		buttonHref="/litigation-work">
+		label="Research Agencies"
+		heading="Solutions for research agencies & consultancies"
+		description="Cut manual effort, messy tool stacks and deliver unique strategic change to clients."
+		buttonText="Solutions for research agencies & consultancies"
+		buttonHref="/demo">
 		<div class="flex items-center justify-center">
-			<img src="/images/features/test.png" alt="Litigation Work" class="h-auto max-w-full" />
+			<img src="/images/features/test.png" alt="Research Agencies" class="h-auto max-w-full" />
 		</div>
 	</TwoSide>
 {/snippet}
@@ -177,7 +182,7 @@
 <div class={cn("space-y-6", className)}>
 	<Tabs.Root value={activeValue} onValueChange={handleTabChange}>
 		<!-- Custom Pills List -->
-		<div class="flex flex-wrap w-2/3 gap-8 mx-auto">
+		<div class="flex flex-row items-center justify-center w-2/3 gap-8 mx-auto">
 			{#each options as option}
 				<div role="button" onmouseenter={() => handleTabHover(option.id)} tabindex="-1">
 					<Tabs.Trigger
@@ -193,7 +198,7 @@
 		</div>
 
 		<!-- Tab Content -->
-		<Tabs.Content value="in-house-counsel" class="mt-6">
+		<Tabs.Content value="in-house-strategy-teams" class="mt-6">
 			<div
 				role="tabpanel"
 				tabindex="-1"
@@ -203,7 +208,7 @@
 			</div>
 		</Tabs.Content>
 
-		<Tabs.Content value="innovation-teams" class="mt-6">
+		<Tabs.Content value="concept-stimulus-testing" class="mt-6">
 			<div
 				role="tabpanel"
 				tabindex="-1"
@@ -213,7 +218,7 @@
 			</div>
 		</Tabs.Content>
 
-		<Tabs.Content value="transactional-work" class="mt-6">
+		<Tabs.Content value="survey-analysis" class="mt-6">
 			<div
 				role="tabpanel"
 				tabindex="-1"
@@ -223,7 +228,7 @@
 			</div>
 		</Tabs.Content>
 
-		<Tabs.Content value="litigation-work" class="mt-6">
+		<Tabs.Content value="research-agencies" class="mt-6">
 			<div
 				role="tabpanel"
 				tabindex="-1"

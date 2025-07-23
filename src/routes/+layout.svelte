@@ -8,13 +8,13 @@
 	import Header from "./Header.svelte"
 
 	import { page } from "$app/state"
+	// import { ModeWatcher } from "mode-watcher"
 
 	interface Props {
 		children?: Snippet
-		data?: any
 	}
 
-	let { children, data }: Props = $props()
+	let { children }: Props = $props()
 </script>
 
 <!-- <ModeWatcher /> -->

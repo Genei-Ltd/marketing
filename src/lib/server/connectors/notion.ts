@@ -4,10 +4,19 @@ import type {
 	PageObjectResponse,
 	QueryDatabaseResponse,
 	BlockObjectResponse,
+	PartialBlockObjectResponse,
 	RichTextItemResponse,
+	QueryDatabaseParameters,
+	PartialPageObjectResponse,
+	UserObjectResponse,
+	PartialUserObjectResponse,
+	PartialDatabaseObjectResponse,
+	DatabaseObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints"
 
+// @ts-expect-error - SvelteKit environment import
 import { env } from "$env/dynamic/private"
+import type { Article } from "$lib/types/articles"
 
 export class NotionConnector {
 	private client: Client
@@ -100,9 +109,9 @@ export class NotionConnector {
 		try {
 			const blocks = await this.getPageBlocks(pageId)
 			const blocksWithChildren = await Promise.all(
-				blocks.map(async (block: BlockObjectResponse) => {
+				blocks.map(async (block: BlockObjectResponse | PartialBlockObjectResponse) => {
 					// Check if block has children (toggle, column_list, etc.)
-					if (block.has_children) {
+					if ("has_children" in block && block.has_children) {
 						try {
 							const children = await this.getBlockChildren(block.id)
 							return {
@@ -117,7 +126,7 @@ export class NotionConnector {
 					return block
 				}),
 			)
-			return blocksWithChildren
+			return blocksWithChildren.filter((block) => "type" in block) as BlockObjectResponse[]
 		} catch (error) {
 			console.error("Error fetching page blocks with children:", error)
 			throw new Error(
@@ -129,7 +138,11 @@ export class NotionConnector {
 	/**
 	 * Query a database
 	 */
-	async queryDatabase(databaseId: string, filter?: any, sorts?: any): Promise<QueryDatabaseResponse> {
+	async queryDatabase(
+		databaseId: string,
+		filter?: QueryDatabaseParameters["filter"],
+		sorts?: QueryDatabaseParameters["sorts"],
+	): Promise<QueryDatabaseResponse> {
 		try {
 			const response = await this.client.databases.query({
 				database_id: databaseId,
@@ -186,62 +199,100 @@ export class NotionConnector {
 	/**
 	 * Helper function to extract text content from rich text property
 	 */
-	extractTextFromRichText(richText: any[]): string {
+	extractTextFromRichText(richText: Array<RichTextItemResponse>): string {
 		return richText.map((item) => item.plain_text || "").join("")
 	}
 
 	/**
 	 * Helper function to get property value by type
 	 */
-	getPropertyValue(property: any, type: string): any {
+	getPropertyValue(property: PageObjectResponse["properties"][string], type: string): unknown {
 		if (!property || property.type !== type) {
 			return null
 		}
 
 		switch (type) {
 			case "title":
-				return this.extractTextFromRichText(property.title)
+				return this.extractTextFromRichText((property as { title: RichTextItemResponse[] }).title)
 			case "rich_text":
-				return this.extractTextFromRichText(property.rich_text)
+				return this.extractTextFromRichText((property as { rich_text: RichTextItemResponse[] }).rich_text)
 			case "number":
-				return property.number
+				return (property as { number: number | null }).number
 			case "select":
-				return property.select?.name || null
+				return (property as { select: { name: string } | null }).select?.name || null
 			case "multi_select":
-				return property.multi_select?.map((item: any) => item.name) || []
+				return (property as { multi_select: { name: string }[] }).multi_select?.map((item) => item.name) || []
 			case "date":
-				return property.date
+				return (property as { date: { start: string; end: string | null; time_zone: string | null } | null })
+					.date
 			case "checkbox":
-				return property.checkbox
+				return (property as { checkbox: boolean }).checkbox
 			case "url":
-				return property.url
+				return (property as { url: string | null }).url
 			case "email":
-				return property.email
+				return (property as { email: string | null }).email
 			case "phone_number":
-				return property.phone_number
+				return (property as { phone_number: string | null }).phone_number
 			case "relation":
-				return property.relation
+				return (property as { relation: { id: string }[] }).relation
 			case "rollup":
-				return property.rollup
+				return (
+					property as {
+						rollup:
+							| { type: "number"; number: number | null; function: string }
+							| { type: "date"; date: { start: string; end: string | null } | null; function: string }
+							| {
+									type: "array"
+									array: ({ type: "title"; title: RichTextItemResponse[] } | object)[]
+									function: string
+							  }
+					}
+				).rollup
 			case "people":
-				return property.people
-			case "files":
-				return property.files
+				return (property as { people: (UserObjectResponse | PartialUserObjectResponse)[] }).people
+			case "files": {
+				const files = (
+					property as {
+						files: Array<{
+							type: "external" | "file"
+							external?: { url: string }
+							file?: { url: string }
+							name?: string
+						}>
+					}
+				).files
+				// Return array of URLs instead of raw file objects
+				return (
+					files
+						?.map((file) => {
+							if (file.type === "external") {
+								return file.external?.url
+							}
+							if (file.type === "file") {
+								return file.file?.url
+							}
+							return null
+						})
+						.filter(Boolean) || []
+				)
+			}
+			case "status":
+				return (property as { status: { id: string; name: string; color: string } | null }).status
 			case "created_time":
-				return property.created_time
+				return (property as { created_time: string }).created_time
 			case "created_by":
-				return property.created_by
+				return (property as { created_by: UserObjectResponse | PartialUserObjectResponse }).created_by
 			case "last_edited_time":
-				return property.last_edited_time
+				return (property as { last_edited_time: string }).last_edited_time
 			case "last_edited_by":
-				return property.last_edited_by
+				return (property as { last_edited_by: UserObjectResponse | PartialUserObjectResponse }).last_edited_by
 			default:
-				return property[type] || null
+				return (property as Record<string, unknown>)[type] || null
 		}
 	}
 }
 
-export async function getPublishedBlogPosts(databaseId: string) {
+export async function getAllPublishedBlogPosts(databaseId: string) {
 	const response = await notionConnector.queryDatabase(databaseId, {
 		and: [
 			{
@@ -250,6 +301,33 @@ export async function getPublishedBlogPosts(databaseId: string) {
 					equals: "Published",
 				},
 			},
+		],
+	})
+	return response.results
+}
+
+export async function getDatabaseRowsByGroup(
+	databaseId: string,
+	group: string,
+	category?: string,
+): Promise<
+	(PageObjectResponse | PartialPageObjectResponse | DatabaseObjectResponse | PartialDatabaseObjectResponse)[]
+> {
+	const response = await notionConnector.queryDatabase(databaseId, {
+		and: [
+			{
+				property: "Group",
+				multi_select: {
+					contains: group,
+				},
+			},
+			{
+				property: "Status",
+				status: {
+					equals: "Published",
+				},
+			},
+			...(category ? [{ property: "Category", multi_select: { contains: category } }] : []),
 		],
 	})
 	return response.results
@@ -273,6 +351,73 @@ export async function getBlogPost(databaseId: string, slug: string) {
 		],
 	})
 	return response.results[0]
+}
+export async function transformNotionDBRowToArticle(
+	notionDBItem: PageObjectResponse | PartialPageObjectResponse,
+): Promise<Article> {
+	if (!("properties" in notionDBItem)) {
+		return {} as Article
+	}
+	const props = notionDBItem.properties
+
+	return {
+		id: notionDBItem.id,
+		title: (notionConnector.getPropertyValue(props["Title"], "title") as string) || "",
+		excerpt: notionConnector.getPropertyValue(props["Excerpt"], "rich_text") as string | undefined,
+		author: (notionConnector.getPropertyValue(props["Author"], "rich_text") as string) || "",
+		slug: (notionConnector.getPropertyValue(props["Slug"], "rich_text") as string) || "",
+		company: notionConnector.getPropertyValue(props["Company"], "rich_text") as string | undefined,
+		companyLogo: (notionConnector.getPropertyValue(props["Company Logo"], "files") as string[])?.[0],
+		coverImage: (notionConnector.getPropertyValue(props["Cover Image"], "files") as string[])?.[0],
+		authorImage: (notionConnector.getPropertyValue(props["Author Image"], "files") as string[])?.[0],
+		category: notionConnector.getPropertyValue(props["Category"], "multi_select") as string[] | undefined,
+		tags: notionConnector.getPropertyValue(props["Tags"], "multi_select") as string[] | undefined,
+		group: notionConnector.getPropertyValue(props["Group"], "multi_select") as string[] | undefined,
+		publishedDate: (
+			notionConnector.getPropertyValue(props["Published Date"], "date") as {
+				start: string
+				end: string | null
+				time_zone: string | null
+			} | null
+		)?.start,
+		seoDescription: notionConnector.getPropertyValue(props["SEO Description"], "rich_text") as string | undefined,
+		featured: notionConnector.getPropertyValue(props["Featured"], "checkbox") as boolean | undefined,
+		status: (
+			notionConnector.getPropertyValue(props["Status"], "status") as {
+				id: string
+				name: string
+				color: string
+			} | null
+		)?.name,
+		url: notionDBItem.url,
+		icon: notionDBItem.icon as { type: "external"; external: { url: string } } | null,
+		blocks: [], // Will be populated separately when fetching page content
+	}
+}
+
+export async function transformDBRowsToArticles(
+	dbRows: (PageObjectResponse | PartialPageObjectResponse | DatabaseObjectResponse | PartialDatabaseObjectResponse)[],
+): Promise<Article[]> {
+	const onlyPageObjects: PageObjectResponse[] | PartialPageObjectResponse[] = dbRows.filter(
+		(row) => row.object === "page",
+	) as PageObjectResponse[] | PartialPageObjectResponse[]
+	return Promise.all(onlyPageObjects.map(transformNotionDBRowToArticle))
+}
+
+export async function getDatabaseSchemaMultiSelectOptionsForProperty(
+	databaseId: string,
+	property: string,
+): Promise<string[]> {
+	const schema = await notionConnector.getDatabaseSchema(databaseId)
+	const propertySchema = schema[property as keyof typeof schema]
+
+	if (propertySchema && propertySchema.type === "multi_select") {
+		return (propertySchema as { multi_select: { options: { name: string }[] } }).multi_select.options.map(
+			(option) => option.name,
+		)
+	}
+
+	return []
 }
 
 // Export a singleton instance

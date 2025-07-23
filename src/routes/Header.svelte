@@ -96,9 +96,10 @@
 <div
 	class="px-4 fixed left-0 right-0 top-0 z-[99] mx-auto w-full bg-card/50 backdrop-blur-sm transition-all duration-300">
 	<div class=" max-w-7xl flex items-center justify-between mx-auto font-sans">
-		<div class="flex items-center w-full gap-4">
-			<a href="/" class="text-2xl font-bold">
-				<img src="/logos/black.png" alt="Logo" class="dark:invert h-6" />
+		<div class=" flex items-center justify-start w-full">
+			<a href="/" class=" flex items-center gap-2">
+				<img src="/logos/CoLoop_Icon.svg" alt="CoLoop Logo" class="contrast-100 saturate-0 rounded-xl h-6" />
+				<h4 class=" text-foreground font-semibold">CoLoop</h4>
 			</a>
 		</div>
 

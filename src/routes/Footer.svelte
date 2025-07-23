@@ -16,7 +16,7 @@
 				</a>
 			</div>
 
-			<div class="md:col-span-3 grid grid-cols-4 gap-8 text-right">
+			<div class="md:col-span-3 grid grid-cols-5 gap-8 text-right">
 				<div>
 					<span class="text-muted-foreground text-xs font-medium">Product</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
@@ -25,29 +25,38 @@
 						<a href="/products/agentic-ai-chat" class="hover:underline transition-colors"
 							>Agentic AI Chat
 						</a>
-						<a href="https://status.coloop.ai" class="hover:underline transition-colors">Status</a>
-						<a href="https://trust.coloop.ai" class="hover:underline transition-colors">Trust</a>
+						<a href="https://status.coloop.ai" class="hover:underline transition-colors">Concept Testing</a>
 					</nav>
 				</div>
 				<!-- <div>
 					<span class="text-muted-foreground text-xs font-medium">Sectors</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
 						<a href="/sectors/healthcare-and-pharmaceuticals" class="hover:underline transition-colors"
-							>Healthcare & <br />Pharmaceuticals</a>
+						>Healthcare & <br />Pharmaceuticals</a>
 						<a href="/sectors/consumer-goods" class="hover:underline transition-colors">
-							Consumer & Retail
+						Consumer & Retail
 						</a>
 						<a href="/sectors/experts-and-key-opinion-leaders" class="hover:underline transition-colors">
-							Industry Experts
+						Industry Experts
 						</a>
 						<a href="/sectors/business-stakeholders" class="hover:underline transition-colors"
-							>Business Stakeholders</a>
+						>Business Stakeholders</a>
 						<a href="/sectors/media-and-entertainment" class="hover:underline transition-colors"
-							>Media & Entertainment</a>
-					</nav>
-				</div> -->
+						>Media & Entertainment</a>
+						</nav>
+						</div> -->
 				<div>
-					<span class="text-muted-foreground text-xs font-medium">Personas</span>
+					<span class="text-muted-foreground text-xs font-medium">Comparisons</span>
+					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
+						<a href="/careers" class="hover:underline transition-colors">CoLoop Vs. ChatGPT</a>
+						<a href="/mission" class="hover:underline transition-colors">CoLoop Vs. Listenlabs</a>
+						<a href="/about" class="hover:underline transition-colors">CoLoop Vs. Claude</a>
+						<a href="/blog" class="hover:underline transition-colors">CoLoop Vs. Gemini</a>
+						<a href="/values" class="hover:underline transition-colors">CoLoop Vs. Grok</a>
+					</nav>
+				</div>
+				<div>
+					<span class="text-muted-foreground text-xs font-medium">Teams</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
 						<a href="/use-cases/pharmaceutical" class="hover:underline transition-colors">In-house Teams</a>
 						<a href="/use-cases/biotechnology" class="hover:underline transition-colors">Academics</a>
@@ -62,6 +71,8 @@
 						<a href="/support" class="hover:underline transition-colors">Support</a>
 						<a href="https://community.coloop.ai" class="hover:underline transition-colors">Community</a>
 						<a href="/blog" class="hover:underline transition-colors">Blog</a>
+						<a href="https://status.coloop.ai" class="hover:underline transition-colors">Status</a>
+						<a href="https://trust.coloop.ai" class="hover:underline transition-colors">Trust</a>
 					</nav>
 				</div>
 				<div>

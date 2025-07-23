@@ -4,17 +4,18 @@
 	type Props = {
 		title: string
 		subtitle: string
-		image: string
+		image?: string
 		colSpan?: number
 		href?: string
 		cardHeight?: number
+		rowSpan?: number
 	}
 
-	let { title, subtitle, image, colSpan = 1, href, cardHeight = 60 }: Props = $props()
+	let { title, subtitle, image, colSpan = 1, href, cardHeight = 64, rowSpan = 1 }: Props = $props()
 </script>
 
 <div
-	class="group col-span-{colSpan} min-h-{cardHeight} bg-card {image
+	class="group shadow col-span-{colSpan} row-span-{rowSpan} min-h-{cardHeight} bg-card {image
 		? 'text-card'
 		: 'text-card-foreground'} relative flex flex-col items-start justify-between overflow-hidden rounded transition-all duration-300 ease-in-out hover:shadow-xl">
 	{#if image}
