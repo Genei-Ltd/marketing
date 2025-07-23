@@ -1,4 +1,5 @@
 <script lang="ts">
+	import GoodStyle from "./../lib/components/animations/GoodStyle.svelte"
 	import TwoSplit from "$components/layouts/TwoSplit.svelte"
 	import type { Testimonial } from "$lib/server/connectors/notion-testimonials"
 
@@ -27,16 +28,15 @@
 
 <div class="pb-96 max-h-300 relative top-0 z-10 w-full h-screen">
 	<img
-		src="/images/wild/coca-cola.png"
+		src="/images/wild/x.png"
 		alt="Hero"
-		class="absolute top-0 z-10 object-cover w-full h-full 2xl:object-top-right opacity-100" />
+		class="2xl:object-top-right absolute top-0 z-10 object-cover w-full h-full opacity-100" />
 	<div class="pb-96 bg-gradient-to-t from-primary to-transparent absolute bottom-0 z-10 w-full h-screen"></div>
 	<div
 		class="max-w-7xl absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-auto">
-		<img
-			src="/images/wild/river-valley.png"
-			alt="Hero"
-			class="relative top-0 z-10 object-cover w-64 h-64 mt-16 opacity-100" />
+		<div class="h-fit relative top-0 z-10 flex items-center justify-center object-cover w-1/3 mt-16 opacity-100">
+			<GoodStyle />
+		</div>
 		<div class="flex flex-col items-start justify-end h-full">
 			<h1 class="text-huge text-background text-balance drop-shadow-lg font-serif leading-tight text-left">
 				AI-powered analysis <br /> for human-powered insights
@@ -116,7 +116,7 @@
 			description="Delegate complex tasks in natural language to domain-specific agents that can count, search, summarise and cite."
 			buttonText="Explore Agents"
 			buttonHref="/demo">
-			<div class="h-full w-full flex flex-col items-center justify-center gap-16 overflow-hidden">
+			<div class="flex flex-col items-center justify-center w-full h-full gap-16 overflow-hidden">
 				<AnimateQuerey />
 			</div>
 		</TwoSplit>
@@ -127,7 +127,7 @@
 			buttonText="Explore Integrations"
 			reverse
 			buttonHref="/demo">
-			<div class=" h-full w-full bg-accent-1">
+			<div class=" bg-accent-1 w-full h-full">
 				<DemoRolodex
 					showControls={false}
 					items={[
@@ -148,17 +148,17 @@
 						{ src: "/integrations/qualzy.png", title: "qualzy" },
 					]}>
 					{#snippet children(item)}
-						<div class="flex flex-col items-center justify-center h-64 w-full p-8">
+						<div class="flex flex-col items-center justify-center w-full h-64 p-8">
 							<div
-								class="flex flex-row gap-4 items-center text-card-foreground justify-center mx-auto h-full w-full rounded overflow-hidden bg-card shadow-2xl border-t-20 border-accent-3">
+								class="text-card-foreground bg-card border-t-20 border-accent-3 flex flex-row items-center justify-center w-full h-full gap-4 mx-auto overflow-hidden rounded shadow-2xl">
 								<img
 									src={(item as { src: string; alt: string }).src}
 									alt={(item as { src: string; title: string }).title}
 									class="object-cover h-12" />
 								<div class="flex flex-col items-start justify-start">
-									<span class="text-balance text-xl capitalize font-semibold"
+									<span class="text-balance text-xl font-semibold capitalize"
 										>{(item as { src: string; title: string }).title}</span>
-									<span class="text-balance text-xs font-sans font-semibold uppercase opacity-50">
+									<span class="text-balance font-sans text-xs font-semibold uppercase opacity-50">
 										Full Integration
 									</span>
 								</div>
@@ -256,7 +256,7 @@
 <div class="bg-accent-1 flex items-center justify-center w-full py-32">
 	<div class="max-w-7xl grid items-center justify-center grid-cols-2 mx-auto">
 		<div class=" flex items-center justify-center">
-			<img src="/images/old-man.png" alt="old man" class="rounded aspect-square object-cover w-full h-full" />
+			<img src="/images/old-man.png" alt="old man" class="aspect-square object-cover w-full h-full rounded" />
 		</div>
 		<div class="flex flex-col items-start justify-center flex-1 pl-32">
 			<blockquote class="text-foreground text-balance mb-8 font-serif text-xl">
