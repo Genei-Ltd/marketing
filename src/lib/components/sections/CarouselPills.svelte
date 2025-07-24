@@ -83,21 +83,20 @@
 </script>
 
 <div class="md:py-24 bg-muted w-full py-16">
-	<div class="text-muted-foreground w-full py-2 mb-8 text-sm text-center">
-		<div class="flex flex-row items-center justify-center w-full max-w-5xl gap-8 py-2 mx-auto">
+	<div class="text-muted-foreground w-full mb-8 text-sm text-center">
+		<div class="flex flex-row items-center justify-center w-full max-w-3xl gap-4 py-2 mx-auto">
 			{#each Array(count) as _, i (i)}
-				<span
+				<div
 					onclick={() => api?.scrollTo(i)}
 					role="button"
 					tabindex={i === current ? 0 : -1}
 					aria-current={i === current}
 					class={`
-						transition-all duration-300 cursor-pointer w-full ease-in-out rounded-full p-2 px-4 border border-card
-						${i === current ? " bg-card text-card-foreground " : "text-card"}
-					`}
-					style="transition-property: width, background, box-shadow, opacity, transform;">
+						truncate line-clamp-2 transition-all duration-300 cursor-pointer w-2/3 ease-in-out rounded-full p-2 px-4  border border-card hover:bg-card hover:text-card-foreground
+						${i === current ? "w-full bg-card text-card-foreground " : " text-card"}
+					`}>
 					<span class=" relative z-10 text-sm">{cards[i].label}</span>
-				</span>
+				</div>
 			{/each}
 		</div>
 	</div>
@@ -107,13 +106,13 @@
 			align: "center",
 		}}
 		setApi={(emblaApi) => (api = emblaApi)}
-		class="max-w-7xl w-full mx-auto mask-l-from-95% mask-r-from-95%">
+		class="max-w-7xl w-full mx-auto transition-all duration-500 ease-in-out">
 		<Carousel.Content class="flex">
 			{#each cards as card, index}
 				<Carousel.Item
-					class="flex w-full max-w-6xl mx-auto pl-4 {index === current
+					class="flex w-full max-w-7xl mx-auto {index === current
 						? 'opacity-100'
-						: 'opacity-20'} transition-opacity duration-300 ease-in-out"
+						: 'opacity-20'} transition-all  duration-300 ease-in-out"
 					onclick={() => api?.scrollTo(index)}>
 					<TwoSplit
 						label={card.label}

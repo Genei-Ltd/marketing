@@ -3,8 +3,8 @@
 	import { Badge } from "$lib/components/ui/badge"
 </script>
 
-<footer class="text-muted-foreground mt-36 px-4 py-8 text-sm">
-	<div class="w-full max-w-6xl mx-auto">
+<footer class="text-muted-foreground mt-36 w-full px-4 py-8 text-sm">
+	<div class="max-w-7xl w-full mx-auto">
 		<div class="flex justify-between w-full">
 			<div class="col-span-1">
 				<a href="/" class="flex items-center gap-2 mb-4">

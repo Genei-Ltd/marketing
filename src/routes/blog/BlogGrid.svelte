@@ -2,7 +2,7 @@
 	import { IconCalendar } from "@tabler/icons-svelte"
 	import type { Article } from "$lib/types/articles"
 	import { fly } from "svelte/transition"
-
+	import { cubicInOut } from "svelte/easing"
 	let { articles }: { articles: Article[] } = $props()
 
 	function formatDate(dateString: string | null): string {
@@ -35,15 +35,15 @@
 		{#each articles as post, i}
 			<div
 				class="group block"
-				in:fly={{ y: 50, duration: 600, delay: i * 100 }}
-				out:fly={{ y: -50, duration: 400 }}>
+				in:fly={{ y: 50, duration: 600, delay: i * 100, easing: cubicInOut }}
+				out:fly={{ y: -50, duration: 400, easing: cubicInOut }}>
 				<a href={`/blog/${post.slug}`} class="block">
 					<div class="bg-card overflow-hidden rounded-md">
 						<!-- {#if post.coverImage} -->
 						<div class="aspect-[5/3] w-full overflow-hidden rounded-lg relative">
 							{#if isNew(post.publishedDate)}
 								<span
-									class="text-xs absolute shadow top-2 left-2 uppercase font-semibold bg-accent text-white px-1.5 py-0.5 rounded-sm z-20">
+									class="text-xs absolute shadow tracking-wider top-2 left-2 uppercase font-semibold bg-accent text-white px-1.5 py-0.5 rounded-sm z-20">
 									New
 								</span>
 							{/if}

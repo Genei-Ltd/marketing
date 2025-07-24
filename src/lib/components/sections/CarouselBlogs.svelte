@@ -63,10 +63,10 @@
 						</div>
 					</div>
 					<div class="relative z-10">
-						<div class=" relative flex flex-col justify-start h-full px-4 text-background">
+						<div class=" text-background relative flex flex-col justify-start h-full px-2">
 							<!-- Content -->
 							<div class="flex flex-col justify-center flex-1 mt-4 mb-1">
-								<blockquote class=" text-lg font-medium text-background">
+								<blockquote class=" text-background line-clamp-2 text-lg font-medium">
 									{post.title}
 								</blockquote>
 							</div>
@@ -74,11 +74,11 @@
 							<!-- Footer -->
 							<div class="flex items-end justify-between flex-shrink-0 gap-6">
 								<div class="flex-1">
-									<p class=" text-sm text-muted-foreground font-semibold">{post.company}</p>
+									<p class=" text-muted-foreground text-sm font-semibold">{post.company}</p>
 									<div class="flex flex-row gap-3">
 										{#if post.category}
 											{#each post.category as category}
-												<p class="text-sm capitalize text-muted-foreground">{category}</p>
+												<p class="text-muted-foreground text-sm capitalize">{category}</p>
 											{/each}
 										{/if}
 									</div>

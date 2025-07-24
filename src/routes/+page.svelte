@@ -10,11 +10,13 @@
 	import Card from "$components/blocks/Card.svelte"
 	import BentoGrid from "../lib/components/layouts/BentoGrid.svelte"
 	import NakedCardSet from "$components/sections/NakedCardSet.svelte"
-	import BlogCarousel from "$components/sections/BlogCarousel.svelte"
-	import CarouselPill from "$components/sections/CarouselPill.svelte"
+	import BlogCarousel from "$components/sections/CarouselBlogs.svelte"
+	import CarouselPill from "$components/sections/CarouselPills.svelte"
 	import type { Article } from "$lib/types/articles"
 	import DemoRolodex from "$components/animations/DemoRolerdex.svelte"
 	import AnimateQuerey from "$components/animations/DemoAnimateQuerey.svelte"
+	import NakedCardSetImages from "$components/sections/NakedCardSetImages.svelte"
+	import Security from "$components/sections/Security.svelte"
 	let {
 		form,
 		data,
@@ -28,15 +30,18 @@
 
 <div class="pb-96 max-h-300 relative top-0 z-10 w-full h-screen">
 	<img
-		src="/images/wild/x.png"
+		src="/images/wild/coca-cola-4k.png"
 		alt="Hero"
 		class="2xl:object-top-right absolute top-0 z-10 object-cover w-full h-full opacity-100" />
 	<div class="pb-96 bg-gradient-to-t from-primary to-transparent absolute bottom-0 z-10 w-full h-screen"></div>
 	<div
-		class="max-w-7xl absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-auto">
-		<div class="h-fit relative top-0 z-10 flex items-center justify-center object-cover w-1/3 mt-16 opacity-100">
+		class="px-auto absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-32">
+		<div class="h-fit relative top-0 z-10 flex items-center justify-center object-cover w-1/4 mt-16 opacity-100">
 			<GoodStyle />
 		</div>
+	</div>
+	<div
+		class="max-w-7xl absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-auto">
 		<div class="flex flex-col items-start justify-end h-full">
 			<h1 class="text-huge text-background text-balance drop-shadow-lg font-serif leading-tight text-left">
 				AI-powered analysis <br /> for human-powered insights
@@ -288,23 +293,30 @@
 		<div class="flex flex-row mb-16"></div>
 		<BentoGrid />
 	</div>
-
-	<!-- insert calendar from cal.com -->
-	<!-- <div class="w-full overflow-hidden rounded">
-		<iframe
-			src="https://coloop.cal.com/coloop-ai/agencies"
-			style="border: 0px #ffffff none"
-			width="100%"
-			height="800"
-			frameborder="0"
-			marginheight="0"
-			marginwidth="0"
-			title="Booking Calendar"></iframe>
-	</div> -->
 </div>
+<!-- Security -->
+<div class="bg-primary text-primary-foreground">
+	<div class="max-w-7xl flex flex-col w-full py-32 mx-auto">
+		<Security />
+	</div>
+</div>
+
+<!-- insert calendar from cal.com -->
+<!-- <div class="w-full overflow-hidden rounded">
+	<iframe
+	src="https://coloop.cal.com/coloop-ai/agencies"
+	style="border: 0px #ffffff none"
+	width="100%"
+	height="800"
+	frameborder="0"
+	marginheight="0"
+	marginwidth="0"
+	title="Booking Calendar"></iframe>
+	</div> -->
 
 <div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto mt-32">
 	{@render section("Professional Grade AI Designed by Insights Experts")}
+	<NakedCardSetImages />
 	<NakedCardSet set="security" />
 	<div class="grid w-full grid-cols-1 gap-8 px-4 my-16">
 		<Card

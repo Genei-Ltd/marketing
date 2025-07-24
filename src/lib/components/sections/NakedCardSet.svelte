@@ -64,18 +64,20 @@
 	const chosenSet = set === "security" ? security : features
 </script>
 
-<section class="bg-background text-foreground w-full py-16">
-	<div class="md:px-6 container px-4">
-		<div class="md:grid-cols-2 lg:grid-cols-4 text-balance grid gap-8">
-			{#each chosenSet as feature}
-				<div class="flex flex-col items-start text-left">
-					<div class="flex items-center justify-start w-12 h-12 mb-4 rounded-full">
-						<feature.icon class="size-8" />
-					</div>
-					<span class="mb-2 text-lg font-semibold">{feature.title}</span>
-					<span class="opacity-70 pr-8 text-sm">{feature.description}</span>
-				</div>
-			{/each}
+{#snippet card(feature: Feature)}
+	<div class=" flex flex-col items-start text-left">
+		<div class=" flex items-center justify-start w-12 h-12 mb-4">
+			<feature.icon class="size-8 text-primary" />
 		</div>
+		<span class="mb-2 text-lg font-semibold">{feature.title}</span>
+		<span class="opacity-70 pr-8 text-sm">{feature.description}</span>
+	</div>
+{/snippet}
+
+<section class="text-foreground w-full py-16">
+	<div class="md:grid-cols-2 lg:grid-cols-4 grid gap-4 px-4">
+		{#each chosenSet as feature}
+			{@render card(feature)}
+		{/each}
 	</div>
 </section>
