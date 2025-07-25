@@ -1,6 +1,6 @@
 <script lang="ts">
 	import BlogEndArtCard from "./../lib/components/blocks/BlogEndArtCard.svelte"
-	import GoodStyle from "./../lib/components/animations/GoodStyle.svelte"
+	import DemoWorkflow from "../lib/components/animations/DemoWorkflow.svelte"
 	import TwoSplit from "$components/layouts/TwoSplit.svelte"
 	import type { Testimonial } from "$lib/server/connectors/notion-testimonials"
 
@@ -9,15 +9,14 @@
 	import Testimonials from "../lib/components/sections/Testimonials.svelte"
 	import TestimonialCard from "$components/blocks/TestimonialCard.svelte"
 	import Card from "$components/blocks/Card.svelte"
-	import BentoGrid from "../lib/components/layouts/BentoGrid.svelte"
 	import NakedCardSet from "$components/sections/NakedCardSet.svelte"
 	import CarouselBlogs from "$components/sections/CarouselBlogs.svelte"
 	import CarouselPills from "$components/sections/CarouselPills.svelte"
 	import type { Article } from "$lib/types/articles"
 	import DemoRolodex from "$components/animations/DemoRolerdex.svelte"
 	import AnimateQuerey from "$components/animations/DemoAnimateQuerey.svelte"
-	import NakedCardSetImages from "$components/sections/NakedCardSetImages.svelte"
 	import Security from "$components/sections/Security.svelte"
+	import DemoWorkflowSharing from "$components/animations/DemoWorkflowSharing.svelte"
 	let {
 		form,
 		data,
@@ -41,7 +40,7 @@
 <!-- HERO SECTION -->
 <div class="pb-96 max-h-300 relative top-0 z-10 w-full h-screen">
 	<img
-		src="/images/wild/sunrise-lake-8k.png"
+		src="/images/wild/crazy-cola.png"
 		alt="Hero"
 		class="2xl:object-top-right absolute top-0 z-10 object-cover w-full h-full opacity-100" />
 	<div
@@ -50,7 +49,7 @@
 	<div
 		class="px-auto absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-32">
 		<div class="h-fit relative top-0 z-10 flex items-center justify-center object-cover w-1/4 mt-16 opacity-100">
-			<GoodStyle />
+			<DemoWorkflow />
 		</div>
 	</div>
 	<div
@@ -154,8 +153,13 @@
 			heading="Secure Access Controlled Workspaces"
 			description="Combine your research material in secure projects with all of the context."
 			buttonText="Explore Projects"
-			buttonHref="/demo">
-			<img src="/images/wild/old-car.png" alt="Projects" class="p-xl object-cover w-full h-full" />
+			buttonHref="/demo"
+			clearBackground={[false, true]}>
+			<div class="bg-accent-2 w-full h-full flex items-center justify-center">
+				<div class="w-3/4 h-3/4">
+					<DemoWorkflowSharing />
+				</div>
+			</div>
 		</TwoSplit>
 		<TwoSplit
 			label="Workflows"

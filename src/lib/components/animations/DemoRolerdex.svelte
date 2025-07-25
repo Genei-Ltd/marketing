@@ -109,7 +109,7 @@
 					: index - currentIndex < 0
 						? -75
 						: 20}deg) translateZ(0px) scale({index === currentIndex ? 1.05 : 1});
-					opacity: {Math.abs(index - currentIndex) <= 8 ? Math.max(0.3, 1 - Math.abs(index - currentIndex) * 0.2) : 0};
+					opacity: {Math.abs(index - currentIndex) <= 8 ? Math.max(0.8, 1 - Math.abs(index - currentIndex) * 0.2) : 0};
 					filter: {index === currentIndex ? 'drop-shadow(0 0 10px rgba(0, 0, 0, 0.5))' : 'none'};
 					z-index: {index === currentIndex ? 100 : Math.max(0, 50 - Math.abs(index - currentIndex))};
 				">
