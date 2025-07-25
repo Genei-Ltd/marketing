@@ -82,7 +82,7 @@
 	})
 </script>
 
-<div class="md:py-24 bg-muted w-full py-16">
+<div class="md:py-24 w-full py-16">
 	<div class="text-muted-foreground w-full mb-8 text-sm text-center">
 		<div class="flex flex-row items-center justify-center w-full max-w-3xl gap-4 py-2 mx-auto">
 			{#each Array(count) as _, i (i)}

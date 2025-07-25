@@ -1,4 +1,5 @@
 <script lang="ts">
+	import BlogEndArtCard from "./../lib/components/blocks/BlogEndArtCard.svelte"
 	import GoodStyle from "./../lib/components/animations/GoodStyle.svelte"
 	import TwoSplit from "$components/layouts/TwoSplit.svelte"
 	import type { Testimonial } from "$lib/server/connectors/notion-testimonials"
@@ -10,8 +11,8 @@
 	import Card from "$components/blocks/Card.svelte"
 	import BentoGrid from "../lib/components/layouts/BentoGrid.svelte"
 	import NakedCardSet from "$components/sections/NakedCardSet.svelte"
-	import BlogCarousel from "$components/sections/CarouselBlogs.svelte"
-	import CarouselPill from "$components/sections/CarouselPills.svelte"
+	import CarouselBlogs from "$components/sections/CarouselBlogs.svelte"
+	import CarouselPills from "$components/sections/CarouselPills.svelte"
 	import type { Article } from "$lib/types/articles"
 	import DemoRolodex from "$components/animations/DemoRolerdex.svelte"
 	import AnimateQuerey from "$components/animations/DemoAnimateQuerey.svelte"
@@ -28,47 +29,6 @@
 	<h2 class="text-balance w-1/2 mx-auto mb-16 font-serif text-4xl text-center">{title}</h2>
 {/snippet}
 
-<div class="pb-96 max-h-300 relative top-0 z-10 w-full h-screen">
-	<img
-		src="/images/wild/coca-cola-4k.png"
-		alt="Hero"
-		class="2xl:object-top-right absolute top-0 z-10 object-cover w-full h-full opacity-100" />
-	<div class="pb-96 bg-gradient-to-t from-primary to-transparent absolute bottom-0 z-10 w-full h-screen"></div>
-	<div
-		class="px-auto absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-32">
-		<div class="h-fit relative top-0 z-10 flex items-center justify-center object-cover w-1/4 mt-16 opacity-100">
-			<GoodStyle />
-		</div>
-	</div>
-	<div
-		class="max-w-7xl absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-auto">
-		<div class="flex flex-col items-start justify-end h-full">
-			<h1 class="text-huge text-background text-balance drop-shadow-lg font-serif leading-tight text-left">
-				AI-powered analysis <br /> for human-powered insights
-			</h1>
-			<h2 class="text-background opacity-60 mt-4 font-sans leading-tight text-left">
-				Opinions in, insights out. Fast.
-			</h2>
-		</div>
-	</div>
-</div>
-
-<div class="max-w-7xl relative z-50 flex flex-col items-center justify-center mx-auto">
-	<!-- <div class="flex flex-row items-center justify-center w-full gap-4 mt-32">
-  <div class="bg-brand text-brand-foreground w-full h-16">Brand</div>
-  <div class="bg-primary text-primary-foreground w-full h-16">Primary</div>
-  <div class="bg-accent-1 text-accent-1-foreground w-full h-16">Accent 1</div>
-  <div class="bg-accent-2 text-accent-2-foreground w-full h-16">Accent 2</div>
-  <div class="bg-accent-3 text-accent-3-foreground w-full h-16">Accent 3</div>
-  <div class="bg-accent-4 text-accent-4-foreground w-full h-16">Accent 4</div>
-  </div> -->
-	<!-- Hero text -->
-	<!-- <h1 class="text-huge text-foreground text-balance drop-shadow-lg mx-16 mt-64 font-serif leading-tight text-left">
-		AI-powered analysis <br /> for human-powered insights
-	</h1>
-	<h2 class="text-foreground mt-16 font-sans leading-tight text-left">Opinions in, insights out. Fast.</h2> -->
-</div>
-
 <!-- Hero image -->
 <!-- <div class="relative z-50 w-full mt-16">
 	<img
@@ -78,9 +38,38 @@
 	</div> -->
 <!-- <img src="/images/wild/hero.png" alt="Hero" class="absolute inset-0 object-cover w-full h-full py-16 opacity-50" /> -->
 
-<!-- <Button>Button</Button> -->
+<!-- HERO SECTION -->
+<div class="pb-96 max-h-300 relative top-0 z-10 w-full h-screen">
+	<img
+		src="/images/wild/sunrise-lake-8k.png"
+		alt="Hero"
+		class="2xl:object-top-right absolute top-0 z-10 object-cover w-full h-full opacity-100" />
+	<div
+		class="pb-96 bg-gradient-to-t from-primary/90 via-primary/0 to-transparent opacity-60 absolute bottom-0 z-10 w-full h-screen">
+	</div>
+	<div
+		class="px-auto absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-32">
+		<div class="h-fit relative top-0 z-10 flex items-center justify-center object-cover w-1/4 mt-16 opacity-100">
+			<GoodStyle />
+		</div>
+	</div>
+	<div
+		class="max-w-7xl absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-auto">
+		<div class="flex flex-col items-start justify-end h-full">
+			<h1
+				class="text-huge text-background text-balance drop-shadow-lg capitalize font-serif leading-tight tracking-wide text-left">
+				AI-powered analysis <br /> for human-powered insights
+			</h1>
+			<h2
+				class="text-background opacity-80 mt-4 text-xl font-medium capitalize font-sans leading-tight tracking-wide text-left">
+				Opinions in, insights out. Fast.
+			</h2>
+		</div>
+	</div>
+</div>
+
 <div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto">
-	<!-- Customer logos -->
+	<!-- CUSTOMER LOGOS  -->
 	<div class="w-full mt-32 mb-16">
 		<h2 class="font-serif text-2xl text-center">Trusted by the brands you trust</h2>
 		<div class="flex flex-row items-center justify-center gap-16 mt-8">
@@ -95,25 +84,12 @@
 		</div>
 	</div>
 
-	<!-- CTA -->
-	<div class="flex flex-col w-full gap-16 mt-32 mb-32">
-		<TwoSplit
-			label="Get CoLoop"
-			heading="See CoLoop in action"
-			description="Book a personalized demo to discover how CoLoop can accelerate your research and insights workflow."
-			buttonText="Get CoLoop"
-			buttonHref="/demo"
-			clearBackground={[true, true]}>
-			<TestimonialCard testimonial={data.ctaTestimonial[0]} />
-		</TwoSplit>
-	</div>
-
-	<!-- Email subscribe form -->
-	<div class="mb-18 w-full mt-16">
+	<!-- FIRST CTA -->
+	<div class="w-full mt-16">
 		<EmailSubmit {form} placeholder="Enter your email address" buttonText="Subscribe" />
 	</div>
 
-	<!-- Features -->
+	<!-- PRODUCT BENEFITS  -->
 	<div class="flex flex-col w-full gap-32 mt-32 mb-32">
 		<TwoSplit
 			label="Analysis Agents"
@@ -192,114 +168,208 @@
 		</TwoSplit>
 	</div>
 
+	<!-- STATISTICS & BENEFITS  -->
 	<div class="flex flex-col w-full mt-32 mb-32">
 		{@render section("Let us do the heavy lifting, you do the insights")}
-		<div class="grid grid-cols-4 grid-rows-3 gap-4 mb-16">
-			<Card
-				title="70%"
-				subtitle="70% time saving"
-				image="/images/water/tops.png"
-				href="/demo"
-				cardHeight={96}
-				colSpan={2} />
-			<Card
-				title="70%"
-				subtitle="70% time saving"
-				image="/images/wild/old-car.png"
-				href="/demo"
-				cardHeight={96} />
-			<Card title="55%" subtitle="55% researchers report more enjoyable work" />
-			<Card
-				title="73% report more efficient research"
-				subtitle="73% report more efficient research"
-				colSpan={2} />
-			<Card
-				title="46% report higher quality reports"
-				subtitle="46% report higher quality reports"
-				colSpan={2}
-				rowSpan={2} />
-			<Card
-				title="2x more likely to recommend that ChatGPT"
-				subtitle="2x more likely to recommend that ChatGPT"
-				colSpan={2}
-				rowSpan={2} />
-			<!-- <Card title="$200 saved per interview" subtitle="$200 saved per interview" cardHeight={96} />
-			<Card title="Average NPS of 60" subtitle="Average NPS of 60" cardHeight={96} />
-			<Card
-				title="55% User Retention after 18 months"
-				subtitle="55% User Retention after 18 months"
-				colSpan={2}
-				cardHeight={96} /> -->
-		</div>
+		<NakedCardSet set="features" />
 	</div>
 
-	<!-- <div class="flex flex-col w-full mt-16 mb-16">
-		{@render section("Unlock the power of AI for your team")}
-		<div class="flex flex-row my-16">
-			<PillTabs defaultValue="in-house-counsel" autoProgressInterval={4000} />
+	<!-- Testimonials -->
+	<div class=" w-full">
+		<div class="max-w-7xl flex flex-col w-full gap-16 mx-auto mb-32">
+			{@render section("What our customers say")}
+			<Testimonials testimonials={data.testimonials} />
 		</div>
-	</div> -->
-</div>
-
-<div class="bg-accent-1 min-h-200 flex flex-col items-center justify-center w-full mt-32 mb-32">
-	<!-- {@render section("What our customers say")} -->
-	<BlogCarousel articles={data.articles as Article[]} />
-</div>
-
-<div class="bg-accent-1 min-h-200 flex flex-col items-center justify-center w-full mt-32 mb-32">
-	<!-- {@render section("What our customers say")} -->
-	<CarouselPill />
-</div>
-
-<!-- Testimonials -->
-<div class="bg-primary text-primary-foreground w-full">
-	<div class="max-w-7xl flex flex-col w-full gap-16 py-16 mx-auto mt-32 mb-32">
-		{@render section("What our customers say")}
-		<Testimonials testimonials={data.testimonials} />
 	</div>
 </div>
-<div class="bg-accent-1 flex items-center justify-center w-full py-32">
+
+<!-- MAX 7XL END -->
+<!-- FULL WIDTH START -->
+
+<div class="bg-primary text-primary-foreground flex flex-col items-center justify-center w-full py-32">
+	<!-- TESTIMONIALS  -->
 	<div class="max-w-7xl grid items-center justify-center grid-cols-2 mx-auto">
 		<div class=" flex items-center justify-center">
 			<img src="/images/old-man.png" alt="old man" class="aspect-square object-cover w-full h-full rounded" />
 		</div>
 		<div class="flex flex-col items-start justify-center flex-1 pl-32">
-			<blockquote class="text-foreground text-balance mb-8 font-serif text-xl">
-				&ldquo;When it comes to AI and technology, it’s all about learning by doing. You won’t figure everything
-				out right away, but the more you engage with it, the more opportunities you’ll see.&rdquo;
+			<blockquote class="text-primary-foreground text-balance mb-8 font-serif text-xl">
+				"When it comes to AI and technology, it’s all about learning by doing. You won’t figure everything out
+				right away, but the more you engage with it, the more opportunities you’ll see."
 			</blockquote>
-			<div class="text-foreground font-sans text-sm">
-				<span class="text-foreground block font-semibold">Tommi Laitio</span>
+			<div class="text-primary-foreground font-sans text-sm">
+				<span class="text-primary-foreground block font-semibold">Tommi Laitio</span>
 				<span class="block">Former Executive Director, Culture and Leisure, City of Helsinki</span>
 			</div>
 		</div>
 	</div>
+
+	<!-- SOLUTIONS -->
+	<div class=" min-h-200 flex flex-col items-center justify-center w-full mt-32">
+		<!-- {@render section("What our customers say")} -->
+		<CarouselPills />
+	</div>
 </div>
-<!-- ******************** ABOVE IS GOOD ******************** -->
 
-<div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto mt-32">
-	{@render section("Professional Grade AI Designed by Insights Experts")}
-	<NakedCardSet set="features" />
+<!-- FULL WIDTH END -->
+<!-- MAX 7XL START -->
 
-	<!-- Features -->
+<div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto">
+	<!-- BOOK A CALL CTA -->
+	<div class="w-full mt-32 mb-32">
+		{@render section("This is the future of research")}
+		<EmailSubmit {form} placeholder="Enter your email address" buttonText="Get a demo" />
+	</div>
+
+	<!-- ENTERPRISE READY -->
+	{@render section("Enterprise Grade AI Designed by Insights Experts")}
+	<div class="grid grid-cols-4 grid-rows-2 gap-4 mb-16">
+		<!-- {
+			icon: IconShieldLock,
+			title: "SOC II Compliant",
+			description: "Robust, industry-standard protection with zero training on your data.",
+		},
+		{
+			icon: IconDeviceDesktopCode,
+			title: "Live Support & Training",
+			description:
+				"White glove support to support adoption, maximise value and transform your team to AI first experts.",
+		},
+		{
+			icon: IconScale,
+			title: "Best In Class Models",
+			description:
+				"High-performing model ensembles assembled from across platforms and providers for a best in class experience.",
+		},
+		{
+			icon: IconWorldWww,
+			title: "Flexible API & Agentic Workflows",
+			description:
+				"Retrofit your teams, tools and processes in weeks with integrated APIs and expert quality tooling with no prompting experience required.",
+		}, -->
+		<Card
+			title="SOC II Compliant"
+			subtitle="Robust, industry-standard protection with zero training on your data."
+			image="/images/water/tops.png"
+			href="/demo"
+			cardHeight={96}
+			colSpan={2}
+			rowSpan={2} />
+		<Card
+			title="Live Support & Training"
+			subtitle="White glove support to support adoption, maximise value and transform your team to AI first experts."
+			image="/images/wild/old-car.png"
+			href="/demo"
+			cardHeight={96}
+			colSpan={2} />
+		<Card
+			title="Best In Class Models"
+			subtitle="High-performing model ensembles assembled from across platforms and providers for a best in class experience."
+			colSpan={2}
+			rowSpan={2} />
+		<Card
+			title="Flexible API & Agentic Workflows"
+			subtitle="Retrofit your teams, tools and processes in weeks with integrated APIs and expert quality tooling with no prompting experience required." />
+		<Card
+			title="Flexible API & Agentic Workflows"
+			subtitle="Retrofit your teams, tools and processes in weeks with integrated APIs and expert quality tooling with no prompting experience required." />
+	</div>
+</div>
+
+<!-- MAX 7XL END -->
+<!-- FULL WIDTH START -->
+
+<div class="bg-primary text-primary-foreground min-h-200 flex flex-col items-center justify-center w-full mt-32 mb-32">
+	<!-- BLOGS CAROUSEL -->
+	<!-- {@render section("What our customers say")} -->
+	<CarouselBlogs articles={data.articles as Article[]} />
+</div>
+<!-- FULL WIDTH END -->
+
+<div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto">
+	<!-- ORG TRANSFORMATION TIMELINE -->
+	<div class="w-full mt-32 mb-32">
+		{@render section("Org Transformation Timeline")}
+	</div>
+	<!-- FINAL GET STARTED -->
+	<div class="w-full mt-32 mb-32">
+		{@render section("With a Book a call CTA too")}
+		<div class="flex flex-col w-full gap-16 mt-32 mb-32">
+			<TwoSplit
+				label="Get CoLoop"
+				heading="See CoLoop in action"
+				description="Book a personalized demo to discover how CoLoop can accelerate your research and insights workflow."
+				buttonText="Get CoLoop"
+				buttonHref="/demo"
+				clearBackground={[true, true]}>
+				<TestimonialCard testimonial={data.ctaTestimonial[0]} />
+			</TwoSplit>
+		</div>
+
+		<EmailSubmit {form} placeholder="Enter your email address" buttonText="Get a demo" />
+	</div>
+
+	<!-- PRODUCTS  -->
 	<div class="flex flex-col w-full gap-16 mt-32 mb-32">
-		{@render section("Run every kind of study, on any kind of data")}
+		{@render section("Products to run every kind of study, on any kind of data")}
 		<ColSideSelectTwoSplit />
 	</div>
 
-	<!-- Success -->
-	<div class="flex flex-col w-full mt-32 mb-32">
-		{@render section("Unlock the power of AI for your team")}
-		<div class="flex flex-row mb-16"></div>
-		<BentoGrid />
+	<!-- COMPARISON  -->
+	<div class="flex flex-col w-full gap-16 mt-32 mb-32">
+		{@render section("Compare CoLoop to CoPilot, ChatGPT + others etc")}
+
+		<div
+			class="bg-primary text-primary-foreground w-full h-96 flex items-center justify-center text-2xl font-serif">
+			COMPARISON
+		</div>
 	</div>
 </div>
-<!-- Security -->
+
 <div class="bg-primary text-primary-foreground">
-	<div class="max-w-7xl flex flex-col w-full py-32 mx-auto">
-		<Security />
+	<!-- SECURITY -->
+	<div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto">
+		<div class="w-full mt-32 mb-32">
+			<Security />
+		</div>
 	</div>
 </div>
+
+<div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto">
+	<div class="w-full mt-32 mb-32">
+		<!-- COMMUNITY -->
+		<div
+			class="bg-primary text-primary-foreground w-full h-96 flex items-center justify-center text-2xl font-serif">
+			COMMUNITY
+		</div>
+	</div>
+
+	<!-- BLOG ENDER -->
+	<div class="w-full mt-32 mb-32">
+		<BlogEndArtCard />
+	</div>
+</div>
+
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
 
 <!-- insert calendar from cal.com -->
 <!-- <div class="w-full overflow-hidden rounded">
@@ -313,17 +383,3 @@
 	marginwidth="0"
 	title="Booking Calendar"></iframe>
 	</div> -->
-
-<div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto mt-32">
-	{@render section("Professional Grade AI Designed by Insights Experts")}
-	<NakedCardSetImages />
-	<NakedCardSet set="security" />
-	<div class="grid w-full grid-cols-1 gap-8 px-4 my-16">
-		<Card
-			title="AI-powered analysis"
-			subtitle="For human-powered insights"
-			image="/images/wild/old-car.png"
-			href="/demo"
-			cardHeight={128} />
-	</div>
-</div>

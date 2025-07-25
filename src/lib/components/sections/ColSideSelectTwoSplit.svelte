@@ -7,7 +7,7 @@
 	const features = [
 		{
 			id: "concept-testing",
-			title: "Concept and message testing",
+			title: "Open Ends",
 			description:
 				"Quickly understand target audiences perception, and uncover what resonates. Never miss or mix up another concept with CoLoop's automatic keyword labelling.",
 			image: "/images/features/concept.gif",
@@ -15,7 +15,7 @@
 		},
 		{
 			id: "customer-experience",
-			title: "Customer experience",
+			title: "Qualitative",
 			description:
 				"Analyze open-ended feedback to reveal customer sentiment. CoLoop enables scalable CX analysis to improve customer journeys and retention.",
 			image: "/images/features/steal.png",
@@ -23,7 +23,7 @@
 		},
 		{
 			id: "competitor-analysis",
-			title: "Competitor analysis",
+			title: "Concept & Message Testing",
 			description:
 				"Unlock the competitive edge with deeper insights into unmet needs, differentiators and white space opportunities.",
 			image: "/images/features/image.png",
@@ -31,7 +31,7 @@
 		},
 		{
 			id: "market-research",
-			title: "Market research",
+			title: "Agentic Chat",
 			description:
 				"Uncover market trends, customer needs, and market opportunities with comprehensive market research.",
 			image: "/images/features/market.png",
@@ -49,7 +49,9 @@
 			<div
 				class={cn(
 					"flex min-h-[150px] cursor-pointer flex-col justify-between rounded  p-6 transition-all duration-300",
-					activeFeature.id === feature.id ? "bg-secondary text-secondary-foreground" : "bg-card",
+					activeFeature.id === feature.id
+						? "bg-card text-card-foreground shadow-lg bg-gradient-to-br from-primary/10 to-primary/5 border-primary"
+						: "bg-card",
 				)}
 				onmouseenter={() => (activeFeature = feature)}
 				role="button"

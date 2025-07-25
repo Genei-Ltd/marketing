@@ -63,7 +63,7 @@
 	<!-- Main Content Grid -->
 	<div class="lg:grid-cols-2 grid items-start grid-cols-1 gap-16">
 		<!-- Left Column - Content -->
-		<div class=" flex flex-col items-start justify-between h-full p-8 space-y-8">
+		<div class=" flex flex-col items-start justify-between h-full space-y-8">
 			<!-- <div class="flex flex-row items-center justify-start w-full gap-4 mb-12">
 				<div class="bg-primary p-2">
 					<IconLock class="text-primary-foreground w-6 h-6" />

@@ -28,7 +28,10 @@
 			</main>
 			<Footer />
 		</div>
-		<div class="from-background to-background/0 bg-gradient-to-b h-16"></div>
+
+		<div class=" h-0">
+			<div class="from-background to-background/0 bg-gradient-to-b h-32"></div>
+		</div>
 	</div>
 	{#if page.url.pathname === "/"}
 		<EndReveal />
