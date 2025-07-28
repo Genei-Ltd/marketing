@@ -2,7 +2,7 @@
 	import { IconUpload, IconFileText, IconCheck, IconLoader } from "@tabler/icons-svelte"
 	import { onMount } from "svelte"
 	import { fly, scale } from "svelte/transition"
-	import { quintOut, cubicInOut, elasticOut } from "svelte/easing"
+	import { quintOut, cubicInOut, elasticOut, linear } from "svelte/easing"
 	import type { ComponentType } from "svelte"
 
 	// ============================================================================
@@ -296,11 +296,11 @@
 				for (let progress = 0; progress <= 100; progress += 10) {
 					if (controller.signal.aborted) throw new Error("Animation cancelled")
 					animationState.uploadedFiles[i].uploadProgress = progress
-					await controller.delay(50)
+					await controller.delay(70)
 				}
 
 				animationState.uploadedFiles[i].status = "uploaded"
-				await controller.delay(200)
+				await controller.delay(50)
 			}
 
 			await controller.delay(800)
@@ -598,7 +598,7 @@
 					<div class="flex items-center gap-2">
 						{#if file.status === "uploading"}
 							<div class="w-20">
-								<div class="bg-border h-1.5 overflow-hidden rounded-full">
+								<div class="bg-secondary h-1.5 overflow-hidden rounded-full">
 									<div
 										class="bg-primary h-full transition-all duration-200 rounded-full"
 										style="width: {file.uploadProgress}%">
@@ -663,7 +663,7 @@
 				{#each rows as row, i (row.file.id)}
 					<div
 						class="grid grid-cols-4 gap-4 items-start"
-						in:fly={{ y: -20, duration: 400, delay: i * 100, easing: elasticOut }}>
+						in:fly={{ y: -20, duration: 400, delay: i * 100, easing: linear }}>
 						<!-- File column -->
 						<div class="flex items-startt justify-start gap-2">
 							<div class="shrink-0">
@@ -684,11 +684,12 @@
 							{@render processingCell(row.transcription)}
 							{#if row.transcription.status === "complete"}
 								{#if row.transcription.detectedLanguages}
-									<div class="flex flex-wrap gap-1 mb-2">
+									<div
+										class="flex flex-wrap gap-1 mb-2"
+										in:fly={{ duration: 200, easing: linear, delay: 100, x: -20 }}>
 										{#each row.transcription.detectedLanguages as lang}
 											<span
-												class="bg-secondary text-secondary-foreground px-2 py-0.5 text-xs font-medium rounded"
-												in:scale={{ duration: 200, easing: elasticOut }}>
+												class="bg-secondary text-secondary-foreground px-2 py-0.5 text-xs font-medium rounded">
 												{lang}
 											</span>
 										{/each}
@@ -712,17 +713,23 @@
 							{@render processingCell(row.translation)}
 							{#if row.translation.status === "complete"}
 								{#if row.translation.originalLanguage && row.translation.targetLanguage}
-									<div class="flex flex-wrap gap-1 mb-2">
+									<div
+										class="flex flex-wrap gap-1 mb-2"
+										in:fly={{ duration: 200, easing: linear, delay: 100, x: -20 }}>
 										<span
-											class="bg-primary/10 text-primary px-2 py-0.5 text-xs font-medium rounded"
-											in:scale={{ duration: 200, easing: elasticOut }}>
+											class="bg-primary/10 text-primary px-2 py-0.5 text-xs font-medium rounded">
 											{row.translation.originalLanguage} → {row.translation.targetLanguage}
 										</span>
 									</div>
 								{/if}
 								{#if row.translation.translatedText}
-									<div class="text-card-foreground/80 text-xs leading-relaxed">
-										{row.translation.translatedText}
+									<div
+										class="text-card-foreground/80 text-xs leading-relaxed"
+										in:fly={{ duration: 200, easing: linear, delay: 100, x: -20 }}>
+										{row.translation.translatedText.slice(0, 100)}
+										{#if row.translation.translatedText.length > 100}
+											<span class="animate-pulse">|</span>
+										{/if}
 									</div>
 								{/if}
 							{/if}
@@ -732,11 +739,11 @@
 						<div class="space-y-2">
 							{@render processingCell(row.speakers)}
 							{#if row.speakers.status === "complete" && row.speakers.speakers}
-								<div class="flex flex-wrap gap-2">
+								<div
+									class="flex flex-wrap gap-2"
+									in:fly={{ duration: 200, easing: elasticOut, delay: 100, x: -20 }}>
 									{#each row.speakers.speakers as speaker}
-										<div
-											class="flex items-center gap-1"
-											in:scale={{ duration: 200, easing: elasticOut }}>
+										<div class="flex items-center gap-1">
 											<div
 												class="w-4 h-4 rounded-full font-bold text-[5px] flex items-center justify-center {speaker.color ===
 												'text-primary'
@@ -747,7 +754,9 @@
 													.map((n) => n[0])
 													.join("")}
 											</div>
-											<span class="text-card-foreground text-xs truncate">{speaker.name}</span>
+											<span class="text-card-foreground text-xs truncate">
+												{speaker.name}
+											</span>
 										</div>
 									{/each}
 								</div>

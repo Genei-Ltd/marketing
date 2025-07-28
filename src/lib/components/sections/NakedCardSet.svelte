@@ -98,8 +98,8 @@
 </script>
 
 {#snippet card(feature: Feature)}
-	<div class=" flex flex-col items-start text-left">
-		<div class=" flex items-center justify-start w-12 h-12 mb-4">
+	<div class=" flex flex-col bg-card items-start text-left border-l-2 border-primary pl-4 py-4 text-balance">
+		<div class=" flex items-center justify-start w-12 h-12 mb-8">
 			<feature.icon class="size-16 text-primary" />
 		</div>
 		<span class="mb-2 text-lg font-semibold">{feature.title}</span>
@@ -108,7 +108,7 @@
 {/snippet}
 
 <section class="text-foreground w-full py-16">
-	<div class="md:grid-cols-2 lg:grid-cols-4 grid gap-4 px-4">
+	<div class="md:grid-cols-2 lg:grid-cols-3 grid gap-4 px-4 gap-y-8">
 		{#each chosenSet as feature}
 			{@render card(feature)}
 		{/each}

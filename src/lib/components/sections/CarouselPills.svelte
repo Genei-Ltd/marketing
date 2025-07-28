@@ -3,6 +3,7 @@
 	import type { CarouselAPI } from "$lib/components/ui/carousel/context.js"
 	import TwoSplit from "$components/layouts/TwoSplit.svelte"
 	import DemoWorkflowAssetUpload from "$components/animations/DemoWorkflowAssetUpload.svelte"
+	import DemoInterviewAnalysis from "$components/animations/DemoInterviewAnalysis.svelte"
 
 	// Define the pill labels
 	const pillLabels = [
@@ -74,12 +75,10 @@
 					buttonHref="/blog/in-house-strategy-teams"
 					showButton={true}
 					reverse={false}>
-					<div class="p-lg flex items-center justify-center">
-						<!-- Add your custom component here instead of just an image -->
-						<img
-							src="/images/features/concept.gif"
-							alt="In-House Strategy Teams"
-							class="h-auto max-w-full" />
+					<div class=" bg-accent-2 flex items-center justify-center w-full h-full">
+						<div class="absoulte w-full h-full">
+							<DemoInterviewAnalysis />
+						</div>
 					</div>
 				</TwoSplit>
 			</Carousel.Item>
@@ -143,12 +142,12 @@
 					buttonHref="/blog/research-agencies"
 					showButton={true}
 					reverse={false}>
-					<div class="bg-accent-4 w-full h-full flex items-center justify-center relative">
+					<div class="bg-accent-4 relative flex items-center justify-center w-full h-full overflow-hidden">
 						<img
 							src="/images/water/tops.png"
 							alt="Survey Analysis"
-							class="inset-0 absolute w-full h-full object-cover opacity-50" />
-						<div class="w-full pl-16 pt-16 h-full">
+							class="blur-sm absolute inset-0 object-cover w-full h-full opacity-50" />
+						<div class="w-full h-full pt-16 pl-16">
 							<DemoWorkflowAssetUpload />
 						</div>
 					</div>
