@@ -111,7 +111,7 @@
 	})
 </script>
 
-<div class="bg-card border-border max-w-md p-6 mx-auto border rounded-lg shadow-lg">
+<div class="bg-card border-border p-6 mx-auto border rounded-lg shadow-lg">
 	<div class="mb-6">
 		<h3 class="text-foreground text-lg font-semibold">Guest Access</h3>
 		<p class="text-muted-foreground text-sm">Share with external collaborators</p>

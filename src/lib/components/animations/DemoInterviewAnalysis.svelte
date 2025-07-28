@@ -1,5 +1,14 @@
 <script lang="ts">
-	import { IconMessageQuestion, IconChartBar, IconCheck, IconLoader } from "@tabler/icons-svelte"
+	import {
+		IconMessageQuestion,
+		IconChartBar,
+		IconCheck,
+		IconLoader,
+		IconTags,
+		IconCamera,
+		IconMicrophone,
+		IconMovie,
+	} from "@tabler/icons-svelte"
 	import { onMount } from "svelte"
 	import { fly, scale } from "svelte/transition"
 	import { quintOut, cubicInOut, elasticOut } from "svelte/easing"
@@ -225,27 +234,27 @@
 
 	const speakerGroups: Speaker[][] = [
 		[
+			{ id: "s2", name: "Researcher", role: "Researcher", color: "text-secondary" },
 			{ id: "s1", name: "Sarah Chen", role: "Product Manager", color: "text-primary" },
-			{ id: "s2", name: "Interviewer", role: "Researcher", color: "text-secondary" },
 		],
 		[
+			{ id: "s6", name: "Researcher", role: "Researcher", color: "text-secondary" },
 			{ id: "s3", name: "Mike Rodriguez", role: "Engineering Lead", color: "text-primary" },
 			{ id: "s4", name: "Emma Wilson", role: "Designer", color: "text-primary" },
 			{ id: "s5", name: "David Kim", role: "QA Lead", color: "text-primary" },
-			{ id: "s6", name: "Moderator", role: "Researcher", color: "text-secondary" },
 		],
 		[
+			{ id: "s8", name: "Researcher", role: "Researcher", color: "text-secondary" },
 			{ id: "s7", name: "Mike Johnson", role: "Customer", color: "text-primary" },
-			{ id: "s8", name: "Interviewer", role: "Researcher", color: "text-secondary" },
 		],
 		[
+			{ id: "s11", name: "Researcher", role: "Researcher", color: "text-secondary" },
 			{ id: "s9", name: "Alex Thompson", role: "Stakeholder", color: "text-primary" },
 			{ id: "s10", name: "Lisa Park", role: "Stakeholder", color: "text-primary" },
-			{ id: "s11", name: "Facilitator", role: "Researcher", color: "text-secondary" },
 		],
 		[
+			{ id: "s13", name: "Researcher", role: "Researcher", color: "text-secondary" },
 			{ id: "s12", name: "Ana Silva", role: "Customer", color: "text-primary" },
-			{ id: "s13", name: "Interviewer", role: "Researcher", color: "text-secondary" },
 		],
 	]
 
@@ -263,7 +272,7 @@
 		},
 		{
 			text: "Monthly costs add up quickly with multiple team members. We'd prefer annual discounts or volume pricing for larger teams like ours.",
-			sentiment: "negative" as const,
+			sentiment: "neutral" as const,
 			keyThemes: [
 				"cost-concerns",
 				"team-scaling",
@@ -272,7 +281,7 @@
 		},
 		{
 			text: "It's hard to predict our monthly bill since usage-based pricing fluctuates. We need more transparency and budgeting tools to manage costs effectively.",
-			sentiment: "negative" as const,
+			sentiment: "positive" as const,
 			keyThemes: [
 				"cost-predictability",
 				"transparency",
@@ -530,6 +539,11 @@
 	let currentController: AnimationController | null = $state(null)
 	let isAnimationStarted = $state(false)
 
+	// STATIC DESIGN MODE - Set to true to disable animations and show all steps
+	// Perfect for design work: shows question box, analysis table with responses, and results summary
+	// all at once without any animations or delays
+	let staticDesignMode = $state(true) // Set to true for design work
+
 	let currentStep = $derived(steps[currentStepIndex])
 
 	async function executeStep(stepIndex: number): Promise<void> {
@@ -625,9 +639,11 @@
 	})
 
 	onMount(() => {
-		setTimeout(() => {
-			startAnimation()
-		}, 500)
+		if (!staticDesignMode) {
+			setTimeout(() => {
+				startAnimation()
+			}, 500)
+		}
 	})
 </script>
 
@@ -635,94 +651,139 @@
 <!-- VISUAL COMPONENTS
 <!-- ============================================================================ -->
 
-<!-- Analysis table with question and answers -->
-{#snippet analysisTable(rows: AnalysisRow[], questionText: string, questionComplete: boolean)}
-	{#if animationState.showTable || rows.length > 0}
+<!-- Prominent question box -->
+{#snippet questionBox(questionText: string, questionComplete: boolean)}
+	{#if questionText}
 		<div
-			class="bg-card/60 backdrop-blur-sm border-border/20 max-w-5xl p-4 border rounded-lg shadow-sm"
+			class="bg-card/85 backdrop-blur-sm border-border/10 max-w-2xl p-4 mb-6 border rounded-lg shadow-sm"
 			in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 			out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
-			<div class="text-card-foreground mb-3 text-xs font-medium tracking-wide uppercase">
-				Interview Analysis • {rows.length} Sessions
+			<div class="text-card-foreground mb-3 text-sm font-semibold tracking-wide text-left uppercase">
+				Question
 			</div>
-
-			<!-- Table header -->
-			<div class="border-border/20 grid grid-cols-3 gap-6 pb-3 mb-4 border-b">
-				<div class="text-card-foreground text-xs font-medium tracking-wide uppercase">Participants</div>
-				<div class="flex items-center gap-2">
-					<div class="text-card-foreground text-xs font-medium tracking-wide uppercase">
-						{#if questionText}
-							<span class="text-card-foreground text-xs">{questionText}</span>
-							{#if !questionComplete}
-								<span class="animate-pulse text-primary">|</span>
-							{/if}
-						{:else}
-							Analysis Question
+			<div class="flex items-start gap-3">
+				<div class="bg-primary/20 text-primary flex-shrink-0 p-2 rounded-md">
+					<IconMessageQuestion class="size-6" />
+				</div>
+				<div class="flex-1">
+					<div class="text-card-foreground text-base font-medium leading-relaxed">
+						"{questionText}"
+						{#if !questionComplete}
+							<span class="animate-pulse text-primary ml-1">●</span>
 						{/if}
 					</div>
 					{#if questionComplete}
-						<div class="text-primary" in:scale={{ duration: 200, easing: elasticOut }}>
-							<IconCheck class="size-3" />
+						<div class="flex items-center gap-2 mt-2">
+							<div class="text-primary" in:scale={{ duration: 200, easing: elasticOut }}>
+								<IconCheck class="size-3" />
+							</div>
+							<span class="text-primary text-xs font-medium">Query processed</span>
 						</div>
 					{/if}
 				</div>
-				<div class="text-card-foreground text-xs font-medium tracking-wide uppercase">Key Themes</div>
+			</div>
+		</div>
+	{/if}
+{/snippet}
+
+<!-- Analysis table with compact styling -->
+{#snippet analysisTable(rows: AnalysisRow[])}
+	{#if animationState.showTable && rows.length > 0}
+		<div
+			class="bg-card/70 backdrop-blur-sm border-border/10 max-w-2xl overflow-hidden border rounded-lg"
+			in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
+			out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
+			<!-- Header -->
+			<!-- <div class="bg-card/85 backdrop-blur-sm border-border/10 px-4 py-2.5 border-b">
+				<div class="text-foreground/90 text-xs font-semibold tracking-wide uppercase">
+					Participant Interviews • {rows.length}
+				</div>
+			</div> -->
+
+			<!-- Column headers -->
+			<div class="bg-card/85 backdrop-blur-sm border-border/10 grid grid-cols-4 gap-4 px-4 py-2 border-b">
+				<div class="text-foreground/80 text-[10px] font-bold tracking-wider uppercase">Interview</div>
+				<div class="text-foreground/80 text-[10px] col-span-2 font-bold tracking-wider uppercase">Answer</div>
+				<div class="text-foreground/80 text-[10px] font-bold tracking-wider uppercase">Coded Themes</div>
 			</div>
 
-			<!-- Table rows -->
-			<div class="space-y-4">
+			<!-- Rows -->
+			<div class="divide-border/20 divide-y">
 				{#each rows as row, i (row.file.id)}
 					<div
-						class="grid items-start grid-cols-3 gap-6"
+						class="hover:bg-card backdrop-blur-sm border-border/10 grid grid-cols-4 gap-4 px-4 py-3 transition-colors"
 						in:fly={{ y: -20, duration: 400, delay: i * 100, easing: quintOut }}>
 						<!-- Participants column -->
-						<div class="flex flex-wrap gap-2">
-							{#each row.speakers as speaker}
-								<div class="flex items-center gap-1.5">
+						<div class="space-y-2">
+							<!-- File info -->
+							<div class="flex items-center gap-2">
+								{#if row.file.type === "video"}
+									<IconMovie class="size-4 text-foreground/50" />
+								{:else}
+									<IconMicrophone class="size-4 text-foreground/50" />
+								{/if}
+								<div class="text-foreground/60 font-mono text-xs font-medium">
+									{row.file.name.replace(/\.(mp4|wav|m4a|mov)$/, "")}
+								</div>
+							</div>
+							<!-- Overlapped avatars -->
+							<div class="flex items-center -space-x-1">
+								{#each row.speakers as speaker, speakerIndex}
 									<div
-										class="flex items-center justify-center w-4 h-4 text-[10px] font-bold rounded-full
-										{speaker.color === 'text-primary' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}">
+										class="flex items-center justify-center size-6 text-[9px] font-bold rounded-full border-2 border-background relative z-[{10 -
+											speakerIndex}]
+										{speaker.color === 'text-primary' ? 'bg-primary text-primary-foreground' : 'bg-muted-foreground text-background'}"
+										title={speaker.name}>
 										{speaker.name
 											.split(" ")
 											.map((n) => n[0])
 											.join("")}
 									</div>
-									<div class="text-card-foreground text-[11px] font-medium">
-										{speaker.name}
-									</div>
-								</div>
-							{/each}
+								{/each}
+							</div>
 						</div>
 
-						<!-- Question response column -->
-						<div class="space-y-2">
+						<!-- Response column -->
+						<div class="col-span-2 pr-2">
 							{#if row.answer.animatedLength > 0}
-								<div class="text-card-foreground text-xs leading-relaxed">
+								<div class="text-foreground text-xs leading-relaxed">
 									{row.answer.text.slice(0, row.answer.animatedLength)}
 									{#if animationState.answerAnimations[row.file.id]}
-										<span class="animate-pulse text-primary">|</span>
+										<span class="animate-pulse text-primary ml-1">|</span>
 									{/if}
 								</div>
+								{#if row.answer.animatedLength >= row.answer.text.length}
+									<div class="flex items-center gap-1.5 mt-2">
+										<div class="size-1.5 bg-green-500 rounded-full"></div>
+										<span class="text-foreground/60 text-[10px] font-medium">Captured</span>
+									</div>
+								{/if}
 							{/if}
 						</div>
 
 						<!-- Theme tags column -->
-						<div class="space-y-2">
+						<div>
 							{#if row.answer.animatedLength >= row.answer.text.length}
 								<div
-									class="flex flex-wrap gap-1.5"
+									class="flex flex-wrap gap-1"
 									in:fly={{ y: 10, duration: 300, delay: 200, easing: quintOut }}>
 									{#each row.answer.keyThemes as theme}
 										<span
-											class="px-2 py-0.5 text-[10px] font-medium rounded border
+											class="px-2 py-1 text-[9px] font-medium rounded-full
 											{row.answer.sentiment === 'negative'
-												? 'bg-red-50 text-red-700 border-red-200'
+												? 'bg-red-100 text-red-700 border border-red-200'
 												: row.answer.sentiment === 'positive'
-													? 'bg-green-50 text-green-700 border-green-200'
-													: 'bg-gray-50 text-gray-700 border-gray-200'}">
-											#{theme}
+													? 'bg-green-100 text-green-700 border border-green-200'
+													: 'bg-gray-100 text-gray-700 border border-gray-200'}">
+											{theme.replace(/-/g, " ")}
 										</span>
 									{/each}
+								</div>
+								<div class="flex items-center gap-1 mt-1.5">
+									<IconTags class="size-3 text-foreground/50" />
+									<span class="text-foreground/50 text-[9px] font-medium">
+										{row.answer.keyThemes.length} themes
+									</span>
 								</div>
 							{/if}
 						</div>
@@ -739,66 +800,84 @@
 		<div class="max-w-4xl space-y-6">
 			<!-- Text Summary -->
 			<div
-				class="bg-card/60 backdrop-blur-sm border-border/20 p-6 border rounded-lg shadow-sm"
+				class="bg-card/85 backdrop-blur-sm border-border/10 p-6 border rounded-lg shadow-sm"
 				in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 				out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
-				<div class="text-card-foreground mb-4 text-xs font-medium tracking-wide uppercase">
+				<div class="text-card-foreground/70 mb-4 text-xs font-medium tracking-wide uppercase">
 					Analysis Summary
 				</div>
 
-				<div class="text-card-foreground space-y-2 text-xs leading-relaxed">
-					<p>
-						Our analysis of {insights.reduce((sum, insight) => sum + insight.count, 0)} customer responses revealed
+				<div class="text-card-foreground space-y-4 text-sm leading-relaxed">
+					<div class="pb-2">
+						Our analysis of <strong class="text-primary"
+							>{insights.reduce((sum, insight) => sum + insight.count, 0)} customer responses</strong> revealed
 						significant concerns about our current pricing model.
-						<strong class="text-red-600">Pricing Structure issues</strong> dominated the feedback,
-						accounting for 35% of all mentions, followed by
-						<strong class="text-orange-600">Cost Concerns</strong>
-						at 23% and <strong class="text-yellow-600">Transparency</strong> issues at 20%.
-					</p>
-					<p>
-						The most common complaints centered around confusing tiered pricing, unpredictable monthly
-						costs, and a significant gap between our professional and enterprise tiers. Customers
-						consistently requested better value alignment, annual discount options, and improved budget
-						predictability tools.
-					</p>
+					</div>
+					<div class="border-primary/20 pl-4 space-y-2 border-l-2">
+						<div>
+							<strong class="text-primary font-semibold">Pricing Structure issues</strong> dominated the
+							feedback at <strong class="text-primary">35%</strong> of all mentions, with customers struggling
+							with confusing tiered pricing
+						</div>
+						<div>
+							<strong class="text-primary font-semibold">Cost Concerns</strong> at
+							<strong class="text-primary">23%</strong> focused on unpredictable monthly costs and significant
+							gaps between professional and enterprise tiers
+						</div>
+						<div>
+							<strong class="text-primary font-semibold">Transparency</strong> issues at
+							<strong class="text-primary">20%</strong> highlighted customer requests for better value alignment
+							and improved budget predictability tools
+						</div>
+					</div>
 				</div>
 			</div>
 
-			<!-- Bar Chart -->
+			<!-- Vertical Bar Chart -->
 			{#if showChart}
 				<div
-					class="bg-card/60 backdrop-blur-sm border-border/20 p-6 border rounded-lg shadow-sm"
+					class="bg-card/85 backdrop-blur-sm border-border/10 p-6 border rounded-lg shadow-sm"
 					in:fly={{ y: 20, duration: 600, delay: 300, easing: elasticOut }}
 					out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
-					<div class="text-card-foreground mb-6 text-xs font-medium tracking-wide uppercase">
-						Theme Distribution
+					<!-- Chart Header -->
+					<div class="flex items-center gap-3 mb-6">
+						<div class="bg-primary text-primary-foreground p-2 rounded-md">
+							<IconChartBar class="size-4" />
+						</div>
+						<div>
+							<div class="text-card-foreground text-sm font-semibold">Theme Distribution</div>
+							<div class="text-card-foreground/60 text-xs">Customer feedback analysis breakdown</div>
+						</div>
 					</div>
 
-					<div class="space-y-3">
+					<!-- Chart Area -->
+					<div class="flex items-end justify-start h-32 gap-4">
 						{#each insights as insight, i (insight.theme)}
 							<div
-								class="flex items-center gap-3"
-								in:fly={{ x: -30, duration: 600, delay: 400 + i * 100, easing: elasticOut }}>
-								<!-- Theme label -->
-								<div class="w-28 text-right">
-									<div class="text-card-foreground text-xs font-semibold">{insight.theme}</div>
-									<div class="text-card-foreground/50 text-[10px]">{insight.count}</div>
+								class="flex flex-col items-center gap-3 flex-1 max-w-[80px]"
+								in:fly={{ y: 30, duration: 600, delay: 400 + i * 100, easing: elasticOut }}>
+								<!-- Bar -->
+								<div class="bg-muted/30 rounded-t-md relative w-full h-24 overflow-hidden">
+									<div
+										class="absolute bottom-0 w-full transition-all duration-1500 ease-out
+										{insight.sentiment === 'negative' ? 'bg-primary' : insight.sentiment === 'positive' ? 'bg-secondary' : 'bg-muted'}"
+										style="height: {(insight.percentage / 40) * 100}%">
+									</div>
+									<!-- Percentage label on bar -->
+									<div class="top-1 absolute left-0 right-0 text-center">
+										<span class="text-card-foreground text-xs font-bold">
+											{insight.percentage}%
+										</span>
+									</div>
 								</div>
 
-								<!-- Bar -->
-								<div class="flex-1 max-w-xs">
-									<div class="bg-border/20 h-6 overflow-hidden rounded-md shadow-inner">
-										<div
-											class="h-full rounded-md transition-all duration-1500 ease-out flex items-center px-2 shadow-sm
-											{insight.sentiment === 'negative'
-												? 'bg-gradient-to-r from-red-500 to-red-400'
-												: insight.sentiment === 'positive'
-													? 'bg-gradient-to-r from-green-500 to-green-400'
-													: 'bg-gradient-to-r from-gray-500 to-gray-400'}"
-											style="width: {insight.percentage}%">
-											<span class="text-[10px] font-bold text-white/90"
-												>{insight.percentage}%</span>
-										</div>
+								<!-- Theme label -->
+								<div class="text-center">
+									<div class="text-card-foreground mb-1 text-xs font-medium leading-tight">
+										{insight.theme}
+									</div>
+									<div class="text-card-foreground/60 text-xs">
+										{insight.count} mentions
 									</div>
 								</div>
 							</div>
@@ -811,90 +890,149 @@
 {/snippet}
 
 <!-- ============================================================================ -->
-<!-- MAIN UI
+<!-- MAIN UI - SIMPLIFIED STATIC/ANIMATED MODE -->
 <!-- ============================================================================ -->
 
-<div class="relative flex flex-col w-full pl-12 space-y-4">
-	<!-- Fixed icon -->
-	<div class="absolute top-0 left-0 z-10">
-		<div
-			class="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/10 relative flex items-center justify-center w-8 h-8 transition-all duration-300 rounded-full shadow-lg">
-			{#key currentStepIndex}
+<!-- 
+SIMPLE TOGGLE: Change 'staticDesignMode' to 'true' on line ~536 to see all steps without animations
+Perfect for design work - shows question box, analysis table, and results summary
+-->
+
+{#if staticDesignMode}
+	<!-- STATIC DESIGN MODE - All steps visible with full data -->
+	<div class="relative flex flex-col w-full pl-12 space-y-12">
+		<!-- STEP 1: Interview Analysis -->
+		<div class="space-y-4">
+			<div class="absolute top-0 left-0 z-10">
 				<div
-					in:scale={{ duration: 300, easing: elasticOut, start: 0.5, delay: 150 }}
-					out:scale={{ duration: 150, easing: cubicInOut, start: 0.5 }}
-					class="transform-gpu absolute inset-0 flex items-center justify-center">
-					{#if currentStep.icon}
-						{@const IconComponent = currentStep.icon}
-						<IconComponent class="size-4" />
-					{:else}
-						<IconLoader class="size-4" />
-					{/if}
-				</div>
-			{/key}
-		</div>
-	</div>
-
-	{#if showCard}
-		<div
-			class="transition-all duration-500"
-			in:fly={{ y: 30, duration: 600, easing: quintOut }}
-			out:fly={{ y: -30, duration: 500, easing: cubicInOut }}>
-			<!-- Step header -->
-			<div class="mb-4 space-y-3">
-				<div in:fly={{ x: -30, duration: 500, easing: quintOut }}>
-					<h3 class="text-foreground text-lg font-semibold tracking-tight">{currentStep.title}</h3>
-				</div>
-
-				<div class="relative min-h-[1.25rem]">
-					{#key `${currentStep.id}-${isLoading}-${isComplete}`}
-						<div
-							class="absolute inset-0"
-							in:fly={{ x: -30, duration: 400, delay: 100, easing: quintOut }}
-							out:fly={{ x: 30, duration: 300, easing: cubicInOut }}>
-							<div class="text-foreground text-sm leading-relaxed">
-								{#if animationState.isComplete}
-									<span class="text-primary flex items-center gap-2 font-medium">
-										<div class="size-2 flex-shrink-0 bg-green-500 rounded-full shadow-lg"></div>
-										{currentStep.completeText}
-									</span>
-								{:else if isLoading}
-									<span class="text-foreground opacity-80 flex items-center gap-2 font-semibold">
-										<div class="animate-spin flex-shrink-0">
-											<IconLoader class="size-4 text-foreground" />
-										</div>
-										<span class="animate-shimmer-once text-foreground bg-foreground">
-											{currentStep.loadingText}...
-										</span>
-									</span>
-								{:else}
-									<span>{currentStep.subtitle}</span>
-								{/if}
-							</div>
-						</div>
-					{/key}
+					class="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/10 flex items-center justify-center w-8 h-8 rounded-full shadow-lg">
+					<IconMessageQuestion class="size-4" />
 				</div>
 			</div>
 
-			<!-- Dynamic content -->
-			{#if isLoading || animationState.isComplete}
-				<!-- INTERVIEW ANALYSIS STEP -->
-				{#if currentStep.id === "interview-analysis"}
-					{@render analysisTable(
-						animationState.analysisRows,
-						animationState.questionText,
-						animationState.questionComplete,
-					)}
-				{/if}
+			<div class="mb-4 space-y-3">
+				<h3 class="text-foreground text-lg font-semibold tracking-tight">Interview Analysis</h3>
+				<div class="text-foreground text-sm leading-relaxed">
+					<span class="text-primary flex items-center gap-2 mb-2 font-medium">
+						<div class="size-2 flex-shrink-0 bg-green-500 rounded-full shadow-lg"></div>
+						Interview analysis completed
+					</span>
+				</div>
+			</div>
 
-				<!-- RESULTS SUMMARY STEP -->
-				{#if currentStep.id === "results-summary"}
-					{@render resultsSummary(animationState.summaryInsights, animationState.showChart)}
-				{/if}
-			{/if}
+			{@render questionBox(analysisQuestion, true)}
+			{@render analysisTable(
+				interviewFiles.map((file, index) => ({
+					file,
+					speakers: speakerGroups[index],
+					answer: {
+						text: sampleAnswers[index].text,
+						animatedLength: sampleAnswers[index].text.length,
+						sentiment: sampleAnswers[index].sentiment,
+						keyThemes: sampleAnswers[index].keyThemes,
+					},
+				})),
+			)}
 		</div>
-	{/if}
-</div>
+
+		<!-- STEP 2: Results Summary -->
+		<div class="space-y-4">
+			<div class="absolute left-0 z-10" style="top: 60rem;">
+				<div
+					class="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/10 flex items-center justify-center w-8 h-8 rounded-full shadow-lg">
+					<IconChartBar class="size-4" />
+				</div>
+			</div>
+
+			<div class="mb-4 space-y-3">
+				<h3 class="text-foreground text-lg font-semibold tracking-tight">Results Summary</h3>
+				<div class="text-foreground text-sm leading-relaxed">
+					<span class="text-primary flex items-center gap-2 mb-2 font-medium">
+						<div class="size-2 flex-shrink-0 bg-green-500 rounded-full shadow-lg"></div>
+						Analysis complete with actionable insights
+					</span>
+				</div>
+			</div>
+
+			{@render resultsSummary(summaryData, true)}
+		</div>
+	</div>
+{:else}
+	<!-- ANIMATED MODE - Standard step-by-step animation -->
+	<div class="relative flex flex-col w-full pl-12 space-y-4">
+		<div class="absolute top-0 left-0 z-10">
+			<div
+				class="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/10 relative flex items-center justify-center w-8 h-8 transition-all duration-300 rounded-full shadow-lg">
+				{#key currentStepIndex}
+					<div
+						in:scale={{ duration: 300, easing: elasticOut, start: 0.5, delay: 150 }}
+						out:scale={{ duration: 150, easing: cubicInOut, start: 0.5 }}
+						class="transform-gpu absolute inset-0 flex items-center justify-center">
+						{#if currentStep.icon}
+							{@const IconComponent = currentStep.icon}
+							<IconComponent class="size-4" />
+						{:else}
+							<IconLoader class="size-4" />
+						{/if}
+					</div>
+				{/key}
+			</div>
+		</div>
+
+		{#if showCard}
+			<div
+				class="transition-all duration-500"
+				in:fly={{ y: 30, duration: 600, easing: quintOut }}
+				out:fly={{ y: -30, duration: 500, easing: cubicInOut }}>
+				<div class="mb-4 space-y-3">
+					<div in:fly={{ x: -30, duration: 500, easing: quintOut }}>
+						<h3 class="text-foreground text-lg font-semibold tracking-tight">{currentStep.title}</h3>
+					</div>
+
+					<div class="relative min-h-[1.25rem]">
+						{#key `${currentStep.id}-${isLoading}-${isComplete}`}
+							<div
+								class="absolute inset-0"
+								in:fly={{ x: -30, duration: 400, delay: 100, easing: quintOut }}
+								out:fly={{ x: 30, duration: 300, easing: cubicInOut }}>
+								<div class="text-foreground text-sm leading-relaxed">
+									{#if animationState.isComplete}
+										<span class="text-primary flex items-center gap-2 font-medium">
+											<div class="size-2 flex-shrink-0 bg-green-500 rounded-full shadow-lg"></div>
+											{currentStep.completeText}
+										</span>
+									{:else if isLoading}
+										<span class="text-foreground opacity-80 flex items-center gap-2 font-semibold">
+											<div class="animate-spin flex-shrink-0">
+												<IconLoader class="size-4 text-foreground" />
+											</div>
+											<span class="animate-shimmer-once text-foreground bg-foreground">
+												{currentStep.loadingText}...
+											</span>
+										</span>
+									{:else}
+										<span>{currentStep.subtitle}</span>
+									{/if}
+								</div>
+							</div>
+						{/key}
+					</div>
+				</div>
+
+				{#if isLoading || animationState.isComplete}
+					{#if currentStep.id === "interview-analysis"}
+						{@render questionBox(animationState.questionText, animationState.questionComplete)}
+						{@render analysisTable(animationState.analysisRows)}
+					{/if}
+
+					{#if currentStep.id === "results-summary"}
+						{@render resultsSummary(animationState.summaryInsights, animationState.showChart)}
+					{/if}
+				{/if}
+			</div>
+		{/if}
+	</div>
+{/if}
 
 <style>
 	.animate-shimmer-once {

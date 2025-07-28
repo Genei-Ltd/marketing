@@ -567,7 +567,7 @@
 <!-- File upload list -->
 {#snippet fileUploadList(files: UploadFile[])}
 	<div
-		class="bg-card/85 backdrop-blur-sm border-border/10 mr-16 p-4 border rounded-lg shadow-sm"
+		class="bg-card/85 backdrop-blur-sm border-border/10 p-4 mr-16 border rounded-lg shadow-sm"
 		in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 		out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
 		<div class="text-card-foreground mb-3 text-xs font-medium tracking-wide uppercase">
@@ -588,7 +588,7 @@
 
 					<!-- File info -->
 					<div class="flex-1 min-w-0">
-						<div class="text-card-foreground font-medium text-sm truncate">{file.name}</div>
+						<div class="text-card-foreground text-sm font-medium truncate">{file.name}</div>
 						<div class="text-card-foreground/70 text-xs">
 							{file.size} • {file.duration || "Unknown duration"}
 						</div>
@@ -605,9 +605,13 @@
 									</div>
 								</div>
 							</div>
-							<span class="text-card-foreground/70 text-xs font-mono">{file.uploadProgress}%</span>
+							<span class="text-card-foreground/70 font-mono text-xs">{file.uploadProgress}%</span>
 						{:else if file.status === "uploaded"}
-							<div class="text-primary" in:scale={{ duration: 200, easing: elasticOut }}>
+							<div
+								class="text-primary flex items-center gap-2"
+								in:scale={{ duration: 200, easing: elasticOut }}>
+								<span class="text-card-foreground/70 text-xs font-medium"
+									>{file.type.toUpperCase()}</span>
 								<IconCheck class="size-4" />
 							</div>
 						{/if}
@@ -630,7 +634,7 @@
 			</div>
 
 			<!-- Table header -->
-			<div class="grid grid-cols-4 gap-4 pb-3 mb-3 border-b border-border/20">
+			<div class="border-border/20 grid grid-cols-4 gap-4 pb-3 mb-3 border-b">
 				<div class="text-card-foreground/70 text-xs font-medium">File</div>
 				<div class="flex items-center gap-2">
 					<span class="text-card-foreground/70 text-xs font-medium">Transcription</span>
@@ -662,15 +666,15 @@
 			<div class="space-y-3">
 				{#each rows as row, i (row.file.id)}
 					<div
-						class="grid grid-cols-4 gap-4 items-start"
+						class="grid items-start grid-cols-4 gap-4"
 						in:fly={{ y: -20, duration: 400, delay: i * 100, easing: linear }}>
 						<!-- File column -->
-						<div class="flex items-startt justify-start gap-2">
+						<div class="items-startt flex justify-start gap-2">
 							<div class="shrink-0">
 								<img src={row.file.icon} alt={row.file.type} class="size-5" />
 							</div>
 							<div class="min-w-0">
-								<div class="text-card-foreground font-medium text-xs">
+								<div class="text-card-foreground text-xs font-medium">
 									{row.file.name}
 								</div>
 								<div class="text-card-foreground/50 text-xs">

@@ -369,6 +369,11 @@
 	let currentController: AnimationController | null = $state(null)
 	let isAnimationStarted = $state(false)
 
+	// STATIC DESIGN MODE - Set to true to disable animations and show all steps
+	// Perfect for design work: shows access levels, share setup, notification, and team grid
+	// all at once without any animations or delays
+	let staticDesignMode = $state(false) // Set to true for design work
+
 	let currentStep = $derived(steps[currentStepIndex])
 
 	async function executeStep(stepIndex: number): Promise<void> {
@@ -464,9 +469,11 @@
 	})
 
 	onMount(() => {
-		setTimeout(() => {
-			startAnimation()
-		}, 500)
+		if (!staticDesignMode) {
+			setTimeout(() => {
+				startAnimation()
+			}, 500)
+		}
 	})
 </script>
 
@@ -486,7 +493,7 @@
 		<div class="text-card-foreground font-sans text-sm leading-relaxed">
 			{config.text}
 			{#if config.showDot}
-				<span class="bg-card-foreground/70 size-3 mt-1 inline-block ml-1 rounded-full animate-pulse"></span>
+				<span class="bg-card-foreground/70 size-3 animate-pulse inline-block mt-1 ml-1 rounded-full"></span>
 			{/if}
 		</div>
 	</div>
@@ -495,7 +502,7 @@
 <!-- Access levels display (simplified) -->
 {#snippet accessLevelsDisplay(levels: AccessLevel[], selectedLevel: AccessLevel | null)}
 	<div
-		class="bg-card/85 backdrop-blur-sm mb-3 border-border/10 max-w-2xl p-4 border rounded-lg shadow-sm"
+		class="bg-card/85 backdrop-blur-sm border-border/10 max-w-2xl p-4 mb-3 border rounded-lg shadow-sm"
 		in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 		out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
 		<div class="text-foreground mb-3 text-xs font-medium tracking-wide uppercase">Access Permissions</div>
@@ -509,12 +516,12 @@
 						: 'border-border/20'}"
 					in:fly={{ x: -10, duration: 300, delay: levels.indexOf(level) * 100, easing: quintOut }}>
 					<div class="{level.color} p-1">
-						<IconComponent class="size-4" />
+						<IconComponent class="size-6" />
 					</div>
-					<span class="text-card-foreground text-xs font-medium">{level.name}</span>
+					<span class="text-card-foreground text-sm font-medium">{level.name}</span>
 					{#if isSelected}
 						<div class="text-primary ml-auto" in:scale={{ duration: 200, easing: elasticOut }}>
-							<IconCheck class="size-3" />
+							<IconCheck class="size-4" />
 						</div>
 					{/if}
 				</div>
@@ -584,11 +591,11 @@
 								.map((n) => n[0])
 								.join("")}
 							{#if member.isExternal}
-								<div class="absolute -bottom-1 -right-1">
+								<div class="-bottom-1 -right-1 absolute">
 									<div
-										class="bg-primary/70 text-primary-foreground w-3 h-3 rounded-full flex items-center justify-center shadow-sm"
+										class="bg-primary/70 text-primary-foreground flex items-center justify-center w-4 h-4 rounded-full shadow-sm"
 										in:scale={{ duration: 300, easing: elasticOut, delay: 500 }}>
-										<IconLock class="size-2" />
+										<IconLock class="size-2.5" />
 									</div>
 								</div>
 							{/if}
@@ -597,7 +604,7 @@
 						<!-- Member info (simplified) -->
 						<div class="flex-1 min-w-0">
 							<div class="flex items-center gap-2">
-								<span class="text-card-foreground font-medium text-sm truncate">{member.name}</span>
+								<span class="text-card-foreground text-sm font-medium truncate">{member.name}</span>
 								{#if member.isExternal}
 									<span
 										class="bg-primary/10 text-primary px-1.5 py-0.5 text-xs font-medium rounded"
@@ -612,10 +619,10 @@
 						<!-- Access level (simplified) -->
 						<div class="flex items-center gap-1">
 							{#if accessLevel}
+								<span class="text-card-foreground/70 text-sm font-medium">{accessLevel.name}</span>
 								<div class={accessLevel.color}>
-									<IconComponent class="size-3" />
+									<IconComponent class="size-5" />
 								</div>
-								<span class="text-card-foreground/70 text-xs font-medium">{accessLevel.name}</span>
 							{/if}
 						</div>
 					</div>
@@ -626,112 +633,191 @@
 {/snippet}
 
 <!-- ============================================================================ -->
-<!-- MAIN UI (same structure as DemoWorkflow)
+<!-- MAIN UI - SIMPLIFIED STATIC/ANIMATED MODE
 <!-- ============================================================================ -->
 
-<div class="relative flex flex-col w-full pl-12 space-y-4">
-	<!-- Fixed icon -->
-	<div class="absolute top-0 left-0 z-10">
-		<div
-			class="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/10 relative flex items-center justify-center w-8 h-8 transition-all duration-300 rounded-full shadow-lg">
-			{#key currentStepIndex}
+<!-- 
+SIMPLE TOGGLE: Change 'staticDesignMode' to 'true' on line ~375 to see all steps without animations
+Perfect for design work - shows access levels, share setup, notification, and team grid
+-->
+
+{#if staticDesignMode}
+	<!-- STATIC DESIGN MODE - All steps visible with full data -->
+	<div class="relative flex flex-col w-full pl-12 space-y-12">
+		<!-- STEP 1: Share Setup -->
+		<div class="space-y-4">
+			<div class="absolute top-0 left-0 z-10">
 				<div
-					in:scale={{ duration: 300, easing: elasticOut, start: 0.5, delay: 150 }}
-					out:scale={{ duration: 150, easing: cubicInOut, start: 0.5 }}
-					class="transform-gpu absolute inset-0 flex items-center justify-center">
-					{#if currentStep.icon}
-						{@const IconComponent = currentStep.icon}
-						<IconComponent class="size-4" />
-					{:else}
-						<IconLoader class="size-4" />
-					{/if}
-				</div>
-			{/key}
-		</div>
-	</div>
-
-	{#if showCard}
-		<div
-			class="transition-all duration-500"
-			in:fly={{ y: 30, duration: 600, easing: quintOut }}
-			out:fly={{ y: -30, duration: 500, easing: cubicInOut }}>
-			<!-- Step header -->
-			<div class="mb-4 space-y-3">
-				<div in:fly={{ x: -30, duration: 500, easing: quintOut }}>
-					<h3 class="text-foreground text-lg font-semibold tracking-tight">{currentStep.title}</h3>
-				</div>
-
-				<div class="relative min-h-[1.25rem]">
-					{#key `${currentStep.id}-${isLoading}-${isComplete}`}
-						<div
-							class="absolute inset-0"
-							in:fly={{ x: -30, duration: 400, delay: 100, easing: quintOut }}
-							out:fly={{ x: 30, duration: 300, easing: cubicInOut }}>
-							<div class="text-foreground text-sm leading-relaxed">
-								{#if animationState.isComplete}
-									<span class="text-primary flex items-center gap-2 font-medium">
-										<div class="size-2 flex-shrink-0 bg-green-500 rounded-full shadow-lg"></div>
-										{currentStep.completeText}
-									</span>
-								{:else if isLoading}
-									<span class="text-foreground opacity-80 flex items-center gap-2 font-semibold">
-										<div class="animate-spin flex-shrink-0">
-											<IconLoader class="size-4 text-foreground" />
-										</div>
-										<span class="animate-shimmer-once text-foreground bg-foreground">
-											{currentStep.loadingText}...
-										</span>
-									</span>
-								{:else}
-									<span>{currentStep.subtitle}</span>
-								{/if}
-							</div>
-						</div>
-					{/key}
+					class="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/10 flex items-center justify-center w-8 h-8 rounded-full shadow-lg">
+					<IconShare class="size-4" />
 				</div>
 			</div>
 
-			<!-- Dynamic content -->
-			{#if isLoading || animationState.isComplete}
-				<!-- SHARE SETUP STEP -->
-				{#if currentStep.id === "share-setup"}
-					{#if animationState.accessLevels.length > 0}
-						{@render accessLevelsDisplay(animationState.accessLevels, animationState.selectedLevel)}
-					{/if}
+			<div class="mb-4 space-y-3">
+				<h3 class="text-foreground text-lg font-semibold tracking-tight">Share Project</h3>
+				<div class="text-foreground text-sm leading-relaxed">
+					<span class="text-primary flex items-center gap-2 mb-2 font-medium">
+						<div class="size-2 flex-shrink-0 bg-green-500 rounded-full shadow-lg"></div>
+						Share configuration completed
+					</span>
+				</div>
+			</div>
 
-					{#if animationState.shareAction.email}
-						{@render animatedTextBubble({
-							header: "Guest Email • Project Sharing",
-							text: animationState.shareAction.email,
-							showDot: animationState.shareAction.status === "typing",
-						})}
-					{/if}
-
-					{#if animationState.shareAction.status === "complete"}
-						{@render animatedTextBubble({
-							header: "Share Link • Generated",
-							text: "Guest access link created and sent to alex@client-corp.com",
-						})}
-					{/if}
-				{/if}
-
-				<!-- INVITE NOTIFICATION STEP -->
-				{#if currentStep.id === "invite-notification"}
-					{@render invitationNotification(
-						animationState.notification.visible,
-						animationState.notification.projectName,
-						animationState.notification.inviterName,
-					)}
-				{/if}
-
-				<!-- ACCESS GRID STEP -->
-				{#if currentStep.id === "access-grid"}
-					{@render teamMembersGrid(animationState.teamMembers, animationState.highlightedMember)}
-				{/if}
-			{/if}
+			{@render accessLevelsDisplay(accessLevels, accessLevels.find((l) => l.id === "guest") || null)}
+			{@render animatedTextBubble({
+				header: "Guest Email • Project Sharing",
+				text: "alex@client-corp.com",
+			})}
+			{@render animatedTextBubble({
+				header: "Share Link • Generated",
+				text: "Guest access link created and sent to alex@client-corp.com",
+			})}
 		</div>
-	{/if}
-</div>
+
+		<!-- STEP 2: Invite Notification -->
+		<div class="space-y-4">
+			<div class="absolute left-0 z-10" style="top: 32rem;">
+				<div
+					class="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/10 flex items-center justify-center w-8 h-8 rounded-full shadow-lg">
+					<IconBell class="size-4" />
+				</div>
+			</div>
+
+			<div class="mb-4 space-y-3">
+				<h3 class="text-foreground text-lg font-semibold tracking-tight">Send Invitation</h3>
+				<div class="text-foreground text-sm leading-relaxed">
+					<span class="text-primary flex items-center gap-2 mb-2 font-medium">
+						<div class="size-2 flex-shrink-0 bg-green-500 rounded-full shadow-lg"></div>
+						Invitation sent successfully
+					</span>
+				</div>
+			</div>
+
+			{@render invitationNotification(true, "Optimal Research Group - Project 1", "Sarah Chen")}
+		</div>
+
+		<!-- STEP 3: Team Access -->
+		<div class="space-y-4">
+			<div class="absolute left-0 z-10" style="top: 46rem;">
+				<div
+					class="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/10 flex items-center justify-center w-8 h-8 rounded-full shadow-lg">
+					<IconUsers class="size-4" />
+				</div>
+			</div>
+
+			<div class="mb-4 space-y-3">
+				<h3 class="text-foreground text-lg font-semibold tracking-tight">Team Access</h3>
+				<div class="text-foreground text-sm leading-relaxed">
+					<span class="text-primary flex items-center gap-2 mb-2 font-medium">
+						<div class="size-2 flex-shrink-0 bg-green-500 rounded-full shadow-lg"></div>
+						Access permissions updated
+					</span>
+				</div>
+			</div>
+
+			{@render teamMembersGrid(teamMembers, "alex")}
+		</div>
+	</div>
+{:else}
+	<!-- ANIMATED MODE - Standard step-by-step animation -->
+	<div class="relative flex flex-col w-full pl-12 space-y-4">
+		<div class="absolute top-0 left-0 z-10">
+			<div
+				class="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/10 relative flex items-center justify-center w-8 h-8 transition-all duration-300 rounded-full shadow-lg">
+				{#key currentStepIndex}
+					<div
+						in:scale={{ duration: 300, easing: elasticOut, start: 0.5, delay: 150 }}
+						out:scale={{ duration: 150, easing: cubicInOut, start: 0.5 }}
+						class="transform-gpu absolute inset-0 flex items-center justify-center">
+						{#if currentStep.icon}
+							{@const IconComponent = currentStep.icon}
+							<IconComponent class="size-4" />
+						{:else}
+							<IconLoader class="size-4" />
+						{/if}
+					</div>
+				{/key}
+			</div>
+		</div>
+
+		{#if showCard}
+			<div
+				class="transition-all duration-500"
+				in:fly={{ y: 30, duration: 600, easing: quintOut }}
+				out:fly={{ y: -30, duration: 500, easing: cubicInOut }}>
+				<div class="mb-4 space-y-3">
+					<div in:fly={{ x: -30, duration: 500, easing: quintOut }}>
+						<h3 class="text-foreground text-lg font-semibold tracking-tight">{currentStep.title}</h3>
+					</div>
+
+					<div class="relative min-h-[1.25rem]">
+						{#key `${currentStep.id}-${isLoading}-${isComplete}`}
+							<div
+								class="absolute inset-0"
+								in:fly={{ x: -30, duration: 400, delay: 100, easing: quintOut }}
+								out:fly={{ x: 30, duration: 300, easing: cubicInOut }}>
+								<div class="text-foreground text-sm leading-relaxed">
+									{#if animationState.isComplete}
+										<span class="text-primary flex items-center gap-2 font-medium">
+											<div class="size-2 flex-shrink-0 bg-green-500 rounded-full shadow-lg"></div>
+											{currentStep.completeText}
+										</span>
+									{:else if isLoading}
+										<span class="text-foreground opacity-80 flex items-center gap-2 font-semibold">
+											<div class="animate-spin flex-shrink-0">
+												<IconLoader class="size-4 text-foreground" />
+											</div>
+											<span class="animate-shimmer-once text-foreground bg-foreground">
+												{currentStep.loadingText}...
+											</span>
+										</span>
+									{:else}
+										<span>{currentStep.subtitle}</span>
+									{/if}
+								</div>
+							</div>
+						{/key}
+					</div>
+				</div>
+
+				{#if isLoading || animationState.isComplete}
+					{#if currentStep.id === "share-setup"}
+						{#if animationState.accessLevels.length > 0}
+							{@render accessLevelsDisplay(animationState.accessLevels, animationState.selectedLevel)}
+						{/if}
+
+						{#if animationState.shareAction.email}
+							{@render animatedTextBubble({
+								header: "Guest Email • Project Sharing",
+								text: animationState.shareAction.email,
+								showDot: animationState.shareAction.status === "typing",
+							})}
+						{/if}
+
+						{#if animationState.shareAction.status === "complete"}
+							{@render animatedTextBubble({
+								header: "Share Link • Generated",
+								text: "Guest access link created and sent to alex@client-corp.com",
+							})}
+						{/if}
+					{/if}
+
+					{#if currentStep.id === "invite-notification"}
+						{@render invitationNotification(
+							animationState.notification.visible,
+							animationState.notification.projectName,
+							animationState.notification.inviterName,
+						)}
+					{/if}
+
+					{#if currentStep.id === "access-grid"}
+						{@render teamMembersGrid(animationState.teamMembers, animationState.highlightedMember)}
+					{/if}
+				{/if}
+			</div>
+		{/if}
+	</div>
+{/if}
 
 <style>
 	.animate-shimmer-once {
