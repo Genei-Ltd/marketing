@@ -1,4 +1,8 @@
 <script lang="ts">
+	import Timeline from "../lib/components/sections/Timeline.svelte"
+
+	import WildAnimationBox from "./WildAnimationBox.svelte"
+
 	import BlogEndArtCard from "./../lib/components/blocks/BlogEndArtCard.svelte"
 	import DemoWorkflow from "../lib/components/animations/DemoWorkflow.svelte"
 	import TwoSplit from "$components/layouts/TwoSplit.svelte"
@@ -7,16 +11,15 @@
 	import EmailSubmit from "../lib/components/blocks/EmailSubmit.svelte"
 	import ColSideSelectTwoSplit from "../lib/components/sections/ColSideSelectTwoSplit.svelte"
 	import Testimonials from "../lib/components/sections/Testimonials.svelte"
-	import TestimonialCard from "$components/blocks/TestimonialCard.svelte"
 	import Card from "$components/blocks/Card.svelte"
 	import NakedCardSet from "$components/sections/NakedCardSet.svelte"
 	import CarouselBlogs from "$components/sections/CarouselBlogs.svelte"
 	import CarouselPills from "$components/sections/CarouselPills.svelte"
 	import type { Article } from "$lib/types/articles"
-	import DemoRolodex from "$components/animations/DemoRolerdex.svelte"
-	import AnimateQuerey from "$components/animations/DemoAnimateQuerey.svelte"
 	import Security from "$components/sections/Security.svelte"
 	import DemoWorkflowSharing from "$components/animations/DemoWorkflowSharing.svelte"
+	import StaticDemoIntegrations from "$components/animations/StaticDemoIntegrations.svelte"
+	import DemoTranscriptClips from "$components/animations/DemoTranscriptClips.svelte"
 	let {
 		form,
 		data,
@@ -24,8 +27,17 @@
 		$props()
 </script>
 
-{#snippet section(title: string)}
-	<h2 class="text-balance w-1/2 mx-auto mb-16 font-serif text-4xl text-center">{title}</h2>
+{#snippet section(title: string, subtitle?: string)}
+	{#if subtitle}
+		<div class="flex flex-col items-center justify-center">
+			<h2 class="text-balance md:w-1/2 w-full mx-auto mb-4 font-serif text-4xl text-center">{title}</h2>
+			<span
+				class="text-balance opacity-80 text-md md:w-1/2 w-full mx-auto mb-16 font-sans tracking-wide text-center"
+				>{subtitle}</span>
+		</div>
+	{:else}
+		<h2 class="text-balance md:w-1/2 w-full mx-auto mb-16 font-serif text-4xl text-center">{title}</h2>
+	{/if}
 {/snippet}
 
 <!-- Hero image -->
@@ -40,7 +52,7 @@
 <!-- HERO SECTION -->
 <div class="pb-96 max-h-300 relative top-0 z-10 w-full h-screen">
 	<img
-		src="/images/wild/crazy-cola.png"
+		src="/wild/coca-cola-4k.png"
 		alt="Hero"
 		class="2xl:object-top-right absolute top-0 z-10 object-cover w-full h-full opacity-100" />
 	<div
@@ -56,18 +68,18 @@
 		class="max-w-7xl absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-auto">
 		<div class="flex flex-col items-start justify-end h-full">
 			<h1
-				class="text-huge text-background text-balance drop-shadow-lg capitalize font-serif leading-tight tracking-wide text-left">
+				class="text-huge text-background text-balance drop-shadow-lg font-serif leading-tight tracking-wide text-left capitalize">
 				AI-powered analysis <br /> for human-powered insights
 			</h1>
 			<h2
-				class="text-background opacity-80 mt-4 text-xl font-medium capitalize font-sans leading-tight tracking-wide text-left">
+				class="text-background opacity-80 mt-4 font-sans text-xl font-medium leading-tight tracking-wide text-left capitalize">
 				Opinions in, insights out. Fast.
 			</h2>
 		</div>
 	</div>
 </div>
 
-<div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto">
+<div class="max-w-7xl relative flex flex-col items-center justify-center px-4 mx-auto">
 	<!-- CUSTOMER LOGOS  -->
 	<div class="w-full mt-32 mb-16">
 		<h2 class="font-serif text-2xl text-center">Trusted by the brands you trust</h2>
@@ -96,8 +108,11 @@
 			description="Delegate complex tasks in natural language to domain-specific agents that can count, search, summarise and cite."
 			buttonText="Explore Agents"
 			buttonHref="/demo">
-			<div class="flex flex-col items-center justify-center w-full h-full gap-16 overflow-hidden">
-				<AnimateQuerey />
+			<div class="bg-accent-4 flex items-center justify-center w-full h-full">
+				<div class="h-3/4 w-3/4">
+					<!-- <AnimateQuerey /> -->
+					<DemoWorkflow />
+				</div>
 			</div>
 		</TwoSplit>
 		<TwoSplit
@@ -107,46 +122,9 @@
 			buttonText="Explore Integrations"
 			reverse
 			buttonHref="/demo">
-			<div class=" bg-accent-1 w-full h-full">
-				<DemoRolodex
-					showControls={false}
-					items={[
-						{ src: "/integrations/capvision.png", title: "Capvision" },
-						{ src: "/integrations/teams.png", title: "teams" },
-						{ src: "/integrations/zoom.png", title: "zoom" },
-						{ src: "/integrations/discuss.png", title: "discuss" },
-						{ src: "/integrations/google-meet.png", title: "google meet" },
-						{ src: "/integrations/incling.png", title: "incling" },
-						{ src: "/integrations/onedrive.png", title: "onedrive" },
-						{ src: "/integrations/otter.png", title: "otter" },
-						{ src: "/integrations/rev.png", title: "rev" },
-						{ src: "/integrations/qualzy.png", title: "qualzy" },
-						{ src: "/integrations/qualzy.png", title: "qualzy" },
-						{ src: "/integrations/qualzy.png", title: "qualzy" },
-						{ src: "/integrations/qualzy.png", title: "qualzy" },
-						{ src: "/integrations/qualzy.png", title: "qualzy" },
-						{ src: "/integrations/qualzy.png", title: "qualzy" },
-					]}>
-					{#snippet children(item)}
-						<div class="flex flex-col items-center justify-center w-full h-64 p-8">
-							<div
-								class="text-card-foreground bg-card border-t-20 border-accent-3 flex flex-row items-center justify-center w-full h-full gap-4 mx-auto overflow-hidden rounded shadow-2xl">
-								<img
-									src={(item as { src: string; alt: string }).src}
-									alt={(item as { src: string; title: string }).title}
-									class="object-cover h-12" />
-								<div class="flex flex-col items-start justify-start">
-									<span class="text-balance text-xl font-semibold capitalize"
-										>{(item as { src: string; title: string }).title}</span>
-									<span class="text-balance font-sans text-xs font-semibold uppercase opacity-50">
-										Full Integration
-									</span>
-								</div>
-							</div>
-						</div>
-					{/snippet}
-				</DemoRolodex>
-			</div>
+			<WildAnimationBox backgroundImage="/water/blue-3.png">
+				<StaticDemoIntegrations />
+			</WildAnimationBox>
 		</TwoSplit>
 		<TwoSplit
 			label="Projects"
@@ -155,11 +133,9 @@
 			buttonText="Explore Projects"
 			buttonHref="/demo"
 			clearBackground={[false, true]}>
-			<div class="bg-accent-2 w-full h-full flex items-center justify-center">
-				<div class="w-3/4 h-3/4">
-					<DemoWorkflowSharing />
-				</div>
-			</div>
+			<WildAnimationBox backgroundImage="/water/blue-3.png">
+				<DemoWorkflowSharing />
+			</WildAnimationBox>
 		</TwoSplit>
 		<TwoSplit
 			label="Workflows"
@@ -168,7 +144,9 @@
 			buttonText="Explore Workflows"
 			reverse
 			buttonHref="/demo">
-			<img src="/images/wild/petri-2.png" alt="Workflows" class="p-xl object-cover w-full h-full" />
+			<WildAnimationBox backgroundImage="/water/green-1.png">
+				<DemoTranscriptClips />
+			</WildAnimationBox>
 		</TwoSplit>
 	</div>
 
@@ -177,26 +155,18 @@
 		{@render section("Let us do the heavy lifting, you do the insights")}
 		<NakedCardSet set="features" />
 	</div>
-
-	<!-- Testimonials -->
-	<div class=" w-full">
-		<div class="max-w-7xl flex flex-col w-full gap-16 mx-auto mb-32">
-			{@render section("What our customers say")}
-			<Testimonials testimonials={data.testimonials} />
-		</div>
-	</div>
 </div>
 
 <!-- MAX 7XL END -->
 <!-- FULL WIDTH START -->
 
-<div class="bg-primary text-primary-foreground flex flex-col items-center justify-center w-full py-32">
+<div class="bg-primary text-primary-foreground flex flex-col items-center justify-center w-full px-4 py-32">
 	<!-- TESTIMONIALS  -->
-	<div class="max-w-7xl grid items-center justify-center grid-cols-2 mx-auto">
+	<div class="max-w-7xl lg:grid-cols-2 lg:gap-0 grid items-center justify-center grid-cols-1 gap-16 mx-auto">
 		<div class=" flex items-center justify-center">
 			<img src="/images/old-man.png" alt="old man" class="aspect-square object-cover w-full h-full rounded" />
 		</div>
-		<div class="flex flex-col items-start justify-center flex-1 pl-32">
+		<div class=" 5xl:pl-32 flex flex-col items-start justify-center flex-1 pl-16">
 			<blockquote class="text-primary-foreground text-balance mb-8 font-serif text-xl">
 				"When it comes to AI and technology, it’s all about learning by doing. You won’t figure everything out
 				right away, but the more you engage with it, the more opportunities you’ll see."
@@ -210,7 +180,7 @@
 
 	<!-- SOLUTIONS -->
 	<div class=" min-h-200 flex flex-col items-center justify-center w-full mt-32">
-		<!-- {@render section("What our customers say")} -->
+		{@render section("There's a CoLoop for everyone")}
 		<CarouselPills />
 	</div>
 </div>
@@ -218,9 +188,16 @@
 <!-- FULL WIDTH END -->
 <!-- MAX 7XL START -->
 
-<div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto">
+<div class="max-w-7xl relative flex flex-col items-center justify-center px-4 mx-auto">
+	<!-- Testimonials -->
+	<div class=" w-full">
+		<div class="max-w-7xl flex flex-col w-full gap-16 mx-auto mt-32 mb-32">
+			{@render section("What our customers say")}
+			<Testimonials testimonials={data.testimonials} />
+		</div>
+	</div>
 	<!-- BOOK A CALL CTA -->
-	<div class="w-full mt-32 mb-32">
+	<div class="w-full mt-64 mb-64">
 		{@render section("This is the future of research")}
 		<EmailSubmit {form} placeholder="Enter your email address" buttonText="Get a demo" />
 	</div>
@@ -252,30 +229,62 @@
 				"Retrofit your teams, tools and processes in weeks with integrated APIs and expert quality tooling with no prompting experience required.",
 		}, -->
 		<Card
-			title="SOC II Compliant"
-			subtitle="Robust, industry-standard protection with zero training on your data."
-			image="/images/water/tops.png"
+			title="Enterprise Grade Security"
+			subtitle="Robust, industry-standard protection with zero training on your data. SOC II Compliant. "
+			image="/wild/vault.png"
 			href="/demo"
 			cardHeight={96}
 			colSpan={2}
 			rowSpan={2} />
-		<Card
-			title="Live Support & Training"
-			subtitle="White glove support to support adoption, maximise value and transform your team to AI first experts."
-			image="/images/wild/old-car.png"
-			href="/demo"
-			cardHeight={96}
-			colSpan={2} />
 		<Card
 			title="Best In Class Models"
 			subtitle="High-performing model ensembles assembled from across platforms and providers for a best in class experience."
-			colSpan={2}
-			rowSpan={2} />
+			cardHeight={96}
+			colSpan={2}>
+			<div class="mask-l-from-100 mask-r-from-100 flex items-center justify-center w-full h-full">
+				<div class=" h-36 flex flex-row items-center justify-center w-full gap-4">
+					{#each ["google", "openai", "anthropic", "meta", "xai"] as logo}
+						<div class="bg-primary flex items-center justify-center h-full p-4 rounded">
+							<img src={`/security/${logo}.png`} alt={logo} class="w-fit object-contain max-w-xl" />
+						</div>
+					{/each}
+				</div>
+			</div>
+		</Card>
 		<Card
-			title="Flexible API & Agentic Workflows"
+			title="Live Support & Training"
+			subtitle="White glove support to support adoption, maximise value and transform your team to AI first experts."
+			href="/demo"
+			rowSpan={2}
+			colSpan={2}>
+			<div class=" flex items-center justify-center w-full h-full">
+				<div
+					class="mask-l-from-100 mask-r-from-100 flex flex-row items-center justify-center w-full h-full gap-4 overflow-hidden">
+					{#each ["Kelly Kapoor", "Michael Scott", "Pam Beesly", "Jim Halpert", "Dwight Schrute"] as avatar, i}
+						<div
+							class="bg-secondary h-3/5 min-w-38 text-secondary-foreground flex flex-col items-start justify-start w-full gap-4 p-2 rounded shadow">
+							<img
+								src={`/avatars/pp-${i + 1}.png`}
+								alt={avatar}
+								class="border-primary saturate-0 object-cover w-full h-64 border-4 rounded-full shadow" />
+
+							<div class="h-1/4 flex flex-col items-start justify-center w-full gap-2">
+								<span class="text-balance w-full text-sm font-bold">Customer Support Manager</span>
+								<span class="opacity-80 w-full text-sm font-medium">
+									{avatar}
+								</span>
+							</div>
+						</div>
+					{/each}
+				</div>
+			</div>
+		</Card>
+
+		<Card
+			title="Flexible API "
 			subtitle="Retrofit your teams, tools and processes in weeks with integrated APIs and expert quality tooling with no prompting experience required." />
 		<Card
-			title="Flexible API & Agentic Workflows"
+			title="Agentic Workflows"
 			subtitle="Retrofit your teams, tools and processes in weeks with integrated APIs and expert quality tooling with no prompting experience required." />
 	</div>
 </div>
@@ -290,70 +299,70 @@
 </div>
 <!-- FULL WIDTH END -->
 
-<div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto">
+<div class="max-w-7xl relative flex flex-col items-center justify-center px-4 mx-auto">
 	<!-- ORG TRANSFORMATION TIMELINE -->
 	<div class="w-full mt-32 mb-32">
-		{@render section("Org Transformation Timeline")}
+		{@render section("Transformation Your Team to AI Native ")}
+		<Timeline></Timeline>
 	</div>
 	<!-- FINAL GET STARTED -->
 	<div class="w-full mt-32 mb-32">
-		{@render section("With a Book a call CTA too")}
-		<div class="flex flex-col w-full gap-16 mt-32 mb-32">
-			<TwoSplit
-				label="Get CoLoop"
-				heading="See CoLoop in action"
-				description="Book a personalized demo to discover how CoLoop can accelerate your research and insights workflow."
-				buttonText="Get CoLoop"
-				buttonHref="/demo"
-				clearBackground={[true, true]}>
-				<TestimonialCard testimonial={data.ctaTestimonial[0]} />
-			</TwoSplit>
-		</div>
-
+		{@render section(
+			"Get Started with CoLoop Now",
+			"Book a personalized demo to discover how CoLoop can accelerate your research and insights workflow.",
+		)}
 		<EmailSubmit {form} placeholder="Enter your email address" buttonText="Get a demo" />
 	</div>
 
 	<!-- PRODUCTS  -->
-	<div class="flex flex-col w-full gap-16 mt-32 mb-32">
+	<div class="flex flex-col w-full h-full gap-16 mt-32 mb-32">
 		{@render section("Products to run every kind of study, on any kind of data")}
 		<ColSideSelectTwoSplit />
 	</div>
 
 	<!-- COMPARISON  -->
-	<div class="flex flex-col w-full gap-16 mt-32 mb-32">
+	<!-- <div class="flex flex-col w-full gap-16 mt-32 mb-32">
 		{@render section("Compare CoLoop to CoPilot, ChatGPT + others etc")}
 
 		<div
-			class="bg-primary text-primary-foreground w-full h-96 flex items-center justify-center text-2xl font-serif">
+			class="bg-primary text-primary-foreground h-96 flex items-center justify-center w-full font-serif text-2xl">
 			COMPARISON
 		</div>
-	</div>
+	</div> -->
 </div>
 
 <div class="bg-primary text-primary-foreground">
 	<!-- SECURITY -->
-	<div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto">
-		<div class="w-full mt-32 mb-32">
+	<div class="max-w-7xl relative flex flex-col items-center justify-center h-full mx-auto">
+		<div class="w-full h-full px-4 mt-32 mb-32">
 			<Security />
 		</div>
 	</div>
 </div>
 
 <div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto">
-	<div class="w-full mt-32 mb-32">
-		<!-- COMMUNITY -->
+	<!-- <div class="w-full mt-32 mb-32">
 		<div
-			class="bg-primary text-primary-foreground w-full h-96 flex items-center justify-center text-2xl font-serif">
+			class="bg-primary text-primary-foreground h-96 flex items-center justify-center w-full font-serif text-2xl">
 			COMMUNITY
 		</div>
-	</div>
+	</div> -->
 
-	<!-- BLOG ENDER -->
+	<!-- FINAL GET STARTED -->
 	<div class="w-full mt-32 mb-32">
+		{@render section(
+			"Get Started with CoLoop Now",
+			"Book a personalized demo to discover how CoLoop can accelerate your research and insights workflow.",
+		)}
+		<EmailSubmit {form} placeholder="Enter your email address" buttonText="Get a demo" />
+	</div>
+	<!-- BLOG ENDER -->
+	<div class="w-full mb-32">
 		<BlogEndArtCard />
 	</div>
 </div>
 
+<!-- ######################################################### -->
 <!-- ######################################################### -->
 <!-- ######################################################### -->
 <!-- ######################################################### -->

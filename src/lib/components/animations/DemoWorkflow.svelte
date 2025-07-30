@@ -5,7 +5,6 @@
 		IconTags,
 		IconUsers,
 		IconMessageQuestion,
-		IconCheck,
 		IconPlayerPlay,
 		IconMicrophone,
 		IconLoader,
@@ -32,6 +31,7 @@
 		}
 
 		get isActive() {
+			Ê
 			return this.state === "running"
 		}
 
@@ -406,10 +406,10 @@
 		{
 			id: "tagging",
 			icon: IconTags,
-			title: "Smart Tagging",
-			subtitle: "Identifying key themes and insights...",
-			loadingText: "Analyzing content for patterns",
-			completeText: "Themes identified and tagged",
+			title: "Coding Open Ends",
+			subtitle: "Coding open ends with context...",
+			loadingText: "Analyzing open ends samples...",
+			completeText: "Open ends coded",
 			colors: { bg: "bg-accent-1/20", icon: "text-accent-1", text: "text-accent-1" },
 			execute: animateTagging,
 		},
@@ -656,13 +656,13 @@
 	<div
 		in:fly={{ y: 15, duration: 400, delay: 300, easing: quintOut }}
 		out:fly={{ y: -15, duration: 400, easing: cubicInOut }}
-		class="flex flex-wrap gap-2 mt-4">
+		class="flex flex-col gap-2 mt-4">
 		{#each tags as tag, i (`tag-${i}`)}
 			<span
 				class="bg-card/60 backdrop-blur-sm rounded-xl border-border/20 px-3 py-1 text-xs font-semibold border shadow-sm"
 				in:scale={{ duration: 300, delay: i * 100, easing: elasticOut }}
 				out:scale={{ duration: 300, easing: cubicInOut }}>
-				#{tag.theme}
+				{tag.theme}
 			</span>
 		{/each}
 	</div>
@@ -685,7 +685,7 @@
 				in:fly={{ x: -20, duration: 400, delay: 100, easing: quintOut }}
 				out:fly={{ x: 20, duration: 400, easing: cubicInOut }}>
 				<div class="size-2 bg-green-500 rounded-full"></div>
-				Analysis complete • Video clips generated
+				Analysis complete • Video clip generated
 			</div>
 			<div
 				class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border-slate-700/50 overflow-hidden border shadow-xl"
@@ -693,7 +693,7 @@
 				out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
 				<div class="aspect-[16/10] bg-gradient-to-br from-slate-700/50 to-slate-800/50 relative">
 					<img
-						src="/images/wild/coca-cola-4k.png"
+						src="/images/interviewer-crisps.png"
 						alt="Video"
 						class="opacity-60 absolute inset-0 object-cover w-full h-full" />
 					<div class="absolute inset-0 flex items-center justify-center">

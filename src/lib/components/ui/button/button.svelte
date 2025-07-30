@@ -17,7 +17,7 @@
 				secondary: "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
 				ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
 				link: "text-primary font-medium text-sm opacity-80 hover:opacity-100 bg-transparent hover:bg-transparent underline-offset-4 hover:underline [data-state=active]:underline",
-				more: "text-secondary bg-transparent hover:bg-transparent underline-offset-4 hover:underline group  opacity-60",
+				more: "text-secondary bg-transparent hover:bg-transparent underline-offset-4 hover:underline group opacity-80",
 			},
 			size: {
 				none: "p-0",

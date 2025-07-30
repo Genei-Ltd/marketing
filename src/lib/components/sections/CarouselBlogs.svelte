@@ -26,7 +26,7 @@
 	})
 </script>
 
-<div class="md:py-24 bg-muted w-full py-16">
+<div class="md:py-24 bg-primary w-full py-16">
 	<Carousel.Root
 		opts={{
 			loop: true,
@@ -47,14 +47,17 @@
 							src={post.coverImage || "/images/fallback.png"}
 							alt={post.title}
 							class="absolute inset-0 object-cover w-full h-full" />
-						<div class="bg-gradient-to-t from-muted/90 via-muted/40 to-transparent absolute inset-0"></div>
+						<div
+							class="bg-gradient-to-t from-primary/90 via-primary/40 to-transparent absolute inset-0 opacity-50">
+						</div>
 						<!-- Company Logo -->
-						<div class="text-card absolute inset-0 z-20 flex items-center justify-center flex-shrink-0 p-4">
+						<div
+							class="text-primary-foreground absolute inset-0 z-20 flex items-center justify-center flex-shrink-0 p-4">
 							{#if post.companyLogo}
 								<img
 									src={post.companyLogo}
 									alt={post.company || "Company"}
-									class="w-auto h-12 brightness-0 contrast-200 invert drop-shadow-[0_0_0_white]" />
+									class="w-auto h-12 brightness-0 contrast-200 invert drop-shadow-[0_0_0_white] text-primary-foreground" />
 							{:else if post.company}
 								<div class="md:text-3xl text-2xl font-bold tracking-tight lowercase">
 									{post.company}
@@ -63,29 +66,31 @@
 						</div>
 					</div>
 					<div class="relative z-10">
-						<div class=" text-background relative flex flex-col justify-start h-full px-2">
+						<div class=" text-primary-foreground relative flex flex-col justify-start h-full px-2">
 							<!-- Content -->
-							<div class="flex flex-col justify-center flex-1 mt-4 mb-1">
-								<blockquote class=" text-background line-clamp-2 text-lg font-medium">
+							<div class="flex flex-row justify-between flex-1 mt-4 mb-1">
+								<blockquote class=" text-primary-foreground line-clamp-2 text-lg font-medium">
 									{post.title}
 								</blockquote>
+								<div class="flex-shrink-0">
+									<Button
+										href={"/blog/" + post.slug}
+										variant="secondary"
+										class="text-secondary-foreground ">Read Article</Button>
+								</div>
 							</div>
 
 							<!-- Footer -->
 							<div class="flex items-end justify-between flex-shrink-0 gap-6">
 								<div class="flex-1">
-									<p class=" text-muted-foreground text-sm font-semibold">{post.company}</p>
+									<p class=" text-primary-foreground text-sm font-semibold">{post.company}</p>
 									<div class="flex flex-row gap-3">
 										{#if post.category}
 											{#each post.category as category}
-												<p class="text-muted-foreground text-sm capitalize">{category}</p>
+												<p class="text-primary-foreground text-sm capitalize">{category}</p>
 											{/each}
 										{/if}
 									</div>
-								</div>
-								<div class="flex-shrink-0">
-									<Button href={"/blog/" + post.slug} variant="secondary" class=""
-										>Read Article</Button>
 								</div>
 							</div>
 						</div>

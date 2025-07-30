@@ -1,9 +1,11 @@
 <script lang="ts">
+	import WildAnimationBox from "./../../../routes/WildAnimationBox.svelte"
 	import * as Carousel from "$lib/components/ui/carousel/index.js"
 	import type { CarouselAPI } from "$lib/components/ui/carousel/context.js"
 	import TwoSplit from "$components/layouts/TwoSplit.svelte"
 	import DemoWorkflowAssetUpload from "$components/animations/DemoWorkflowAssetUpload.svelte"
 	import DemoInterviewAnalysis from "$components/animations/DemoInterviewAnalysis.svelte"
+	import ConceptTestingDemo from "$components/animations/ConceptTestingDemo.svelte"
 
 	// Define the pill labels
 	const pillLabels = [
@@ -34,7 +36,7 @@
 	}
 </script>
 
-<div class="md:py-24 w-full py-16">
+<div class=" w-full">
 	<div class="text-muted-foreground w-full mb-8 text-sm text-center">
 		<div class="flex flex-row items-center justify-center w-full max-w-3xl gap-4 py-2 mx-auto">
 			{#each pillLabels as label, i (i)}
@@ -75,11 +77,9 @@
 					buttonHref="/blog/in-house-strategy-teams"
 					showButton={true}
 					reverse={false}>
-					<div class=" bg-accent-2 flex items-center justify-center w-full h-full">
-						<div class="absoulte w-full h-full">
-							<DemoInterviewAnalysis />
-						</div>
-					</div>
+					<WildAnimationBox backgroundImage="/water/tan-1.png">
+						<DemoInterviewAnalysis />
+					</WildAnimationBox>
 				</TwoSplit>
 			</Carousel.Item>
 
@@ -97,12 +97,14 @@
 					buttonHref="/blog/concept-stimulus-testing"
 					showButton={true}
 					reverse={false}>
-					<div class="p-lg flex items-center justify-center">
-						<!-- Add your custom component here instead of just an image -->
+					<div class="bg-secondary saturate-50 relative flex items-center justify-center w-full h-full">
 						<img
-							src="/images/features/image.png"
-							alt="Concept & Stimulus Testing"
-							class="h-auto max-w-full" />
+							src="/water/tan-1.png"
+							alt="Survey Analysis"
+							class=" opacity-60 absolute inset-0 object-cover w-full h-full" />
+						<div class="h-5/6 w-5/6">
+							<ConceptTestingDemo />
+						</div>
 					</div>
 				</TwoSplit>
 			</Carousel.Item>
@@ -121,10 +123,9 @@
 					buttonHref="/blog/survey-analysis"
 					showButton={true}
 					reverse={false}>
-					<div class="p-lg flex items-center justify-center">
-						<!-- Add your custom component here instead of just an image -->
-						<img src="/images/features/steal.png" alt="Survey Analysis" class="h-auto max-w-full" />
-					</div>
+					<WildAnimationBox backgroundImage="/water/green-1.png">
+						<DemoInterviewAnalysis />
+					</WildAnimationBox>
 				</TwoSplit>
 			</Carousel.Item>
 

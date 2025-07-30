@@ -2,7 +2,8 @@
 	import { fly } from "svelte/transition"
 
 	import { cn } from "$lib/utils.js"
-
+	import { conceptTestingDemo, demoInterviewAnalysis, demoTranslation } from "$lib/components/animations"
+	import WildAnimationBox from "../../../routes/WildAnimationBox.svelte"
 	// Define the features data structure
 	const features = [
 		{
@@ -10,7 +11,8 @@
 			title: "Open Ends",
 			description:
 				"Quickly understand target audiences perception, and uncover what resonates. Never miss or mix up another concept with CoLoop's automatic keyword labelling.",
-			image: "/images/features/concept.gif",
+			demo: conceptTestingDemo,
+			image: "/water/blue-1.png",
 			bgColor: "bg-accent-1",
 		},
 		{
@@ -18,7 +20,8 @@
 			title: "Qualitative",
 			description:
 				"Analyze open-ended feedback to reveal customer sentiment. CoLoop enables scalable CX analysis to improve customer journeys and retention.",
-			image: "/images/features/steal.png",
+			demo: demoInterviewAnalysis,
+			image: "/water/green-1.png",
 			bgColor: "bg-accent-2",
 		},
 		{
@@ -26,7 +29,8 @@
 			title: "Concept & Message Testing",
 			description:
 				"Unlock the competitive edge with deeper insights into unmet needs, differentiators and white space opportunities.",
-			image: "/images/features/image.png",
+			demo: demoInterviewAnalysis,
+			image: "/water/blue-3.png",
 			bgColor: "bg-accent-3",
 		},
 		{
@@ -34,7 +38,8 @@
 			title: "Agentic Chat",
 			description:
 				"Uncover market trends, customer needs, and market opportunities with comprehensive market research.",
-			image: "/images/features/market.png",
+			demo: demoTranslation,
+			image: "/water/tan-1.png",
 			bgColor: "bg-accent-4",
 		},
 	]
@@ -42,15 +47,15 @@
 	let activeFeature = $state(features[0])
 </script>
 
-<div class="lg:grid-cols-2 grid items-start grid-cols-1 gap-4">
+<div class="lg:grid-cols-2 lg:h-156 grid items-start h-full grid-cols-1 gap-4">
 	<!-- Left side - Feature options -->
-	<div class="space-y-4">
+	<div class="h-156 flex flex-col justify-between gap-4">
 		{#each features as feature}
 			<div
 				class={cn(
-					"flex min-h-[150px] cursor-pointer flex-col justify-between rounded  p-6 transition-all duration-300",
+					"flex h-full cursor-pointer flex-col justify-between rounded  p-4 transition-all duration-300",
 					activeFeature.id === feature.id
-						? "bg-card text-card-foreground shadow-lg bg-gradient-to-br from-primary/10 to-primary/5 border-primary"
+						? "text-card-foreground shadow bg-secondary border-primary"
 						: "bg-card",
 				)}
 				onmouseenter={() => (activeFeature = feature)}
@@ -70,16 +75,13 @@
 	</div>
 
 	<!-- Right side - Content display -->
-	<div class="lg:sticky lg:top-8 w-full h-full">
+	<div class="lg:sticky lg:top-8 h-156 w-full overflow-hidden rounded">
 		<div class="relative flex h-full w-full rounded transition-all duration-300 {activeFeature.bgColor}">
 			<!-- Regular layout with image -->
-			<div class="flex items-center justify-center w-full h-full transition-all duration-300">
-				<img
-					in:fly={{ y: 40, duration: 350, opacity: 0.2 }}
-					out:fly={{ y: -40, duration: 250, opacity: 0.2 }}
-					src={activeFeature.image}
-					alt={activeFeature.title}
-					class="object-contain w-2/3" />
+			<div class="w-full h-full overflow-hidden">
+				<WildAnimationBox backgroundImage={activeFeature.image}>
+					{@render activeFeature.demo?.()}
+				</WildAnimationBox>
 			</div>
 		</div>
 	</div>

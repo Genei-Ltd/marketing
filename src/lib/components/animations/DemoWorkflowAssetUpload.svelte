@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { IconUpload, IconFileText, IconCheck, IconLoader } from "@tabler/icons-svelte"
+	import { IconUpload, IconFileText, IconCheck, IconLoader, IconMovie, IconMicrophone } from "@tabler/icons-svelte"
 	import { onMount } from "svelte"
 	import { fly, scale } from "svelte/transition"
 	import { quintOut, cubicInOut, elasticOut, linear } from "svelte/easing"
@@ -626,86 +626,73 @@
 {#snippet processingTable(rows: FileProcessingRow[])}
 	{#if rows.length > 0}
 		<div
-			class="bg-card/85 backdrop-blur-sm border-border/10 max-w-5xl p-4 border rounded-lg shadow-sm"
+			class="bg-card/70 backdrop-blur-sm border-border/10 max-w-4xl overflow-hidden border rounded-lg"
 			in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 			out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
-			<div class="text-card-foreground mb-4 text-xs font-medium tracking-wide uppercase">
-				Analysing Content • {rows.length} Files
+			<!-- Column headers -->
+			<div class="bg-card/85 backdrop-blur-sm border-border/10 grid grid-cols-4 gap-4 px-4 py-3 border-b">
+				<div class="text-foreground/80 text-xs font-bold tracking-wider uppercase">Asset</div>
+				<div class="text-foreground/80 text-xs font-bold tracking-wider uppercase">Transcription</div>
+				<div class="text-foreground/80 text-xs font-bold tracking-wider uppercase">Translation</div>
+				<div class="text-foreground/80 text-xs font-bold tracking-wider uppercase">Speakers</div>
 			</div>
 
-			<!-- Table header -->
-			<div class="border-border/20 grid grid-cols-4 gap-4 pb-3 mb-3 border-b">
-				<div class="text-card-foreground/70 text-xs font-medium">File</div>
-				<div class="flex items-center gap-2">
-					<span class="text-card-foreground/70 text-xs font-medium">Transcription</span>
-					{#if animationState.columnCompletion.transcription}
-						<div class="text-primary" in:scale={{ duration: 200, easing: elasticOut }}>
-							<IconCheck class="size-3" />
-						</div>
-					{/if}
-				</div>
-				<div class="flex items-center gap-2">
-					<span class="text-card-foreground/70 text-xs font-medium">Translation</span>
-					{#if animationState.columnCompletion.translation}
-						<div class="text-primary" in:scale={{ duration: 200, easing: elasticOut }}>
-							<IconCheck class="size-3" />
-						</div>
-					{/if}
-				</div>
-				<div class="flex items-center gap-2">
-					<span class="text-card-foreground/70 text-xs font-medium">Speakers</span>
-					{#if animationState.columnCompletion.speakers}
-						<div class="text-primary" in:scale={{ duration: 200, easing: elasticOut }}>
-							<IconCheck class="size-3" />
-						</div>
-					{/if}
-				</div>
-			</div>
-
-			<!-- Table rows -->
-			<div class="space-y-3">
+			<!-- Rows -->
+			<div class="divide-border/20 divide-y">
 				{#each rows as row, i (row.file.id)}
 					<div
-						class="grid items-start grid-cols-4 gap-4"
+						class="hover:bg-card backdrop-blur-sm grid grid-cols-4 gap-4 px-4 py-4 transition-colors"
 						in:fly={{ y: -20, duration: 400, delay: i * 100, easing: linear }}>
-						<!-- File column -->
-						<div class="items-startt flex justify-start gap-2">
-							<div class="shrink-0">
-								<img src={row.file.icon} alt={row.file.type} class="size-5" />
-							</div>
-							<div class="min-w-0">
-								<div class="text-card-foreground text-xs font-medium">
-									{row.file.name}
+						<!-- Asset column -->
+						<div class="space-y-2">
+							<div class="flex items-center gap-3">
+								{#if row.file.type === "video"}
+									<IconMovie class="size-5 text-foreground/60" />
+								{:else if row.file.type === "audio"}
+									<IconMicrophone class="size-5 text-foreground/60" />
+								{/if}
+								<div class="text-foreground/70 font-mono text-sm font-medium truncate">
+									{row.file.name.replace(/\.(mp4|wav|m4a|mov)$/, "")}
 								</div>
-								<div class="text-card-foreground/50 text-xs">
-									{row.file.size} • {row.file.duration || "Unknown duration"}
-								</div>
 							</div>
+							<div class="text-foreground/50 ml-8 text-xs">
+								{row.file.size} • {row.file.duration || "Unknown"}
+							</div>
+							{#if row.translation.originalLanguage && row.translation.targetLanguage}
+								<div class="ml-8" in:fly={{ duration: 200, easing: linear, delay: 100, x: -20 }}>
+									<span class="bg-primary/10 text-primary px-2 py-1 text-xs font-medium rounded">
+										{row.translation.originalLanguage} → {row.translation.targetLanguage}
+									</span>
+								</div>
+							{/if}
 						</div>
 
 						<!-- Transcription column -->
 						<div class="space-y-2">
-							{@render processingCell(row.transcription)}
+							{@render compactProcessingCell(row.transcription)}
 							{#if row.transcription.status === "complete"}
-								{#if row.transcription.detectedLanguages}
+								<!-- {#if row.transcription.detectedLanguages}
 									<div
-										class="flex flex-wrap gap-1 mb-2"
+										class="flex flex-wrap gap-1"
 										in:fly={{ duration: 200, easing: linear, delay: 100, x: -20 }}>
 										{#each row.transcription.detectedLanguages as lang}
 											<span
-												class="bg-secondary text-secondary-foreground px-2 py-0.5 text-xs font-medium rounded">
+												class="bg-secondary text-secondary-foreground px-2 py-1 text-xs font-medium rounded">
 												{lang}
 											</span>
 										{/each}
 									</div>
-								{/if}
+								{/if} -->
 								{#if row.transcription.text}
 									{@const textKey = `${i}-transcription`}
 									{@const animatedLength = animationState.animatedTextProgress[textKey] || 0}
 									{@const isAnimating = animatedLength < row.transcription.text.length}
-									<div class="text-card-foreground/80 text-xs leading-relaxed">
-										{row.transcription.text.slice(0, animatedLength)}{#if isAnimating}<span
-												class="animate-pulse">|</span
+									<div class="text-foreground/70 text-xs leading-relaxed">
+										{row.transcription.text.slice(
+											0,
+											Math.min(animatedLength, 80),
+										)}{#if row.transcription.text.length > 80}...{/if}{#if isAnimating}<span
+												class="animate-pulse text-primary">|</span
 											>{/if}
 									</div>
 								{/if}
@@ -714,26 +701,16 @@
 
 						<!-- Translation column -->
 						<div class="space-y-2">
-							{@render processingCell(row.translation)}
+							{@render compactProcessingCell(row.translation)}
 							{#if row.translation.status === "complete"}
-								{#if row.translation.originalLanguage && row.translation.targetLanguage}
-									<div
-										class="flex flex-wrap gap-1 mb-2"
-										in:fly={{ duration: 200, easing: linear, delay: 100, x: -20 }}>
-										<span
-											class="bg-primary/10 text-primary px-2 py-0.5 text-xs font-medium rounded">
-											{row.translation.originalLanguage} → {row.translation.targetLanguage}
-										</span>
-									</div>
-								{/if}
 								{#if row.translation.translatedText}
 									<div
-										class="text-card-foreground/80 text-xs leading-relaxed"
+										class="text-foreground/70 text-xs leading-relaxed"
 										in:fly={{ duration: 200, easing: linear, delay: 100, x: -20 }}>
-										{row.translation.translatedText.slice(0, 100)}
-										{#if row.translation.translatedText.length > 100}
-											<span class="animate-pulse">|</span>
-										{/if}
+										{row.translation.translatedText.slice(
+											0,
+											80,
+										)}{#if row.translation.translatedText.length > 80}...{/if}
 									</div>
 								{/if}
 							{/if}
@@ -741,28 +718,26 @@
 
 						<!-- Speakers column -->
 						<div class="space-y-2">
-							{@render processingCell(row.speakers)}
+							{@render compactProcessingCell(row.speakers)}
 							{#if row.speakers.status === "complete" && row.speakers.speakers}
 								<div
-									class="flex flex-wrap gap-2"
+									class="flex items-center -space-x-1"
 									in:fly={{ duration: 200, easing: elasticOut, delay: 100, x: -20 }}>
-									{#each row.speakers.speakers as speaker}
-										<div class="flex items-center gap-1">
-											<div
-												class="w-4 h-4 rounded-full font-bold text-[5px] flex items-center justify-center {speaker.color ===
-												'text-primary'
-													? 'bg-primary text-primary-foreground'
-													: 'bg-secondary text-secondary-foreground'}">
-												{speaker.name
-													.split(" ")
-													.map((n) => n[0])
-													.join("")}
-											</div>
-											<span class="text-card-foreground text-xs truncate">
-												{speaker.name}
-											</span>
+									{#each row.speakers.speakers as speaker, speakerIndex}
+										<div
+											class="flex items-center justify-center size-6 text-[10px] font-bold rounded-full border-2 border-background relative z-[{10 -
+												speakerIndex}]
+											{speaker.color === 'text-primary' ? 'bg-primary text-primary-foreground' : 'bg-muted-foreground text-background'}"
+											title={speaker.name}>
+											{speaker.name
+												.split(" ")
+												.map((n) => n[0])
+												.join("")}
 										</div>
 									{/each}
+								</div>
+								<div class="text-foreground/50 text-xs font-medium">
+									{row.speakers.speakers.length} identified
 								</div>
 							{/if}
 						</div>
@@ -773,21 +748,22 @@
 	{/if}
 {/snippet}
 
-<!-- Individual processing cell -->
-{#snippet processingCell(cell: { status: string; progress: number })}
+<!-- Compact processing cell -->
+{#snippet compactProcessingCell(cell: { status: string; progress: number })}
 	<div class="flex items-center gap-2">
 		{#if cell.status === "processing"}
 			<div class="text-primary animate-spin">
-				<IconLoader class="size-3" />
+				<IconLoader class="size-4" />
 			</div>
 			<div class="flex-1">
-				<div class="bg-primary/30 h-1 overflow-hidden rounded-full">
+				<div class="bg-primary/20 h-1.5 overflow-hidden rounded-full">
 					<div
 						class="bg-primary h-full transition-all duration-200 rounded-full"
 						style="width: {cell.progress}%">
 					</div>
 				</div>
 			</div>
+			<span class="text-foreground/60 font-mono text-xs">{cell.progress}%</span>
 		{/if}
 	</div>
 {/snippet}

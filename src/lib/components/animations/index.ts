@@ -1,4 +1,16 @@
-export { default as PharmaInsightDemo } from "./PharmaInsightDemo.svelte"
-export { default as ConceptTestingDemo } from "./ConceptTestingDemo.svelte"
-export { default as GuestAccess } from "./GuestAccess.svelte"
-export { default as DemoInterviewAnalysis } from "./DemoInterviewAnalysis.svelte"
+export {
+	pharmaInsightDemo,
+	conceptTestingDemo,
+	guestAccess,
+	demoInterviewAnalysis,
+	demoIntegrations,
+	staticDemoIntegrations,
+	demoTranslation,
+	demoTranscriptClips,
+	demoAnimateQuerey,
+	demoRolerdex,
+	demoWorkflow,
+	demoWorkflowAssetUpload,
+	demoWorkflowSharing,
+	demoWorkflowStepsArchive,
+} from "./AnimationSnippets.svelte"

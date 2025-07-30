@@ -58,7 +58,6 @@
     "@tabler/icons-svelte": "^3.33.0",
     "embla-carousel-autoplay": "^8.6.0",
     "mini-svg-data-uri": "^1.4.4",
-    "mode-watcher": "^1.1.0",
     "svelte-eslint-parser": "^0.43.0",
     "sveltekit-superforms": "^2.27.0",
     "tailwindcss-animate": "^1.0.7",

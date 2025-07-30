@@ -11,7 +11,7 @@
 		rowSpan?: number
 	}
 
-	let { title, subtitle, image, colSpan = 1, href, cardHeight = 64, rowSpan = 1 }: Props = $props()
+	let { title, subtitle, image, colSpan = 1, href, cardHeight = 64, rowSpan = 1, children }: Props = $props()
 </script>
 
 <div
@@ -24,6 +24,11 @@
 			src={image}
 			alt={title}
 			class="opacity-80 group-hover:opacity-100 absolute inset-0 z-0 object-cover w-full h-full transition-all duration-300 ease-in-out" />
+	{/if}
+	{#if children}
+		<div class="absolute inset-0">
+			{@render children()}
+		</div>
 	{/if}
 	<div class="z-20 flex flex-col justify-between w-full h-full p-4 text-left">
 		<div class="flex flex-col gap-2 mb-2">

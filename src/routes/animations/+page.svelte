@@ -5,6 +5,7 @@
 	import DemoWorkflowAssetUpload from "$lib/components/animations/DemoWorkflowAssetUpload.svelte"
 	import DemoWorkflow from "$lib/components/animations/DemoWorkflow.svelte"
 	import DemoAnimateQuerey from "$lib/components/animations/DemoAnimateQuerey.svelte"
+	import DemoIntegrations from "$lib/components/animations/DemoIntegrations.svelte"
 </script>
 
 <svelte:head>
@@ -18,68 +19,81 @@
 	</header>
 
 	<section class="flex flex-col gap-8">
-		<div class=" h-256 max-h-256 relative overflow-hidden">
-			<h2 class="text-foreground mb-4 text-2xl font-semibold">Concept Testing Demo</h2>
-			<div class="bg-muted/20 relative w-full h-full p-4 overflow-hidden rounded">
+		<div class=" min-h-256 h-256 relative max-w-2xl overflow-hidden">
+			<h2 class="text-foreground mb-4 text-2xl font-semibold">Integrations Demo</h2>
+			<div class="bg-secondary saturate-50 relative flex items-center justify-center w-full h-full">
 				<img
-					src="/images/water/tops.png"
-					alt="Concept Testing Demo"
-					class="blur-sm absolute top-0 left-0 object-cover w-full h-full opacity-50" />
-				<ConceptTestingDemo />
+					src="/water/tan-2.png"
+					alt="Survey Analysis"
+					class=" opacity-60 absolute inset-0 object-cover w-full h-full" />
+				<div class="h-5/6 w-5/6">
+					<DemoIntegrations />
+				</div>
 			</div>
-		</div>
 
-		<div class="">
-			<h2 class="text-foreground mb-4 text-2xl font-semibold">Interview Analysis Demo</h2>
-			<div class="bg-muted/20 relative h-full p-6 overflow-hidden rounded">
-				<img
-					src="/images/water/tops.png"
-					alt="Concept Testing Demo"
-					class="blur-sm absolute top-0 left-0 object-cover w-full h-full opacity-50" />
-				<DemoInterviewAnalysis />
+			<div class=" h-256 max-h-256 relative overflow-hidden">
+				<h2 class="text-foreground mb-4 text-2xl font-semibold">Concept Testing Demo</h2>
+				<div class="bg-muted/20 relative w-full h-full p-4 overflow-hidden rounded">
+					<img
+						src="/water/tan-1.png"
+						alt="Concept Testing Demo"
+						class="absolute top-0 left-0 object-cover w-full h-full opacity-50" />
+					<ConceptTestingDemo />
+				</div>
 			</div>
-		</div>
 
-		<div class="h-full overflow-hidden">
-			<h2 class="text-foreground mb-4 text-2xl font-semibold">Workflow Sharing Demo</h2>
-			<div class="bg-muted/20 p-lg h-full overflow-hidden rounded">
-				<DemoWorkflowSharing />
+			<div class="">
+				<h2 class="text-foreground mb-4 text-2xl font-semibold">Interview Analysis Demo</h2>
+				<div class="bg-muted/20 relative h-full p-6 overflow-hidden rounded">
+					<img
+						src="/water/tan-1.png"
+						alt="Concept Testing Demo"
+						class="absolute top-0 left-0 object-cover w-full h-full opacity-50" />
+					<DemoInterviewAnalysis />
+				</div>
 			</div>
-		</div>
 
-		<div class="h-156 max-h-156 overflow-hidden">
-			<h2 class="text-foreground mb-4 text-2xl font-semibold">Workflow Asset Upload Demo</h2>
-			<div class="bg-muted/20 h-156 max-h-156 p-6 overflow-hidden rounded">
-				<DemoWorkflowAssetUpload />
+			<div class="h-full overflow-hidden">
+				<h2 class="text-foreground mb-4 text-2xl font-semibold">Workflow Sharing Demo</h2>
+				<div class="bg-muted/20 p-lg h-full overflow-hidden rounded">
+					<DemoWorkflowSharing />
+				</div>
 			</div>
-		</div>
 
-		<div class="h-156 max-h-156 overflow-hidden">
-			<h2 class="text-foreground mb-4 text-2xl font-semibold">Workflow Demo</h2>
-			<div class="bg-muted/20 h-156 max-h-156 p-6 overflow-hidden rounded">
-				<DemoWorkflow />
+			<div class="h-156 max-h-156 overflow-hidden">
+				<h2 class="text-foreground mb-4 text-2xl font-semibold">Workflow Asset Upload Demo</h2>
+				<div class="bg-muted/20 h-156 max-h-156 p-6 overflow-hidden rounded">
+					<DemoWorkflowAssetUpload />
+				</div>
 			</div>
-		</div>
 
-		<div class="h-156 max-h-156 overflow-hidden">
-			<h2 class="text-foreground mb-4 text-2xl font-semibold">Animate Query Demo</h2>
-			<div class="bg-muted/20 h-156 max-h-156 p-6 overflow-hidden rounded">
-				<DemoAnimateQuerey />
+			<div class="h-156 max-h-156 overflow-hidden">
+				<h2 class="text-foreground mb-4 text-2xl font-semibold">Workflow Demo</h2>
+				<div class="bg-muted/20 h-156 max-h-156 p-6 overflow-hidden rounded">
+					<DemoWorkflow />
+				</div>
 			</div>
-		</div>
 
-		<!-- <div class="h-156 max-h-156 overflow-hidden">
+			<div class="h-156 max-h-156 overflow-hidden">
+				<h2 class="text-foreground mb-4 text-2xl font-semibold">Animate Query Demo</h2>
+				<div class="bg-muted/20 h-156 max-h-156 p-6 overflow-hidden rounded">
+					<DemoAnimateQuerey />
+				</div>
+			</div>
+
+			<!-- <div class="h-156 max-h-156 overflow-hidden">
 			<h2 class="text-foreground mb-4 text-2xl font-semibold">Guest Access</h2>
 			<div class="bg-muted/20 p-6 rounded-lg">
 				<GuestAccess />
 			</div>
 		</div> -->
 
-		<!-- <div class="">
+			<!-- <div class="">
 			<h2 class="text-foreground mb-4 text-2xl font-semibold">Pharma Insight Demo</h2>
 			<div class="bg-muted/20 p-6 rounded-lg">
 				<PharmaInsightDemo />
 			</div>
 		</div> -->
+		</div>
 	</section>
 </div>

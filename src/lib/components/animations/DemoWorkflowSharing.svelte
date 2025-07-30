@@ -490,6 +490,23 @@
 		<div class="text-card-foreground mb-2 text-xs font-medium tracking-wide uppercase">
 			{config.header}
 		</div>
+		<div class="text-card-foreground border-border/20 p-1 px-2 font-sans text-sm leading-relaxed border rounded">
+			{config.text}
+			{#if config.showDot}
+				<span class="bg-card-foreground/70 size-3 animate-pulse inline-block mt-1 ml-1 rounded-full"></span>
+			{/if}
+		</div>
+	</div>
+{/snippet}
+<!-- Animated text bubble (simplified) -->
+{#snippet textBubble(config: { header: string; text: string; showDot?: boolean })}
+	<div
+		class="bg-card/85 backdrop-blur-sm border-border/10 max-w-2xl p-4 mb-3 border rounded-lg shadow-sm"
+		in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
+		out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
+		<div class="text-card-foreground mb-2 text-xs font-medium tracking-wide uppercase">
+			{config.header}
+		</div>
 		<div class="text-card-foreground font-sans text-sm leading-relaxed">
 			{config.text}
 			{#if config.showDot}
@@ -511,7 +528,7 @@
 				{@const IconComponent = level.icon}
 				{@const isSelected = selectedLevel?.id === level.id}
 				<div
-					class="flex items-center gap-2 p-2 rounded-md border transition-all duration-200 hover:bg-primary/5 {isSelected
+					class="flex items-center gap-2 p-2 rounded-md border uppercase transition-all duration-200 hover:bg-primary/5 {isSelected
 						? 'border-primary/30 bg-primary/5'
 						: 'border-border/20'}"
 					in:fly={{ x: -10, duration: 300, delay: levels.indexOf(level) * 100, easing: quintOut }}>
@@ -545,7 +562,7 @@
 					<IconMail class="size-4" />
 				</div>
 				<div class="flex-1">
-					<div class="text-card-foreground font-sans text-sm">
+					<div class="text-card-foreground text-md font-sans">
 						<span class="font-medium">You've been invited to view</span>
 						<span class="text-foreground font-semibold">"{projectName}"</span>
 					</div>
@@ -617,9 +634,10 @@
 						</div>
 
 						<!-- Access level (simplified) -->
-						<div class="flex items-center gap-1">
+						<div class="flex items-center gap-2">
 							{#if accessLevel}
-								<span class="text-card-foreground/70 text-sm font-medium">{accessLevel.name}</span>
+								<span class="text-card-foreground/70 text-sm font-medium uppercase"
+									>{accessLevel.name}</span>
 								<div class={accessLevel.color}>
 									<IconComponent class="size-5" />
 								</div>
@@ -668,7 +686,7 @@ Perfect for design work - shows access levels, share setup, notification, and te
 				header: "Guest Email • Project Sharing",
 				text: "alex@client-corp.com",
 			})}
-			{@render animatedTextBubble({
+			{@render textBubble({
 				header: "Share Link • Generated",
 				text: "Guest access link created and sent to alex@client-corp.com",
 			})}
@@ -795,9 +813,9 @@ Perfect for design work - shows access levels, share setup, notification, and te
 						{/if}
 
 						{#if animationState.shareAction.status === "complete"}
-							{@render animatedTextBubble({
+							{@render textBubble({
 								header: "Share Link • Generated",
-								text: "Guest access link created and sent to alex@client-corp.com",
+								text: "Guest access sent to alex@client-corp.com",
 							})}
 						{/if}
 					{/if}

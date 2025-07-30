@@ -5,7 +5,6 @@
 		IconCheck,
 		IconLoader,
 		IconTags,
-		IconCamera,
 		IconMicrophone,
 		IconMovie,
 	} from "@tabler/icons-svelte"
@@ -542,7 +541,7 @@
 	// STATIC DESIGN MODE - Set to true to disable animations and show all steps
 	// Perfect for design work: shows question box, analysis table with responses, and results summary
 	// all at once without any animations or delays
-	let staticDesignMode = $state(true) // Set to true for design work
+	let staticDesignMode = $state(false) // Set to true for design work
 
 	let currentStep = $derived(steps[currentStepIndex])
 
@@ -771,10 +770,10 @@
 										<span
 											class="px-2 py-1 text-[9px] font-medium rounded-full
 											{row.answer.sentiment === 'negative'
-												? 'bg-red-100 text-red-700 border border-red-200'
+												? 'bg-secondary text-secondary-foreground border border-secondary'
 												: row.answer.sentiment === 'positive'
-													? 'bg-green-100 text-green-700 border border-green-200'
-													: 'bg-gray-100 text-gray-700 border border-gray-200'}">
+													? 'bg-primary text-primary-foreground border border-primary'
+													: 'bg-muted text-muted-foreground border border-muted'}">
 											{theme.replace(/-/g, " ")}
 										</span>
 									{/each}
@@ -800,20 +799,20 @@
 		<div class="max-w-4xl space-y-6">
 			<!-- Text Summary -->
 			<div
-				class="bg-card/85 backdrop-blur-sm border-border/10 p-6 border rounded-lg shadow-sm"
+				class="bg-card/85 backdrop-blur-sm border-border/10 p-4 border rounded shadow"
 				in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 				out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
 				<div class="text-card-foreground/70 mb-4 text-xs font-medium tracking-wide uppercase">
 					Analysis Summary
 				</div>
 
-				<div class="text-card-foreground space-y-4 text-sm leading-relaxed">
-					<div class="pb-2">
+				<div class="text-card-foreground space-y-4 text-xs leading-relaxed">
+					<div class="pb-1">
 						Our analysis of <strong class="text-primary"
 							>{insights.reduce((sum, insight) => sum + insight.count, 0)} customer responses</strong> revealed
 						significant concerns about our current pricing model.
 					</div>
-					<div class="border-primary/20 pl-4 space-y-2 border-l-2">
+					<div class="border-primary/20 pl-2 space-y-1 border-l-2">
 						<div>
 							<strong class="text-primary font-semibold">Pricing Structure issues</strong> dominated the
 							feedback at <strong class="text-primary">35%</strong> of all mentions, with customers struggling
@@ -836,7 +835,7 @@
 			<!-- Vertical Bar Chart -->
 			{#if showChart}
 				<div
-					class="bg-card/85 backdrop-blur-sm border-border/10 p-6 border rounded-lg shadow-sm"
+					class="bg-card/85 backdrop-blur-sm border-border/10 p-6 border rounded shadow"
 					in:fly={{ y: 20, duration: 600, delay: 300, easing: elasticOut }}
 					out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
 					<!-- Chart Header -->
@@ -845,7 +844,7 @@
 							<IconChartBar class="size-4" />
 						</div>
 						<div>
-							<div class="text-card-foreground text-sm font-semibold">Theme Distribution</div>
+							<div class="text-card-foreground text-xs font-semibold">Theme Distribution</div>
 							<div class="text-card-foreground/60 text-xs">Customer feedback analysis breakdown</div>
 						</div>
 					</div>

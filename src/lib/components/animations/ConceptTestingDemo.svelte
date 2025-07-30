@@ -441,19 +441,19 @@
 {#snippet conceptsGrid(concepts: Concept[])}
 	{#if concepts.length > 0}
 		<div
-			class=" backdrop-blur-sm max-w-2xl mt-2"
+			class=" backdrop-blur-sm border-border w-full p-4 mt-2 border rounded"
 			in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 			out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
 			<div class="text-card-foreground/70 mb-4 text-xs font-medium tracking-wide uppercase">
 				Concept Testing • {concepts.length} Variants
 			</div>
 
-			<div class="w-fit grid grid-cols-3 gap-2">
+			<div class="grid w-full grid-cols-3 gap-4">
 				{#each concepts as concept, i (concept.id)}
 					<div
-						class="relative w-36 grayscale overflow-hidden bg-card/80 flex flex-row items-center justify-center rounded transition-all duration-300 {concept.isHighlighted
-							? 'bg-secondary grayscale-0 shadow-lg ring-4 ring-muted'
-							: 'border-border/20 hover:bg-card'}"
+						class="relative w-full grayscale overflow-hidden bg-card/20 border border-border text-card-foreground flex flex-row items-center justify-center rounded transition-all duration-300 {concept.isHighlighted
+							? 'bg-primary grayscale-0 shadow ring-4 ring-primary/50 text-primary-foreground border border-secondary scale-105'
+							: 'hover:border-border/20 hover:bg-primary/10 border border-border/20'}"
 						in:fly={{ y: -20, duration: 400, delay: i * 150, easing: elasticOut }}>
 						{#if concept.isHighlighted}
 							<div
@@ -468,7 +468,7 @@
 							<span class="text-sm font-bold">{concept.letter}</span>
 						</div>
 
-						<div class="text-card-foreground text-sm font-medium text-left">
+						<div class=" px-2 text-sm font-medium text-left">
 							{concept.name}
 						</div>
 
@@ -489,12 +489,12 @@
 {#snippet videoPlayer(showVideo: boolean, subtitleWords: SubtitleWord[], currentWordIndex: number)}
 	{#if showVideo}
 		<div
-			class="max-w-128 flex flex-col gap-4 mt-4"
+			class=" flex flex-col gap-4 mt-4"
 			in:fly={{ y: 20, duration: 500, easing: elasticOut }}
 			out:fly={{ y: -20, duration: 400, easing: cubicInOut }}>
 			<!-- Zoom-style video grid -->
 			<!-- Recording indicator -->
-			<div class="flex items-center justify-between">
+			<!-- <div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">
 					<div class="size-2 animate-pulse bg-red-500 rounded-full"></div>
 					<span class="text-card-foreground/70 text-xs font-medium tracking-wide uppercase">
@@ -502,12 +502,9 @@
 					</span>
 				</div>
 				<div class="text-card-foreground/50 text-xs">2 participants</div>
-			</div>
-			<div class="flex flex-row gap-2">
-				<div class="bg-primary flex-0 h-fit flex-grow-0 border rounded shadow-sm">
-					<!-- 2-participant grid -->
+			</div> -->
+			<!-- <div class="bg-primary flex-0 h-fit flex-grow-0 border rounded shadow-sm">
 					<div class="flex flex-row gap-2 aspect-[16/9] w-64 p-2 relative overflow-hidden">
-						<!-- Participant 2 - Respondent -->
 						<div
 							class="bg-secondary/10 relative flex items-center justify-center w-full h-full overflow-hidden rounded">
 							<div
@@ -518,7 +515,6 @@
 								<span class="text-secondary-foreground p-3 text-base font-bold rounded">IV</span>
 							</div>
 						</div>
-						<!-- Participant 2 - Respondent -->
 						<div class="bg-secondary/10 flex items-center justify-center w-full overflow-hidden rounded">
 							<div
 								class="bg-secondary ring-4 ring-secondary/50 size-12 flex items-center justify-center rounded-full">
@@ -526,12 +522,11 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
-				<!-- Live transcription panel -->
-				<div class="flex-1 min-w-0">
-					<div class=" backdrop-blur-sm rounded">
-						<!-- Transcription header
+			<!-- Live transcription panel -->
+			<div class=" backdrop-blur-sm border-border/20 border rounded shadow">
+				<!-- Transcription header
 						<div class="border-border/10 p-3 pb-2 border-b">
 							<div class="flex items-center justify-between">
 								<div class="flex items-center gap-2">
@@ -544,43 +539,43 @@
 							</div>
 						</div> -->
 
-						<!-- Transcription content -->
-						<div class=" p-2 space-y-2 overflow-y-auto">
-							{#if subtitleWords.length > 0}
-								<div class="flex flex-row items-start justify-between gap-2">
-									<!-- Speaker label -->
-									<div class="flex items-start gap-2">
-										<div class="flex-shrink-0 mt-0.5">
-											<div
-												class="size-5 bg-secondary border-secondary/30 flex items-center justify-center border rounded-full">
-												<span class="text-secondary-foreground text-xs font-bold">R</span>
-											</div>
-										</div>
-										<div class="flex-1 min-w-0">
-											<div class="text-card-foreground my-1 text-xs font-medium">Speaker 1:</div>
-											<div class="text-card-foreground flex flex-wrap text-sm leading-relaxed">
-												{#each subtitleWords as word, i}
-													<span
-														class="transition-all duration-200 mr-1 {i <= currentWordIndex
-															? word.relatedConcept
-																? 'bg-muted/20 text-muted font-bold px-1 rounded border border-muted/30'
-																: word.isHighlighted
-																	? 'text-card-foreground'
-																	: 'text-card-foreground/70'
-															: 'hidden'}">
-														{word.text}
-													</span>
-												{/each}
-												{#if currentWordIndex < subtitleWords.length - 1}
-													<div
-														class="bg-primary animate-pulse size-2 self-center inline-block ml-1 rounded-full">
-													</div>
-												{/if}
-											</div>
-										</div>
+				<!-- Transcription content -->
+				<div class=" p-4 space-y-2 overflow-y-auto">
+					{#if subtitleWords.length > 0}
+						<div class="flex flex-row items-start justify-between gap-2">
+							<!-- Speaker label -->
+							<div class="flex items-start gap-2">
+								<div class="flex-shrink-0 mt-0.5">
+									<div
+										class="size-5 bg-secondary border-secondary/30 flex items-center justify-center border rounded-full">
+										<span class="text-secondary-foreground text-xs font-bold">R</span>
 									</div>
+								</div>
+								<div class="flex-1 min-w-0">
+									<div class="text-card-foreground my-1 text-xs font-medium">Speaker 1:</div>
+									<div class="text-card-foreground flex flex-wrap text-sm leading-relaxed">
+										{#each subtitleWords as word, i}
+											<span
+												class="transition-all duration-200 mr-1 {i <= currentWordIndex
+													? word.relatedConcept
+														? 'bg-muted/20 text-muted font-bold px-1 rounded border border-muted/30'
+														: word.isHighlighted
+															? 'text-card-foreground'
+															: 'text-card-foreground/70'
+													: 'hidden'}">
+												{word.text}
+											</span>
+										{/each}
+										{#if currentWordIndex < subtitleWords.length - 1}
+											<div
+												class="bg-primary animate-pulse size-2 self-center inline-block ml-1 rounded-full">
+											</div>
+										{/if}
+									</div>
+								</div>
+							</div>
 
-									<!-- Concept detection indicators
+							<!-- Concept detection indicators
 									{#if subtitleWords.some((w) => w.relatedConcept && subtitleWords.indexOf(w) <= currentWordIndex)}
 										<div class="max-w-24 flex-col self-start flex-grow-0 flex-shrink-0 w-24">
 											<div class="text-card-foreground mb-1 text-xs font-medium">
@@ -601,10 +596,8 @@
 											</div>
 										</div>
 									{/if} -->
-								</div>
-							{/if}
 						</div>
-					</div>
+					{/if}
 				</div>
 			</div>
 		</div>
@@ -615,7 +608,7 @@
 {#snippet resultsTable(results: ConceptResult[])}
 	{#if results.length > 0}
 		<div
-			class="bg-card/85 backdrop-blur-sm border-border/10 max-w-128 p-4 border rounded shadow-sm"
+			class=" backdrop-blur-sm border-border/10 p-4 border rounded shadow"
 			in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 			out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
 			<!-- Table Header -->
@@ -647,7 +640,7 @@
 								{result.letter}
 							</div>
 							<div class="flex flex-col">
-								<span class="text-card-foreground text-sm font-medium">{result.concept}</span>
+								<span class="text-card-foreground text-xs font-medium">{result.concept}</span>
 							</div>
 						</div>
 
@@ -741,7 +734,7 @@
 				</div>
 
 				<div
-					class="bg-card/85 backdrop-blur-sm border-border/10 p-2 border rounded shadow"
+					class=" backdrop-blur-sm border-border/10 p-2 border rounded shadow"
 					in:fly={{ y: 20, duration: 500, delay: 200, easing: elasticOut }}>
 					<!-- Three pie charts side by side -->
 					<div class="grid grid-cols-3 gap-2">
@@ -1058,27 +1051,5 @@ Perfect for design work - shows fully populated concepts, video, results table, 
 		to {
 			background-position: left;
 		}
-	}
-
-	@keyframes breathe {
-		0% {
-			transform: scale(1);
-		}
-		25% {
-			transform: scale(1.1);
-		}
-		50% {
-			transform: scale(1);
-		}
-		75% {
-			transform: scale(1.2);
-		}
-		100% {
-			transform: scale(1);
-		}
-	}
-
-	.animate-breathe {
-		animation: breathe 1s 6;
 	}
 </style>

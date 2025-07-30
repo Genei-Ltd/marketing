@@ -61,7 +61,7 @@
 
 <div class="relative w-full mx-auto">
 	<!-- Main Content Grid -->
-	<div class="lg:grid-cols-2 grid items-start grid-cols-1 gap-16">
+	<div class="lg:grid-cols-2 lg:grid flex flex-col-reverse items-start grid-cols-1 gap-16">
 		<!-- Left Column - Content -->
 		<div class=" flex flex-col items-start justify-between h-full space-y-8">
 			<!-- <div class="flex flex-row items-center justify-start w-full gap-4 mb-12">
@@ -102,7 +102,7 @@
 		</div>
 
 		<!-- Right Column - Certifications Grid -->
-		<div class="flex items-center justify-end">
+		<div class="lg:justify-end lg:w-full flex items-center justify-center">
 			<div class="grid grid-cols-2 gap-4">
 				{#each certifications as cert}
 					<a href={cert.link} target="_blank" rel="noopener noreferrer" class="">

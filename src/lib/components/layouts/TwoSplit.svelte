@@ -36,10 +36,10 @@
 	}: TwoSideProps = $props()
 </script>
 
-<div class="h-156 flex w-full overflow-hidden rounded">
+<div class="md:h-156 md:flex-row md:reverse flex flex-col w-full overflow-hidden rounded">
 	<!-- Left Side - Dark Background -->
 	<div
-		class=" text-card-foreground px-xl py-xl flex flex-col justify-center w-1/2 {clearBackground[0]
+		class=" text-card-foreground px-xl py-xl flex flex-col justify-center md:max-w-1/2 w-full aspect-square {clearBackground[0]
 			? 'bg-transparent'
 			: 'bg-card'} {reverse ? 'order-2' : 'order-1'}">
 		<div class="space-y-sm">
@@ -47,14 +47,14 @@
 			<div class="text-xs font-medium tracking-widest uppercase">{label}</div>
 
 			<!-- Main Heading -->
-			<h1 class="font-serif font-bold">
+			<h1 class="font-serif text-2xl font-bold leading-tight tracking-wide">
 				{#each heading.split("\n") as line}
 					{line}<br />
 				{/each}
 			</h1>
 
 			<!-- Description -->
-			<p class="pr-16">
+			<p class="text-balance text-md pr-16 font-medium leading-tight opacity-75">
 				{description}
 			</p>
 
@@ -74,7 +74,7 @@
 
 	<!-- Right Side - Light Background with Custom Content -->
 	<div
-		class="bg-accent-1 flex items-center justify-center w-1/2 {clearBackground[1]
+		class="bg-accent-1 flex items-center justify-center md:max-w-1/2 w-full aspect-square {clearBackground[1]
 			? 'bg-transparent'
 			: 'bg-accent-1'} {reverse ? 'order-1' : 'order-2'}">
 		{@render children?.()}
