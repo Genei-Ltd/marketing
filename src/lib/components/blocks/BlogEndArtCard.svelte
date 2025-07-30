@@ -7,8 +7,8 @@
 		<!-- src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" -->
 		<img
 			alt="Castle moat"
-			src="/wild/river-valley-2.png"
-			class="object-cover object-center w-full h-full"
+			src="/water/vista.png"
+			class="object-cover object-center w-full h-full scale-110 opacity-50"
 			style="z-index: 0;" />
 		<div class="bg-gradient-to-b from-background/50 to-background/10 absolute inset-0"></div>
 	</div>

@@ -8,12 +8,7 @@
 	import ConceptTestingDemo from "$components/animations/ConceptTestingDemo.svelte"
 
 	// Define the pill labels
-	const pillLabels = [
-		"In-House Strategy Teams",
-		"Concept & Stimulus Testing",
-		"Survey Analysis",
-		"Research Agencies",
-	]
+	const pillLabels = ["In-House Strategy Teams", "Concept & Stimulus Testing", "Survey Analysis", "Research Agencies"]
 
 	let api: CarouselAPI | undefined = $state()
 	let current = $state(0)
@@ -77,7 +72,7 @@
 					buttonHref="/blog/in-house-strategy-teams"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundImage="/water/tan-1.png">
+					<WildAnimationBox backgroundColor="bg-accent-1">
 						<DemoInterviewAnalysis />
 					</WildAnimationBox>
 				</TwoSplit>
@@ -97,15 +92,9 @@
 					buttonHref="/blog/concept-stimulus-testing"
 					showButton={true}
 					reverse={false}>
-					<div class="bg-secondary saturate-50 relative flex items-center justify-center w-full h-full">
-						<img
-							src="/water/tan-1.png"
-							alt="Survey Analysis"
-							class=" opacity-60 absolute inset-0 object-cover w-full h-full" />
-						<div class="h-5/6 w-5/6">
-							<ConceptTestingDemo />
-						</div>
-					</div>
+					<WildAnimationBox backgroundColor="bg-accent-2">
+						<ConceptTestingDemo />
+					</WildAnimationBox>
 				</TwoSplit>
 			</Carousel.Item>
 
@@ -123,7 +112,7 @@
 					buttonHref="/blog/survey-analysis"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundImage="/water/green-1.png">
+					<WildAnimationBox backgroundColor="bg-accent-3	">
 						<DemoInterviewAnalysis />
 					</WildAnimationBox>
 				</TwoSplit>
@@ -143,15 +132,9 @@
 					buttonHref="/blog/research-agencies"
 					showButton={true}
 					reverse={false}>
-					<div class="bg-accent-4 relative flex items-center justify-center w-full h-full overflow-hidden">
-						<img
-							src="/images/water/tops.png"
-							alt="Survey Analysis"
-							class="blur-sm absolute inset-0 object-cover w-full h-full opacity-50" />
-						<div class="w-full h-full pt-16 pl-16">
-							<DemoWorkflowAssetUpload />
-						</div>
-					</div>
+					<WildAnimationBox backgroundColor="bg-accent-4">
+						<DemoWorkflowAssetUpload />
+					</WildAnimationBox>
 				</TwoSplit>
 			</Carousel.Item>
 		</Carousel.Content>

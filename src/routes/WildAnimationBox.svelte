@@ -1,8 +1,13 @@
 <script lang="ts">
-	let { backgroundImage, children }: { backgroundImage?: string; children: any } = $props()
+	import { cn } from "$lib/utils.js"
+	let {
+		backgroundImage,
+		backgroundColor = "bg-secondary",
+		children,
+	}: { backgroundImage?: string; backgroundColor?: string; children: any } = $props()
 </script>
 
-<div class="bg-secondary relative flex items-center justify-center w-full h-full">
+<div class={cn("relative flex items-center justify-center w-full h-full", backgroundColor)}>
 	{#if backgroundImage}
 		<img src={backgroundImage} alt="Background" class="opacity-80 absolute inset-0 object-cover w-full h-full" />
 	{/if}

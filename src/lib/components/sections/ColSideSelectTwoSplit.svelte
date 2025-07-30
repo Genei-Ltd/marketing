@@ -79,7 +79,7 @@
 		<div class="relative flex h-full w-full rounded transition-all duration-300 {activeFeature.bgColor}">
 			<!-- Regular layout with image -->
 			<div class="w-full h-full overflow-hidden">
-				<WildAnimationBox backgroundImage={activeFeature.image}>
+				<WildAnimationBox backgroundColor={activeFeature.bgColor}>
 					{@render activeFeature.demo?.()}
 				</WildAnimationBox>
 			</div>

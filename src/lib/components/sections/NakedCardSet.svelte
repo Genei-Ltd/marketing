@@ -1,5 +1,14 @@
 <script lang="ts">
-	import { IconShieldLock, IconDeviceDesktopCode, IconScale, IconWorldWww } from "@tabler/icons-svelte"
+	import {
+		IconShieldLock,
+		IconDeviceDesktopCode,
+		IconScale,
+		IconWorldWww,
+		IconShieldChevron,
+		IconHeartHandshake,
+		IconChartBar,
+		IconClock,
+	} from "@tabler/icons-svelte"
 	import type { ComponentType } from "svelte"
 
 	type Props = {
@@ -26,24 +35,25 @@
 			description: "Robust, industry-standard protection with zero training on your data.",
 		},
 		{
+			icon: IconClock,
+			title: "70% time saving",
+			description: "Robust, industry-standard protection with zero training on your data.",
+		},
+		{
 			icon: IconDeviceDesktopCode,
-			title: "70% time saving",
-			description: "Robust, industry-standard protection with zero training on your data.",
+			title: "Live Support & Training",
+			description:
+				"White glove support to support adoption, maximise value and transform your team to AI first experts.",
 		},
 		{
-			icon: IconScale,
-			title: "70% time saving",
-			description: "Robust, industry-standard protection with zero training on your data.",
+			icon: IconHeartHandshake,
+			title: "Over half of researchers report more enjoyable work",
+			description: "AI-first research teams are more engaged and productive.",
 		},
 		{
-			icon: IconWorldWww,
-			title: "55% researchers report more enjoyable work",
-			description: "Robust, industry-standard protection with zero training on your data.",
-		},
-		{
-			icon: IconScale,
-			title: "46% report higher quality reports",
-			description: "Robust, industry-standard protection with zero training on your data.",
+			icon: IconChartBar,
+			title: "46% of researchers report higher quality reports",
+			description: "AI-first research teams are more productive and efficient.",
 		},
 		{
 			icon: IconScale,

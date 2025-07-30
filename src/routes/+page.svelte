@@ -72,7 +72,7 @@
 				AI-powered analysis <br /> for human-powered insights
 			</h1>
 			<h2
-				class="text-background opacity-80 mt-4 font-sans text-xl font-medium leading-tight tracking-wide text-left capitalize">
+				class="text-background opacity-80 mt-4 font-sans text-lg uppercase font-medium leading-tight tracking-wide text-left">
 				Opinions in, insights out. Fast.
 			</h2>
 		</div>
@@ -108,12 +108,9 @@
 			description="Delegate complex tasks in natural language to domain-specific agents that can count, search, summarise and cite."
 			buttonText="Explore Agents"
 			buttonHref="/demo">
-			<div class="bg-accent-4 flex items-center justify-center w-full h-full">
-				<div class="h-3/4 w-3/4">
-					<!-- <AnimateQuerey /> -->
-					<DemoWorkflow />
-				</div>
-			</div>
+			<WildAnimationBox backgroundColor="bg-accent-4">
+				<DemoWorkflow />
+			</WildAnimationBox>
 		</TwoSplit>
 		<TwoSplit
 			label="Integrations"
@@ -122,7 +119,7 @@
 			buttonText="Explore Integrations"
 			reverse
 			buttonHref="/demo">
-			<WildAnimationBox backgroundImage="/water/blue-3.png">
+			<WildAnimationBox backgroundColor="bg-accent-2">
 				<StaticDemoIntegrations />
 			</WildAnimationBox>
 		</TwoSplit>
@@ -133,7 +130,7 @@
 			buttonText="Explore Projects"
 			buttonHref="/demo"
 			clearBackground={[false, true]}>
-			<WildAnimationBox backgroundImage="/water/blue-3.png">
+			<WildAnimationBox backgroundColor="bg-accent-1">
 				<DemoWorkflowSharing />
 			</WildAnimationBox>
 		</TwoSplit>
@@ -144,7 +141,7 @@
 			buttonText="Explore Workflows"
 			reverse
 			buttonHref="/demo">
-			<WildAnimationBox backgroundImage="/water/green-1.png">
+			<WildAnimationBox backgroundColor="bg-accent-3">
 				<DemoTranscriptClips />
 			</WildAnimationBox>
 		</TwoSplit>
@@ -152,7 +149,7 @@
 
 	<!-- STATISTICS & BENEFITS  -->
 	<div class="flex flex-col w-full mt-32 mb-32">
-		{@render section("Let us do the heavy lifting, you do the insights")}
+		{@render section("Let us do the heavy lifting, you do the insights", "Researchers love CoLoop.")}
 		<NakedCardSet set="features" />
 	</div>
 </div>
@@ -204,7 +201,7 @@
 
 	<!-- ENTERPRISE READY -->
 	{@render section("Enterprise Grade AI Designed by Insights Experts")}
-	<div class="grid grid-cols-4 grid-rows-2 gap-4 mb-16">
+	<div class="grid grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-4 mb-16">
 		<!-- {
 			icon: IconShieldLock,
 			title: "SOC II Compliant",
@@ -242,9 +239,9 @@
 			cardHeight={96}
 			colSpan={2}>
 			<div class="mask-l-from-100 mask-r-from-100 flex items-center justify-center w-full h-full">
-				<div class=" h-36 flex flex-row items-center justify-center w-full gap-4">
+				<div class=" h-1/3 flex flex-row items-center justify-center w-full gap-4 mt-18">
 					{#each ["google", "openai", "anthropic", "meta", "xai"] as logo}
-						<div class="bg-primary flex items-center justify-center h-full p-4 rounded">
+						<div class="bg-white flex items-center justify-center h-full p-4 rounded">
 							<img src={`/security/${logo}.png`} alt={logo} class="w-fit object-contain max-w-xl" />
 						</div>
 					{/each}
@@ -252,27 +249,22 @@
 			</div>
 		</Card>
 		<Card
-			title="Live Support & Training"
-			subtitle="White glove support to support adoption, maximise value and transform your team to AI first experts."
-			href="/demo"
+			title="Data Sovereignty"
+			subtitle="Your data, your rules. Host your data to be compliant in UK, EU or USA ."
 			rowSpan={2}
 			colSpan={2}>
 			<div class=" flex items-center justify-center w-full h-full">
 				<div
 					class="mask-l-from-100 mask-r-from-100 flex flex-row items-center justify-center w-full h-full gap-4 overflow-hidden">
-					{#each ["Kelly Kapoor", "Michael Scott", "Pam Beesly", "Jim Halpert", "Dwight Schrute"] as avatar, i}
+					{#each ["UK", "EU", "USA"] as logo, i}
 						<div
-							class="bg-secondary h-3/5 min-w-38 text-secondary-foreground flex flex-col items-start justify-start w-full gap-4 p-2 rounded shadow">
-							<img
-								src={`/avatars/pp-${i + 1}.png`}
-								alt={avatar}
-								class="border-primary saturate-0 object-cover w-full h-64 border-4 rounded-full shadow" />
-
-							<div class="h-1/4 flex flex-col items-start justify-center w-full gap-2">
-								<span class="text-balance w-full text-sm font-bold">Customer Support Manager</span>
-								<span class="opacity-80 w-full text-sm font-medium">
-									{avatar}
-								</span>
+							class="bg-secondary h-2/5 min-w-36 text-secondary-foreground flex flex-col items-start justify-start w-full gap-4 outline-hidden shadow mt-12 relative">
+							<div
+								class="flex flex-row items-center justify-center object-cover w-full h-full overflow-hidden rounded relative">
+								<img
+									src={`/security/${logo.toLowerCase()}.png`}
+									alt={logo}
+									class="w-full h-full object-cover" />
 							</div>
 						</div>
 					{/each}

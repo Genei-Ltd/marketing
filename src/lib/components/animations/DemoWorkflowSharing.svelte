@@ -10,6 +10,9 @@
 		IconEdit,
 		IconCrown,
 		IconBell,
+		IconEditOff,
+		IconAddressBook,
+		IconSettings,
 	} from "@tabler/icons-svelte"
 	import { onMount } from "svelte"
 	import { fly, scale } from "svelte/transition"
@@ -171,7 +174,7 @@
 		{
 			id: "admin",
 			name: "Admin",
-			icon: IconCrown,
+			icon: IconSettings,
 			color: "text-foreground",
 		},
 		{
@@ -181,21 +184,21 @@
 			color: "text-foreground",
 		},
 		{
-			id: "analyst",
-			name: "Analyst",
-			icon: IconEye,
+			id: "viewer",
+			name: "Viewer",
+			icon: IconEditOff,
 			color: "text-foreground",
 		},
 		{
-			id: "viewer",
-			name: "Viewer",
-			icon: IconLock,
+			id: "analyst",
+			name: "Analyst",
+			icon: IconEdit,
 			color: "text-foreground",
 		},
 		{
 			id: "guest",
 			name: "Guest",
-			icon: IconLock,
+			icon: IconAddressBook,
 			color: "text-foreground",
 		},
 	]
