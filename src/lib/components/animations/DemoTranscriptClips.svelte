@@ -148,7 +148,7 @@
 				await controller.delay(30)
 			}
 
-			await controller.delay(1000)
+			await controller.delay(200)
 
 			// Show generate button
 			animationState.showGenerateButton = true
@@ -343,10 +343,10 @@
 {#snippet transcriptBubble(text: string, highlightedIndices: number[])}
 	{#if text}
 		<div
-			class="backdrop-blur-sm bg-card/10 border-border max-w-2xl p-4 border rounded shadow"
+			class="card max-w-2xl p-4"
 			in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 			out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
-			<div class="text-card-foreground/70 mb-3 text-xs font-medium tracking-wide uppercase">
+			<div class="text-card-foreground text-md mb-3 font-semibold tracking-wider uppercase">
 				Interview Transcript
 			</div>
 
@@ -363,7 +363,7 @@
 						{#each text.slice(100) as char, i}
 							<span
 								class="transition-all duration-200 {highlightedIndices.includes(i + 20)
-									? 'bg-primary/50 text-primary-foreground '
+									? 'bg-primary text-primary-foreground '
 									: ''}">
 								{char}
 							</span>
@@ -421,7 +421,7 @@
 
 				<!-- Video player mockup -->
 				<div
-					class="bg-gradient-to-br from-slate-800 to-slate-900 border-slate-700/50 overflow-hidden border rounded-lg shadow-lg"
+					class="bg-gradient-to-br from-primary to-primary/80 border-border overflow-hidden border rounded-lg"
 					in:fly={{ y: 20, duration: 500, delay: 200, easing: elasticOut }}>
 					<div class="aspect-[16/9] bg-gradient-to-br from-slate-700/50 to-slate-800/50 relative">
 						<img
@@ -437,8 +437,7 @@
 										class="group-hover:scale-110 w-5 h-5 text-white transition-transform duration-300" />
 								</div>
 								<div class="space-y-1">
-									<div class="text-sm font-medium text-white">Concept A - Positive Feedback</div>
-									<div class="text-white/70 text-xs">0:08 duration</div>
+									<div class="text-md font-medium text-white">Concept A • Positive Feedback</div>
 								</div>
 							</div>
 						</div>

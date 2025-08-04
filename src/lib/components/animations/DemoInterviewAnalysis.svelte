@@ -263,47 +263,27 @@
 		{
 			text: "The tiered pricing is confusing and doesn't align with how we actually use the product. We end up paying for features we don't need while missing ones that would be valuable.",
 			sentiment: "negative" as const,
-			keyThemes: [
-				"pricing-structure",
-				"feature-alignment",
-				"value-perception",
-			],
+			keyThemes: ["pricing-structure", "feature-alignment", "value-perception"],
 		},
 		{
 			text: "Monthly costs add up quickly with multiple team members. We'd prefer annual discounts or volume pricing for larger teams like ours.",
 			sentiment: "neutral" as const,
-			keyThemes: [
-				"cost-concerns",
-				"team-scaling",
-				"pricing-flexibility",
-			],
+			keyThemes: ["cost-concerns", "team-scaling", "pricing-flexibility"],
 		},
 		{
 			text: "It's hard to predict our monthly bill since usage-based pricing fluctuates. We need more transparency and budgeting tools to manage costs effectively.",
 			sentiment: "positive" as const,
-			keyThemes: [
-				"cost-predictability",
-				"transparency",
-				"budgeting-tools",
-			],
+			keyThemes: ["cost-predictability", "transparency", "budgeting-tools"],
 		},
 		{
 			text: "The enterprise tier feels overpriced for mid-size companies. There's a big gap between professional and enterprise that doesn't serve our segment well.",
 			sentiment: "negative" as const,
-			keyThemes: [
-				"pricing-tiers",
-				"market-fit",
-				"enterprise-gap",
-			],
+			keyThemes: ["pricing-tiers", "market-fit", "enterprise-gap"],
 		},
 		{
 			text: "While the pricing is reasonable, the value becomes clearer once you see ROI. Maybe better onboarding could help justify the cost upfront for new customers.",
 			sentiment: "neutral" as const,
-			keyThemes: [
-				"value-realization",
-				"onboarding",
-				"roi-demonstration",
-			],
+			keyThemes: ["value-realization", "onboarding", "roi-demonstration"],
 		},
 	]
 
@@ -313,55 +293,35 @@
 			count: 12,
 			percentage: 35,
 			sentiment: "negative",
-			examples: [
-				"Tiered pricing confusion",
-				"Feature misalignment",
-				"Complex billing",
-			],
+			examples: ["Tiered pricing confusion", "Feature misalignment", "Complex billing"],
 		},
 		{
 			theme: "Cost Concerns",
 			count: 8,
 			percentage: 23,
 			sentiment: "negative",
-			examples: [
-				"Monthly costs add up",
-				"Team scaling expensive",
-				"Budget unpredictability",
-			],
+			examples: ["Monthly costs add up", "Team scaling expensive", "Budget unpredictability"],
 		},
 		{
 			theme: "Transparency",
 			count: 7,
 			percentage: 20,
 			sentiment: "negative",
-			examples: [
-				"Unclear billing",
-				"Hidden costs",
-				"Usage tracking",
-			],
+			examples: ["Unclear billing", "Hidden costs", "Usage tracking"],
 		},
 		{
 			theme: "Value Realization",
 			count: 5,
 			percentage: 15,
 			sentiment: "neutral",
-			examples: [
-				"ROI demonstration",
-				"Onboarding improvements",
-				"Feature education",
-			],
+			examples: ["ROI demonstration", "Onboarding improvements", "Feature education"],
 		},
 		{
 			theme: "Market Fit",
 			count: 3,
 			percentage: 7,
 			sentiment: "negative",
-			examples: [
-				"Enterprise gap",
-				"Mid-market needs",
-				"Segment mismatch",
-			],
+			examples: ["Enterprise gap", "Mid-market needs", "Segment mismatch"],
 		},
 	]
 
@@ -386,11 +346,10 @@
 			animationState.analysisRows = initialRows
 
 			// Sub-step 1a: Show table with initial delay
-			await controller.delay(800)
-			animationState.showTable = true
+			// await controller.delay(800)
 
 			// Animate question text
-			await controller.delay(1000)
+			// await controller.delay(1000)
 			const question = analysisQuestion
 			for (let i = 0; i <= question.length; i++) {
 				if (controller.signal.aborted) throw new Error("Animation cancelled")
@@ -399,6 +358,7 @@
 			}
 
 			animationState.questionComplete = true
+			animationState.showTable = true
 			await controller.delay(500)
 
 			// Sub-step 1b: Animate answers in parallel
@@ -654,31 +614,31 @@
 {#snippet questionBox(questionText: string, questionComplete: boolean)}
 	{#if questionText}
 		<div
-			class="bg-card/85 backdrop-blur-sm border-border/10 max-w-2xl p-4 mb-6 border rounded-lg shadow-sm"
+			class="card max-w-2xl p-4 mb-6"
 			in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 			out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
-			<div class="text-card-foreground mb-3 text-sm font-semibold tracking-wide text-left uppercase">
+			<div class="text-card-foreground text-md mb-3 font-semibold tracking-wide text-left uppercase">
 				Question
 			</div>
 			<div class="flex items-start gap-3">
-				<div class="bg-primary/20 text-primary flex-shrink-0 p-2 rounded-md">
+				<!-- <div class="bg-primary/20 text-primary flex-shrink-0 p-2 rounded-md">
 					<IconMessageQuestion class="size-6" />
-				</div>
+				</div> -->
 				<div class="flex-1">
-					<div class="text-card-foreground text-base font-medium leading-relaxed">
+					<div class="text-card-foreground opacity-70 text-md font-medium leading-relaxed">
 						"{questionText}"
 						{#if !questionComplete}
 							<span class="animate-pulse text-primary ml-1">●</span>
 						{/if}
 					</div>
-					{#if questionComplete}
+					<!-- {#if questionComplete}
 						<div class="flex items-center gap-2 mt-2">
 							<div class="text-primary" in:scale={{ duration: 200, easing: elasticOut }}>
 								<IconCheck class="size-3" />
 							</div>
 							<span class="text-primary text-xs font-medium">Query processed</span>
 						</div>
-					{/if}
+					{/if} -->
 				</div>
 			</div>
 		</div>
@@ -689,7 +649,7 @@
 {#snippet analysisTable(rows: AnalysisRow[])}
 	{#if animationState.showTable && rows.length > 0}
 		<div
-			class="bg-card/70 backdrop-blur-sm border-border/10 max-w-2xl overflow-hidden border rounded-lg"
+			class="card max-w-2xl overflow-hidden"
 			in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 			out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
 			<!-- Header -->
@@ -700,22 +660,22 @@
 			</div> -->
 
 			<!-- Column headers -->
-			<div class="bg-card/85 backdrop-blur-sm border-border/10 grid grid-cols-4 gap-4 px-4 py-2 border-b">
-				<div class="text-foreground/80 text-[10px] font-bold tracking-wider uppercase">Interview</div>
-				<div class="text-foreground/80 text-[10px] col-span-2 font-bold tracking-wider uppercase">Answer</div>
-				<div class="text-foreground/80 text-[10px] font-bold tracking-wider uppercase">Coded Themes</div>
+			<div class="bg-card/20 grid grid-cols-3 gap-4 px-4 py-2 border-b">
+				<div class="text-foreground/80 text-sm font-bold tracking-wider uppercase">Interview</div>
+				<div class="text-foreground/80 col-span-2 text-sm font-bold tracking-wider uppercase">Answer</div>
+				<!-- <div class="text-foreground/80 text-sm font-bold tracking-wider uppercase">Coded Themes</div> -->
 			</div>
 
 			<!-- Rows -->
 			<div class="divide-border/20 divide-y">
 				{#each rows as row, i (row.file.id)}
 					<div
-						class="hover:bg-card backdrop-blur-sm border-border/10 grid grid-cols-4 gap-4 px-4 py-3 transition-colors"
+						class=" grid grid-cols-3 gap-4 px-4 py-3"
 						in:fly={{ y: -20, duration: 400, delay: i * 100, easing: quintOut }}>
 						<!-- Participants column -->
 						<div class="space-y-2">
 							<!-- File info -->
-							<div class="flex items-center gap-2">
+							<!-- <div class="flex items-center gap-2">
 								{#if row.file.type === "video"}
 									<IconMovie class="size-4 text-foreground/50" />
 								{:else}
@@ -724,7 +684,7 @@
 								<div class="text-foreground/60 font-mono text-xs font-medium">
 									{row.file.name.replace(/\.(mp4|wav|m4a|mov)$/, "")}
 								</div>
-							</div>
+							</div> -->
 							<!-- Overlapped avatars -->
 							<div class="flex items-center -space-x-1">
 								{#each row.speakers as speaker, speakerIndex}
@@ -748,20 +708,20 @@
 								<div class="text-foreground text-xs leading-relaxed">
 									{row.answer.text.slice(0, row.answer.animatedLength)}
 									{#if animationState.answerAnimations[row.file.id]}
-										<span class="animate-pulse text-primary ml-1">|</span>
+										<span class="animate-pulse text-primary ml-1">●</span>
 									{/if}
 								</div>
-								{#if row.answer.animatedLength >= row.answer.text.length}
+								<!-- {#if row.answer.animatedLength >= row.answer.text.length}
 									<div class="flex items-center gap-1.5 mt-2">
 										<div class="size-1.5 bg-green-500 rounded-full"></div>
 										<span class="text-foreground/60 text-[10px] font-medium">Captured</span>
 									</div>
-								{/if}
+								{/if} -->
 							{/if}
 						</div>
 
 						<!-- Theme tags column -->
-						<div>
+						<!-- <div>
 							{#if row.answer.animatedLength >= row.answer.text.length}
 								<div
 									class="flex flex-wrap gap-1"
@@ -785,7 +745,7 @@
 									</span>
 								</div>
 							{/if}
-						</div>
+						</div> -->
 					</div>
 				{/each}
 			</div>
@@ -799,34 +759,34 @@
 		<div class="max-w-4xl space-y-6">
 			<!-- Text Summary -->
 			<div
-				class="bg-card/85 backdrop-blur-sm border-border/10 p-4 border rounded shadow"
+				class="card p-4"
 				in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 				out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
-				<div class="text-card-foreground/70 mb-4 text-xs font-medium tracking-wide uppercase">
+				<div class="text-card-foreground text-md mb-4 font-semibold tracking-wide uppercase">
 					Analysis Summary
 				</div>
 
 				<div class="text-card-foreground space-y-4 text-xs leading-relaxed">
-					<div class="pb-1">
+					<!-- <div class="pb-1">
 						Our analysis of <strong class="text-primary"
 							>{insights.reduce((sum, insight) => sum + insight.count, 0)} customer responses</strong> revealed
 						significant concerns about our current pricing model.
-					</div>
+					</div> -->
 					<div class="border-primary/20 pl-2 space-y-1 border-l-2">
 						<div>
 							<strong class="text-primary font-semibold">Pricing Structure issues</strong> dominated the
-							feedback at <strong class="text-primary">35%</strong> of all mentions, with customers struggling
-							with confusing tiered pricing
+							feedback at <strong class="text-primary opacity-70">35%</strong> of all mentions, with customers
+							struggling with confusing tiered pricing
 						</div>
 						<div>
 							<strong class="text-primary font-semibold">Cost Concerns</strong> at
-							<strong class="text-primary">23%</strong> focused on unpredictable monthly costs and significant
-							gaps between professional and enterprise tiers
+							<strong class="text-primary opacity-70">23%</strong> focused on unpredictable monthly costs and
+							significant gaps between professional and enterprise tiers
 						</div>
 						<div>
 							<strong class="text-primary font-semibold">Transparency</strong> issues at
-							<strong class="text-primary">20%</strong> highlighted customer requests for better value alignment
-							and improved budget predictability tools
+							<strong class="text-primary opacity-70">20%</strong> highlighted customer requests for better
+							value alignment and improved budget predictability tools
 						</div>
 					</div>
 				</div>
@@ -835,11 +795,11 @@
 			<!-- Vertical Bar Chart -->
 			{#if showChart}
 				<div
-					class="bg-card/85 backdrop-blur-sm border-border/10 p-6 border rounded shadow"
+					class="card p-4"
 					in:fly={{ y: 20, duration: 600, delay: 300, easing: elasticOut }}
 					out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
 					<!-- Chart Header -->
-					<div class="flex items-center gap-3 mb-6">
+					<!-- <div class="flex items-center gap-3 mb-6">
 						<div class="bg-primary text-primary-foreground p-2 rounded-md">
 							<IconChartBar class="size-4" />
 						</div>
@@ -847,13 +807,13 @@
 							<div class="text-card-foreground text-xs font-semibold">Theme Distribution</div>
 							<div class="text-card-foreground/60 text-xs">Customer feedback analysis breakdown</div>
 						</div>
-					</div>
+					</div> -->
 
 					<!-- Chart Area -->
-					<div class="flex items-end justify-start h-32 gap-4">
+					<div class="flex items-start justify-start h-full gap-4">
 						{#each insights as insight, i (insight.theme)}
 							<div
-								class="flex flex-col items-center gap-3 flex-1 max-w-[80px]"
+								class="flex flex-col items-center flex-1 w-full gap-3"
 								in:fly={{ y: 30, duration: 600, delay: 400 + i * 100, easing: elasticOut }}>
 								<!-- Bar -->
 								<div class="bg-muted/30 rounded-t-md relative w-full h-24 overflow-hidden">

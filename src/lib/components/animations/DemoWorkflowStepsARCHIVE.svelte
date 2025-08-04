@@ -329,10 +329,7 @@
 					// Animate highlighting with gentle stagger
 					indices.forEach((charIndex, i) => {
 						setTimeout(() => {
-							highlightedIndices = [
-								...highlightedIndices,
-								charIndex,
-							]
+							highlightedIndices = [...highlightedIndices, charIndex]
 						}, i * 80) // Slower, more elegant highlighting
 					})
 				},
@@ -347,10 +344,7 @@
 		speakerData.forEach((segment, index) => {
 			setTimeout(
 				() => {
-					speakerSegments = [
-						...speakerSegments,
-						segment,
-					]
+					speakerSegments = [...speakerSegments, segment]
 				},
 				1000 + index * interval, // Longer initial delay for sophistication
 			)

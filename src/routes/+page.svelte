@@ -20,6 +20,8 @@
 	import DemoWorkflowSharing from "$components/animations/DemoWorkflowSharing.svelte"
 	import StaticDemoIntegrations from "$components/animations/StaticDemoIntegrations.svelte"
 	import DemoTranscriptClips from "$components/animations/DemoTranscriptClips.svelte"
+	import DemoFeatureReel from "$components/animations/DemoFeatureReel.svelte"
+
 	let {
 		form,
 		data,
@@ -72,7 +74,7 @@
 				AI-powered analysis <br /> for human-powered insights
 			</h1>
 			<h2
-				class="text-background opacity-80 mt-4 font-sans text-lg uppercase font-medium leading-tight tracking-wide text-left">
+				class="text-background opacity-80 mt-4 font-sans text-lg font-medium leading-tight tracking-wide text-left uppercase">
 				Opinions in, insights out. Fast.
 			</h2>
 		</div>
@@ -109,7 +111,7 @@
 			buttonText="Explore Agents"
 			buttonHref="/demo">
 			<WildAnimationBox backgroundColor="bg-accent-4">
-				<DemoWorkflow />
+				<DemoTranscriptClips />
 			</WildAnimationBox>
 		</TwoSplit>
 		<TwoSplit
@@ -141,9 +143,9 @@
 			buttonText="Explore Workflows"
 			reverse
 			buttonHref="/demo">
-			<WildAnimationBox backgroundColor="bg-accent-3">
-				<DemoTranscriptClips />
-			</WildAnimationBox>
+			<div class="bg-accent-3 flex items-center justify-center h-full mx-auto overflow-hidden">
+				<DemoFeatureReel />
+			</div>
 		</TwoSplit>
 	</div>
 
@@ -190,7 +192,13 @@
 	<div class=" w-full">
 		<div class="max-w-7xl flex flex-col w-full gap-16 mx-auto mt-32 mb-32">
 			{@render section("What our customers say")}
-			<Testimonials testimonials={data.testimonials} />
+			{#await data.testimonials}
+				<span class="text-foreground">Loading testimonials...</span>
+			{:then testimonials}
+				<Testimonials {testimonials} />
+			{:catch}
+				<span class="text-foreground">Error loading testimonials</span>
+			{/await}
 		</div>
 	</div>
 	<!-- BOOK A CALL CTA -->
@@ -201,7 +209,7 @@
 
 	<!-- ENTERPRISE READY -->
 	{@render section("Enterprise Grade AI Designed by Insights Experts")}
-	<div class="grid grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-4 mb-16">
+	<div class="lg:grid-cols-4 grid grid-cols-2 grid-rows-2 gap-4 mb-16">
 		<!-- {
 			icon: IconShieldLock,
 			title: "SOC II Compliant",
@@ -239,9 +247,9 @@
 			cardHeight={96}
 			colSpan={2}>
 			<div class="mask-l-from-100 mask-r-from-100 flex items-center justify-center w-full h-full">
-				<div class=" h-1/3 flex flex-row items-center justify-center w-full gap-4 mt-18">
+				<div class=" h-1/3 mt-18 flex flex-row items-center justify-center w-full gap-4">
 					{#each ["google", "openai", "anthropic", "meta", "xai"] as logo}
-						<div class="bg-white flex items-center justify-center h-full p-4 rounded">
+						<div class="flex items-center justify-center h-full p-4 bg-white rounded">
 							<img src={`/security/${logo}.png`} alt={logo} class="w-fit object-contain max-w-xl" />
 						</div>
 					{/each}
@@ -256,15 +264,15 @@
 			<div class=" flex items-center justify-center w-full h-full">
 				<div
 					class="mask-l-from-100 mask-r-from-100 flex flex-row items-center justify-center w-full h-full gap-4 overflow-hidden">
-					{#each ["UK", "EU", "USA"] as logo, i}
+					{#each ["UK", "EU", "USA"] as logo}
 						<div
-							class="bg-secondary h-2/5 min-w-36 text-secondary-foreground flex flex-col items-start justify-start w-full gap-4 outline-hidden shadow mt-12 relative">
+							class="bg-secondary h-2/5 min-w-36 text-secondary-foreground outline-hidden relative flex flex-col items-start justify-start w-full gap-4 mt-12 shadow">
 							<div
-								class="flex flex-row items-center justify-center object-cover w-full h-full overflow-hidden rounded relative">
+								class="relative flex flex-row items-center justify-center object-cover w-full h-full overflow-hidden rounded">
 								<img
 									src={`/security/${logo.toLowerCase()}.png`}
 									alt={logo}
-									class="w-full h-full object-cover" />
+									class="object-cover w-full h-full" />
 							</div>
 						</div>
 					{/each}
@@ -287,7 +295,13 @@
 <div class="bg-primary text-primary-foreground min-h-200 flex flex-col items-center justify-center w-full mt-32 mb-32">
 	<!-- BLOGS CAROUSEL -->
 	<!-- {@render section("What our customers say")} -->
-	<CarouselBlogs articles={data.articles as Article[]} />
+	{#await data.articles}
+		<span class="text-foreground text-center">Loading articles...</span>
+	{:then articles}
+		<CarouselBlogs {articles} />
+	{:catch}
+		<span class="text-foreground text-center">Error loading articles</span>
+	{/await}
 </div>
 <!-- FULL WIDTH END -->
 

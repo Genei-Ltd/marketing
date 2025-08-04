@@ -12,13 +12,11 @@
 		IconPlus,
 	} from "@tabler/icons-svelte"
 
-	import { cn } from "$lib/utils.js"
-
 	// Security certifications with logos
 	const certifications = [
 		{
 			name: "SOC2 Type I",
-			image: "/security/soc-2.png",
+			image: "/security/soc-1.png",
 			link: "https://trust.coloop.ai/doc?s=9u0fwagr3r3hvjfcypwus2",
 		},
 		{
@@ -27,7 +25,7 @@
 			link: "https://trust.coloop.ai/doc?s=l6qlmwfk06wjebs23sp8qx",
 		},
 		{
-			name: "ISO 27001",
+			name: "Trust Center",
 			image: "/security/soc-2-vanta.png",
 			link: "https://trust.coloop.ai/",
 		},
@@ -111,7 +109,7 @@
 							<img
 								src={cert.image}
 								alt={cert.name}
-								class="w-fit grayscale group-hover:grayscale-0 dark:invert object-contain h-32 transition-opacity duration-200" />
+								class="w-fit grayscale group-hover:grayscale-0 group-hover:dark:invert-0 invert object-contain h-32 transition-opacity duration-200" />
 							<span
 								class=" text-card-foreground opacity-70 absolute bottom-0 left-0 p-2 px-3 font-mono text-sm font-semibold">
 								{cert.name}

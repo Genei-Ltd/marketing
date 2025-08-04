@@ -9,6 +9,7 @@
 		href?: string
 		cardHeight?: number
 		rowSpan?: number
+		children?: any
 	}
 
 	let { title, subtitle, image, colSpan = 1, href, cardHeight = 64, rowSpan = 1, children }: Props = $props()

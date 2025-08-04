@@ -7,17 +7,7 @@ import animate from "tailwindcss-animate"
 
 function addVariablesForColors({ addBase, theme }) {
 	const allColors = flattenColorPalette(theme("colors"))
-	const newVars = Object.fromEntries(
-		Object.entries(allColors).map(
-			([
-				key,
-				val,
-			]) => [
-				`--${key}`,
-				val,
-			],
-		),
-	)
+	const newVars = Object.fromEntries(Object.entries(allColors).map(([key, val]) => [`--${key}`, val]))
 
 	addBase({
 		":root": newVars,
@@ -60,9 +50,7 @@ const config = {
 	],
 
 	darkMode: ["class"],
-	content: [
-		"./src/**/*.{html,js,svelte,ts}",
-	],
+	content: ["./src/**/*.{html,js,svelte,ts}"],
 	safelist: ["dark"],
 	theme: {
 		container: {

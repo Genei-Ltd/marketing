@@ -41,23 +41,22 @@
 						? 'opacity-100'
 						: 'opacity-20'} transition-opacity  duration-500 ease-in-out"
 					onclick={() => api?.scrollTo(index)}>
-					<div
-						class="relative h-full w-full overflow-hidden rounded-xl shadow-2xl select-none aspect-[16/10]">
+					<div class="relative h-full w-full overflow-hidden rounded shadow-xl select-none aspect-[16/10]">
 						<img
 							src={post.coverImage || "/images/fallback.png"}
 							alt={post.title}
 							class="absolute inset-0 object-cover w-full h-full" />
 						<div
-							class="bg-gradient-to-t from-primary/90 via-primary/40 to-transparent absolute inset-0 opacity-50">
+							class="bg-gradient-to-t from-primary/90 via-primary/40 to-transparent absolute inset-0 z-20">
 						</div>
 						<!-- Company Logo -->
 						<div
-							class="text-primary-foreground absolute inset-0 z-20 flex items-center justify-center flex-shrink-0 p-4">
+							class="text-primary-foreground absolute inset-0 z-30 flex items-center justify-center flex-shrink-0 p-4">
 							{#if post.companyLogo}
 								<img
 									src={post.companyLogo}
 									alt={post.company || "Company"}
-									class="w-auto h-12 brightness-0 contrast-200 invert drop-shadow-[0_0_0_white] text-primary-foreground" />
+									class="w-auto h-12 brightness-0 contrast-200 dark:invert-0 invert drop-shadow-[0_0_0_white] text-primary-foreground" />
 							{:else if post.company}
 								<div class="md:text-3xl text-2xl font-bold tracking-tight lowercase">
 									{post.company}
@@ -83,8 +82,10 @@
 							<!-- Footer -->
 							<div class="flex items-end justify-between flex-shrink-0 gap-6">
 								<div class="flex-1">
-									<p class=" text-primary-foreground text-sm font-semibold">{post.company}</p>
-									<div class="flex flex-row gap-3">
+									<p class=" text-primary-foreground opacity-70 text-sm font-semibold">
+										{post.company}
+									</p>
+									<div class="flex flex-row gap-3 opacity-70">
 										{#if post.category}
 											{#each post.category as category}
 												<p class="text-primary-foreground text-sm capitalize">{category}</p>

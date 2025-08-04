@@ -3,22 +3,15 @@ import { getApprovedTestimonialsByPage } from "$lib/server/connectors/notion-tes
 
 import type { Actions } from "./$types"
 import { getDatabaseRowsByGroup, transformDBRowsToArticles } from "$lib/server/connectors/notion"
-import type { Article } from "$lib/types/articles"
 
 export const load = async () => {
 	// get testimonials from notion
-	const testimonials = await getApprovedTestimonialsByPage("/", false)
-	const ctaTestimonial = await getApprovedTestimonialsByPage("CTA", false)
 	const DATABASE_ID = "2326a3daa35a80a19eaae5366b3b2a1d"
 
-	const blogs = await getDatabaseRowsByGroup(DATABASE_ID, "landing-page")
-	const articles: Article[] = await transformDBRowsToArticles(blogs)
-
-	console.log("articles :", articles)
 	return {
-		testimonials,
-		ctaTestimonial,
-		articles,
+		testimonials: getApprovedTestimonialsByPage("/", false),
+		ctaTestimonial: getApprovedTestimonialsByPage("CTA", false),
+		articles: transformDBRowsToArticles(await getDatabaseRowsByGroup(DATABASE_ID, "landing-page")),
 	}
 }
 

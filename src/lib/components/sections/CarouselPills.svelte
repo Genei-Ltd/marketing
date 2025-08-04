@@ -45,7 +45,7 @@
 						truncate line-clamp-2 transition-all duration-300 cursor-pointer w-2/3 ease-in-out rounded-full p-2 px-4  border border-card hover:bg-card hover:text-card-foreground
 						${i === current ? "w-full bg-card text-card-foreground " : " text-card"}
 					`}>
-					<span class=" relative z-10 text-sm">{label}</span>
+					<span class=" relative z-10 text-sm font-semibold">{label}</span>
 				</div>
 			{/each}
 		</div>

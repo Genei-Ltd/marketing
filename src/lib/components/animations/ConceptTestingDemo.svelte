@@ -209,10 +209,7 @@
 			// Sub-step 1a: Show concepts grid
 			for (let i = 0; i < conceptsData.length; i++) {
 				if (controller.signal.aborted) throw new Error("Animation cancelled")
-				animationState.concepts = [
-					...animationState.concepts,
-					{ ...conceptsData[i] },
-				]
+				animationState.concepts = [...animationState.concepts, { ...conceptsData[i] }]
 				await controller.delay(200)
 			}
 

@@ -158,7 +158,7 @@
 				status: "disconnected" as const,
 			}))
 
-			await controller.delay(600)
+			await controllerw.delay(600)
 
 			// Connect all platforms with staggered timing
 			for (let i = 0; i < animationState.currentIntegrations.length; i++) {

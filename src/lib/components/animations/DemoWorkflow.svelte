@@ -153,10 +153,7 @@
 						throw new Error("Animation cancelled")
 					}
 
-					allIndices = [
-						...allIndices,
-						charIndex,
-					]
+					allIndices = [...allIndices, charIndex]
 					onUpdate([...allIndices])
 					await controller.delay(80)
 				}
@@ -183,10 +180,7 @@
 					throw new Error("Animation cancelled")
 				}
 
-				currentSegments = [
-					...currentSegments,
-					segment,
-				]
+				currentSegments = [...currentSegments, segment]
 				onUpdate([...currentSegments])
 
 				await controller.delay(interval)
@@ -317,10 +311,7 @@
 			})()
 
 			// Wait for both to complete
-			await Promise.all([
-				spanishAnimation,
-				englishAnimation,
-			])
+			await Promise.all([spanishAnimation, englishAnimation])
 		} catch (err) {
 			// Graceful fallback
 			animationState.originalText = spanishText
@@ -608,7 +599,7 @@
 	<div
 		in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
 		out:fly={{ y: -20, duration: 500, easing: cubicInOut }}
-		class="bg-card/60 backdrop-blur-sm rounded-xl border-border/20 max-w-2xl p-4 mb-3 border rounded-tl shadow-sm">
+		class="card max-w-2xl p-4 mb-3">
 		<div class="text-card-foreground opacity-70 mb-2 text-xs font-medium tracking-wide uppercase">
 			{config.header}
 		</div>

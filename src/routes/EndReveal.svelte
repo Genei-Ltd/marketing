@@ -2,7 +2,7 @@
 	import { Button } from "$components/ui/button"
 </script>
 
-<div class="sticky inset-0 bottom-0 h-[800px] w-screen">
+<div class="sticky inset-0 bottom-0 h-[500px] w-screen">
 	<div class="flex items-center justify-center w-full h-full">
 		<img src="/wild/reveal.png" alt="Footer" class="object-cover w-full h-full" />
 		<!-- <div class="from-background via-background/80 bg-gradient-to-b to-transparent h-36 absolute inset-0"></div> -->

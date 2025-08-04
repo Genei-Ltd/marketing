@@ -20,19 +20,22 @@
 <!-- <ModeWatcher /> -->
 
 <div class="bg-background relative flex flex-col min-h-screen">
-	<div class="z-20 bg-transparent">
+	<div class=" z-20 bg-transparent">
 		<div class="bg-background z-20">
 			<Header />
-			<main class="flex-1">
+			<main class=" flex-1">
 				{@render children?.()}
 			</main>
-			<Footer />
+			<div class="snap-end">
+				<Footer />
+			</div>
 		</div>
 
 		<div class=" h-0">
 			<div class="from-background to-background/0 bg-gradient-to-b h-32"></div>
 		</div>
 	</div>
+
 	{#if page.url.pathname === "/"}
 		<EndReveal />
 	{/if}
