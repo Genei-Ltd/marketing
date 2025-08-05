@@ -33,7 +33,8 @@
 
 <div class=" w-full">
 	<div class="text-muted-foreground w-full mb-8 text-sm text-center">
-		<div class="flex flex-row items-center justify-center w-full max-w-3xl gap-4 py-2 mx-auto">
+		<div
+			class="lg:flex-row lg:flex grid items-center justify-center w-full max-w-3xl grid-cols-2 gap-4 py-2 mx-auto">
 			{#each pillLabels as label, i (i)}
 				<div
 					onclick={() => api?.scrollTo(i)}
@@ -42,8 +43,8 @@
 					tabindex={i === current ? 0 : -1}
 					aria-current={i === current}
 					class={`
-						truncate line-clamp-2 transition-all duration-300 cursor-pointer w-2/3 ease-in-out rounded-full p-2 px-4  border border-card hover:bg-card hover:text-card-foreground
-						${i === current ? "w-full bg-card text-card-foreground " : " text-card"}
+						truncate line-clamp-2 transition-all duration-300 cursor-pointer lg:w-2/3 w-full ease-in-out rounded-full p-1.75 px-3  border border-card hover:bg-card/20 hover:text-card
+						${i === current ? "lg:w-full w-2/3 bg-card text-card-foreground " : " text-card"}
 					`}>
 					<span class=" relative z-10 text-sm font-semibold">{label}</span>
 				</div>

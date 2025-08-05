@@ -17,7 +17,7 @@
 	--foreground: hsl(60deg, 6.25%, 6.27%); /* #dark-bg */
 	--card-foreground: hsl(60deg, 1.37%, 14.3%); /* #dark-card */
 	--card: hsl(60deg, 9.09%, 93.5%); /* #light-card */
-	--popover: oklch(0.408 0 265.755);
+	--popover: oklch(1 0 0);
 	--popover-foreground: oklch(0.984 0 247.858);
 	--primary: hsl(60deg, 1.37%, 14.3%);
 	--primary-foreground: hsl(60deg, 9.09%, 93.5%);
@@ -123,7 +123,7 @@
 	--text-2xl: 2.25rem;
 	--text-3xl: 3rem;
 	--text-3xl--line-height: calc(2.25 / 1.875);
-	--text-4xl: 2.25rem;
+	--text-4xl: 4rem;
 	--text-4xl--line-height: calc(2.5 / 2.25);
 	--text-huge: 5rem;
 	--spacing-xs: 0.4375rem;

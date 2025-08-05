@@ -28,18 +28,15 @@
 		buttonVariant = "link",
 		showButton = true,
 		children,
-		clearBackground = [
-			false,
-			false,
-		],
+		clearBackground = [false, false],
 		reverse = false,
 	}: TwoSideProps = $props()
 </script>
 
-<div class="md:h-156 md:flex-row md:reverse flex flex-col w-full overflow-hidden rounded">
+<div class="lg:h-156 lg:flex-row lg:reverse flex flex-col w-full overflow-hidden rounded">
 	<!-- Left Side - Dark Background -->
 	<div
-		class=" text-card-foreground px-xl py-xl flex flex-col justify-center md:max-w-1/2 w-full aspect-square {clearBackground[0]
+		class=" text-card-foreground p-lg xl:px-xl xl:py-xl flex flex-col justify-center lg:max-w-1/2 w-full aspect-square {clearBackground[0]
 			? 'bg-transparent'
 			: 'bg-card'} {reverse ? 'order-2' : 'order-1'}">
 		<div class="space-y-sm">
@@ -74,7 +71,7 @@
 
 	<!-- Right Side - Light Background with Custom Content -->
 	<div
-		class="bg-accent-1 flex items-center justify-center md:max-w-1/2 w-full aspect-square {clearBackground[1]
+		class="bg-accent-1 flex items-center justify-center lg:max-w-1/2 w-full aspect-square {clearBackground[1]
 			? 'bg-transparent'
 			: 'bg-accent-1'} {reverse ? 'order-1' : 'order-2'}">
 		{@render children?.()}

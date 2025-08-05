@@ -26,7 +26,7 @@
 	})
 </script>
 
-<div class="md:py-24 bg-primary w-full py-16">
+<div class="md:py-24 w-full py-16">
 	<Carousel.Root
 		opts={{
 			loop: true,
@@ -85,7 +85,7 @@
 									<p class=" text-primary-foreground opacity-70 text-sm font-semibold">
 										{post.company}
 									</p>
-									<div class="flex flex-row gap-3 opacity-70">
+									<div class="opacity-70 flex flex-row gap-3">
 										{#if post.category}
 											{#each post.category as category}
 												<p class="text-primary-foreground text-sm capitalize">{category}</p>

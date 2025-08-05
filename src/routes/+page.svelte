@@ -4,7 +4,7 @@
 	import WildAnimationBox from "./WildAnimationBox.svelte"
 
 	import BlogEndArtCard from "./../lib/components/blocks/BlogEndArtCard.svelte"
-	import DemoWorkflow from "../lib/components/animations/DemoWorkflow.svelte"
+
 	import TwoSplit from "$components/layouts/TwoSplit.svelte"
 	import type { Testimonial } from "$lib/server/connectors/notion-testimonials"
 
@@ -30,16 +30,21 @@
 </script>
 
 {#snippet section(title: string, subtitle?: string)}
-	{#if subtitle}
-		<div class="flex flex-col items-center justify-center">
-			<h2 class="text-balance md:w-1/2 w-full mx-auto mb-4 font-serif text-4xl text-center">{title}</h2>
-			<span
-				class="text-balance opacity-80 text-md md:w-1/2 w-full mx-auto mb-16 font-sans tracking-wide text-center"
-				>{subtitle}</span>
-		</div>
-	{:else}
-		<h2 class="text-balance md:w-1/2 w-full mx-auto mb-16 font-serif text-4xl text-center">{title}</h2>
-	{/if}
+	<div class="flex flex-col items-center justify-center w-full">
+		{#if subtitle}
+			<div class="flex flex-col items-center justify-center w-full">
+				<h2 class="text-balance lg:text-3xl sm:text-2xl w-full mx-auto mb-4 font-serif text-xl text-center">
+					{title}
+				</h2>
+				<span class="text-balance opacity-80 text-md w-2/3 mx-auto mb-16 font-sans tracking-wide text-center"
+					>{subtitle}</span>
+			</div>
+		{:else}
+			<h2 class="text-balance lg:text-3xl sm:text-2xl w-full mx-auto mb-16 font-serif text-xl text-center">
+				{title}
+			</h2>
+		{/if}
+	</div>
 {/snippet}
 
 <!-- Hero image -->
@@ -60,28 +65,28 @@
 	<div
 		class="pb-96 bg-gradient-to-t from-primary/90 via-primary/0 to-transparent opacity-60 absolute bottom-0 z-10 w-full h-screen">
 	</div>
-	<div
+	<!-- <div
 		class="px-auto absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-32">
 		<div class="h-fit relative top-0 z-10 flex items-center justify-center object-cover w-1/4 mt-16 opacity-100">
 			<DemoWorkflow />
 		</div>
-	</div>
+	</div> -->
 	<div
-		class="max-w-7xl absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-auto">
+		class="max-w-7xl absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full px-4 py-16 mx-auto">
 		<div class="flex flex-col items-start justify-end h-full">
 			<h1
-				class="text-huge text-background text-balance drop-shadow-lg font-serif leading-tight tracking-wide text-left capitalize">
-				AI-powered analysis <br /> for human-powered insights
+				class="xl:text-huge text-background text-balance drop-shadow-lg sm:text-3xl md:text-4xl font-serif text-2xl leading-tight tracking-wide text-left capitalize">
+				AI-powered analysis for human-powered insights
 			</h1>
 			<h2
-				class="text-background opacity-80 mt-4 font-sans text-lg font-medium leading-tight tracking-wide text-left uppercase">
+				class="text-background opacity-80 text-md md:text-lg mt-4 font-sans font-medium leading-tight tracking-wide text-left uppercase">
 				Opinions in, insights out. Fast.
 			</h2>
 		</div>
 	</div>
 </div>
 
-<div class="max-w-7xl relative flex flex-col items-center justify-center px-4 mx-auto">
+<div class="max-w-7xl relative flex flex-col items-center justify-center px-4 mx-auto overflow-hidden">
 	<!-- CUSTOMER LOGOS  -->
 	<div class="w-full mt-32 mb-16">
 		<h2 class="font-serif text-2xl text-center">Trusted by the brands you trust</h2>
@@ -91,7 +96,7 @@
 					<img
 						src={`/customer-logos/${index + 1}.png`}
 						alt="Logo"
-						class="opacity-80 brightness-200 contrast-0 grayscale dark:brightness-0 dark:contrast-0 dark:invert-0 object-contain w-24" />
+						class="opacity-80 min-w-18 brightness-200 contrast-0 grayscale dark:brightness-0 dark:contrast-0 dark:invert-0 object-contain w-24" />
 				</div>
 			{/each}
 		</div>
@@ -106,7 +111,7 @@
 	<div class="flex flex-col w-full gap-32 mt-32 mb-32">
 		<TwoSplit
 			label="Analysis Agents"
-			heading="Specialised for Qualitative"
+			heading="Specialized for Insights"
 			description="Delegate complex tasks in natural language to domain-specific agents that can count, search, summarise and cite."
 			buttonText="Explore Agents"
 			buttonHref="/demo">
@@ -115,11 +120,21 @@
 			</WildAnimationBox>
 		</TwoSplit>
 		<TwoSplit
+			label="Workflows"
+			heading="Streamline Your Analysis"
+			description="Precise purpose built workflows for transcription, translation, content analysis, clip reels and more."
+			buttonText="Explore Workflows"
+			reverse
+			buttonHref="/demo">
+			<div class="bg-accent-3 flex items-center justify-center h-full mx-auto overflow-hidden">
+				<DemoFeatureReel />
+			</div>
+		</TwoSplit>
+		<TwoSplit
 			label="Integrations"
 			heading="Streamlined Analysis in a single tool"
 			description="Upload your data from a growing range of file formats, languages and 3rd party tools to create a single unified source of truth."
 			buttonText="Explore Integrations"
-			reverse
 			buttonHref="/demo">
 			<WildAnimationBox backgroundColor="bg-accent-2">
 				<StaticDemoIntegrations />
@@ -130,25 +145,35 @@
 			heading="Secure Access Controlled Workspaces"
 			description="Combine your research material in secure projects with all of the context."
 			buttonText="Explore Projects"
+			reverse
 			buttonHref="/demo"
 			clearBackground={[false, true]}>
 			<WildAnimationBox backgroundColor="bg-accent-1">
 				<DemoWorkflowSharing />
 			</WildAnimationBox>
 		</TwoSplit>
-		<TwoSplit
-			label="Workflows"
-			heading="Streamline Your Work"
-			description="Precise purpose built workflows for transcription, translation, content analysis, clip reels and more."
-			buttonText="Explore Workflows"
-			reverse
-			buttonHref="/demo">
-			<div class="bg-accent-3 flex items-center justify-center h-full mx-auto overflow-hidden">
-				<DemoFeatureReel />
-			</div>
-		</TwoSplit>
 	</div>
+</div>
+<div class="bg-primary text-primary-foreground flex flex-col items-center justify-center w-full px-4 py-32">
+	<!-- TESTIMONIAL HIGHLIGHT  -->
+	<div class="max-w-7xl lg:grid-cols-2 lg:gap-0 grid items-center justify-center grid-cols-1 gap-16 mx-auto">
+		<div class=" flex items-center justify-center">
+			<img src="/images/old-man.png" alt="old man" class="aspect-square object-cover w-full h-full rounded" />
+		</div>
+		<div class=" xl:p-xl lg:p-lg p-sm flex flex-col items-start justify-center flex-1">
+			<blockquote class="text-primary-foreground text-balance mb-8 font-serif text-xl">
+				"When it comes to AI and technology, it’s all about learning by doing. You won’t figure everything out
+				right away, but the more you engage with it, the more opportunities you’ll see."
+			</blockquote>
+			<div class="text-primary-foreground font-sans text-sm">
+				<span class="text-primary-foreground block font-semibold">Tommi Laitio</span>
+				<span class="block">Former Executive Director, Culture and Leisure, City of Helsinki</span>
+			</div>
+		</div>
+	</div>
+</div>
 
+<div class="max-w-7xl relative flex flex-col items-center justify-center px-4 mx-auto overflow-hidden">
 	<!-- STATISTICS & BENEFITS  -->
 	<div class="flex flex-col w-full mt-32 mb-32">
 		{@render section("Let us do the heavy lifting, you do the insights", "Researchers love CoLoop.")}
@@ -160,26 +185,10 @@
 <!-- FULL WIDTH START -->
 
 <div class="bg-primary text-primary-foreground flex flex-col items-center justify-center w-full px-4 py-32">
-	<!-- TESTIMONIALS  -->
-	<div class="max-w-7xl lg:grid-cols-2 lg:gap-0 grid items-center justify-center grid-cols-1 gap-16 mx-auto">
-		<div class=" flex items-center justify-center">
-			<img src="/images/old-man.png" alt="old man" class="aspect-square object-cover w-full h-full rounded" />
-		</div>
-		<div class=" 5xl:pl-32 flex flex-col items-start justify-center flex-1 pl-16">
-			<blockquote class="text-primary-foreground text-balance mb-8 font-serif text-xl">
-				"When it comes to AI and technology, it’s all about learning by doing. You won’t figure everything out
-				right away, but the more you engage with it, the more opportunities you’ll see."
-			</blockquote>
-			<div class="text-primary-foreground font-sans text-sm">
-				<span class="text-primary-foreground block font-semibold">Tommi Laitio</span>
-				<span class="block">Former Executive Director, Culture and Leisure, City of Helsinki</span>
-			</div>
-		</div>
-	</div>
-
 	<!-- SOLUTIONS -->
-	<div class=" min-h-200 flex flex-col items-center justify-center w-full mt-32">
-		{@render section("There's a CoLoop for everyone")}
+	<div class=" min-h-200 flex flex-col items-center justify-center w-full mb-16">
+		<h4 class="text-balance text-md mb-4 font-medium tracking-wide text-center">From researchers to analysts</h4>
+		{@render section("There's a CoLoop for every team")}
 		<CarouselPills />
 	</div>
 </div>
@@ -187,10 +196,10 @@
 <!-- FULL WIDTH END -->
 <!-- MAX 7XL START -->
 
-<div class="max-w-7xl relative flex flex-col items-center justify-center px-4 mx-auto">
+<div class="max-w-7xl relative flex flex-col items-center justify-center h-full px-4 mx-auto">
 	<!-- Testimonials -->
-	<div class=" w-full">
-		<div class="max-w-7xl flex flex-col w-full gap-16 mx-auto mt-32 mb-32">
+	<div class="min-h-max w-full h-full overflow-hidden">
+		<div class="max-w-7xl min-h-max flex flex-col w-full h-full gap-16 mx-auto mt-32 mb-32">
 			{@render section("What our customers say")}
 			{#await data.testimonials}
 				<span class="text-foreground">Loading testimonials...</span>
@@ -202,13 +211,16 @@
 		</div>
 	</div>
 	<!-- BOOK A CALL CTA -->
-	<div class="w-full mt-64 mb-64">
-		{@render section("This is the future of research")}
+	<div class="w-full mt-16 mb-64">
+		{@render section(
+			"This is the future of research",
+			"Book a personalized demo to discover how CoLoop can accelerate your research and insights workflow.",
+		)}
 		<EmailSubmit {form} placeholder="Enter your email address" buttonText="Get a demo" />
 	</div>
 
 	<!-- ENTERPRISE READY -->
-	{@render section("Enterprise Grade AI Designed by Insights Experts")}
+	{@render section("Enterprise Grade AI", "Designed by Insights Experts, for Insights Experts")}
 	<div class="lg:grid-cols-4 grid grid-cols-2 grid-rows-2 gap-4 mb-16">
 		<!-- {
 			icon: IconShieldLock,
@@ -259,6 +271,7 @@
 		<Card
 			title="Data Sovereignty"
 			subtitle="Your data, your rules. Host your data to be compliant in UK, EU or USA ."
+			cardHeight={96}
 			rowSpan={2}
 			colSpan={2}>
 			<div class=" flex items-center justify-center w-full h-full">
@@ -292,7 +305,7 @@
 <!-- MAX 7XL END -->
 <!-- FULL WIDTH START -->
 
-<div class="bg-primary text-primary-foreground min-h-200 flex flex-col items-center justify-center w-full mt-32 mb-32">
+<div class="text-primary-foreground min-h-200 bg-primary flex flex-col items-center justify-center w-full mt-32 mb-32">
 	<!-- BLOGS CAROUSEL -->
 	<!-- {@render section("What our customers say")} -->
 	{#await data.articles}
@@ -311,13 +324,20 @@
 		{@render section("Transformation Your Team to AI Native ")}
 		<Timeline></Timeline>
 	</div>
+
 	<!-- FINAL GET STARTED -->
-	<div class="w-full mt-32 mb-32">
-		{@render section(
-			"Get Started with CoLoop Now",
-			"Book a personalized demo to discover how CoLoop can accelerate your research and insights workflow.",
-		)}
-		<EmailSubmit {form} placeholder="Enter your email address" buttonText="Get a demo" />
+
+	<div
+		class="bg-accent-1 text-primary-foreground relative flex flex-col items-center justify-center w-full px-4 py-32 mt-32 mb-32 overflow-hidden rounded shadow">
+		<div class="relative z-20">
+			{@render section(
+				"Get Started with CoLoop Now",
+				"Book a personalized demo to discover how CoLoop can accelerate your research and insights workflow.",
+			)}
+			<EmailSubmit {form} placeholder="Enter your email address" buttonText="Get a demo" />
+		</div>
+		<img src="/wild/super-car.png" alt="Get Started" class="absolute inset-0 object-cover w-full h-full" />
+		<div class="bg-gradient-to-t from-primary/90 via-primary/70 to-transparent absolute z-10 w-full h-full"></div>
 	</div>
 
 	<!-- PRODUCTS  -->
@@ -363,7 +383,7 @@
 		<EmailSubmit {form} placeholder="Enter your email address" buttonText="Get a demo" />
 	</div>
 	<!-- BLOG ENDER -->
-	<div class="w-full mb-32">
+	<div class="w-full px-4 mb-32">
 		<BlogEndArtCard />
 	</div>
 </div>

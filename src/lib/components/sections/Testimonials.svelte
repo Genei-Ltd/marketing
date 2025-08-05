@@ -21,7 +21,7 @@
 </script>
 
 <!-- Testimonials Grid -->
-<div class="flex flex-col gap-4">
+<div class=" flex flex-col h-full gap-4">
 	<!-- Top Row: 2 Larger Testimonials -->
 	<div class="lg:grid-cols-2 grid grid-cols-1 gap-4">
 		{#each featuredTestimonials as testimonial (testimonial.id)}
@@ -32,7 +32,7 @@
 	</div>
 
 	<!-- Bottom Row: 3 Smaller Testimonials -->
-	<div class="md:grid-cols-2 lg:grid-cols-3 max-h-64 grid grid-cols-1 gap-4 mb-16">
+	<div class="md:grid-cols-2 lg:grid-cols-3 max-h-64 grid h-full grid-cols-1 gap-4 mb-16 overflow-hidden">
 		{#each regularTestimonials as testimonial (testimonial.id)}
 			<div class="h-full">
 				<TestimonialCard {testimonial} class="max-h-64 p-8 text-base" size="sm" />

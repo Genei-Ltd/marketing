@@ -4,24 +4,28 @@
 
 	const featuresLists: string[][] = [
 		[
-			"AI-Powered Analysis",
-			"Real-time Processing",
-			"Team Collaboration",
-			"Enterprise Security",
-			"Infinitely Scalable",
-			"Advanced Analytics",
-			"10x Faster Research",
-			"Global Coverage",
-		],
-		[
-			"AI-Powered Analysis",
-			"Real-time Processing",
-			"Open Ends",
-			"Data Sovereignty",
+			"Code Open Ends",
+			"Create Clip Reels",
 			"Translation",
 			"Transcription",
-			"50+ Languages",
-			"Multi Workspace",
+			"Secure Collaboration",
+			"Concept Testing",
+			"Content Analysis",
+			"Knowledge Bases",
+			"Segmentation",
+			"Consolidate Sources",
+		],
+		[
+			"Segmentation",
+			"Create Clip Reels",
+			"Transcription",
+			"Concept Testing",
+			"Translation",
+			"Content Analysis",
+			"Knowledge Bases",
+			"Code Open Ends",
+			"Secure Collaboration",
+			"Consolidate Sources",
 		],
 	]
 </script>
@@ -33,7 +37,7 @@
 			"flex flex-col items-center justify-center  text-center",
 			"hover:bg-card/80 transition-colors duration-200",
 		)}>
-		<h3 class="text-lg font-semibold text-foreground">{item}</h3>
+		<h3 class="text-foreground text-lg font-semibold">{item}</h3>
 	</div>
 {/snippet}
 

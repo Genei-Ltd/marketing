@@ -59,7 +59,7 @@
 
 <div class="relative w-full mx-auto">
 	<!-- Main Content Grid -->
-	<div class="lg:grid-cols-2 lg:grid flex flex-col-reverse items-start grid-cols-1 gap-16">
+	<div class="lg:grid-cols-2 lg:grid flex flex-col-reverse items-start justify-between h-full grid-cols-1 gap-16">
 		<!-- Left Column - Content -->
 		<div class=" flex flex-col items-start justify-between h-full space-y-8">
 			<!-- <div class="flex flex-row items-center justify-start w-full gap-4 mb-12">
@@ -99,24 +99,30 @@
 			</div>
 		</div>
 
-		<!-- Right Column - Certifications Grid -->
-		<div class="lg:justify-end lg:w-full flex items-center justify-center">
-			<div class="grid grid-cols-2 gap-4">
-				{#each certifications as cert}
-					<a href={cert.link} target="_blank" rel="noopener noreferrer" class="">
-						<div
-							class=" bg-card group hover:shadow-lg relative flex items-center justify-center w-64 h-64 p-4 transition-all duration-200 rounded">
-							<img
-								src={cert.image}
-								alt={cert.name}
-								class="w-fit grayscale group-hover:grayscale-0 group-hover:dark:invert-0 invert object-contain h-32 transition-opacity duration-200" />
-							<span
-								class=" text-card-foreground opacity-70 absolute bottom-0 left-0 p-2 px-3 font-mono text-sm font-semibold">
-								{cert.name}
-							</span>
-						</div>
-					</a>
-				{/each}
+		<div class="flex flex-col items-end justify-end w-full h-full">
+			<!-- Right Column - Certifications Grid -->
+			<div class="lg:self-end w-fit flex items-end self-start justify-end h-full">
+				<div class="lg:grid-cols-2 lg:gap-4 grid items-end justify-end w-full h-full grid-cols-4">
+					{#each certifications as cert}
+						<a href={cert.link} target="_blank" rel="noopener noreferrer" class="">
+							<div
+								class=" lg:bg-card group hover:shadow lg:w-full min-h-32 max-h-32 lg:max-h-68 lg:p-4 lg:h-96 relative flex items-center justify-center w-full h-32 transition-all duration-200 rounded">
+								<img
+									src={cert.image}
+									alt={cert.name}
+									loading="lazy"
+									decoding="async"
+									fetchpriority="low"
+									class:invert={cert.name === "GDPR"}
+									class="w-fit grayscale group-hover:grayscale-0 contrast-200 max-h-32 object-contain h-32 transition-opacity duration-200" />
+								<span
+									class="lg:absolute text-card-foreground opacity-70 lg:block bottom-0 left-0 hidden p-2 px-3 font-mono text-sm font-semibold">
+									{cert.name}
+								</span>
+							</div>
+						</a>
+					{/each}
+				</div>
 			</div>
 		</div>
 	</div>

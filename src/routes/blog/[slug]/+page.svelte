@@ -57,4 +57,6 @@
 		</div>
 	</article>
 </div>
-<BlogEndArtCard />
+<div class="w-full px-4 mx-auto">
+	<BlogEndArtCard />
+</div>
