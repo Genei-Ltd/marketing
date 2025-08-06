@@ -1,4 +1,4 @@
-<div class="max-w-7xl relative flex flex-col items-center justify-center mx-auto">
+<div class="max-w-6xl relative flex flex-col items-center justify-center mx-auto">
 	{@render section("What our customers say")}
 	<div class="grid w-full h-full grid-cols-3 gap-16 py-16 mb-32 rounded">
 		<div class="bg-accent-2 max-h-96 col-span-2 p-16 rounded">

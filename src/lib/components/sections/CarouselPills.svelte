@@ -57,11 +57,11 @@
 			align: "center",
 		}}
 		setApi={(emblaApi) => (api = emblaApi)}
-		class="max-w-7xl w-full mx-auto transition-all duration-500 ease-in-out">
+		class="max-w-6xl w-full mx-auto transition-all duration-500 ease-in-out">
 		<Carousel.Content class="flex">
 			<!-- Card 1: In-House Strategy Teams -->
 			<Carousel.Item
-				class="flex w-full max-w-7xl mx-auto {0 === current
+				class="flex w-full max-w-6xl mx-auto {0 === current
 					? 'opacity-100'
 					: 'opacity-20'} transition-opacity  duration-300 ease-in-out"
 				onclick={() => api?.scrollTo(0)}>
@@ -81,7 +81,7 @@
 
 			<!-- Card 2: Concept & Stimulus Testing -->
 			<Carousel.Item
-				class="flex w-full max-w-7xl mx-auto {1 === current
+				class="flex w-full max-w-6xl mx-auto {1 === current
 					? 'opacity-100'
 					: 'opacity-20'} transition-opacity  duration-300 ease-in-out"
 				onclick={() => api?.scrollTo(1)}>
@@ -101,7 +101,7 @@
 
 			<!-- Card 3: Survey Analysis -->
 			<Carousel.Item
-				class="flex w-full max-w-7xl mx-auto {2 === current
+				class="flex w-full max-w-6xl mx-auto {2 === current
 					? 'opacity-100'
 					: 'opacity-20'} transition-opacity  duration-300 ease-in-out"
 				onclick={() => api?.scrollTo(2)}>
@@ -121,7 +121,7 @@
 
 			<!-- Card 4: Research Agencies -->
 			<Carousel.Item
-				class="flex w-full max-w-7xl mx-auto {3 === current
+				class="flex w-full max-w-6xl mx-auto {3 === current
 					? 'opacity-100'
 					: 'opacity-20'} transition-opacity  duration-300 ease-in-out"
 				onclick={() => api?.scrollTo(3)}>

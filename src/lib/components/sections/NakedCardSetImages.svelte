@@ -1,7 +1,7 @@
 <script lang="ts">
 </script>
 
-<div class="text-foreground max-w-7xl w-full">
+<div class="text-foreground max-w-6xl w-full">
 	<div class="flex flex-row items-start justify-center w-full h-full gap-4 mx-auto">
 		<div class=" text-foreground bg-card flex flex-col items-start flex-1 w-full h-full p-4 text-left">
 			<div class=" flex flex-row items-end justify-start w-full h-full gap-4 mb-8">

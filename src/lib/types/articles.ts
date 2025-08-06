@@ -12,6 +12,7 @@ export type Article = {
 	tags?: string[]
 	group?: string[]
 	publishedDate?: string
+	readingTime?: number
 	seoDescription?: string
 	featured?: boolean
 	status?: string

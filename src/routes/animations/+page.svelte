@@ -12,7 +12,7 @@
 	<title>Animation Demos</title>
 </svelte:head>
 
-<div class="max-w-7xl p-8 mx-auto mt-32 space-y-16">
+<div class="max-w-6xl p-8 mx-auto mt-32 space-y-16">
 	<header class="mb-12 text-center">
 		<h1 class="text-foreground mb-4 text-4xl font-bold">Animation Demos</h1>
 		<p class="text-muted-foreground">Collection of all available animation components</p>

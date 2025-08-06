@@ -46,28 +46,28 @@
 <!-- Blog Title Section -->
 {#if isBlogHome && !isBlogPostPage}
 	<!-- Fixed height wrapper to prevent layout shift -->
-	<div class="mx-auto mt-16 min-h-[225px]">
+	<div class="mx-auto mt-14 min-h-[225px]">
 		<!-- Animated primary background container -->
 		<div
 			class="bg-primary text-primary-foreground flex flex-col gap-4 py-8"
 			in:slide={{ duration: 400, easing: cubicInOut, axis: "y", delay: 100 }}>
 			<div
-				class="max-w-7xl w-full px-4 mx-auto my-12"
+				class="max-w-6xl lg:px-10 w-full px-6 mx-auto my-12"
 				in:fly={{ y: -30, duration: 400, easing: cubicInOut, delay: 250 }}>
-				<h1 class="mb-2 font-serif font-medium capitalize">All articles</h1>
-				<p class="opacity-60 text-balance text-base">Latest articles and insights from our team</p>
+				<h1 class="mb-2 font-serif text-2xl font-light capitalize">All articles</h1>
+				<p class="opacity-60 text-balance text-md">Latest articles and insights from our team</p>
 			</div>
 		</div>
 	</div>
 {:else if isCategoryPage && categoryDisplay}
 	<!-- Fixed height container to prevent layout shift -->
-	<div class="max-w-7xl relative px-4 py-8 mx-auto mt-16 min-h-[225px] transition-all duration-500">
+	<div class="max-w-6xl lg:px-10 px-6 relative py-8 mx-auto mt-16 min-h-[225px] transition-all duration-500">
 		{#key page.url.pathname}
 			<div
 				in:fly={{ x: -30, duration: 400, easing: cubicInOut, delay: 250 }}
 				class="mt-12 transition-all duration-500">
-				<h1 class="text-foreground mb-2 font-serif font-medium capitalize">{categoryDisplay}</h1>
-				<p class="text-foreground opacity-60 text-balance text-base">
+				<h1 class="text-foreground mb-2 font-serif text-2xl font-light capitalize">{categoryDisplay}</h1>
+				<p class="text-foreground opacity-60 text-balance text-md">
 					Latest {categoryDisplay} articles and insights from our team
 				</p>
 			</div>
@@ -77,7 +77,7 @@
 
 <!-- Blog Navigation -->
 {#if !isBlogPostPage}
-	<div class="max-w-7xl px-4 mx-auto">
+	<div class="max-w-6xl lg:px-10 px-6 mx-auto">
 		{#if data?.categories}
 			{#await data.categories}
 				<div class="flex flex-row gap-4 mb-8">
@@ -106,8 +106,8 @@
 <!-- Blog content -->
 {@render children?.()}
 
-<div class="w-full px-4 mx-auto mt-32 mb-32">
-	<div class="max-w-7xl w-full mx-auto">
+<div class="lg:px-10 w-full px-6 mx-auto mt-32 mb-32">
+	<div class="max-w-6xl w-full mx-auto">
 		<BlogEndArtCard />
 	</div>
 </div>

@@ -1,7 +1,7 @@
 <script lang="ts">
 </script>
 
-<div class="max-w-7xl w-full mx-auto">
+<div class="max-w-6xl w-full mx-auto">
 	<!-- Desktop Timeline -->
 	<div class="md:flex relative flex-row items-start hidden w-full">
 		<!-- Full width horizontal line with arrow -->

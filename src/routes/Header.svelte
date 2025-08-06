@@ -104,8 +104,9 @@
 	]
 </script>
 
-<div class=" px-4 fixed left-0 right-0 top-0 z-[99] w-full bg-card/50 backdrop-blur-sm transition-all duration-300">
-	<div class="max-w-7xl h-14 flex items-center justify-between mx-auto font-sans">
+<div
+	class=" px-6 fixed left-0 right-0 top-0 z-[99] bg-card/30 shadow-sm w-full border-b border-border/50 backdrop-blur-md transition-all duration-300">
+	<div class="h-14 flex items-center justify-between max-w-6xl mx-auto font-sans">
 		<!-- Logo -->
 		<div class="flex items-center justify-start">
 			<a href="/" class="flex items-center gap-2">
@@ -166,8 +167,7 @@
 			<NavigationMenu.Root>
 				<NavigationMenu.List>
 					<NavigationMenu.Item>
-						<NavigationMenu.Trigger class="hover:bg-transparent font-medium bg-transparent"
-							>Product</NavigationMenu.Trigger>
+						<NavigationMenu.Trigger class="">Product</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
 							<ul class=" grid w-fit grid-cols-[200px_240px] grid-rows-3 gap-2 p-4">
 								<li class="max-h-min grow-0 row-span-3">

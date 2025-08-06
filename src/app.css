@@ -12,12 +12,12 @@
 
 :root {
 	--font-sans: "Work Sans", theme(fontFamily.sans);
-	--font-serif: "Libre Caslon Text", theme(fontFamily.serif);
+	--font-serif: "Georgia", theme(fontFamily.serif);
 	--background: hsl(60deg, 15.8%, 96.3%);
 	--foreground: hsl(60deg, 6.25%, 6.27%); /* #dark-bg */
 	--card-foreground: hsl(60deg, 1.37%, 14.3%); /* #dark-card */
 	--card: hsl(60deg, 9.09%, 93.5%); /* #light-card */
-	--popover: oklch(1 0 0 / 61%);
+	--popover: oklch(0.984 0.003 247.858);
 	--popover-foreground: oklch(0.984 0 247.858);
 	--primary: hsl(60deg, 1.37%, 14.3%);
 	--primary-foreground: hsl(60deg, 9.09%, 93.5%);
@@ -58,12 +58,12 @@
 
 .dark {
 	--font-sans: "Work Sans", theme(fontFamily.sans);
-	--font-serif: "Libre Caslon Text", theme(fontFamily.serif);
+	--font-serif: "Georgia", theme(fontFamily.serif);
 	--background: hsl(30deg, 7.14%, 5.49%); /* #0f0e0d dark-oxford*/
 	--foreground: hsl(60deg, 9.09%, 97.8%); /* #fafaf9 light-ivory */
 	--card: oklch(0.25 0 264.695);
 	--card-foreground: oklch(0.984 0.003 247.858);
-	--popover: oklch(0.408 0 265.755);
+	--popover: oklch(0.003 0 0);
 	--popover-foreground: oklch(0.984 0 247.858);
 	--primary: oklch(1 0 0 / 96%);
 	--primary-foreground: oklch(0.208 0 265.755);
@@ -71,10 +71,10 @@
 	--secondary-foreground: oklch(0.984 0.003 247.858);
 	--muted: oklch(0.279 0 260.031);
 	--muted-foreground: oklch(0.704 0 256.788);
-	--brand: oklch(0.52 0.287 288.01);
+	--brand: oklch(0.32 0.287 288.01);
 	--brand-foreground: oklch(0.984 0.003 247.858);
-	--accent: hsl(126deg, 8.46%, 39.1%);
-	--accent-foreground: hsl(210deg, 34.5%, 98%);
+	--accent: oklch(0.52 0.287 288.01);
+	--accent-foreground: oklch(0.984 0.003 247.858);
 	--accent-1: hsl(126deg, 8.46%, 39.1%);
 	--accent-1-foreground: hsl(210deg, 34.5%, 98%);
 	--accent-2: oklch(0.878 0.063 121);
@@ -131,6 +131,7 @@
 	--spacing-md: 1.75rem;
 	--spacing-lg: 3.5rem;
 	--spacing-xl: 7rem;
+	--font-weight-light: 300;
 	--font-weight-normal: 400;
 	--font-weight-medium: 500;
 	--font-weight-semibold: 600;
@@ -224,16 +225,16 @@
 	}
 
 	h1 {
-		@apply text-3xl;
-	}
-	h2 {
 		@apply text-2xl;
 	}
-	h3 {
+	h2 {
 		@apply text-xl;
 	}
-	h4 {
+	h3 {
 		@apply text-lg;
+	}
+	h4 {
+		@apply text-md;
 	}
 	p {
 		@apply text-base;

@@ -32,7 +32,7 @@
 				align: "center",
 			}}
 			setApi={(emblaApi) => (api = emblaApi)}
-			class="max-w-7xl w-full mx-auto mask-l-from-90% mask-r-from-90%">
+			class="max-w-6xl w-full mx-auto mask-l-from-90% mask-r-from-90%">
 			<Carousel.Content class="flex">
 				{#each testimonials as testimonial, i (i)}
 					<Carousel.Item

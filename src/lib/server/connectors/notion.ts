@@ -352,6 +352,30 @@ export async function getBlogPost(databaseId: string, slug: string) {
 	})
 	return response.results[0]
 }
+function calculateReadingTime(blocks: (BlockObjectResponse | PartialBlockObjectResponse)[]): number {
+	const wordsPerMinute = 200
+	let totalWords = 0
+
+	function getTextFromBlock(block: BlockObjectResponse): string {
+		if (!block) return ""
+		const blockType = block.type
+		// @ts-expect-error - dynamic access
+		const richText = block[blockType]?.rich_text
+		if (richText) {
+			return richText.map((rt: RichTextItemResponse) => rt.plain_text).join(" ")
+		}
+		return ""
+	}
+
+	for (const block of blocks) {
+		if ("type" in block) {
+			const text = getTextFromBlock(block)
+			totalWords += text.split(/\s+/).filter(Boolean).length
+		}
+	}
+
+	return Math.ceil(totalWords / wordsPerMinute)
+}
 export async function transformNotionDBRowToArticle(
 	notionDBItem: PageObjectResponse | PartialPageObjectResponse,
 ): Promise<Article> {
@@ -359,7 +383,8 @@ export async function transformNotionDBRowToArticle(
 		return {} as Article
 	}
 	const props = notionDBItem.properties
-
+	const blocks = await notionConnector.getPageBlocks(notionDBItem.id)
+	const readingTime = calculateReadingTime(blocks)
 	return {
 		id: notionDBItem.id,
 		title: (notionConnector.getPropertyValue(props["Title"], "title") as string) || "",
@@ -391,7 +416,8 @@ export async function transformNotionDBRowToArticle(
 		)?.name,
 		url: notionDBItem.url,
 		icon: notionDBItem.icon as { type: "external"; external: { url: string } } | null,
-		blocks: [], // Will be populated separately when fetching page content
+		blocks: [], // Will be populated separately when fetching page content,
+		readingTime: readingTime,
 	}
 }
 

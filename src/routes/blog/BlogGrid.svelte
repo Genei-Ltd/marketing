@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { IconCalendar } from "@tabler/icons-svelte"
+	import { IconCalendar, IconClock } from "@tabler/icons-svelte"
 	import type { Article } from "$lib/types/articles"
 	import { fly } from "svelte/transition"
 	import { elasticOut } from "svelte/easing"
@@ -28,14 +28,14 @@
 
 {#await articles}
 	<div
-		class="gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3 min-h-96 max-h-96 grid grid-cols-1 overflow-hidden transition-all duration-500 ease-out">
+		class="gap-x-4 gap-y-12 md:grid-cols-2 lg:grid-cols-3 min-h-96 max-h-96 grid grid-cols-1 overflow-hidden transition-all duration-500 ease-out">
 		{#each Array.from({ length: 6 }, (_, i) => i) as i}
 			<div
 				class="group animate-fade-in block opacity-0"
 				style="animation-delay: {250 + i * 100}ms"
 				in:fly={{ y: 40, duration: 600, delay: 200 + i * 100, easing: elasticOut }}>
 				<div class="bg-card overflow-hidden rounded-md">
-					<div class="aspect-[5/3] bg-muted w-full overflow-hidden rounded-lg">
+					<div class="aspect-[16/9] bg-muted w-full overflow-hidden rounded-lg">
 						<Skeleton class="w-full h-full" />
 					</div>
 				</div>
@@ -60,40 +60,41 @@
 		</div>
 	{:else}
 		<div
-			class="gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3 max-h-none grid grid-cols-1 overflow-visible transition-all duration-500 ease-out">
+			class="gap-x-6 gap-y-8 md:grid-cols-2 lg:grid-cols-3 max-h-none grid grid-cols-1 overflow-visible transition-all duration-500 ease-out">
 			{#each articles as post, i}
-				<div
-					class="group animate-fade-in block transition-all duration-300 opacity-0"
-					style="animation-delay: {150 + i * 80}ms"
-					in:fly={{ y: 50, duration: 700, delay: 100 + i * 80, easing: elasticOut }}>
-					<a href={`/blog/${post.slug}`} class="block">
-						<div class="bg-card overflow-hidden rounded-md">
-							<!-- {#if post.coverImage} -->
-							<div class="aspect-[5/3] bg-card w-full overflow-hidden rounded-lg relative">
-								{#if isNew(post.publishedDate)}
-									<span
-										class="text-xs absolute shadow tracking-wider top-2 left-2 uppercase font-semibold bg-accent text-white px-1.5 py-0.5 rounded-sm z-20">
-										New
-									</span>
-								{/if}
-								{#if post.companyLogo}
-									<div
-										class="bg-gradient-to-tl from-primary/50 to-primary/30 absolute inset-0 z-10 flex items-center justify-center">
-										<img
-											src={post.companyLogo}
-											alt={post.title}
-											loading="lazy"
-											class="h-fit z-20 w-auto max-w-xl brightness-0 contrast-200 invert drop-shadow-[0_0_0_white]" />
-									</div>
-								{/if}
-								<img
-									src={post.coverImage || "/images/fallback.png"}
-									alt={post.title}
-									loading="lazy"
-									class="group-hover:scale-110 animate-fade-in object-cover w-full h-full transition-all duration-500 ease-out opacity-0"
-									style="animation-delay: {300 + i * 80}ms" />
-							</div>
-							<!-- {:else}
+				<a href={`/blog/${post.slug}`} class="block">
+					<div
+						class="group animate-fade-in block transition-all duration-300 opacity-0"
+						style="animation-delay: {150 + i * 80}ms"
+						in:fly={{ y: 50, duration: 700, delay: 100 + i * 80, easing: elasticOut }}>
+						<div class="block">
+							<div class="bg-card overflow-hidden rounded-md">
+								<!-- {#if post.coverImage} -->
+								<div class="aspect-[16/9] bg-card w-full overflow-hidden rounded-lg relative">
+									{#if isNew(post.publishedDate)}
+										<span
+											class="text-xs absolute shadow tracking-wider top-2 left-2 uppercase font-semibold bg-accent text-white px-1.5 py-0.5 rounded-sm z-20">
+											New
+										</span>
+									{/if}
+									{#if post.companyLogo}
+										<div
+											class="bg-gradient-to-tl from-primary/50 to-primary/30 absolute inset-0 z-10 flex items-center justify-center">
+											<img
+												src={post.companyLogo}
+												alt={post.title}
+												loading="lazy"
+												class="h-fit z-20 w-auto max-w-xl brightness-0 contrast-200 invert drop-shadow-[0_0_0_white]" />
+										</div>
+									{/if}
+									<img
+										src={post.coverImage || "/images/fallback.png"}
+										alt={post.title}
+										loading="lazy"
+										class="group-hover:scale-110 animate-fade-in object-cover w-full h-full transition-all duration-500 ease-out opacity-0"
+										style="animation-delay: {300 + i * 80}ms" />
+								</div>
+								<!-- {:else}
 							<div class="aspect-[5/3] bg-card flex items-center justify-center w-full rounded-lg">
 								<p
 									class="text-muted-foreground opacity-60 text-balance text-md line-clamp-2 text-center">
@@ -101,22 +102,30 @@
 								</p>
 							</div>
 						{/if} -->
+							</div>
+							<div class="mt-6">
+								<h3 class="text-foreground line-clamp-2 text-base font-medium">
+									{post.title}
+								</h3>
+								{#if post.publishedDate}
+									<div class="text-muted-foreground flex items-center mt-2 capitalize">
+										<IconCalendar class="text-muted-foreground w-3 h-3 mr-1.5" stroke={1.5} />
+										<span class="text-xs font-medium">
+											{formatDate(post.publishedDate)}
+										</span>
+										{#if post.readingTime}
+											<span class="text-muted-foreground mx-1.5">&bull;</span>
+											<IconClock class="text-muted-foreground w-3 h-3 mr-1.5" stroke={1.5} />
+											<span class="text-xs font-medium">
+												{post.readingTime} min read
+											</span>
+										{/if}
+									</div>
+								{/if}
+							</div>
 						</div>
-						<div class="mt-4">
-							<h3 class="text-foreground line-clamp-2 text-md font-medium">
-								{post.title}
-							</h3>
-							{#if post.publishedDate}
-								<div class="text-foreground opacity-60 flex items-center mt-2 uppercase">
-									<IconCalendar class="opacity-60 w-3 h-3 mr-1" />
-									<span class="text-xs font-medium">
-										{formatDate(post.publishedDate)}
-									</span>
-								</div>
-							{/if}
-						</div>
-					</a>
-				</div>
+					</div>
+				</a>
 			{/each}
 		</div>
 	{/if}
