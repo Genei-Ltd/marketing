@@ -33,25 +33,25 @@
 	}: TwoSideProps = $props()
 </script>
 
-<div class="lg:h-156 lg:flex-row lg:reverse flex flex-col w-full overflow-hidden rounded">
+<div class=" lg:flex-row lg:reverse flex flex-col w-full h-full overflow-hidden rounded">
 	<!-- Left Side - Dark Background -->
 	<div
-		class=" text-card-foreground p-lg xl:px-xl xl:py-xl flex flex-col justify-center lg:max-w-1/2 w-full aspect-square {clearBackground[0]
+		class=" text-card-foreground lg:p-lg xl:p-xl p-sm flex flex-col justify-center lg:max-w-1/2 w-full aspect-square overflow-hidden h-1/2 max-h-1/2 lg:max-h-full lg:h-full {clearBackground[0]
 			? 'bg-transparent'
-			: 'bg-card'} {reverse ? 'order-2' : 'order-1'}">
+			: 'bg-card'} {reverse ? 'order-2 lg:order-1' : 'order-2 lg:order-2'}">
 		<div class="space-y-sm">
 			<!-- Label -->
 			<div class="text-xs font-medium tracking-widest uppercase">{label}</div>
 
 			<!-- Main Heading -->
-			<h1 class="font-serif text-2xl font-bold leading-tight tracking-wide">
+			<h1 class="font-serif text-xl font-medium leading-tight tracking-wide">
 				{#each heading.split("\n") as line}
 					{line}<br />
 				{/each}
 			</h1>
 
 			<!-- Description -->
-			<p class="text-balance text-md pr-16 font-medium leading-tight opacity-75">
+			<p class="text-balance text-md text-muted-foreground tracking-wide">
 				{description}
 			</p>
 
@@ -61,7 +61,7 @@
 					href={buttonHref}
 					variant={buttonVariant}
 					size="none"
-					class="group opacity-80 hover:opacity-100 inline-flex items-center mt-16 transition-opacity">
+					class="group opacity-80 hover:opacity-100 lg:mt-16 inline-flex items-center mt-8 transition-opacity">
 					<span class="text-sm">{buttonText}</span>
 					<IconArrowRight class="group-hover:translate-x-1 w-4 h-4 transition-transform" />
 				</Button>
@@ -71,9 +71,9 @@
 
 	<!-- Right Side - Light Background with Custom Content -->
 	<div
-		class="bg-accent-1 flex items-center justify-center lg:max-w-1/2 w-full aspect-square {clearBackground[1]
+		class="bg-accent-1 flex items-center justify-center lg:max-w-1/2 overflow-hidden w-full aspect-square lg:h-full h-1/2 {clearBackground[1]
 			? 'bg-transparent'
-			: 'bg-accent-1'} {reverse ? 'order-1' : 'order-2'}">
+			: 'bg-accent-1'} {reverse ? 'order-1 lg:order-2' : 'order-1 lg:order-1'}">
 		{@render children?.()}
 	</div>
 </div>

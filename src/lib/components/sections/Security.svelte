@@ -70,16 +70,15 @@
 			</div> -->
 			<div class="flex flex-col gap-6">
 				<div class="flex flex-col gap-2 mb-8">
-					<span class=" text-balance font-serif text-4xl font-medium leading-tight"
-						>Enterprise Grade Security</span>
-					<span class=" opacity-90 text-lg">Trusted by the largest global brands and agencies</span>
+					<span class=" text-balance leading-tighter font-serif text-3xl">Enterprise Grade Security</span>
+					<span class=" opacity-90 text-md">Trusted by the largest global brands and agencies</span>
 				</div>
 
 				<!-- Features List -->
 				{#each features as feature}
 					<div class="opacity-70 flex items-center h-3 space-x-2">
 						<div class="flex items-center justify-center w-4 h-4">
-							<svelte:component this={feature.icon} class=" w-4 h-4" />
+							<svelte:component this={feature.icon} class=" w-4 h-4" stroke={0.8} />
 						</div>
 						<span class=" text-sm">{feature.title}</span>
 					</div>
@@ -92,16 +91,16 @@
 					href="https://trust.coloop.ai/"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-card-foreground hover:text-primary bg-card hover:underline inline-flex items-center p-2 px-4 text-sm transition-colors duration-200">
+					class="text-card-foreground hover:text-primary bg-card hover:underline inline-flex items-center p-2 px-4 text-sm transition-colors duration-200 rounded">
 					Trust Center
-					<IconExternalLink class="w-4 h-4 ml-2" />
+					<IconExternalLink class="w-4 h-4 ml-2" stroke={0.8} />
 				</a>
 			</div>
 		</div>
 
 		<div class="flex flex-col items-end justify-end w-full h-full">
 			<!-- Right Column - Certifications Grid -->
-			<div class="lg:self-end w-fit flex items-end self-start justify-end h-full">
+			<div class="lg:self-end w-fit lg:w-full flex items-end self-start justify-end h-full">
 				<div class="lg:grid-cols-2 lg:gap-4 grid items-end justify-end w-full h-full grid-cols-4">
 					{#each certifications as cert}
 						<a href={cert.link} target="_blank" rel="noopener noreferrer" class="">

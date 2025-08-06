@@ -47,13 +47,13 @@
 	let activeFeature = $state(features[0])
 </script>
 
-<div class="lg:grid-cols-2 lg:h-156 grid items-start h-full grid-cols-1 gap-4">
+<div class="lg:grid-cols-2 grid items-start w-full h-full grid-cols-1 gap-4">
 	<!-- Left side - Feature options -->
-	<div class="h-156 flex flex-col justify-between gap-4">
+	<div class="lg:grid-cols-1 aspect-square grid justify-between w-full h-full max-h-full grid-cols-2 gap-4">
 		{#each features as feature}
 			<div
 				class={cn(
-					"flex h-full cursor-pointer flex-col justify-between rounded  p-4 transition-all duration-300",
+					"flex flex-1 h-full cursor-pointer flex-col w-full lg:h-full justify-between rounded p-4 transition-all duration-300 overflow-hidden text-ellipsis line-clamp-2",
 					activeFeature.id === feature.id
 						? "text-card-foreground shadow bg-secondary border-primary"
 						: "bg-card",
@@ -61,11 +61,12 @@
 				onmouseenter={() => (activeFeature = feature)}
 				role="button"
 				tabindex="0">
-				<h3 class="mb-3 font-medium capitalize transition-all">
+				<h3 class=" mb-1 overflow-hidden text-lg font-medium capitalize transition-all">
 					{feature.title}
 				</h3>
 				<p
-					class="pr-16 text-sm leading-relaxed transition-all {activeFeature.id === feature.id
+					class=" text-balance text-sm h-full line-clamp-2 transition-all overflow-hidden {activeFeature.id ===
+					feature.id
 						? 'text-secondary-foreground'
 						: 'text-primary/80'}">
 					{feature.description}
@@ -75,10 +76,11 @@
 	</div>
 
 	<!-- Right side - Content display -->
-	<div class="lg:sticky lg:top-8 h-156 w-full overflow-hidden rounded">
-		<div class="relative flex h-full w-full rounded transition-all duration-300 {activeFeature.bgColor}">
+	<div class="lg:sticky lg:top-8 aspect-square w-full h-full overflow-hidden rounded">
+		<div
+			class="relative flex h-full w-full rounded transition-all duration-300 {activeFeature.bgColor}  aspect-square overflow-hidden">
 			<!-- Regular layout with image -->
-			<div class="w-full h-full overflow-hidden">
+			<div class="aspect-square w-full h-full overflow-hidden">
 				<WildAnimationBox backgroundColor={activeFeature.bgColor}>
 					{@render activeFeature.demo?.()}
 				</WildAnimationBox>

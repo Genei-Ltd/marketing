@@ -33,14 +33,14 @@
 	<div class="flex flex-col items-center justify-center w-full">
 		{#if subtitle}
 			<div class="flex flex-col items-center justify-center w-full">
-				<h2 class="text-balance lg:text-3xl sm:text-2xl w-full mx-auto mb-4 font-serif text-xl text-center">
+				<h2 class="text-balance lg:text-2xl w-full mx-auto mb-4 font-serif text-xl text-center">
 					{title}
 				</h2>
-				<span class="text-balance opacity-80 text-md w-2/3 mx-auto mb-16 font-sans tracking-wide text-center"
+				<span class="text-balance opacity-80 text-md w-2/3 mx-auto mb-16 font-sans text-center"
 					>{subtitle}</span>
 			</div>
 		{:else}
-			<h2 class="text-balance lg:text-3xl sm:text-2xl w-full mx-auto mb-16 font-serif text-xl text-center">
+			<h2 class="text-balance lg:text-2xl w-full mx-auto mb-16 font-serif text-xl text-center">
 				{title}
 			</h2>
 		{/if}
@@ -52,7 +52,7 @@
 	<img
 		src="/images/hero-3.png"
 		alt="Hero"
-		class="border-primary aspect-video max-w-6xl grayscale border-6 relative z-50 object-cover w-full mx-auto rounded shadow-2xl" />
+		class="border-primary aspect-video grayscale border-6 relative z-50 object-cover w-full max-w-6xl mx-auto rounded shadow-2xl" />
 	</div> -->
 <!-- <img src="/images/wild/hero.png" alt="Hero" class="absolute inset-0 object-cover w-full h-full py-16 opacity-50" /> -->
 
@@ -72,7 +72,7 @@
 		</div>
 	</div> -->
 	<div
-		class="max-w-6xl lg:px-10 absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full px-6 py-16 mx-auto">
+		class="lg:px-10 absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full max-w-6xl px-6 py-16 mx-auto">
 		<div class="flex flex-col items-start justify-end h-full">
 			<h1
 				class="xl:text-huge text-background text-balance drop-shadow-lg sm:text-3xl md:text-4xl font-serif text-2xl leading-tight tracking-wide text-left capitalize">
@@ -86,9 +86,9 @@
 	</div>
 </div>
 
-<div class="max-w-6xl lg:px-10 relative flex flex-col items-center justify-center px-6 mx-auto overflow-hidden">
+<div class="lg:px-10 relative flex flex-col items-center justify-center max-w-6xl px-6 mx-auto overflow-hidden">
 	<!-- CUSTOMER LOGOS  -->
-	<div class="w-full mt-32 mb-16">
+	<div class="lg:lg:mt-32 w-full mt-16 mb-16">
 		<h2 class="font-serif text-2xl text-center">Trusted by the brands you trust</h2>
 		<div class="flex flex-row items-center justify-center gap-16 mt-8">
 			{#each Array.from({ length: 10 }, (_, i) => i) as index}
@@ -108,7 +108,7 @@
 	</div>
 
 	<!-- PRODUCT BENEFITS  -->
-	<div class="flex flex-col w-full gap-32 mt-32 mb-32">
+	<div class="lg:mt-32 lg:mb-32 flex flex-col w-full gap-32 mt-16 mb-16">
 		<TwoSplit
 			label="Analysis Agents"
 			heading="Specialized for Insights"
@@ -154,13 +154,13 @@
 		</TwoSplit>
 	</div>
 </div>
-<div class="bg-primary text-primary-foreground lg:px-10 flex flex-col items-center justify-center w-full px-6 py-32">
+<div class="bg-primary text-primary-foreground lg:px-10 flex flex-col items-center justify-center w-full py-32">
 	<!-- TESTIMONIAL HIGHLIGHT  -->
-	<div class="max-w-6xl lg:grid-cols-2 lg:gap-0 grid items-center justify-center grid-cols-1 gap-16 mx-auto">
+	<div class="lg:grid-cols-2 lg:gap-0 grid items-center justify-center max-w-6xl grid-cols-1 gap-16 px-6 mx-auto">
 		<div class=" flex items-center justify-center">
 			<img src="/images/old-man.png" alt="old man" class="aspect-square object-cover w-full h-full rounded" />
 		</div>
-		<div class=" xl:p-xl lg:p-lg p-sm flex flex-col items-start justify-center flex-1">
+		<div class=" xl:p-lg lg:p-md p-sm flex flex-col items-start justify-center flex-1">
 			<blockquote class="text-primary-foreground text-balance mb-8 font-serif text-xl">
 				"When it comes to AI and technology, it’s all about learning by doing. You won’t figure everything out
 				right away, but the more you engage with it, the more opportunities you’ll see."
@@ -173,9 +173,9 @@
 	</div>
 </div>
 
-<div class="max-w-6xl lg:px-10 relative flex flex-col items-center justify-center px-6 mx-auto overflow-hidden">
+<div class="lg:px-10 relative flex flex-col items-center justify-center max-w-6xl px-6 mx-auto overflow-hidden">
 	<!-- STATISTICS & BENEFITS  -->
-	<div class="flex flex-col w-full mt-32 mb-32">
+	<div class="lg:mt-32 lg:mb-32 flex flex-col w-full mt-16 mb-16">
 		{@render section("Let us do the heavy lifting, you do the insights", "Researchers love CoLoop.")}
 		<NakedCardSet set="features" />
 	</div>
@@ -196,10 +196,10 @@
 <!-- FULL WIDTH END -->
 <!-- MAX 7XL START -->
 
-<div class="max-w-6xl lg:px-10 relative flex flex-col items-center justify-center h-full px-6 mx-auto">
+<div class="lg:px-10 relative flex flex-col items-center justify-center h-full max-w-6xl px-6 mx-auto">
 	<!-- Testimonials -->
 	<div class="min-h-max w-full h-full overflow-hidden">
-		<div class="max-w-6xl min-h-max flex flex-col w-full h-full gap-16 mx-auto mt-32 mb-32">
+		<div class="min-h-max lg:mt-32 lg:mb-32 flex flex-col w-full h-full max-w-6xl gap-16 mx-auto mt-16 mb-16">
 			{@render section("What our customers say")}
 			{#await data.testimonials}
 				<span class="text-foreground">Loading testimonials...</span>
@@ -305,7 +305,8 @@
 <!-- MAX 7XL END -->
 <!-- FULL WIDTH START -->
 
-<div class="text-primary-foreground min-h-200 bg-primary flex flex-col items-center justify-center w-full mt-32 mb-32">
+<div
+	class="text-primary-foreground min-h-200 bg-primary lg:mt-32 lg:mb-32 flex flex-col items-center justify-center w-full mt-16 mb-16">
 	<!-- BLOGS CAROUSEL -->
 	<!-- {@render section("What our customers say")} -->
 	{#await data.articles}
@@ -318,9 +319,9 @@
 </div>
 <!-- FULL WIDTH END -->
 
-<div class="max-w-6xl lg:px-10 relative flex flex-col items-center justify-center px-6 mx-auto">
+<div class="lg:px-10 relative flex flex-col items-center justify-center max-w-6xl px-6 mx-auto">
 	<!-- ORG TRANSFORMATION TIMELINE -->
-	<div class="w-full mt-32 mb-32">
+	<div class="lg:mt-32 lg:mb-32 w-full mt-16 mb-16">
 		{@render section("Transformation Your Team to AI Native ")}
 		<Timeline></Timeline>
 	</div>
@@ -328,7 +329,7 @@
 	<!-- FINAL GET STARTED -->
 
 	<div
-		class="bg-accent-1 text-primary-foreground lg:px-10 relative flex flex-col items-center justify-center w-full px-6 py-32 mt-32 mb-32 overflow-hidden rounded shadow">
+		class="bg-accent-1 text-primary-foreground lg:px-10 lg:mt-32 lg:mb-32 relative flex flex-col items-center justify-center w-full px-6 py-32 mt-16 mb-16 overflow-hidden rounded shadow">
 		<div class="relative z-20">
 			{@render section(
 				"Get Started with CoLoop Now",
@@ -341,13 +342,13 @@
 	</div>
 
 	<!-- PRODUCTS  -->
-	<div class="flex flex-col w-full h-full gap-16 mt-32 mb-32">
+	<div class="lg:mt-32 lg:mb-32 flex flex-col w-full h-full gap-16 mt-16 mb-16">
 		{@render section("Products to run every kind of study, on any kind of data")}
 		<ColSideSelectTwoSplit />
 	</div>
 
 	<!-- COMPARISON  -->
-	<!-- <div class="flex flex-col w-full gap-16 mt-32 mb-32">
+	<!-- <div class="lg:mt-32 lg:mb-32 flex flex-col w-full gap-16 mt-16 mb-16">
 		{@render section("Compare CoLoop to CoPilot, ChatGPT + others etc")}
 
 		<div
@@ -359,15 +360,15 @@
 
 <div class="bg-primary text-primary-foreground">
 	<!-- SECURITY -->
-	<div class="max-w-6xl relative flex flex-col items-center justify-center h-full mx-auto">
-		<div class="lg:px-10 w-full h-full px-6 mt-32 mb-32">
+	<div class="relative flex flex-col items-center justify-center h-full max-w-6xl mx-auto">
+		<div class="lg:px-10 lg:mt-32 lg:mb-32 w-full h-full px-6 mt-16 mb-16">
 			<Security />
 		</div>
 	</div>
 </div>
 
-<div class="max-w-6xl relative flex flex-col items-center justify-center mx-auto">
-	<!-- <div class="w-full mt-32 mb-32">
+<div class="relative flex flex-col items-center justify-center max-w-6xl mx-auto">
+	<!-- <div class="lg:mt-32 lg:mb-32 w-full mt-16 mb-16">
 		<div
 			class="bg-primary text-primary-foreground h-96 flex items-center justify-center w-full font-serif text-2xl">
 			COMMUNITY
@@ -375,7 +376,7 @@
 	</div> -->
 
 	<!-- FINAL GET STARTED -->
-	<div class="lg:px-10 w-full px-6 mt-32 mb-32">
+	<div class="lg:px-10 lg:mt-32 lg:mb-32 w-full px-6 mt-16 mb-16">
 		{@render section(
 			"Get Started with CoLoop Now",
 			"Book a personalized demo to discover how CoLoop can accelerate your research and insights workflow.",
@@ -383,7 +384,7 @@
 		<EmailSubmit {form} placeholder="Enter your email address" buttonText="Get a demo" />
 	</div>
 	<!-- BLOG ENDER -->
-	<div class="lg:px-10 w-full px-6 mb-32">
+	<div class="lg:px-10 lg:mb-32 w-full px-6 mb-16">
 		<BlogEndArtCard />
 	</div>
 </div>

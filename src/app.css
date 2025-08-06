@@ -13,10 +13,10 @@
 :root {
 	--font-sans: "Work Sans", theme(fontFamily.sans);
 	--font-serif: "Georgia", theme(fontFamily.serif);
-	--background: hsl(60deg, 15.8%, 96.3%);
+	--background: hsl(60deg, 15.8%, 98%);
 	--foreground: hsl(60deg, 6.25%, 6.27%); /* #dark-bg */
 	--card-foreground: hsl(60deg, 1.37%, 14.3%); /* #dark-card */
-	--card: hsl(60deg, 9.09%, 93.5%); /* #light-card */
+	--card: hsl(60deg, 10%, 90%); /* #light-card */
 	--popover: oklch(0.984 0.003 247.858);
 	--popover-foreground: oklch(0.984 0 247.858);
 	--primary: hsl(60deg, 1.37%, 14.3%);

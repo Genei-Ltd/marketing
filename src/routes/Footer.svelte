@@ -5,8 +5,8 @@
 	import { toggleMode } from "$lib/utils/theme"
 </script>
 
-<footer class="text-muted-foreground mt-36 lg:px-10 w-full px-6 py-8 text-sm">
-	<div class="max-w-6xl w-full mx-auto">
+<footer class="text-muted-foreground mt-36 w-full py-8 text-sm">
+	<div class="lg:px-10 w-full max-w-6xl px-6 mx-auto">
 		<div class="lg:flex-row flex flex-col justify-between w-full">
 			<div class="col-span-1">
 				<a href="/" class="lg:mb-4 flex items-center gap-2 mb-8">

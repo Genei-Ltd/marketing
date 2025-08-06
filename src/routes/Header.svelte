@@ -105,13 +105,13 @@
 </script>
 
 <div
-	class=" px-6 fixed left-0 right-0 top-0 z-[99] bg-card/30 shadow-sm w-full border-b border-border/50 backdrop-blur-md transition-all duration-300">
-	<div class="h-14 flex items-center justify-between max-w-6xl mx-auto font-sans">
+	class="  fixed left-0 right-0 top-0 z-[99] bg-card/30 shadow-sm w-full border-b border-border/50 backdrop-blur-md transition-all duration-300">
+	<div class="h-14 lg:px-10 flex items-center justify-between max-w-6xl px-6 mx-auto font-sans">
 		<!-- Logo -->
 		<div class="flex items-center justify-start">
 			<a href="/" class="flex items-center gap-2">
 				<img src="/logos/CoLoop_Icon.svg" alt="CoLoop Logo" class="contrast-100 saturate-0 rounded-xl h-6" />
-				<h4 class="text-foreground font-semibold">CoLoop</h4>
+				<span class="text-foreground text-[20px] font-semibold">CoLoop</span>
 			</a>
 		</div>
 
@@ -153,9 +153,8 @@
 									className,
 								)}
 								{...restProps}>
-								<div class="group-hover:underline text-base font-medium leading-none">{title}</div>
-								<span
-									class="text-card-foreground opacity-80 line-clamp-2 text-md flex-1 font-sans leading-snug">
+								<div class="group-hover:underline text-md font-medium">{title}</div>
+								<span class="text-muted-foreground opacity-80 line-clamp-2 flex-1 font-sans text-sm">
 									{content}
 								</span>
 							</a>
@@ -167,9 +166,9 @@
 			<NavigationMenu.Root>
 				<NavigationMenu.List>
 					<NavigationMenu.Item>
-						<NavigationMenu.Trigger class="">Product</NavigationMenu.Trigger>
+						<NavigationMenu.Trigger>Product</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
-							<ul class=" grid w-fit grid-cols-[200px_240px] grid-rows-3 gap-2 p-4">
+							<ul class=" grid w-fit grid-cols-[200px_240px] grid-rows-3 gap-2 p-2">
 								<li class="max-h-min grow-0 row-span-3">
 									<NavigationMenu.Link
 										class="focus:shadow-md relative flex flex-col justify-end w-full h-full p-6 bg-transparent rounded outline-none select-none">
@@ -177,18 +176,25 @@
 											<a
 												{...props}
 												href="/product"
-												class="focus:shadow-md relative flex flex-col justify-end w-full h-full p-6 overflow-hidden no-underline rounded outline-none select-none">
+												class="focus:shadow-md relative flex flex-col justify-end w-full h-full p-6 overflow-hidden no-underline bg-transparent rounded-md outline-none select-none">
 												<img
 													src="/wild/vault.png"
 													alt="Resources"
 													aria-hidden="true"
 													class="absolute inset-0 z-0 object-cover w-full h-full pointer-events-none" />
 												<div
-													class=" bg-gradient-to-t from-primary/50 to-transparent absolute bottom-0 left-0 z-10 flex flex-col justify-end w-full h-full p-6 rounded">
-													<div class="mt-4 mb-2 text-lg font-medium">CoLoop Resources</div>
-													<span class="text-foreground opacity-80 text-md leading-tight">
-														Everything you need to get started with research.
+													class="from-primary bg-gradient-to-t to-transparent hover:to-background/20 absolute bottom-0 left-0 z-10 flex flex-col justify-end w-full h-full p-4 transition-all duration-300 ease-out">
+													<div
+														class="text-primary-foreground mt-4 mb-1 text-lg font-medium transition-all duration-300 ease-out">
+														Product
+													</div>
+													<span
+														class="text-primary-foreground opacity-80 text-sm leading-tight">
+														Learn how to use CoLoop effectively
 													</span>
+												</div>
+												<div
+													class="bg-gradient-to-t from-primary/50 to-transparent absolute inset-0 z-0 transition-all duration-300 ease-out">
 												</div>
 											</a>
 										{/snippet}
@@ -214,10 +220,9 @@
 					</NavigationMenu.Item>
 
 					<NavigationMenu.Item>
-						<NavigationMenu.Trigger class="hover:bg-transparent font-medium bg-transparent"
-							>Company type</NavigationMenu.Trigger>
+						<NavigationMenu.Trigger>Company type</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
-							<ul class="grid w-fit auto-cols-[240px] grid-flow-col grid-rows-3 gap-2 p-4">
+							<ul class="grid w-fit auto-cols-[240px] grid-flow-col grid-rows-3 gap-2 p-2">
 								{#each companyTypes as item}
 									{@render ListItem({
 										href: item.href,
@@ -230,10 +235,9 @@
 					</NavigationMenu.Item>
 
 					<NavigationMenu.Item>
-						<NavigationMenu.Trigger class="font-medium transition-colors bg-transparent"
-							>Use case</NavigationMenu.Trigger>
+						<NavigationMenu.Trigger>Use case</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
-							<ul class="grid w-fit auto-cols-[240px] grid-flow-col grid-rows-3 gap-2 p-4">
+							<ul class="grid w-fit auto-cols-[240px] grid-flow-col grid-rows-3 gap-2 p-2">
 								{#each useCases as item}
 									{@render ListItem({
 										href: item.href,
@@ -246,13 +250,12 @@
 					</NavigationMenu.Item>
 
 					<NavigationMenu.Item>
-						<NavigationMenu.Trigger class="hover:bg-transparent font-medium bg-transparent"
-							>Resources</NavigationMenu.Trigger>
+						<NavigationMenu.Trigger>Resources</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
-							<ul class="grid w-fit grid-cols-[200px_240px] grid-rows-3 gap-2 p-4">
+							<ul class="grid w-fit grid-cols-[200px_240px] grid-rows-3 gap-2 p-2">
 								<li class="max-h-min grow-0 row-span-3">
 									<NavigationMenu.Link
-										class=" relative flex flex-col justify-end w-full h-full p-4 no-underline bg-transparent rounded-md outline-none select-none">
+										class=" relative flex flex-col justify-end w-full h-full p-2 no-underline bg-transparent rounded-md outline-none select-none">
 										{#snippet child({ props })}
 											<a
 												{...props}
@@ -264,14 +267,19 @@
 													aria-hidden="true"
 													class="absolute inset-0 z-0 object-cover w-full h-full pointer-events-none" />
 												<div
-													class="from-background bg-gradient-to-t to-transparent hover:to-background/20 absolute bottom-0 left-0 z-10 flex flex-col justify-end w-full h-full p-6 transition-all duration-300">
-													<div class="text-card-foreground mt-4 mb-2 text-lg font-medium">
+													class="from-primary bg-gradient-to-t to-transparent hover:to-background/20 absolute bottom-0 left-0 z-10 flex flex-col justify-end w-full h-full p-4 transition-all duration-300 ease-out">
+													<div
+														class="text-primary-foreground mt-4 mb-1 text-lg font-medium transition-all duration-300 ease-out">
 														Researcher Community
 													</div>
-													<span class="text-card-foreground opacity-80 text-md leading-tight">
+													<span
+														class="text-primary-foreground opacity-80 text-sm leading-tight">
 														Join the CoLoop community and get support from other
 														researchers.
 													</span>
+												</div>
+												<div
+													class="bg-gradient-to-t from-primary/50 to-transparent absolute inset-0 z-0 transition-all duration-300 ease-out">
 												</div>
 											</a>
 										{/snippet}
@@ -297,18 +305,23 @@
 					</NavigationMenu.Item>
 
 					<NavigationMenu.Item>
-						<Button variant="ghost" size="default" href="https://docs.coloop.ai/docs/" class=" font-medium"
-							>Docs</Button>
+						<NavigationMenu.Link
+							href="https://docs.coloop.ai/docs/"
+							class="text-foreground/70 hover:text-foreground hover:bg-transparent hover:underline underline-offset-2"
+							>Docs</NavigationMenu.Link>
 					</NavigationMenu.Item>
 					<NavigationMenu.Item>
-						<Button variant="ghost" size="default" href="/blog" class=" font-medium">Blog</Button>
+						<NavigationMenu.Link
+							href="/blog"
+							class="text-foreground/70 hover:text-foreground hover:bg-transparent hover:underline underline-offset-2"
+							>Blog</NavigationMenu.Link>
 					</NavigationMenu.Item>
 
 					<NavigationMenu.Item>
-						<Button variant="outline" size="default" href="/login" class=" font-medium">Login</Button>
+						<Button variant="outline" size="default" href="/login" class="">Login</Button>
 					</NavigationMenu.Item>
 					<NavigationMenu.Item>
-						<Button variant="default" size="default" href="/demo" class="font-medium">Get CoLoop</Button>
+						<Button variant="default" size="default" href="/demo" class="">Get CoLoop</Button>
 					</NavigationMenu.Item>
 					<NavigationMenu.Indicator />
 				</NavigationMenu.List>

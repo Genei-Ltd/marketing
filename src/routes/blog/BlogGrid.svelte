@@ -109,13 +109,13 @@
 								</h3>
 								{#if post.publishedDate}
 									<div class="text-muted-foreground flex items-center mt-2 capitalize">
-										<IconCalendar class="text-muted-foreground w-3 h-3 mr-1.5" stroke={1.5} />
+										<IconCalendar class="text-muted-foreground w-3 h-3 mr-1.5" stroke={0.8} />
 										<span class="text-xs font-medium">
 											{formatDate(post.publishedDate)}
 										</span>
 										{#if post.readingTime}
 											<span class="text-muted-foreground mx-1.5">&bull;</span>
-											<IconClock class="text-muted-foreground w-3 h-3 mr-1.5" stroke={1.5} />
+											<IconClock class="text-muted-foreground w-3 h-3 mr-1.5" stroke={0.8} />
 											<span class="text-xs font-medium">
 												{post.readingTime} min read
 											</span>
