@@ -11,7 +11,7 @@ export const load = async ({ params }: { params: { slug: string } }) => {
 
 	const { slug } = params
 
-	const blogPostMetadata = await getBlogPost(DATABASE_ID!, slug)
+	const blogPostMetadata = getBlogPost(DATABASE_ID!, slug)
 
 	// page response
 	//     {
@@ -48,9 +48,7 @@ export const load = async ({ params }: { params: { slug: string } }) => {
 	//   public_url: null
 	// }
 
-	const blogPostBlocks = await notionConnector.getPageBlocksWithChildren(blogPostMetadata.id)
-
-	console.log(blogPostBlocks)
+	const blogPostBlocks = notionConnector.getPageBlocksWithChildren((await blogPostMetadata).id)
 
 	return { blogPostMetadata, blogPostBlocks }
 }

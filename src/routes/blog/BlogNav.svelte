@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Button } from "$components/ui/button"
 	import { page } from "$app/stores"
+	import { fly } from "svelte/transition"
+	import { cubicInOut } from "svelte/easing"
 
 	let { categories }: { categories: string[] } = $props()
 
@@ -14,26 +16,33 @@
 </script>
 
 <nav aria-label="Blog categories">
-	<div class="flex flex-row gap-4 mb-8 capitalize">
-		<Button
-			variant="link"
-			size="none"
-			href="/blog"
-			class={isActive("/blog") ? "underline text-accent underline-offset-4" : "opacity-80 hover:opacity-100"}>
-			All
-		</Button>
-
-		{#each categories as category (category)}
-			{@const categoryHref = `/blog/category/${getCategorySlug(category)}`}
+	<div
+		class="min-h-6 scrollbar-hide flex flex-row gap-4 mb-8 overflow-x-scroll capitalize"
+		in:fly={{ y: 10, duration: 300, easing: cubicInOut }}
+		out:fly={{ y: -10, duration: 300, easing: cubicInOut }}>
+		<div in:fly={{ y: 5, duration: 300, easing: cubicInOut, delay: 50 }}>
 			<Button
 				variant="link"
 				size="none"
-				href={categoryHref}
-				class={isActive(categoryHref)
-					? "underline text-accent underline-offset-4"
-					: "opacity-80 hover:opacity-100"}>
-				{category}
+				href="/blog"
+				class={isActive("/blog") ? "underline text-accent underline-offset-4" : "opacity-80 hover:opacity-100"}>
+				All
 			</Button>
+		</div>
+
+		{#each categories as category, i (category)}
+			{@const categoryHref = `/blog/category/${getCategorySlug(category)}`}
+			<div in:fly={{ y: 5, duration: 300, easing: cubicInOut, delay: 50 + (i + 1) * 30 }}>
+				<Button
+					variant="link"
+					size="none"
+					href={categoryHref}
+					class={isActive(categoryHref)
+						? "underline text-accent underline-offset-4"
+						: "opacity-80 hover:opacity-100"}>
+					{category}
+				</Button>
+			</div>
 		{/each}
 	</div>
 </nav>

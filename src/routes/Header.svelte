@@ -5,7 +5,8 @@
 	import { Button } from "$lib/components/ui/button"
 	import * as NavigationMenu from "$lib/components/ui/navigation-menu/index.js"
 	import { cn } from "$lib/utils.js"
-	import { fade } from "svelte/transition"
+	import { fade, slide } from "svelte/transition"
+	import { cubicIn, cubicInOut, elasticOut } from "svelte/easing"
 	let mobileMenuOpen = $state(false)
 	let openMobileSection = $state<string | null>(null)
 
@@ -115,7 +116,11 @@
 
 		<!-- Mobile menu button -->
 		<div class="lg:hidden flex items-center justify-center h-full">
-			<Button variant="ghost" size="icon" onclick={toggleMobileMenu} class="relative w-10 h-10">
+			<Button
+				variant="ghost"
+				size="icon"
+				onclick={toggleMobileMenu}
+				class="relative w-10 h-10 overflow-hidden transition-all duration-300 ease-out">
 				{#if mobileMenuOpen}
 					<div
 						in:fade={{ duration: 100 }}
@@ -125,7 +130,7 @@
 					</div>
 				{:else}
 					<div
-						in:fade={{ duration: 100, delay: 200 }}
+						in:fade={{ duration: 100, delay: 100 }}
 						out:fade={{ duration: 100 }}
 						class=" absolute flex items-center justify-center w-full h-full">
 						<IconMenu2 class="size-5" />
@@ -321,7 +326,9 @@
 			role="dialog"
 			aria-modal="true"
 			aria-label="Mobile navigation menu"
-			tabindex="-1">
+			tabindex="-1"
+			in:slide={{ duration: 500, axis: "y", easing: cubicInOut }}
+			out:slide={{ duration: 500, axis: "y", easing: cubicInOut }}>
 			<div class=" flex flex-col h-full">
 				<!-- Product Section -->
 				<div class="border-border/50 pb-2 border-b">
@@ -476,3 +483,17 @@
 		</div>
 	{/if}
 </div>
+
+{#if mobileMenuOpen}
+	<div
+		in:fade={{ duration: 100 }}
+		out:fade={{ duration: 100 }}
+		class="bg-primary/90 backdrop-blur-sm absolute inset-0 z-[98] h-full"
+		onclick={toggleMobileMenu}
+		onkeydown={(e) => e.key === "Escape" && toggleMobileMenu()}
+		role="dialog"
+		aria-modal="true"
+		aria-label="Mobile navigation menu"
+		tabindex="-1">
+	</div>
+{/if}

@@ -26,9 +26,13 @@
 			<main class=" flex-1 w-full">
 				{@render children?.()}
 			</main>
-			<div class="snap-end">
+			{#if page.url.pathname === "/"}
+				<div class="snap-end">
+					<Footer />
+				</div>
+			{:else}
 				<Footer />
-			</div>
+			{/if}
 		</div>
 
 		{#if page.url.pathname === "/"}

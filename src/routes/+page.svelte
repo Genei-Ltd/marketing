@@ -61,7 +61,7 @@
 	<img
 		src="/wild/coca-cola-4k.png"
 		alt="Hero"
-		class="2xl:object-top-right absolute top-0 z-10 object-cover w-full h-full opacity-100" />
+		class="2xl:object-top-right sm:object-center absolute top-0 z-10 object-cover object-left w-full h-full opacity-100" />
 	<div
 		class="pb-96 bg-gradient-to-t from-primary/90 via-primary/0 to-transparent opacity-60 absolute bottom-0 z-10 w-full h-screen">
 	</div>
@@ -375,7 +375,7 @@
 	</div> -->
 
 	<!-- FINAL GET STARTED -->
-	<div class="w-full mt-32 mb-32">
+	<div class="w-full px-4 mt-32 mb-32">
 		{@render section(
 			"Get Started with CoLoop Now",
 			"Book a personalized demo to discover how CoLoop can accelerate your research and insights workflow.",

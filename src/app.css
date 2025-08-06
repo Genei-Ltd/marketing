@@ -17,13 +17,13 @@
 	--foreground: hsl(60deg, 6.25%, 6.27%); /* #dark-bg */
 	--card-foreground: hsl(60deg, 1.37%, 14.3%); /* #dark-card */
 	--card: hsl(60deg, 9.09%, 93.5%); /* #light-card */
-	--popover: oklch(1 0 0);
+	--popover: oklch(1 0 0 / 61%);
 	--popover-foreground: oklch(0.984 0 247.858);
 	--primary: hsl(60deg, 1.37%, 14.3%);
 	--primary-foreground: hsl(60deg, 9.09%, 93.5%);
 	--secondary: oklch(1 0 0 / 90%);
 	--secondary-foreground: oklch(0 0 260);
-	--muted: oklch(0.279 0 260.031);
+	--muted: oklch(0 0 0 / 10%);
 	--muted-foreground: oklch(0.704 0 256.788);
 	--brand: oklch(0.52 0.287 288.01);
 	--brand-foreground: oklch(0.984 0.003 247.858);
@@ -254,6 +254,45 @@
 			transform: rotate(360deg);
 		}
 	}
+
+	.animate-shimmer {
+		background:
+			linear-gradient(-45deg, #0000 40%, var(--popover) 50%, #0000 60%) right/300% 100%,
+			linear-gradient(45deg, var(--card), var(--card));
+		animation: shine 1.5s infinite;
+	}
+
+	.animate-shimmer-text {
+		background:
+			linear-gradient(-45deg, #0000 40%, #fff5, #0000 60%) right/300% 100%,
+			linear-gradient(45deg, var(--foreground), var(--foreground));
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+		color: #000;
+		animation: shine 1.5s infinite;
+	}
+
+	@keyframes shine {
+		to {
+			background-position: left;
+		}
+	}
+
+	.animate-fade-in {
+		animation: fadeIn 0.8s ease-out forwards;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
 }
 
 .notion-content :global(h1) {
@@ -282,4 +321,14 @@
 }
 .notion-content :global(code):not(pre > code) {
 	@apply bg-gray-200 text-sm px-1 py-0.5 rounded font-mono;
+}
+
+/* Respect user motion preferences for accessibility */
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }

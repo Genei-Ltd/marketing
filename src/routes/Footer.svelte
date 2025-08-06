@@ -7,20 +7,20 @@
 
 <footer class="text-muted-foreground mt-36 w-full px-4 py-8 text-sm">
 	<div class="max-w-7xl w-full mx-auto">
-		<div class="flex justify-between w-full">
+		<div class="lg:flex-row flex flex-col justify-between w-full">
 			<div class="col-span-1">
-				<a href="/" class="flex items-center gap-2 mb-4">
+				<a href="/" class="lg:mb-4 flex items-center gap-2 mb-8">
 					<img
 						src="/logos/CoLoop_Icon.svg"
 						alt="CoLoop Logo"
-						class="contrast-100 saturate-0 rounded-xl h-6" />
+						class="contrast-100 saturate-0 h-6 rounded-full" />
 					<h4 class=" text-foreground font-semibold">CoLoop</h4>
 				</a>
 			</div>
 
-			<div class="md:col-span-3 grid grid-cols-5 gap-8 text-right">
+			<div class="lg:grid-cols-5 lg:text-right grid grid-cols-2 col-span-5 gap-8 text-left">
 				<div>
-					<span class="text-muted-foreground text-xs font-medium">Product</span>
+					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Product</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
 						<a href="/products/qualitative" class="hover:underline transition-colors">Qualitative</a>
 						<a href="/products/quantitative" class="hover:underline transition-colors">Open Ends</a>
@@ -31,7 +31,7 @@
 					</nav>
 				</div>
 				<!-- <div>
-					<span class="text-muted-foreground text-xs font-medium">Sectors</span>
+					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Sectors</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
 						<a href="/sectors/healthcare-and-pharmaceuticals" class="hover:underline transition-colors"
 						>Healthcare & <br />Pharmaceuticals</a>
@@ -48,7 +48,7 @@
 						</nav>
 						</div> -->
 				<div>
-					<span class="text-muted-foreground text-xs font-medium">Comparisons</span>
+					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Comparisons</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
 						<a href="/careers" class="hover:underline transition-colors">CoLoop Vs. ChatGPT</a>
 						<a href="/mission" class="hover:underline transition-colors">CoLoop Vs. Listenlabs</a>
@@ -58,7 +58,7 @@
 					</nav>
 				</div>
 				<div>
-					<span class="text-muted-foreground text-xs font-medium">Teams</span>
+					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Teams</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
 						<a href="/use-cases/pharmaceutical" class="hover:underline transition-colors">In-house Teams</a>
 						<a href="/use-cases/biotechnology" class="hover:underline transition-colors">Academics</a>
@@ -67,7 +67,7 @@
 					</nav>
 				</div>
 				<div>
-					<span class="text-muted-foreground text-xs font-medium">Resources</span>
+					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Resources</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
 						<a href="/support" class="hover:underline transition-colors">Help center</a>
 						<a href="/support" class="hover:underline transition-colors">Support</a>
@@ -78,7 +78,7 @@
 					</nav>
 				</div>
 				<div>
-					<span class="text-muted-foreground text-xs font-medium">Company</span>
+					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Company</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
 						<a href="/careers" class="hover:underline transition-colors">Careers</a>
 						<a href="/about" class="hover:underline transition-colors">About</a>
@@ -91,7 +91,7 @@
 			</div>
 		</div>
 
-		<div class="md:flex-row mt-36 flex flex-col items-center justify-between gap-4">
+		<div class="md:flex-row lg:mt-36 flex flex-col items-center justify-between gap-4 mt-16">
 			<div class="text-muted-foreground text-xs">
 				&copy; {new Date().getFullYear()} CoLoop. All rights reserved.
 			</div>
