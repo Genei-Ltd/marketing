@@ -108,17 +108,20 @@
 </script>
 
 {#snippet card(feature: Feature)}
-	<div class=" bg-card border-primary text-balance flex flex-col items-start py-4 pl-4 text-left border-l-4 rounded">
-		<div class=" flex items-center justify-start w-12 h-12 mb-8">
-			<feature.icon class="size-16 text-primary" stroke={0.8} />
+	<div
+		class=" bg-card border-primary h-full text-balance flex lg:flex-col flex-row items-start py-4 pl-4 text-left border-l-4 rounded">
+		<div class=" flex items-start justify-start h-full mb-0 lg:mb-8 mr-4 lg:mr-0">
+			<feature.icon class="size-10 lg:size-12 text-primary" stroke={0.8} />
 		</div>
-		<span class="mb-2 text-lg font-semibold">{feature.title}</span>
-		<span class="opacity-70 pr-8 text-sm">{feature.description}</span>
+		<div class="flex flex-col items-start w-full">
+			<span class="mb-2 text-lg font-semibold">{feature.title}</span>
+			<span class="opacity-70 lg:pr-md pr-sm text-sm">{feature.description}</span>
+		</div>
 	</div>
 {/snippet}
 
-<section class="text-foreground w-full py-16">
-	<div class="md:grid-cols-2 lg:grid-cols-3 gap-y-8 grid gap-4">
+<section class="text-foreground w-full">
+	<div class="md:grid-cols-2 lg:grid-cols-3 lg:gap-y-8 grid gap-4">
 		{#each chosenSet as feature}
 			{@render card(feature)}
 		{/each}

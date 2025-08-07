@@ -59,8 +59,8 @@
 .dark {
 	--font-sans: "Work Sans", theme(fontFamily.sans);
 	--font-serif: "Georgia", theme(fontFamily.serif);
-	--background: hsl(30deg, 7.14%, 5.49%); /* #0f0e0d dark-oxford*/
-	--foreground: hsl(60deg, 9.09%, 97.8%); /* #fafaf9 light-ivory */
+	--background: hsl(0, 0%, 3%); /* #0f0e0d dark-oxford*/
+	--foreground: hsl(0, 0%, 96%); /* #fafaf9 light-ivory */
 	--card: oklch(0.25 0 264.695);
 	--card-foreground: oklch(0.984 0.003 247.858);
 	--popover: oklch(0.003 0 0);
