@@ -26,7 +26,7 @@
 	})
 </script>
 
-<div class="md:py-24 w-full py-16">
+<div class="    lg:py-24 w-full">
 	<Carousel.Root
 		opts={{
 			loop: true,
@@ -41,7 +41,8 @@
 						? 'opacity-100'
 						: 'opacity-20'} transition-opacity  duration-500 ease-in-out"
 					onclick={() => api?.scrollTo(index)}>
-					<div class="relative h-full w-full overflow-hidden rounded shadow-xl select-none aspect-[16/10]">
+					<div
+						class="relative h-full w-full overflow-hidden rounded lg:shadow-xl shadow-md select-none aspect-[16/10]">
 						<img
 							src={post.coverImage || "/images/fallback.png"}
 							alt={post.title}
@@ -65,13 +66,13 @@
 						</div>
 					</div>
 					<div class="relative z-10">
-						<div class=" text-primary-foreground relative flex flex-col justify-start h-full px-2">
+						<div class=" text-primary-foreground relative flex flex-col justify-start h-full lg:px-2">
 							<!-- Content -->
 							<div class="flex flex-row justify-between flex-1 mt-4 mb-1">
 								<blockquote class=" text-primary-foreground line-clamp-2 text-lg font-medium">
 									{post.title}
 								</blockquote>
-								<div class="flex-shrink-0">
+								<div class="flex-shrink-0 hidden lg:block">
 									<Button
 										href={"/blog/" + post.slug}
 										variant="secondary"
@@ -81,16 +82,25 @@
 
 							<!-- Footer -->
 							<div class="flex items-end justify-between flex-shrink-0 gap-6">
-								<div class="flex-1">
-									<p class=" text-primary-foreground opacity-70 text-sm font-semibold">
-										{post.company}
-									</p>
-									<div class="opacity-70 flex flex-row gap-3">
-										{#if post.category}
-											{#each post.category as category}
-												<p class="text-primary-foreground text-sm capitalize">{category}</p>
-											{/each}
-										{/if}
+								<div class="flex-1 flex flex-row items-center justify-between">
+									<div class="flex-col">
+										<p class=" text-primary-foreground opacity-70 text-sm font-semibold">
+											{post.company}
+										</p>
+										<div class="opacity-70 flex flex-row gap-3">
+											{#if post.category}
+												{#each post.category as category}
+													<p class="text-primary-foreground text-sm capitalize">{category}</p>
+												{/each}
+											{/if}
+										</div>
+									</div>
+									<div class="flex-shrink-0 block lg:hidden">
+										<Button
+											href={"/blog/" + post.slug}
+											variant="secondary"
+											size="sm"
+											class="text-secondary-foreground ">Read Article</Button>
 									</div>
 								</div>
 							</div>

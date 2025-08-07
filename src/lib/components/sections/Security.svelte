@@ -39,16 +39,16 @@
 	// Security features with icons
 	const features = [
 		{
-			icon: IconShield,
-			title: "No training on your data",
-		},
-		{
 			icon: IconLock,
 			title: "Modern & secure data practices",
 		},
 		{
 			icon: IconDatabase,
 			title: "End to end encryption",
+		},
+		{
+			icon: IconShield,
+			title: "No training on your data",
 		},
 		{
 			icon: IconUserCheck,
@@ -112,7 +112,8 @@
 									loading="lazy"
 									decoding="async"
 									fetchpriority="low"
-									class:invert={cert.name === "GDPR"}
+									class:invert={cert.name === "SOC2 Type I"}
+									class:group-hover:invert-0={cert.name === "SOC2 Type I"}
 									class="w-fit grayscale group-hover:grayscale-0 contrast-200 max-h-32 object-contain h-32 transition-opacity duration-200" />
 								<span
 									class="lg:absolute text-card-foreground opacity-70 lg:block bottom-0 left-0 hidden p-2 px-3 font-mono text-sm font-semibold">

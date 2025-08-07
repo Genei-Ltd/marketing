@@ -199,7 +199,8 @@
 <div class="lg:px-10 relative flex flex-col items-center justify-center h-full max-w-6xl px-6 mx-auto">
 	<!-- Testimonials -->
 	<div class="min-h-max w-full h-full overflow-hidden">
-		<div class="min-h-max lg:mt-32 lg:mb-32 flex flex-col w-full h-full max-w-6xl gap-16 mx-auto mt-16 mb-16">
+		<div
+			class="min-h-max lg:mt-32 lg:mb-32 hidden lg:flex flex-col w-full h-full max-w-6xl gap-16 mx-auto mt-16 mb-16">
 			{@render section("What our customers say")}
 			{#await data.testimonials}
 				<span class="text-foreground">Loading testimonials...</span>
@@ -211,7 +212,7 @@
 		</div>
 	</div>
 	<!-- BOOK A CALL CTA -->
-	<div class="w-full mt-16 mb-64">
+	<div class="w-full mt-16 lg:mb-64 mb-32">
 		{@render section(
 			"This is the future of research",
 			"Book a personalized demo to discover how CoLoop can accelerate your research and insights workflow.",
@@ -220,7 +221,7 @@
 	</div>
 
 	<!-- ENTERPRISE READY -->
-	{@render section("Enterprise Grade AI", "Designed by Insights Experts, for Insights Experts")}
+	{@render section("Enterprise Grade Artificial Intelligence", "Designed by Insights Experts, for Insights Experts")}
 	<div class="lg:grid-cols-4 grid grid-cols-2 grid-rows-2 gap-4 mb-16">
 		<!-- {
 			icon: IconShieldLock,
@@ -246,9 +247,9 @@
 				"Retrofit your teams, tools and processes in weeks with integrated APIs and expert quality tooling with no prompting experience required.",
 		}, -->
 		<Card
-			title="Enterprise Grade Security"
-			subtitle="Robust, industry-standard protection with zero training on your data. SOC II Compliant. "
-			image="/wild/vault.png"
+			title="By Insights Experts, for Insights Experts"
+			subtitle="Designed with insights leaders with agencies, household brands and research institutions."
+			image="/water/blue-3.png"
 			href="/demo"
 			cardHeight={96}
 			colSpan={2}
@@ -306,7 +307,7 @@
 <!-- FULL WIDTH START -->
 
 <div
-	class="text-primary-foreground min-h-200 bg-primary lg:mt-32 lg:mb-32 flex flex-col items-center justify-center w-full mt-16 mb-16">
+	class="text-primary-foreground lg:min-h-200 min-h-156 bg-primary lg:mt-32 lg:mb-32 flex flex-col items-center justify-center w-full mt-16 mb-16">
 	<!-- BLOGS CAROUSEL -->
 	<!-- {@render section("What our customers say")} -->
 	{#await data.articles}
@@ -322,7 +323,7 @@
 <div class="lg:px-10 relative flex flex-col items-center justify-center max-w-6xl px-6 mx-auto">
 	<!-- ORG TRANSFORMATION TIMELINE -->
 	<div class="lg:mt-32 lg:mb-32 w-full mt-16 mb-16">
-		{@render section("Transformation Your Team to AI Native ")}
+		{@render section("Transform your team to an AI native team")}
 		<Timeline></Timeline>
 	</div>
 
