@@ -261,6 +261,16 @@ export class NotionConnector {
 						}>
 					}
 				).files
+
+				console.log(
+					"FILE",
+					files.map((file) => file.file?.url),
+				)
+				console.log(
+					"EXTERNAL",
+					files.map((file) => file.external?.url),
+				)
+
 				// Return array of URLs instead of raw file objects
 				return (
 					files

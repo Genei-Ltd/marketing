@@ -4,7 +4,7 @@
 	import * as Carousel from "$lib/components/ui/carousel/index.js"
 	import type { CarouselAPI } from "$lib/components/ui/carousel/context.js"
 	import type { Article } from "$lib/types/articles"
-
+	import Autoplay from "embla-carousel-autoplay"
 	let { articles: articles }: { articles: Article[] } = $props()
 	console.log("blogs in the carousel component :", articles)
 
@@ -28,6 +28,11 @@
 
 <div class="    lg:py-24 w-full">
 	<Carousel.Root
+		plugins={[
+			Autoplay({
+				delay: 6000,
+			}),
+		]}
 		opts={{
 			loop: true,
 			align: "center",

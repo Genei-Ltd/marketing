@@ -45,9 +45,9 @@ function convertNotionPageToTestimonial(page: any): Testimonial {
 			notionConnector.getPropertyValue(properties["Client Name"], "rich_text") ||
 			"",
 		role: notionConnector.getPropertyValue(properties["Job Title"], "rich_text") || "",
-		avatar: notionConnector.getPropertyValue(properties["Avatar"], "files")?.[0]?.file?.url || undefined,
+		companyLogo: (notionConnector.getPropertyValue(properties["Logo"], "files") as string[])?.[0] || undefined,
+		avatar: (notionConnector.getPropertyValue(properties["Avatar"], "files") as string[])?.[0] || undefined,
 		company: notionConnector.getPropertyValue(properties["Company"], "rich_text") || "",
-		companyLogo: notionConnector.getPropertyValue(properties["Company Logo"], "files")?.[0]?.file?.url || undefined,
 		content:
 			notionConnector.getPropertyValue(properties["Testimonial"], "rich_text") ||
 			notionConnector.getPropertyValue(properties["Full Text"], "rich_text") ||
@@ -81,6 +81,8 @@ function convertNotionPageToTestimonial(page: any): Testimonial {
 export async function getTestimonialsFromNotion(): Promise<Testimonial[]> {
 	try {
 		const response = await notionConnector.queryDatabase(TESTIMONIALS_DATABASE_ID)
+
+		console.log("🔷", response)
 
 		return response.results.map(convertNotionPageToTestimonial)
 	} catch (error) {
@@ -175,8 +177,6 @@ export async function getApprovedTestimonialsByPage(
 		}
 
 		const response = await notionConnector.queryDatabase(TESTIMONIALS_DATABASE_ID, filter)
-
-		// console.log("🔷", response)
 
 		const testimonials = response.results.map(convertNotionPageToTestimonial)
 

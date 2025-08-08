@@ -6,7 +6,7 @@
 	import DemoWorkflowAssetUpload from "$components/animations/DemoWorkflowAssetUpload.svelte"
 	import DemoInterviewAnalysis from "$components/animations/DemoInterviewAnalysis.svelte"
 	import ConceptTestingDemo from "$components/animations/ConceptTestingDemo.svelte"
-
+	import Autoplay from "embla-carousel-autoplay"
 	// Define the pill labels
 	const pillLabels = ["In-House Strategy Teams", "Concept & Stimulus Testing", "Survey Analysis", "Research Agencies"]
 
@@ -56,6 +56,13 @@
 			loop: true,
 			align: "center",
 		}}
+		plugins={[
+			Autoplay({
+				delay: 6000,
+				stopOnMouseEnter: true,
+				stopOnInteraction: true,
+			}),
+		]}
 		setApi={(emblaApi) => (api = emblaApi)}
 		class="max-w-6xl w-full mx-auto transition-all duration-500 ease-in-out">
 		<Carousel.Content class="flex">

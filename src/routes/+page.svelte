@@ -21,6 +21,7 @@
 	import StaticDemoIntegrations from "$components/animations/StaticDemoIntegrations.svelte"
 	import DemoTranscriptClips from "$components/animations/DemoTranscriptClips.svelte"
 	import DemoFeatureReel from "$components/animations/DemoFeatureReel.svelte"
+	import CarouselTestimonials from "$components/sections/CarouselTestimonials.svelte"
 
 	let {
 		form,
@@ -199,13 +200,14 @@
 <div class="lg:px-10 relative flex flex-col items-center justify-center h-full max-w-6xl px-6 mx-auto">
 	<!-- Testimonials -->
 	<div class="min-h-max w-full h-full overflow-hidden">
-		<div
-			class="min-h-max lg:mt-32 lg:mb-32 hidden lg:flex flex-col w-full h-full max-w-6xl gap-16 mx-auto mt-16 mb-16">
+		<div class="min-h-max lg:mb-32 hidden lg:flex flex-col w-full h-full max-w-6xl gap-16 mx-auto mt-16 mb-16">
 			{@render section("What our customers say")}
 			{#await data.testimonials}
 				<span class="text-foreground">Loading testimonials...</span>
 			{:then testimonials}
-				<Testimonials {testimonials} />
+				<div class="h-full w-full mx-auto flex items-center justify-center">
+					<CarouselTestimonials {testimonials} />
+				</div>
 			{:catch}
 				<span class="text-foreground">Error loading testimonials</span>
 			{/await}
