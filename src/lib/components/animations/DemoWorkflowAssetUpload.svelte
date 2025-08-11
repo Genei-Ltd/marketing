@@ -286,10 +286,7 @@
 				if (controller.signal.aborted) throw new Error("Animation cancelled")
 
 				const file = { ...filesToUpload[i] }
-				animationState.uploadedFiles = [
-					...animationState.uploadedFiles,
-					file,
-				]
+				animationState.uploadedFiles = [...animationState.uploadedFiles, file]
 				animationState.currentUploadIndex = i
 
 				// Animate upload progress

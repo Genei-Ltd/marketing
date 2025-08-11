@@ -154,6 +154,7 @@
 		opts={{
 			loop: true,
 			align: "center",
+			containScroll: false,
 		}}
 		plugins={[autoplayPlugin]}
 		setApi={(emblaApi) => (api = emblaApi)}

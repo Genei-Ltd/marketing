@@ -5,7 +5,7 @@
 	import TwoSplit from "$components/layouts/TwoSplit.svelte"
 	import DemoWorkflowAssetUpload from "$components/animations/DemoWorkflowAssetUpload.svelte"
 	import DemoInterviewAnalysis from "$components/animations/DemoInterviewAnalysis.svelte"
-	import ConceptTestingDemo from "$components/animations/ConceptTestingDemo.svelte"
+	import ConceptTestingDemo from "$components/animations/DemoConceptTesting.svelte"
 	import Autoplay from "embla-carousel-autoplay"
 	// Define the pill labels
 	const pillLabels = ["In-House Strategy Teams", "Concept & Stimulus Testing", "Survey Analysis", "Research Agencies"]

@@ -115,7 +115,7 @@
 			heading="Specialized for Insights"
 			description="Delegate complex tasks in natural language to domain-specific agents that can count, search, summarise and cite."
 			buttonText="Explore Agents"
-			buttonHref="/demo">
+			buttonHref="/book-a-demo">
 			<WildAnimationBox backgroundColor="bg-accent-4">
 				<DemoTranscriptClips />
 			</WildAnimationBox>
@@ -126,7 +126,7 @@
 			description="Precise purpose built workflows for transcription, translation, content analysis, clip reels and more."
 			buttonText="Explore Workflows"
 			reverse
-			buttonHref="/demo">
+			buttonHref="/book-a-demo">
 			<div class="bg-accent-3 flex items-center justify-center h-full mx-auto overflow-hidden">
 				<DemoFeatureReel />
 			</div>
@@ -136,7 +136,7 @@
 			heading="Streamlined Analysis in a single tool"
 			description="Upload your data from a growing range of file formats, languages and 3rd party tools to create a single unified source of truth."
 			buttonText="Explore Integrations"
-			buttonHref="/demo">
+			buttonHref="/book-a-demo">
 			<WildAnimationBox backgroundColor="bg-accent-2">
 				<StaticDemoIntegrations />
 			</WildAnimationBox>
@@ -147,7 +147,7 @@
 			description="Combine your research material in secure projects with all of the context."
 			buttonText="Explore Projects"
 			reverse
-			buttonHref="/demo"
+			buttonHref="/book-a-demo"
 			clearBackground={[false, true]}>
 			<WildAnimationBox backgroundColor="bg-accent-1">
 				<DemoWorkflowSharing />

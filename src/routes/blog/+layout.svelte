@@ -80,8 +80,8 @@
 	<div class="max-w-6xl lg:px-10 px-6 mx-auto">
 		{#if data?.categories}
 			{#await data.categories}
-				<div class="flex flex-row gap-4 mb-8">
-					<Skeleton class="w-8 h-6" />
+				<div class="flex flex-row gap-4 mt-12 mb-8">
+					<!-- <Skeleton class="w-8 h-6" /> -->
 					<Skeleton class="w-16 h-6" />
 					<Skeleton class="w-20 h-6" />
 					<Skeleton class="w-14 h-6" />

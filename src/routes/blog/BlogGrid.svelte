@@ -79,7 +79,7 @@
 									{/if}
 									{#if post.companyLogo}
 										<div
-											class="bg-gradient-to-tl from-primary/50 to-primary/30 absolute inset-0 z-10 flex items-center justify-center">
+											class="bg-gradient-to-tl from-black/50 to-black/30 absolute inset-0 z-10 flex items-center justify-center">
 											<img
 												src={post.companyLogo}
 												alt={post.title}

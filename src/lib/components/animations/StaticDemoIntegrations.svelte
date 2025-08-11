@@ -16,7 +16,7 @@
 	const allIntegrations: Integration[] = [
 		// Video & Meeting Platforms
 		{ id: "zoom", name: "Zoom", logo: "/integrations/zoom.png" },
-		{ id: "teams", name: "Microsoft Teams", logo: "/integrations/teams.png" },
+		{ id: "teams", name: "Teams", logo: "/integrations/teams.png" },
 		{ id: "google-meet", name: "Google Meet", logo: "/integrations/google-meet.png" },
 		{ id: "discuss", name: "Discuss.io", logo: "/integrations/discuss.png" },
 
@@ -94,8 +94,8 @@
 	}
 </script>
 
-<div class="p- h-full w-full flex mx-auto self-center flex-col items-center justify-center">
-	<div class="grid w-full h-full max-w-4xl grid-cols-3 gap-4">
+<div class="h-full w-full flex mx-auto self-center flex-col items-center justify-center">
+	<div class="grid w-full h-full grid-cols-3 gap-4">
 		{#each currentWindow as integration, index (integration.id)}
 			{@const backIntegration = nextWindowIntegrations.get(index) || integration}
 			<div class="group h-full w-full [perspective:1000px] hover:scale-105 transition-transform duration-300">
@@ -106,23 +106,15 @@
 					<!-- Front of card -->
 					<div class="absolute h-full w-full [backface-visibility:hidden]">
 						<div
-							class="group card max-h-24 relative flex flex-col items-center justify-between w-full h-full p-2 transition-all duration-300">
-							<!-- Connected status indicator -->
-							<div class="-top-2 -right-2 absolute">
-								<div
-									class="size-4 ring-2 ring-background bg-secondary flex items-center justify-center rounded-full shadow-lg">
-									<IconCheck class="size-3.5 text-secondary-foreground" />
-								</div>
-							</div>
-
+							class="group card max-h-full relative flex flex-col items-center justify-between w-full h-full p-2 transition-all duration-300">
 							<!-- Logo -->
 							<img
 								src={integration.logo}
 								alt={integration.name}
-								class="max-h-12 object-contain w-24 h-12" />
+								class="max-h-2/3 object-contain size-24" />
 
 							<!-- Name -->
-							<div class="text-secondary-foreground text-sm font-medium leading-tight text-center">
+							<div class=" text-sm font-medium leading-tight text-center">
 								{integration.name}
 							</div>
 						</div>
@@ -132,14 +124,6 @@
 					<div class="absolute h-full w-full [backface-visibility:hidden] [transform:rotateX(180deg)]">
 						<div
 							class="group card max-h-24 relative flex flex-col items-center justify-between w-full h-full p-2 transition-all duration-300">
-							<!-- Connected status indicator -->
-							<div class="-top-2 -right-2 absolute">
-								<div
-									class="size-4 ring-2 ring-background bg-secondary flex items-center justify-center rounded-full shadow-lg">
-									<IconCheck class="size-3.5 text-secondary-foreground" />
-								</div>
-							</div>
-
 							<!-- Logo -->
 							<img
 								src={backIntegration.logo}
@@ -147,7 +131,7 @@
 								class="max-h-12 object-contain w-24 h-12" />
 
 							<!-- Name -->
-							<div class="text-secondary-foreground text-sm font-medium leading-tight text-center">
+							<div class=" text-sm font-medium leading-tight text-center">
 								{backIntegration.name}
 							</div>
 						</div>
@@ -155,9 +139,6 @@
 				</div>
 			</div>
 		{/each}
-	</div>
-	<div class="flex flex-row items-center justify-center w-full mt-4">
-		<div class="text-secondary text-sm font-semibold leading-tight text-center">+ More</div>
 	</div>
 </div>
 

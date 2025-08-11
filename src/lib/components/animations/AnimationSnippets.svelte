@@ -19,7 +19,7 @@
 
 <script>
 	import PharmaInsightDemo from "./PharmaInsightDemo.svelte"
-	import ConceptTestingDemo from "./ConceptTestingDemo.svelte"
+	import ConceptTestingDemo from "./DemoConceptTesting.svelte"
 	import GuestAccess from "./GuestAccess.svelte"
 	import DemoInterviewAnalysis from "./DemoInterviewAnalysis.svelte"
 	import DemoIntegrations from "./DemoIntegrations.svelte"
