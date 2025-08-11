@@ -25,7 +25,9 @@
 				variant="link"
 				size="none"
 				href="/blog"
-				class={isActive("/blog") ? "underline text-accent underline-offset-4" : "opacity-80 hover:opacity-100"}>
+				class={isActive("/blog")
+					? "underline text-accent underline-offset-4 opacity-100 hover:opacity-80"
+					: "opacity-100 hover:opacity-80"}>
 				All
 			</Button>
 		</div>
@@ -38,8 +40,8 @@
 					size="none"
 					href={categoryHref}
 					class={isActive(categoryHref)
-						? "underline text-accent underline-offset-4"
-						: "opacity-80 hover:opacity-100"}>
+						? "underline text-accent underline-offset-4 opacity-100 hover:opacity-80"
+						: "opacity-100 hover:opacity-80"}>
 					{category}
 				</Button>
 			</div>

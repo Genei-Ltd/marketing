@@ -28,10 +28,10 @@
 
 {#await articles}
 	<div
-		class="gap-x-4 gap-y-12 md:grid-cols-2 lg:grid-cols-3 min-h-96 max-h-96 grid grid-cols-1 overflow-hidden transition-all duration-500 ease-out">
+		class="gap-x-4 gap-y-12 md:grid-cols-2 lg:grid-cols-3 min-h-96 lg:max-h-full max-h-96 grid grid-cols-1 overflow-hidden transition-all duration-500 ease-out">
 		{#each Array.from({ length: 6 }, (_, i) => i) as i}
 			<div
-				class="group animate-fade-in block opacity-0"
+				class="group animate-fade-in block opacity-0 h-full"
 				style="animation-delay: {250 + i * 100}ms"
 				in:fly={{ y: 40, duration: 600, delay: 200 + i * 100, easing: elasticOut }}>
 				<div class="bg-card overflow-hidden rounded-md">
@@ -39,7 +39,7 @@
 						<Skeleton class="w-full h-full" />
 					</div>
 				</div>
-				<div class="mt-4">
+				<div class="mt-4 h-full">
 					<div class="mb-2 space-y-1">
 						<Skeleton class="w-full h-4" />
 						<Skeleton class="w-3/4 h-4" />
@@ -62,7 +62,11 @@
 		<div
 			class="gap-x-6 gap-y-8 md:grid-cols-2 lg:grid-cols-3 max-h-none grid grid-cols-1 overflow-visible transition-all duration-500 ease-out">
 			{#each articles as post, i}
-				<a href={`/blog/${post.slug}`} class="block">
+				<a
+					href={post.externalUrl || `/blog/${post.slug}`}
+					class="block"
+					target={post.externalUrl ? "_blank" : "_self"}
+					rel={post.externalUrl ? "noopener noreferrer" : undefined}>
 					<div
 						class="group animate-fade-in block transition-all duration-300 opacity-0"
 						style="animation-delay: {150 + i * 80}ms"
@@ -70,7 +74,7 @@
 						<div class="block">
 							<div class="bg-card overflow-hidden rounded-md">
 								<!-- {#if post.coverImage} -->
-								<div class="aspect-[16/9] bg-card w-full overflow-hidden rounded-lg relative">
+								<div class="aspect-[16/9] w-full overflow-hidden rounded-lg relative">
 									{#if isNew(post.publishedDate)}
 										<span
 											class="text-xs absolute shadow tracking-wider top-2 left-2 uppercase font-semibold bg-accent text-white px-1.5 py-0.5 rounded-sm z-20">
@@ -86,9 +90,19 @@
 												loading="lazy"
 												class="h-fit z-20 w-auto max-w-xl brightness-0 contrast-200 invert drop-shadow-[0_0_0_white]" />
 										</div>
+									{:else if post.externalUrl}
+										<div
+											class="bg-gradient-to-tl from-black/50 to-black/30 absolute inset-0 z-10 flex items-end justify-start p-3 h-full overflow-hidden">
+											<h1
+												class="text-white text-[1.6rem] text-balance justify-end items-end font-thin capitalize font-serif text-left line-clamp-5 leading-tight">
+												{post.title}
+											</h1>
+										</div>
 									{/if}
 									<img
-										src={post.coverImage || "/images/fallback.png"}
+										src={post.externalUrl
+											? "/images/article-fallback.png"
+											: post.coverImage || "/images/fallback.png"}
 										alt={post.title}
 										loading="lazy"
 										class="group-hover:scale-110 animate-fade-in object-cover w-full h-full transition-all duration-500 ease-out opacity-0"
