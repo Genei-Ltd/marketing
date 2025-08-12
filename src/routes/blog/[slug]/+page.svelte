@@ -6,13 +6,25 @@
 	import { Skeleton } from "$components/ui/skeleton"
 	import { fly, scale } from "svelte/transition"
 	import { cubicInOut } from "svelte/easing"
+	import SEOHead from "$lib/components/SEOHead.svelte"
+	import type { Article } from "$lib/types/articles"
+	import type { SEOMetadata } from "$lib/utils/seo"
+
 	interface PageData {
-		blogPostBlocks: NotionBlock[]
-		blogPostMetadata: NotionPageWithProperties
+		// Immediate data (available on first render)
+		article: Article
+		seoMetadata: SEOMetadata
+		structuredData: unknown[]
+		// Streamed data (promises that resolve after page loads)
+		blogPostBlocks: Promise<NotionBlock[]>
+		blogPostMetadata: Promise<NotionPageWithProperties>
 	}
 
 	let { data }: { data: PageData } = $props()
 </script>
+
+<!-- SEO Meta Tags and Structured Data - Available immediately from server -->
+<SEOHead metadata={data.seoMetadata} structuredData={data.structuredData} />
 
 <div class="lg:mt-36 max-w-4xl px-4 mx-auto mt-16">
 	<Button
@@ -24,84 +36,63 @@
 		Back
 	</Button>
 	<article class="space-y-8">
+		<!-- Article header - Available immediately from server -->
 		<div class="lg:mb-24 flex flex-col gap-4 mb-16 text-left">
-			{#await data.blogPostMetadata}
-				<div class="lg:pr-32 text-balance min-h-16 pr-0 space-y-2 font-serif font-medium">
-					<Skeleton class="w-full h-6" />
-					<Skeleton class="w-4/5 h-6" />
-				</div>
-			{:then blogPostMetadata}
-				<h1
-					class="lg:pr-32 text-balance pr-0 font-serif font-medium"
-					in:fly={{ x: -10, duration: 300, easing: cubicInOut, delay: 200 }}
-					out:fly={{ x: 10, duration: 500, easing: cubicInOut }}>
-					{blogPostMetadata?.properties?.Title?.title[0]?.plain_text || "Loading article..."}
-				</h1>
-			{/await}
-			{#await data.blogPostMetadata}
-				<div class="min-h-10 flex items-center justify-start gap-4">
-					<div class="w-10 h-10 overflow-hidden rounded-full">
-						<Skeleton class="w-full h-full" />
-					</div>
-					<div class="space-y-1">
-						<Skeleton class="w-20 h-4" />
-						<Skeleton class="w-32 h-3" />
-					</div>
-				</div>
-			{:then blogPostMetadata}
-				<div
-					class="flex items-center justify-start gap-4"
-					in:fly={{ x: -10, duration: 300, easing: cubicInOut, delay: 400 }}
-					out:fly={{ x: 10, duration: 500, easing: cubicInOut }}>
-					{#if blogPostMetadata?.properties?.["Author Image"]?.files[0]?.file.url}
-						<img
-							src={blogPostMetadata?.properties?.["Author Image"]?.files[0]?.file.url}
-							alt={blogPostMetadata?.properties?.Author?.rich_text[0]?.plain_text}
-							class="bg-primary object-cover object-center w-10 h-10 rounded-full"
-							in:scale={{ duration: 300, easing: cubicInOut, delay: 200, start: 0.8 }} />
-					{:else}
-						<div class="bg-muted w-10 h-10 overflow-hidden rounded-full"></div>
+			<h1
+				class="lg:pr-32 text-balance pr-0 font-serif font-medium text-3xl"
+				in:fly={{ x: -10, duration: 300, easing: cubicInOut, delay: 200 }}
+				out:fly={{ x: 10, duration: 500, easing: cubicInOut }}>
+				{data.article.title}
+			</h1>
+
+			<div
+				class="flex items-center justify-start gap-4"
+				in:fly={{ x: -10, duration: 300, easing: cubicInOut, delay: 400 }}
+				out:fly={{ x: 10, duration: 500, easing: cubicInOut }}>
+				{#if data.article.authorImage}
+					<img
+						src={data.article.authorImage}
+						alt={data.article.author}
+						class="bg-primary object-cover object-center w-10 h-10 rounded-full"
+						in:scale={{ duration: 300, easing: cubicInOut, delay: 200, start: 0.8 }} />
+				{:else}
+					<div class="bg-muted w-10 h-10 overflow-hidden rounded-full"></div>
+				{/if}
+				<div>
+					{#if data.article.author}
+						<p
+							class="text-foreground text-base font-medium"
+							in:fly={{ y: 5, duration: 300, easing: cubicInOut, delay: 250 }}>
+							{data.article.author}
+						</p>
 					{/if}
-					<div>
-						{#if blogPostMetadata?.properties?.Author?.rich_text[0]?.plain_text}
-							<p
-								class="text-foreground text-base font-medium"
-								in:fly={{ y: 5, duration: 300, easing: cubicInOut, delay: 250 }}>
-								{blogPostMetadata?.properties?.Author?.rich_text[0]?.plain_text}
-							</p>
-						{/if}
-						{#if blogPostMetadata?.properties?.["Published Date"]?.date.start}
-							<span
-								class="text-muted-foreground text-sm"
-								in:fly={{ y: 5, duration: 300, easing: cubicInOut, delay: 250 }}>
-								Published on {new Date(
-									blogPostMetadata?.properties?.["Published Date"]?.date.start || "",
-								).toLocaleDateString("en-US", {
-									year: "numeric",
-									month: "long",
-									day: "numeric",
-								})}
-							</span>
-						{/if}
-					</div>
+					{#if data.article.publishedDate}
+						<span
+							class="text-muted-foreground text-sm"
+							in:fly={{ y: 5, duration: 300, easing: cubicInOut, delay: 250 }}>
+							Published on {new Date(data.article.publishedDate).toLocaleDateString("en-US", {
+								year: "numeric",
+								month: "long",
+								day: "numeric",
+							})}
+							{#if data.article.readingTime}
+								• {data.article.readingTime} min read
+							{/if}
+						</span>
+					{/if}
 				</div>
-			{/await}
+			</div>
 		</div>
 
-		{#await data.blogPostMetadata}
-			<div class="aspect-video bg-muted w-full overflow-hidden rounded">
-				<Skeleton class="w-full h-full" />
-			</div>
-		{:then blogPostMetadata}
-			{#if blogPostMetadata?.properties?.["Cover Image"]?.files[0]?.file.url}
-				<img
-					src={blogPostMetadata?.properties?.["Cover Image"]?.files[0]?.file.url}
-					alt={blogPostMetadata?.properties?.Title?.title[0]?.plain_text}
-					class="aspect-video bg-primary object-cover w-full overflow-hidden rounded"
-					in:fly={{ y: 20, duration: 400, easing: cubicInOut, delay: 600 }}
-					out:fly={{ y: -20, duration: 500, easing: cubicInOut }} />
-			{/if}
-		{/await}
+		<!-- Cover image - Available immediately from server -->
+		{#if data.article.coverImage}
+			<img
+				src={data.article.coverImage}
+				alt={data.article.title}
+				class="aspect-video bg-primary object-cover w-full overflow-hidden rounded"
+				in:fly={{ y: 20, duration: 400, easing: cubicInOut, delay: 600 }}
+				out:fly={{ y: -20, duration: 500, easing: cubicInOut }} />
+		{/if}
 
 		{#await data.blogPostBlocks}
 			<div class="space-y-4">

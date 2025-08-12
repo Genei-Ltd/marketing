@@ -10,7 +10,7 @@
 
 	import EmailSubmit from "../lib/components/blocks/EmailSubmit.svelte"
 	import ColSideSelectTwoSplit from "../lib/components/sections/ColSideSelectTwoSplit.svelte"
-	import Testimonials from "../lib/components/sections/Testimonials.svelte"
+
 	import Card from "$components/blocks/Card.svelte"
 	import NakedCardSet from "$components/sections/NakedCardSet.svelte"
 	import CarouselBlogs from "$components/sections/CarouselBlogs.svelte"
@@ -23,12 +23,24 @@
 	import DemoFeatureReel from "$components/animations/DemoFeatureReel.svelte"
 	import CarouselTestimonials from "$components/sections/CarouselTestimonials.svelte"
 
+	// SEO imports
+	import SEOHead from "$lib/components/SEOHead.svelte"
+	import { generateHomepageMetadata } from "$lib/utils/seo"
+	import { generateHomepageSchemas } from "$lib/utils/structured-data"
+
 	let {
 		form,
 		data,
 	}: { form: FormData; data: { testimonials: Testimonial[]; ctaTestimonial: Testimonial[]; articles: Article[] } } =
 		$props()
+
+	// Generate SEO metadata and structured data
+	const seoMetadata = generateHomepageMetadata()
+	const structuredData = generateHomepageSchemas()
 </script>
+
+<!-- SEO Meta Tags and Structured Data -->
+<SEOHead metadata={seoMetadata} {structuredData} />
 
 {#snippet section(title: string, subtitle?: string)}
 	<div class="flex flex-col items-center justify-center w-full">
