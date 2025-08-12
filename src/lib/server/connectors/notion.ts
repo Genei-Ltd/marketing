@@ -323,23 +323,32 @@ export async function getDatabaseRowsByGroup(
 ): Promise<
 	(PageObjectResponse | PartialPageObjectResponse | DatabaseObjectResponse | PartialDatabaseObjectResponse)[]
 > {
-	const response = await notionConnector.queryDatabase(databaseId, {
-		and: [
-			{
-				property: "Group",
-				multi_select: {
-					contains: group,
+	const response = await notionConnector.queryDatabase(
+		databaseId,
+		{
+			and: [
+				{
+					property: "Group",
+					multi_select: {
+						contains: group,
+					},
 				},
-			},
-			{
-				property: "Status",
-				status: {
-					equals: "Published",
+				{
+					property: "Status",
+					status: {
+						equals: "Published",
+					},
 				},
+				...(category ? [{ property: "Category", multi_select: { contains: category } }] : []),
+			],
+		},
+		[
+			{
+				property: "Published Date",
+				direction: "descending",
 			},
-			...(category ? [{ property: "Category", multi_select: { contains: category } }] : []),
 		],
-	})
+	)
 	return response.results
 }
 

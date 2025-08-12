@@ -83,7 +83,7 @@
 									{/if}
 									{#if post.companyLogo}
 										<div
-											class="bg-gradient-to-tl from-black/50 to-black/30 absolute inset-0 z-10 flex items-center justify-center">
+											class="bg-gradient-to-tl from-black/60 to-black/30 absolute inset-0 z-10 flex items-center justify-center p-4">
 											<img
 												src={post.companyLogo}
 												alt={post.title}
@@ -92,7 +92,7 @@
 										</div>
 									{:else if post.externalUrl}
 										<div
-											class="bg-gradient-to-tl from-black/50 to-black/30 absolute inset-0 z-10 flex items-end justify-start p-3 h-full overflow-hidden">
+											class="bg-gradient-to-tl from-black/60 to-black/30 absolute inset-0 z-10 flex items-end justify-start p-4 h-full overflow-hidden">
 											<h1
 												class="text-white text-[1.6rem] text-balance justify-end items-end font-thin capitalize font-serif text-left line-clamp-5 leading-tight">
 												{post.title}
@@ -117,12 +117,12 @@
 							</div>
 						{/if} -->
 							</div>
-							<div class="mt-6">
+							<div class="mt-4">
 								<h3 class="text-foreground line-clamp-2 text-base font-medium">
 									{post.title}
 								</h3>
 								{#if post.publishedDate}
-									<div class="text-muted-foreground flex items-center mt-2 capitalize">
+									<div class="text-muted-foreground flex items-center mt-1 capitalize">
 										<IconCalendar class="text-muted-foreground w-3 h-3 mr-1.5" stroke={0.8} />
 										<span class="text-xs font-medium">
 											{formatDate(post.publishedDate)}

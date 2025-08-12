@@ -86,12 +86,23 @@
 
 		<!-- Cover image - Available immediately from server -->
 		{#if data.article.coverImage}
-			<img
-				src={data.article.coverImage}
-				alt={data.article.title}
-				class="aspect-video bg-primary object-cover w-full overflow-hidden rounded"
-				in:fly={{ y: 20, duration: 400, easing: cubicInOut, delay: 600 }}
-				out:fly={{ y: -20, duration: 500, easing: cubicInOut }} />
+			<div class="aspect-video bg-primary object-cover w-full overflow-hidden rounded relative">
+				<img
+					src={data.article.coverImage}
+					alt={data.article.title}
+					class="aspect-video bg-primary object-cover w-full overflow-hidden rounded"
+					in:fly={{ y: 20, duration: 400, easing: cubicInOut, delay: 600 }}
+					out:fly={{ y: -20, duration: 500, easing: cubicInOut }} />
+				{#if data.article.companyLogo}
+					<div
+						class="bg-gradient-to-tl from-black/60 to-black/30 absolute inset-0 z-10 flex items-center justify-center p-4">
+						<img
+							src={data.article.companyLogo}
+							alt={data.article.company}
+							class="relative inset-0 w-1/2 h-1/2 object-contain brightness-0 contrast-200 invert" />
+					</div>
+				{/if}
+			</div>
 		{/if}
 
 		{#await data.blogPostBlocks}
