@@ -77,7 +77,7 @@
 				{/each}
 			</p>
 		{:else if block.type === "heading_1"}
-			<h1 class="mt-12 mb-4 font-serif text-2xl font-semibold">
+			<h1 class="mt-12 mb-4 font-serif text-2xl font-medium">
 				{extractRichText(block.heading_1?.rich_text || [])}
 			</h1>
 		{:else if block.type === "heading_2"}

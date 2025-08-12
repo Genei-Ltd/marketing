@@ -295,9 +295,9 @@
 		}
 	}
 }
-
+/* 
 .notion-content :global(h1) {
-	@apply mt-12 mb-6 text-4xl font-extrabold;
+	@apply mt-12 mb-6 text-2xl font-bold;
 }
 .notion-content :global(h2) {
 	@apply mt-10 mb-5 text-3xl font-bold;
@@ -322,7 +322,7 @@
 }
 .notion-content :global(code):not(pre > code) {
 	@apply bg-gray-200 text-sm px-1 py-0.5 rounded font-mono;
-}
+} */
 
 /* Respect user motion preferences for accessibility */
 @media (prefers-reduced-motion: reduce) {
