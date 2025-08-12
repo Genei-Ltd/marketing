@@ -17,6 +17,7 @@ export type Article = {
 	featured?: boolean
 	status?: string
 	url?: string
+	externalUrl?: string
 	icon?: {
 		type: "external"
 		external: { url: string }
