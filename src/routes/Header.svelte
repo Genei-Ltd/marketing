@@ -27,17 +27,17 @@
 	const companyTypes = [
 		{
 			title: "Agency",
-			href: "#",
+			href: "#agency",
 			description: "Solutions for agencies and consultants",
 		},
 		{
 			title: "In-house team",
-			href: "#",
+			href: "#in-house",
 			description: "Solutions for internal teams",
 		},
 		{
 			title: "Independent researcher",
-			href: "#",
+			href: "#independent",
 			description: "Solutions for independent researchers",
 		},
 	]
@@ -45,32 +45,32 @@
 	const useCases = [
 		{
 			title: "Concept testing",
-			href: "#",
+			href: "#concept-testing",
 			description: "Test and validate new concepts",
 		},
 		{
 			title: "Message testing",
-			href: "#",
+			href: "#message-testing",
 			description: "Test marketing messages and communications",
 		},
 		{
 			title: "Brand positioning",
-			href: "#",
+			href: "#brand-positioning",
 			description: "Research and refine brand positioning",
 		},
 		{
 			title: "Customer experience",
-			href: "#",
+			href: "#customer-experience",
 			description: "Understand and improve customer experience",
 		},
 		{
 			title: "Market entry",
-			href: "#",
+			href: "#market-entry",
 			description: "Research for entering new markets",
 		},
 		{
 			title: "Pricing research",
-			href: "#",
+			href: "#pricing-research",
 			description: "Research pricing strategies and models",
 		},
 	]
@@ -93,7 +93,7 @@
 		},
 		{
 			title: "Careers",
-			href: "#",
+			href: "/careers",
 			description: "Join our team and grow with us",
 		},
 		{
