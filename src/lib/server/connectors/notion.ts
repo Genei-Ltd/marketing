@@ -424,6 +424,7 @@ export async function transformNotionDBRowToArticle(
 				color: string
 			} | null
 		)?.name,
+		externalUrl: notionConnector.getPropertyValue(props["URL"], "url") as string | undefined,
 		url: notionDBItem.url,
 		icon: notionDBItem.icon as { type: "external"; external: { url: string } } | null,
 		blocks: [], // Will be populated separately when fetching page content,
