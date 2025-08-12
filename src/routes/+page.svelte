@@ -76,7 +76,7 @@
 		alt="Hero"
 		class="2xl:object-top-right sm:object-center absolute top-0 z-10 object-cover object-left w-full h-full opacity-100" />
 	<div
-		class="pb-96 bg-gradient-to-t from-primary/90 via-primary/0 to-transparent opacity-60 absolute bottom-0 z-10 w-full h-screen">
+		class="pb-96 bg-gradient-to-t from-black/90 via-black/0 to-transparent opacity-60 absolute bottom-0 z-10 w-full h-screen">
 	</div>
 	<!-- <div
 		class="px-auto absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-32">
@@ -88,11 +88,11 @@
 		class="lg:px-10 absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full max-w-6xl px-6 py-16 mx-auto">
 		<div class="flex flex-col items-start justify-end h-full">
 			<h1
-				class="xl:text-huge text-background text-balance drop-shadow-lg sm:text-3xl md:text-4xl font-serif text-2xl leading-tight tracking-wide text-left capitalize">
+				class="xl:text-huge text-white text-balance drop-shadow-lg sm:text-3xl md:text-4xl font-serif text-2xl leading-tight tracking-wide text-left capitalize">
 				AI-powered analysis for human-powered insights
 			</h1>
 			<h2
-				class="text-background opacity-80 text-md md:text-lg mt-4 font-sans font-medium leading-tight tracking-wide text-left uppercase">
+				class="text-white opacity-80 text-md md:text-lg mt-4 font-sans font-medium leading-tight tracking-wide text-left uppercase">
 				Opinions in, insights out. Fast.
 			</h2>
 		</div>

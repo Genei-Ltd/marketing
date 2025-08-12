@@ -46,7 +46,7 @@
 						? 'opacity-100'
 						: 'opacity-20'} transition-opacity  duration-500 ease-in-out"
 					onclick={() => api?.scrollTo(index)}>
-					<div
+					<!-- <div
 						class="relative h-full w-full overflow-hidden rounded lg:shadow-xl shadow-md select-none aspect-[16/10]">
 						<img
 							src={post.coverImage || "/images/fallback.png"}
@@ -55,7 +55,6 @@
 						<div
 							class="bg-gradient-to-t from-primary/90 via-primary/40 to-transparent absolute inset-0 z-20">
 						</div>
-						<!-- Company Logo -->
 						<div
 							class="text-primary-foreground absolute inset-0 z-30 flex items-center justify-center flex-shrink-0 p-4">
 							{#if post.companyLogo}
@@ -69,6 +68,42 @@
 								</div>
 							{/if}
 						</div>
+					</div> -->
+					<div class="aspect-[16/10] w-full overflow-hidden rounded-lg relative">
+						{#if post.coverImage}
+							<div
+								class="bg-gradient-to-tl from-black/70 to-black/30 absolute inset-0 z-10 flex items-center justify-center p-4 lg:p-8 h-full">
+								<div
+									class="absolute inset-0 z-30 flex items-center justify-center flex-shrink-0 p-4 h-full">
+									{#if post.companyLogo}
+										<img
+											src={post.companyLogo}
+											alt={post.company || "Company"}
+											class="w-auto h-auto max-h-1/3 max-w-1/3 brightness-0 contrast-200 invert drop-shadow-[0_0_0_white] text-white" />
+									{:else if post.company}
+										<div
+											class="md:text-3xl text-2xl font-bold tracking-tight line-clamp-1 capitalize text-white">
+											{post.company}
+										</div>
+									{/if}
+								</div>
+							</div>
+						{:else if post.externalUrl}
+							<div
+								class="bg-gradient-to-tl from-black/70 to-black/30 absolute inset-0 z-10 flex items-end justify-start p-4 lg:p-8 h-full overflow-hidden">
+								<h1
+									class="text-white text-3xl text-balance justify-end items-end font-thin capitalize font-serif text-left line-clamp-3 leading-tight">
+									{post.title}
+								</h1>
+							</div>
+						{/if}
+						<img
+							src={post.externalUrl
+								? "/images/article-fallback.png"
+								: post.coverImage || "/images/fallback.png"}
+							alt={post.title}
+							loading="lazy"
+							class="group-hover:scale-110 animate-fade-in object-cover w-full h-full transition-all duration-500 ease-out opacity-0" />
 					</div>
 					<div class="relative z-10">
 						<div class=" text-primary-foreground relative flex flex-col justify-start h-full lg:px-2">

@@ -72,7 +72,7 @@
 						style="animation-delay: {150 + i * 80}ms"
 						in:fly={{ y: 50, duration: 700, delay: 100 + i * 80, easing: elasticOut }}>
 						<div class="block">
-							<div class="bg-card overflow-hidden rounded-md">
+							<div class=" overflow-hidden rounded-md">
 								<!-- {#if post.coverImage} -->
 								<div class="aspect-[16/9] w-full overflow-hidden rounded-lg relative">
 									{#if isNew(post.publishedDate)}
