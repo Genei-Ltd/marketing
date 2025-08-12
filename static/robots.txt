@@ -1,3 +1,21 @@
-User-agent: *
-Disallow:
+# CoLoop Marketing Website - robots.txt
 
+User-agent: *
+Allow: /
+
+# Block access to admin/private areas (if they exist)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /node_modules/
+Disallow: /.svelte-kit/
+
+# Allow access to important files
+Allow: /sitemap.xml
+Allow: /favicon.ico
+Allow: /robots.txt
+
+# Block crawling of search results or dynamic filtered pages
+Disallow: /*?*
+
+# Sitemap location
+Sitemap: https://coloop.ai/sitemap.xml
