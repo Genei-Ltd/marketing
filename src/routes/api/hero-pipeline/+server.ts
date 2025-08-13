@@ -4,10 +4,12 @@ import { notionConnector } from "$lib/server/connectors/notion.js"
 import type { RequestHandler } from "./$types.js"
 
 export const POST: RequestHandler = async ({ request }) => {
-	const { body } = await request.json()
+	console.log("inside the server /api/hero-pipeline")
+	console.log("request", request)
 
-	console.log(body)
+	const body = await request.json()
+	console.log("body", body)
 
-	// const result = await runWorkflow(prompt, baseImageUrl, maskUrl, 1)
+	// const result = await runWorkflow(prompt, baseImageUrl, maskUrl
 	return json({ message: "Hello, world!" })
 }
