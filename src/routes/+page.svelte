@@ -72,9 +72,9 @@
 <!-- HERO SECTION -->
 <div class="pb-96 max-h-300 relative top-0 z-10 w-full h-screen">
 	<img
-		src="/wild/coca-cola-4k.png"
+		src="/wild/coca-cola-4k-wide.jpg"
 		alt="Hero"
-		class="2xl:object-top-right sm:object-center absolute top-0 z-10 object-cover object-left w-full h-full opacity-100" />
+		class="2xl:object-bottom-right object-center absolute top-0 z-10 object-cover xl:object-right w-full h-full opacity-100 transition-all duration-500 ease-in-out" />
 	<div
 		class="pb-96 bg-gradient-to-t from-black/90 via-black/0 to-transparent opacity-60 absolute bottom-0 z-10 w-full h-screen">
 	</div>
