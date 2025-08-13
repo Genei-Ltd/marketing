@@ -1,6 +1,6 @@
 import { createProdia } from "prodia/v2"
-// @ts-expect-error - SvelteKit environment import
-import { PRIVATE_PRODIA_TOKEN } from "$env/dynamic/private"
+
+import { PRIVATE_PRODIA_TOKEN } from "$env/static/private"
 
 const Prodia = createProdia({
 	token: PRIVATE_PRODIA_TOKEN,
