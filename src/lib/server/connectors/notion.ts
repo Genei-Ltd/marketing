@@ -466,5 +466,22 @@ export async function getDatabaseSchemaMultiSelectOptionsForProperty(
 	return []
 }
 
+// export async function updatePageProperty(pageId: string, property: string, value: any) {
+// 	try {
+// 		const response = await notionConnector.client.pages.update({
+// 			page_id: pageId,
+// 			properties: {
+// 				[property]: value,
+// 			},
+// 		})
+// 		return response
+// 	} catch (error) {
+// 		console.error("Error updating page property:", error)
+// 		throw new Error(
+// 			`Failed to update property ${property} for page ${pageId}: ${error instanceof Error ? error.message : "Unknown error"}`,
+// 		)
+// 	}
+// }
+
 // Export a singleton instance
 export const notionConnector = new NotionConnector()

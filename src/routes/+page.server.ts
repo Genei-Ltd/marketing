@@ -4,14 +4,20 @@ import { getApprovedTestimonialsByPage } from "$lib/server/connectors/notion-tes
 import type { Actions } from "./$types"
 import { getDatabaseRowsByGroup, transformDBRowsToArticles } from "$lib/server/connectors/notion"
 
-export const load = async () => {
+export const load = async ({ url }) => {
 	// get testimonials from notion
 	const DATABASE_ID = "2326a3daa35a80a19eaae5366b3b2a1d"
+
+	let partner = null
+	if (url.searchParams.get("partner")) {
+		partner = url.searchParams.get("partner")
+	}
 
 	return {
 		testimonials: getApprovedTestimonialsByPage("/", false),
 		ctaTestimonial: getApprovedTestimonialsByPage("CTA", false),
 		articles: transformDBRowsToArticles(await getDatabaseRowsByGroup(DATABASE_ID, "landing-page")),
+		partner,
 	}
 }
 
