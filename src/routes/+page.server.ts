@@ -12,35 +12,48 @@ import {
 
 export const load = async ({ url }) => {
 	// get testimonials from notion
-	const DATABASE_ID = "2326a3daa35a80a19eaae5366b3b2a1d"
+	// https://www.notion.so/genei/24e6a3daa35a8027a782f0017856bcf1?v=24e6a3daa35a8075bed4000c9d48422e&source=copy_link
+	const HERO_DATABASE_ID = "24e6a3daa35a8027a782f0017856bcf1"
 
 	let partnerHero = null
-	if (
-		url.searchParams.get("partner") &&
-		url.searchParams.get("partner") !== "" &&
-		url.searchParams.get("partner") !== null &&
-		url.searchParams.get("partner") !== undefined
-	) {
-		const partner = url.searchParams.get("partner") as string
+	try {
+		if (
+			url.searchParams.get("partner") &&
+			url.searchParams.get("partner") !== "" &&
+			url.searchParams.get("partner") !== null &&
+			url.searchParams.get("partner") !== undefined
+		) {
+			console.log("partner", url.searchParams.get("partner"))
+			const partner = url.searchParams.get("partner") as string
 
-		const page = await getPageByPageName(DATABASE_ID, partner)
-		if (!page) {
-			console.log("Page not found")
+			const page = await getPageByPageName(HERO_DATABASE_ID, partner)
+			if (!page) {
+				console.log("No Published page found for partner", partner)
+			}
+			console.log("getPageByPageName", page)
+
+			const pageObject = await transformPageToSimpleObject(page)
+			console.log("simple pageObject", pageObject)
+
+			// await updatePageProperty(pageObject.id, "Status", {
+			// 	status: {
+			// 		name: "Processing",
+			// 	},
+			// })
+			partnerHero = pageObject.hero[0]
+			console.log("partnerHero URL = ", partnerHero)
 		}
-		console.log("getPageByPageName", page)
-
-		const pageObject = await transformPageToSimpleObject(page)
-		console.log("simple pageObject", pageObject)
-
-		await updatePageProperty(pageObject.id, "Status", "In Progress")
-		partnerHero = pageObject.output
-		console.log("partnerHero URL::: ", partnerHero)
+	} catch (error) {
+		console.error("Error loading partner hero:", error)
 	}
+
+	// https://www.notion.so/genei/2326a3daa35a80a19eaae5366b3b2a1d?v=2326a3daa35a8009953f000ce317ee31&source=copy_link
+	const BLOG_DATABASE_ID = "2326a3daa35a80a19eaae5366b3b2a1d"
 
 	return {
 		testimonials: getApprovedTestimonialsByPage("/", false),
 		ctaTestimonial: getApprovedTestimonialsByPage("CTA", false),
-		articles: transformDBRowsToArticles(await getDatabaseRowsByGroup(DATABASE_ID, "landing-page")),
+		articles: transformDBRowsToArticles(await getDatabaseRowsByGroup(BLOG_DATABASE_ID, "landing-page")),
 		partner: partnerHero,
 	}
 }

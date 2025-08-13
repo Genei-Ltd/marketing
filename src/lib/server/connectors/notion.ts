@@ -279,14 +279,14 @@ export class NotionConnector {
 					}
 				).files
 
-				console.log(
-					"FILE",
-					files.map((file) => file.file?.url),
-				)
-				console.log(
-					"EXTERNAL",
-					files.map((file) => file.external?.url),
-				)
+				// console.log(
+				// 	"FILE",
+				// 	files.map((file) => file.file?.url),
+				// )
+				// console.log(
+				// 	"EXTERNAL",
+				// 	files.map((file) => file.external?.url),
+				// )
 
 				// Return array of URLs instead of raw file objects
 				return (
@@ -494,37 +494,46 @@ export async function updatePageProperty(pageId: string, property: string, value
 	}
 }
 
-export async function getPageByPageName(databaseId: string, pageTitle: string) {
+export async function getPageByPageName(databaseId: string, param: string) {
 	const response = await notionConnector.queryDatabase(databaseId, {
 		and: [
 			{
+				property: "Status",
+				status: {
+					equals: "Published",
+				},
+			},
+			{
 				property: "Query Param",
 				rich_text: {
-					equals: pageTitle,
+					equals: param,
 				},
 			},
 		],
 	})
+	console.log("getPageByPageName response", response.results)
 	return response.results[0] as PageObjectResponse
 }
 
+// This is custom to the hero page
 export async function transformPageToSimpleObject(page: PageObjectResponse): Promise<{
 	id: string
-	title: string
-	queryParam: string
+	partner: string
+	param: string
 	status: string
 	prompt: string
 	brandLogo: string
-	output: string
+	hero: string
 }> {
+	const props = page.properties
 	return {
 		id: page.id,
-		title: (page.properties["Query Param"] as { title: RichTextItemResponse[] }).title[0].plain_text,
-		queryParam: (page.properties["Query Param"] as { rich_text: RichTextItemResponse[] }).rich_text[0].plain_text,
-		status: (page.properties.Status as { status: { name: string } }).status.name,
-		prompt: (page.properties.Prompt as { rich_text: RichTextItemResponse[] }).rich_text[0].plain_text,
-		brandLogo: (page.properties["Brand Logo"] as { files: { file: { url: string } }[] }).files[0].file.url,
-		output: (page.properties["Partner Hero"] as { files: { file: { url: string } }[] }).files[0].file.url,
+		partner: notionConnector.getPropertyValue(props["Partner"], "title") as string,
+		param: notionConnector.getPropertyValue(props["Query Param"], "rich_text") as string,
+		status: notionConnector.getPropertyValue(props["Status"], "status") as string,
+		prompt: notionConnector.getPropertyValue(props["Prompt"], "rich_text") as string,
+		brandLogo: notionConnector.getPropertyValue(props["Brand Logo"], "files") as string,
+		hero: notionConnector.getPropertyValue(props["Partner Hero"], "files") as string,
 	}
 }
 

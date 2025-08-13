@@ -1,6 +1,6 @@
 import { json } from "@sveltejs/kit"
 import { runWorkflow } from "$lib/server/connectors/prodia.js"
-import { notionConnector } from "$lib/server/connectors/notion.js"
+import { notionConnector, updatePageProperty } from "$lib/server/connectors/notion.js"
 import type { RequestHandler } from "./$types.js"
 
 // // body {
@@ -45,6 +45,12 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	const body = await request.json()
 	console.log("body", body)
+
+	await updatePageProperty(body.data.id, "Status", {
+		status: {
+			name: "Processing",
+		},
+	})
 
 	// const result = await runWorkflow(prompt, baseImageUrl, maskUrl, 1)
 	return json({ message: "Hello, world!" })
