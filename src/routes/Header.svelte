@@ -4,9 +4,10 @@
 
 	import { Button } from "$lib/components/ui/button"
 	import * as NavigationMenu from "$lib/components/ui/navigation-menu/index.js"
+	import { navigationMenuTriggerStyle } from "$lib/components/ui/navigation-menu/navigation-menu-trigger.svelte"
 	import { cn } from "$lib/utils.js"
 	import { fade, slide } from "svelte/transition"
-	import { cubicIn, cubicInOut, elasticOut } from "svelte/easing"
+	import { cubicInOut } from "svelte/easing"
 	let mobileMenuOpen = $state(false)
 	let openMobileSection = $state<string | null>(null)
 
@@ -140,61 +141,55 @@
 			</Button>
 		</div>
 
+		{#snippet ListItem({ title, content, href, class: className, ...restProps }: ListItemProps)}
+			<li>
+				<NavigationMenu.Link class="">
+					{#snippet child()}
+						<a
+							{href}
+							class={cn(
+								" group/item hover:bg-primary/10 hover:text-primary-foreground focus:bg-primary/10 focus:text-primary-foreground block select-none space-y-1 rounded-md p-2 leading-none  outline-none transition-colors",
+								className,
+							)}
+							{...restProps}>
+							<div class="text-sm font-medium leading-none text-primary group-hover/item:underline">
+								{title}
+							</div>
+							<p
+								class="text-primary line-clamp-2 text-sm leading-snug opacity-80 group-hover:opacity-100">
+								{content}
+							</p>
+						</a>
+					{/snippet}
+				</NavigationMenu.Link>
+			</li>
+		{/snippet}
 		<!-- Desktop Navigation -->
-		<div class="lg:flex xl:gap-2 hidden gap-0">
-			{#snippet ListItem({ title, content, href, class: className, ...restProps }: ListItemProps)}
-				<li>
-					<NavigationMenu.Link>
-						{#snippet child()}
-							<a
-								{href}
-								class={cn(
-									" text-card-foreground focus:underline group underline-offset-2 hover:bg-primary/10  flex min-h-[80px] flex-col justify-start space-y-1 rounded p-2 leading-none no-underline transition-all outline-none select-none",
-									className,
-								)}
-								{...restProps}>
-								<div class="group-hover:underline text-md font-medium">{title}</div>
-								<span class="text-muted-foreground opacity-80 line-clamp-2 flex-1 font-sans text-sm">
-									{content}
-								</span>
-							</a>
-						{/snippet}
-					</NavigationMenu.Link>
-				</li>
-			{/snippet}
-
-			<NavigationMenu.Root>
+		<div class="lg:flex hidden">
+			<NavigationMenu.Root viewport={false}>
 				<NavigationMenu.List>
 					<NavigationMenu.Item>
 						<NavigationMenu.Trigger>Product</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
-							<ul class=" grid w-fit grid-cols-[200px_240px] grid-rows-3 gap-2 p-2">
-								<li class="max-h-min grow-0 row-span-3">
+							<ul class="grid gap-2 p-2 w-[400px] md:w-[500px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+								<li class="row-span-3">
 									<NavigationMenu.Link
-										class="focus:shadow-md relative flex flex-col justify-end w-full h-full p-6 bg-transparent rounded outline-none select-none">
+										class="relative flex flex-col justify-end w-full h-full p-6 overflow-hidden no-underline bg-transparent rounded-md outline-none select-none focus:shadow-md">
 										{#snippet child({ props })}
-											<a
-												{...props}
-												href="/product"
-												class="focus:shadow-md relative flex flex-col justify-end w-full h-full p-6 overflow-hidden no-underline bg-transparent rounded-md outline-none select-none">
+											<a {...props} href="/product">
 												<img
 													src="/wild/vault.png"
 													alt="Resources"
 													aria-hidden="true"
 													class="absolute inset-0 z-0 object-cover w-full h-full pointer-events-none" />
 												<div
-													class="from-primary bg-gradient-to-t to-transparent hover:to-background/20 absolute bottom-0 left-0 z-10 flex flex-col justify-end w-full h-full p-4 transition-all duration-300 ease-out">
-													<div
-														class="text-primary-foreground mt-4 mb-1 text-lg font-medium transition-all duration-300 ease-out">
-														Product
+													class="from-primary/80 bg-gradient-to-t to-transparent absolute bottom-0 left-0 z-10 flex flex-col justify-end w-full h-full p-4 transition-all duration-300 ease-out">
+													<div class="text-primary-foreground mb-2 mt-4 text-lg font-medium">
+														Resources
 													</div>
-													<span
-														class="text-primary-foreground opacity-80 text-sm leading-tight">
+													<p class="text-primary-foreground/90 text-sm leading-tight">
 														Learn how to use CoLoop effectively
-													</span>
-												</div>
-												<div
-													class="bg-gradient-to-t from-primary/50 to-transparent absolute inset-0 z-0 transition-all duration-300 ease-out">
+													</p>
 												</div>
 											</a>
 										{/snippet}
@@ -211,7 +206,7 @@
 									content: "Watch community-created content",
 								})}
 								{@render ListItem({
-									href: "#",
+									href: "/blog",
 									title: "Blog",
 									content: "Read our latest insights and updates",
 								})}
@@ -222,7 +217,7 @@
 					<NavigationMenu.Item>
 						<NavigationMenu.Trigger>Company type</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
-							<ul class="grid w-fit auto-cols-[240px] grid-flow-col grid-rows-3 gap-2 p-2">
+							<ul class="grid w-[300px] gap-2 p-2">
 								{#each companyTypes as item}
 									{@render ListItem({
 										href: item.href,
@@ -237,7 +232,7 @@
 					<NavigationMenu.Item>
 						<NavigationMenu.Trigger>Use case</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
-							<ul class="grid w-fit auto-cols-[240px] grid-flow-col grid-rows-3 gap-2 p-2">
+							<ul class="grid w-[400px] gap-2 p-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
 								{#each useCases as item}
 									{@render ListItem({
 										href: item.href,
@@ -252,34 +247,25 @@
 					<NavigationMenu.Item>
 						<NavigationMenu.Trigger>Resources</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
-							<ul class="grid w-fit grid-cols-[200px_240px] grid-rows-3 gap-2 p-2">
-								<li class="max-h-min grow-0 row-span-3">
+							<ul class="grid gap-2 p-2 w-[400px] md:w-[500px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+								<li class="row-span-3">
 									<NavigationMenu.Link
-										class=" relative flex flex-col justify-end w-full h-full p-2 no-underline bg-transparent rounded-md outline-none select-none">
+										class="relative flex flex-col justify-end w-full h-full p-6 overflow-hidden no-underline bg-transparent rounded-md outline-none select-none focus:shadow-md">
 										{#snippet child({ props })}
-											<a
-												{...props}
-												href="https://community.coloop.ai/"
-												class="focus:shadow-md relative flex flex-col justify-end w-full h-full p-6 overflow-hidden no-underline bg-transparent rounded-md outline-none select-none">
+											<a {...props} href="https://community.coloop.ai/">
 												<img
 													src="/wild/super-car.png"
-													alt="Resources"
+													alt="CoLoop Community"
 													aria-hidden="true"
 													class="absolute inset-0 z-0 object-cover w-full h-full pointer-events-none" />
 												<div
-													class="from-primary bg-gradient-to-t to-transparent hover:to-background/20 absolute bottom-0 left-0 z-10 flex flex-col justify-end w-full h-full p-4 transition-all duration-300 ease-out">
-													<div
-														class="text-primary-foreground mt-4 mb-1 text-lg font-medium transition-all duration-300 ease-out">
-														Researcher Community
+													class="from-primary/80 bg-gradient-to-t to-transparent absolute bottom-0 left-0 z-10 flex flex-col justify-end w-full h-full p-4 transition-all duration-300 ease-out">
+													<div class="text-primary-foreground mb-2 mt-4 text-lg font-medium">
+														CoLoop Community
 													</div>
-													<span
-														class="text-primary-foreground opacity-80 text-sm leading-tight">
-														Join the CoLoop community and get support from other
-														researchers.
-													</span>
-												</div>
-												<div
-													class="bg-gradient-to-t from-primary/50 to-transparent absolute inset-0 z-0 transition-all duration-300 ease-out">
+													<p class="text-primary-foreground/90 text-sm leading-tight">
+														Join researchers worldwide and get expert support.
+													</p>
 												</div>
 											</a>
 										{/snippet}
@@ -305,16 +291,18 @@
 					</NavigationMenu.Item>
 
 					<NavigationMenu.Item>
-						<NavigationMenu.Link
-							href="https://docs.coloop.ai/docs/"
-							class="text-foreground/70 hover:text-foreground hover:bg-transparent hover:underline underline-offset-2"
-							>Docs</NavigationMenu.Link>
+						<NavigationMenu.Link>
+							{#snippet child()}
+								<a href="https://docs.coloop.ai/docs/" class={navigationMenuTriggerStyle()}>Docs</a>
+							{/snippet}
+						</NavigationMenu.Link>
 					</NavigationMenu.Item>
 					<NavigationMenu.Item>
-						<NavigationMenu.Link
-							href="/blog"
-							class="text-foreground/70 hover:text-foreground hover:bg-transparent hover:underline underline-offset-2"
-							>Blog</NavigationMenu.Link>
+						<NavigationMenu.Link>
+							{#snippet child()}
+								<a href="/blog" class={navigationMenuTriggerStyle()}>Blog</a>
+							{/snippet}
+						</NavigationMenu.Link>
 					</NavigationMenu.Item>
 
 					<NavigationMenu.Item>
@@ -323,7 +311,6 @@
 					<NavigationMenu.Item>
 						<Button variant="default" size="default" href="/demo" class="">Get CoLoop</Button>
 					</NavigationMenu.Item>
-					<NavigationMenu.Indicator />
 				</NavigationMenu.List>
 			</NavigationMenu.Root>
 		</div>
