@@ -33,6 +33,23 @@ export class NotionConnector {
 		})
 	}
 
+	async updatePageProperty(pageId: string, property: string, value: any) {
+		try {
+			const response = await this.client.pages.update({
+				page_id: pageId,
+				properties: {
+					[property]: value,
+				},
+			})
+			return response
+		} catch (error) {
+			console.error("Error updating page property:", error)
+			throw new Error(
+				`Failed to update property ${property} for page ${pageId}: ${error instanceof Error ? error.message : "Unknown error"}`,
+			)
+		}
+	}
+
 	/**
 	 * Get a specific page by ID
 	 */
@@ -466,22 +483,50 @@ export async function getDatabaseSchemaMultiSelectOptionsForProperty(
 	return []
 }
 
-// export async function updatePageProperty(pageId: string, property: string, value: any) {
-// 	try {
-// 		const response = await notionConnector.client.pages.update({
-// 			page_id: pageId,
-// 			properties: {
-// 				[property]: value,
-// 			},
-// 		})
-// 		return response
-// 	} catch (error) {
-// 		console.error("Error updating page property:", error)
-// 		throw new Error(
-// 			`Failed to update property ${property} for page ${pageId}: ${error instanceof Error ? error.message : "Unknown error"}`,
-// 		)
-// 	}
-// }
+export async function updatePageProperty(pageId: string, property: string, value: any): Promise<any> {
+	try {
+		return await notionConnector.updatePageProperty(pageId, property, value)
+	} catch (error) {
+		console.error("Error updating page property:", error)
+		throw new Error(
+			`Failed to update property ${property} for page ${pageId}: ${error instanceof Error ? error.message : "Unknown error"}`,
+		)
+	}
+}
+
+export async function getPageByPageName(databaseId: string, pageTitle: string) {
+	const response = await notionConnector.queryDatabase(databaseId, {
+		and: [
+			{
+				property: "Query Param",
+				rich_text: {
+					equals: pageTitle,
+				},
+			},
+		],
+	})
+	return response.results[0] as PageObjectResponse
+}
+
+export async function transformPageToSimpleObject(page: PageObjectResponse): Promise<{
+	id: string
+	title: string
+	queryParam: string
+	status: string
+	prompt: string
+	brandLogo: string
+	output: string
+}> {
+	return {
+		id: page.id,
+		title: (page.properties["Query Param"] as { title: RichTextItemResponse[] }).title[0].plain_text,
+		queryParam: (page.properties["Query Param"] as { rich_text: RichTextItemResponse[] }).rich_text[0].plain_text,
+		status: (page.properties.Status as { status: { name: string } }).status.name,
+		prompt: (page.properties.Prompt as { rich_text: RichTextItemResponse[] }).rich_text[0].plain_text,
+		brandLogo: (page.properties["Brand Logo"] as { files: { file: { url: string } }[] }).files[0].file.url,
+		output: (page.properties["Partner Hero"] as { files: { file: { url: string } }[] }).files[0].file.url,
+	}
+}
 
 // Export a singleton instance
 export const notionConnector = new NotionConnector()

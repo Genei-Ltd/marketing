@@ -2,22 +2,46 @@ import { fail } from "@sveltejs/kit"
 import { getApprovedTestimonialsByPage } from "$lib/server/connectors/notion-testimonials"
 
 import type { Actions } from "./$types"
-import { getDatabaseRowsByGroup, transformDBRowsToArticles } from "$lib/server/connectors/notion"
+import {
+	getDatabaseRowsByGroup,
+	getPageByPageName,
+	transformDBRowsToArticles,
+	transformPageToSimpleObject,
+	updatePageProperty,
+} from "$lib/server/connectors/notion"
 
 export const load = async ({ url }) => {
 	// get testimonials from notion
 	const DATABASE_ID = "2326a3daa35a80a19eaae5366b3b2a1d"
 
-	let partner = null
-	if (url.searchParams.get("partner")) {
-		partner = url.searchParams.get("partner")
+	let partnerHero = null
+	if (
+		url.searchParams.get("partner") &&
+		url.searchParams.get("partner") !== "" &&
+		url.searchParams.get("partner") !== null &&
+		url.searchParams.get("partner") !== undefined
+	) {
+		const partner = url.searchParams.get("partner") as string
+
+		const page = await getPageByPageName(DATABASE_ID, partner)
+		if (!page) {
+			console.log("Page not found")
+		}
+		console.log("getPageByPageName", page)
+
+		const pageObject = await transformPageToSimpleObject(page)
+		console.log("simple pageObject", pageObject)
+
+		await updatePageProperty(pageObject.id, "Status", "In Progress")
+		partnerHero = pageObject.output
+		console.log("partnerHero URL::: ", partnerHero)
 	}
 
 	return {
 		testimonials: getApprovedTestimonialsByPage("/", false),
 		ctaTestimonial: getApprovedTestimonialsByPage("CTA", false),
 		articles: transformDBRowsToArticles(await getDatabaseRowsByGroup(DATABASE_ID, "landing-page")),
-		partner,
+		partner: partnerHero,
 	}
 }
 
