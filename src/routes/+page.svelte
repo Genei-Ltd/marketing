@@ -78,15 +78,14 @@
 	</div>
 
 	<div
-		class="lg:px-10 absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full max-w-6xl px-6 py-16 mx-auto">
-		<div class="flex flex-col items-start justify-end h-full">
+		class="lg:px-10 absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start text-left justify-between h-full max-w-6xl px-6 py-16 mx-auto">
+		<div class="flex flex-col items-start justify-end h-full w-full">
 			<h1
-				class="xl:text-huge text-white text-balance drop-shadow-lg sm:text-3xl md:text-4xl font-serif text-2xl leading-tight tracking-wide text-left capitalize">
+				class="xl:text-huge text-white text-balance drop-shadow-lg w-full sm:text-3xl md:text-4xl font-serif text-2xl leading-tight tracking-wide capitalize">
 				AI-powered analysis for human-powered insights
 			</h1>
-			<h2
-				class="text-white opacity-80 text-md md:text-lg mt-4 font-sans font-medium leading-tight tracking-wide text-left uppercase">
-				Opinions in, insights out. Fast.
+			<h2 class="text-white text-md md:text-xl mt-4 font-sans w-full tracking-wide capitalize">
+				Insights to Influence.
 			</h2>
 		</div>
 	</div>
@@ -95,7 +94,10 @@
 <div class="lg:px-10 relative flex flex-col items-center justify-center max-w-6xl px-6 mx-auto overflow-hidden">
 	<!-- CUSTOMER LOGOS  -->
 	<div class="lg:lg:mt-32 w-full mt-16 mb-16">
-		<h2 class="font-serif text-2xl text-center">Trusted by the brands you trust</h2>
+		{@render section(
+			"400+ Research Teams trust CoLoop for qualitative analysis.",
+			"Trusted by the brands you trust",
+		)}
 		<div class="flex flex-row items-center justify-center gap-16 mt-8">
 			{#each Array.from({ length: 10 }, (_, i) => i) as index}
 				<div class="flex flex-col items-center justify-center">

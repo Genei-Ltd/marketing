@@ -13,6 +13,7 @@ Clean, professional design for corporate audiences
 		IconMessageQuestion,
 		IconAnalyze,
 		IconCheck,
+		IconPointer,
 	} from "@tabler/icons-svelte"
 	import { fade, fly, scale, slide } from "svelte/transition"
 	import { quintOut, cubicInOut, elasticOut } from "svelte/easing"
@@ -477,7 +478,7 @@ Clean, professional design for corporate audiences
 				<div class="pointer-events-none absolute inset-0 flex items-center justify-center z-20">
 					<div class="relative w-full h-full flex items-center justify-center">
 						<!-- File stack container with slide-in animation -->
-						<div class="animate-slideInFiles translate-y-[150px] -translate-x-[500px]">
+						<div class="animate-slideInFiles translate-y-[150px] -translate-x-[500px] relative">
 							<div class="relative">
 								<!-- File 3 (bottom/back) - slightly offset and darker -->
 								<div
@@ -521,6 +522,11 @@ Clean, professional design for corporate audiences
 											>Guide.pdf</span>
 									</div>
 								</div>
+								<div class="absolute bottom-4 -right-4 z-50">
+									<div class="animate-click" out:scale={{ duration: 500, easing: elasticOut }}>
+										<IconPointer fill="white" class="size-12 text-black drop-shadow-lg" />
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -546,6 +552,36 @@ Clean, professional design for corporate audiences
 
 					.animate-slideInFiles {
 						animation: slideInFiles 1.1s ease-out 0.8s forwards;
+					}
+
+					.animate-click {
+						animation: click 0.2s ease-out 0.4s forwards;
+					}
+
+					@keyframes click {
+						0% {
+							transform: scale(0.5);
+							opacity: 1;
+						}
+						100% {
+							transform: scale(1);
+							opacity: 1;
+						}
+					}
+
+					.animate-move {
+						animation: move 0.4s ease-out 0.8s forwards;
+					}
+
+					@keyframes move {
+						0% {
+							transform: translateX(0px);
+							opacity: 0;
+						}
+						100% {
+							transform: translateX(-500px);
+							opacity: 1;
+						}
 					}
 				</style>
 			{/if}
@@ -600,11 +636,19 @@ Clean, professional design for corporate audiences
 									{animationState.typedQuestion} |
 								</h2>
 							</div>
-							<div class="flex justify-left w-full">
+							<div class="flex justify-left w-full relative">
 								<div
 									class={`bg-black text-white px-8 py-3 rounded font-medium transition-colors w-full min-w-full text-center ${animationState.isComplete ? "bg-black/70 scale-95" : ""}`}>
 									Ask CoLoop
 								</div>
+								{#if animationState.isComplete}
+									<!-- cursor pointer icon -->
+									<div class="absolute top-4 right-8">
+										<div class="animate-click">
+											<IconPointer fill="white" class="size-12 text-black drop-shadow-lg" />
+										</div>
+									</div>
+								{/if}
 							</div>
 						</div>
 					</Box>
@@ -689,7 +733,7 @@ Clean, professional design for corporate audiences
 											class="text-left border-l-4 border-black pl-2"
 											in:fly={{ x: -20, duration: 400, delay: 100, easing: quintOut }}
 											out:fly={{ x: 20, duration: 300, easing: cubicInOut }}>
-											<p class="text-sm text-black">
+											<p class="text-sm text-black flex flex-col gap-2">
 												<span class="font-medium text-gray-700 flex items-center gap-1">
 													<span class="bg-black text-white text-xs px-1.5 py-0.5 mr-1 rounded"
 														>2</span>
@@ -699,7 +743,7 @@ Clean, professional design for corporate audiences
 													What do you think of the 4th option?
 												</span>
 											</p>
-											<p class="text-sm text-black">
+											<p class="text-sm text-black flex flex-col gap-2">
 												<span class="font-medium text-gray-700">
 													<span class="bg-black text-white text-xs px-1.5 py-0.5 mr-1 rounded"
 														>2</span>
