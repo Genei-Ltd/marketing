@@ -511,7 +511,7 @@ export async function getPageByPageName(databaseId: string, param: string) {
 			},
 		],
 	})
-	console.log("getPageByPageName response", response.results)
+	// console.log("getPageByPageName response", response.results)
 	return response.results[0] as PageObjectResponse
 }
 

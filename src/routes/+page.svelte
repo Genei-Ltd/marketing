@@ -37,19 +37,12 @@
 			testimonials: Testimonial[]
 			ctaTestimonial: Testimonial[]
 			articles: Article[]
-			partner: string | null
 		}
 	} = $props()
 
 	// Generate SEO metadata and structured data
 	const seoMetadata = generateHomepageMetadata()
 	const structuredData = generateHomepageSchemas()
-
-	const partnerUrl = $derived(data.partner)
-
-	$effect(() => {
-		console.log("partnerURL", partnerUrl)
-	})
 </script>
 
 <!-- SEO Meta Tags and Structured Data -->
@@ -73,92 +66,16 @@
 	</div>
 {/snippet}
 
-<!-- Hero image -->
-<!-- <div class="relative z-50 w-full mt-16">
-	<img
-		src="/images/hero-3.png"
-		alt="Hero"
-		class="border-primary aspect-video grayscale border-6 relative z-50 object-cover w-full max-w-6xl mx-auto rounded shadow-2xl" />
-	</div> -->
-<!-- <img src="/images/wild/hero.png" alt="Hero" class="absolute inset-0 object-cover w-full h-full py-16 opacity-50" /> -->
-
 <!-- HERO SECTION -->
 <div class="pb-96 max-h-300 relative top-0 z-10 w-full h-screen">
-	{#if partnerUrl}
-		<!-- <div
-			class="absolute inset-0 bg-linear-100 from-white/45 via-transparent to-black/40 pointer-events-none rounded-sm mix-blend-overlay transform z-50">
-			<img src={partner} alt="Partner" class="w-full h-full object-cover" />
-		</div>
-		<img
-			src={partner}
-			alt="Hero"
-			class="2xl:object-bottom-right object-center absolute top-0 z-10 object-cover xl:object-right w-full h-full opacity-100 transition-all duration-500 ease-in-out" />
-		<div
-			class="absolute 2xl:top-[150px] 2xl:right-[445px] 2xl:w-[1465px] 2xl:h-[590px] z-30"
-			style="
-		transform-origin: bottom right;
-		transform-style: preserve-3d;
-		transform: 
-		perspective(2250px) 
-		rotateX(0deg) 
-		rotateY(-34deg) 
-		rotateZ(-1.2deg)
-		skewX(-1deg)
-		scaleY(1)
-		">
-			<img
-				src="/wild/super-car.png"
-				alt="Billboard Advertisement"
-				class="w-full h-full object-cover brightness-80 contrast-85 saturate-80 transition-all feather-100 duration-300 hover:brightness-120 transform-gpu" />
-			<div
-				class="absolute inset-0 bg-linear-100 from-white/45 via-transparent to-black/40 pointer-events-none rounded-sm mix-blend-overlay transform z-50">
-			</div>
-		</div>
-		<div
-			class="pb-96 bg-gradient-to-t from-black/90 via-black/0 to-transparent opacity-60 absolute bottom-0 z-10 w-full h-screen">
-		</div> -->
-		{#await partnerUrl}
-			<span class="text-foreground">Loading partner...</span>
-		{:then partnerUrl}
-			<img
-				src={partnerUrl}
-				alt="Hero"
-				class="2xl:object-bottom-right object-center absolute top-0 z-10 object-cover xl:object-right w-full h-full opacity-100 transition-all duration-500 ease-in-out" />
-			<div
-				class="pb-96 bg-gradient-to-t from-black/90 via-black/0 to-transparent opacity-60 absolute bottom-0 z-10 w-full h-screen">
-			</div>
-		{:catch}
-			<span class="text-foreground">Error loading partner</span>
-		{/await}
-	{:else}
-		<img
-			src="/wild/coca-cola-4k-wide.jpg"
-			alt="Hero"
-			class="2xl:object-bottom-right object-center absolute top-0 z-10 object-cover xl:object-right w-full h-full opacity-100 transition-all duration-500 ease-in-out" />
-		<div
-			class="pb-96 bg-gradient-to-t from-black/90 via-black/0 to-transparent opacity-60 absolute bottom-0 z-10 w-full h-screen">
-		</div>
-	{/if}
+	<img
+		src="/wild/coca-cola-4k-wide.jpg"
+		alt="Hero"
+		class="2xl:object-bottom-right object-center absolute top-0 z-10 object-cover xl:object-right w-full h-full opacity-100 transition-all duration-500 ease-in-out" />
+	<div
+		class="pb-96 bg-gradient-to-t from-black/90 via-black/0 to-transparent opacity-60 absolute bottom-0 z-10 w-full h-screen">
+	</div>
 
-	<!-- BILLBOARD OVERLAY - PRECISELY MATCHES the billboard in background -->
-	<!-- 
-		TO CHANGE BILLBOARD: Replace src with your image:
-		Examples:
-		- "/wild/pepsi.png" 
-		- "/wild/crazy-cola.png"
-		- "/wild/billboard.png"
-		- "/custom/your-ad.jpg"
-		
-		The overlay automatically matches the billboard's exact position and 3D perspective
-		across all screen sizes and responsive breakpoints.
-	-->
-
-	<!-- <div
-		class="px-auto absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full py-16 mx-32">
-		<div class="h-fit relative top-0 z-10 flex items-center justify-center object-cover w-1/4 mt-16 opacity-100">
-			<DemoWorkflow />
-		</div>
-	</div> -->
 	<div
 		class="lg:px-10 absolute bottom-0 left-0 right-0 z-50 flex flex-col items-start justify-between h-full max-w-6xl px-6 py-16 mx-auto">
 		<div class="flex flex-col items-start justify-end h-full">

@@ -8,6 +8,9 @@ const Prodia = createProdia({
 
 export async function generateAdWithLogo(prompt: string, logoUrl: string) {
 	const logo = await (await fetch(logoUrl)).arrayBuffer()
+	console.log("logo", logo)
+	console.log("prompt", prompt)
+	console.log("logoUrl", logoUrl)
 	return await Prodia.job(
 		{
 			type: "inference.flux.dev.img2img.v2",
@@ -42,7 +45,14 @@ export async function fluxFillComposite(prompt: string, baseImageUrl: string, ma
 	return await job.arrayBuffer()
 }
 
-export async function runWorkflow(prompt: string, baseImageUrl: string, maskUrl: string, strength: number) {
+export async function runWorkflow(
+	prompt: string,
+	baseImageUrl: string,
+	maskUrl: string,
+	advertImage: string,
+	strength: number,
+	brandLogo?: string,
+) {
 	const workflow = await Prodia.job({
 		type: "workflow.serial.v1",
 		config: {
@@ -50,12 +60,22 @@ export async function runWorkflow(prompt: string, baseImageUrl: string, maskUrl:
 				{
 					type: "inference.flux.dev.img2img.v2",
 					config: {
+						prompt: "rainy landscape, 4k",
+						strength: 0.8,
+					},
+					inputs: [brandLogo ? brandLogo : ""],
+				},
+				{
+					type: "inference.flux.dev.img2img.v2",
+					config: {
 						prompt: prompt,
 						strength: strength,
 					},
-					inputs: [baseImageUrl, maskUrl],
+					inputs: [baseImageUrl, maskUrl, advertImage],
 				},
 			],
 		},
 	})
+
+	return await workflow.arrayBuffer()
 }

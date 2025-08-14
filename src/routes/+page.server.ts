@@ -23,17 +23,17 @@ export const load = async ({ url }) => {
 			url.searchParams.get("partner") !== null &&
 			url.searchParams.get("partner") !== undefined
 		) {
-			console.log("partner", url.searchParams.get("partner"))
+			// console.log("partner", url.searchParams.get("partner"))
 			const partner = url.searchParams.get("partner") as string
 
 			const page = await getPageByPageName(HERO_DATABASE_ID, partner)
 			if (!page) {
 				console.log("No Published page found for partner", partner)
 			}
-			console.log("getPageByPageName", page)
+			// console.log("getPageByPageName", page)
 
 			const pageObject = await transformPageToSimpleObject(page)
-			console.log("simple pageObject", pageObject)
+			// console.log("simple pageObject", pageObject)
 
 			// await updatePageProperty(pageObject.id, "Status", {
 			// 	status: {
@@ -41,7 +41,7 @@ export const load = async ({ url }) => {
 			// 	},
 			// })
 			partnerHero = pageObject.hero[0]
-			console.log("partnerHero URL = ", partnerHero)
+			// console.log("partnerHero URL = ", partnerHero)
 		}
 	} catch (error) {
 		console.error("Error loading partner hero:", error)

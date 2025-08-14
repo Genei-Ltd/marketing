@@ -1,7 +1,9 @@
 import { json } from "@sveltejs/kit"
-import { runWorkflow } from "$lib/server/connectors/prodia.js"
+import { generateAdWithLogo, runWorkflow } from "$lib/server/connectors/prodia.js"
 import { notionConnector, updatePageProperty } from "$lib/server/connectors/notion.js"
 import type { RequestHandler } from "./$types.js"
+import { env } from "$env/dynamic/private"
+import { uploadImage } from "$lib/server/connectors/supabase.js"
 
 // // body {
 //   source: {
@@ -40,8 +42,13 @@ import type { RequestHandler } from "./$types.js"
 // }
 
 export const POST: RequestHandler = async ({ request }) => {
+	if (request.headers.get("x-internal-api-key") !== env.X_INTERNAL_API_KEY) {
+		return json({ message: "Unauthorized" }, { status: 401 })
+	}
+
 	console.log("inside the server /api/hero-pipeline")
 	console.log("request", request)
+	const base_url = request.url.split("?")[0]
 
 	const body = await request.json()
 	console.log("body", body)
@@ -51,6 +58,35 @@ export const POST: RequestHandler = async ({ request }) => {
 			name: "Processing",
 		},
 	})
+
+	// const prompt =
+	// 	(notionConnector.getPropertyValue(body.data.properties["Prompt"], "rich_text") as string) ||
+	// 	"make a retro advert from this"
+	// const logoUrl = (notionConnector.getPropertyValue(body.data.properties["Brand Logo"], "files") as string[]) || [
+	// 	"https://static.vecteezy.com/system/resources/previews/047/656/219/non_2x/abstract-logo-design-for-any-corporate-brand-business-company-vector.jpg",
+	// ]
+	// const date = new Date().toISOString().split("T")[0]
+
+	// const advertImage = await generateAdWithLogo(prompt, logoUrl[0])
+
+	// const advertImageBuffer = Buffer.from(await advertImage.arrayBuffer())
+
+	// const advertImageUrl = await uploadImage(advertImageBuffer, `adverts/${date}-${body.data.id}.png`)
+	// console.log("advertImageUrl", advertImageUrl)
+
+	// // const baseImageUrl = `${base_url}/hero/base.png`
+	// // const maskUrl = `${base_url}/hero/mask.png`
+
+	// // const result = await runWorkflow(prompt, baseImageUrl, maskUrl, advertImage, 1, logoUrl[0])
+
+	// await updatePageProperty(body.data.id, "Partner Hero", {
+	// 	files: [
+	// 		{
+	// 			type: "external",
+	// 			external: { url: advertImageUrl },
+	// 		},
+	// 	],
+	// })
 
 	// const result = await runWorkflow(prompt, baseImageUrl, maskUrl, 1)
 	return json({ message: "Hello, world!" })
