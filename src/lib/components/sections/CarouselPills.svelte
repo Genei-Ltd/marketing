@@ -7,6 +7,7 @@
 	import DemoInterviewAnalysis from "$components/animations/DemoInterviewAnalysis.svelte"
 	import ConceptTestingDemo from "$components/animations/DemoConceptTesting.svelte"
 	import Autoplay from "embla-carousel-autoplay"
+	import DemoCrossProjectSearch from "$components/animations/DemoCrossProjectSearch.svelte"
 	// Define the pill labels
 	const pillLabels = ["In-House Strategy Teams", "Concept & Stimulus Testing", "Survey Analysis", "Research Agencies"]
 
@@ -75,13 +76,13 @@
 				<TwoSplit
 					label="In-House Strategy Teams"
 					heading="Solutions for in-house strategy teams"
-					description="Move from insight to influence, unblock teams and become a critical asset to your company."
+					description="Build a knowledge base of your most valuable data and move from insight to influence"
 					buttonText="Solutions for in-house strategy teams"
 					buttonHref="/blog/in-house-strategy-teams"
 					showButton={true}
 					reverse={false}>
 					<WildAnimationBox backgroundColor="bg-accent-1">
-						<DemoInterviewAnalysis />
+						<DemoCrossProjectSearch />
 					</WildAnimationBox>
 				</TwoSplit>
 			</Carousel.Item>
@@ -95,7 +96,7 @@
 				<TwoSplit
 					label="Concept & Stimulus Testing"
 					heading="Solutions for product, message & concept testing"
-					description="Test messages, concepts and products with machine precision and human empathy."
+					description="Test messages, concepts and products with machine precision and human empathy"
 					buttonText="Solutions for product, message & concept testing"
 					buttonHref="/blog/concept-stimulus-testing"
 					showButton={true}
