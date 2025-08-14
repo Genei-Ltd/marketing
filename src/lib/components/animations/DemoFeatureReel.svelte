@@ -4,12 +4,16 @@
 
 	const featuresLists: string[][] = [
 		[
+			"Survey Analysis",
 			"Code Open Ends",
-			"Create Clip Reels",
-			"Translation",
+			"Stimulus Testing",
+			"Clip Reels",
 			"Transcription",
+			"Multiple Languages",
+			"API Integration",
 			"Secure Collaboration",
 			"Concept Testing",
+			"Translation",
 			"Content Analysis",
 			"Knowledge Bases",
 			"Segmentation",
@@ -17,12 +21,16 @@
 		],
 		[
 			"Segmentation",
-			"Create Clip Reels",
+			"Clip Reels",
+			"Survey Analysis",
 			"Transcription",
+			"API Integration",
+			"Clip Reels",
 			"Concept Testing",
 			"Translation",
 			"Content Analysis",
 			"Knowledge Bases",
+			"Multiple Languages",
 			"Code Open Ends",
 			"Secure Collaboration",
 			"Consolidate Sources",
@@ -33,11 +41,11 @@
 {#snippet feature(item: string)}
 	<div
 		class={cn(
-			"bg-card/60 border border-border/80 rounded-full p-4 px-8 min-w-50 backdrop-blur-sm",
+			"bg-white  rounded-full p-4 px-8 min-w-50 backdrop-blur-sm",
 			"flex flex-col items-center justify-center  text-center",
-			"hover:bg-card/80 transition-colors duration-200",
+			"hover:scale-105 transition-all duration-300 pointer-events-none",
 		)}>
-		<h3 class="text-foreground text-lg font-semibold">{item}</h3>
+		<h3 class="text-black text-md font-semibold">{item}</h3>
 	</div>
 {/snippet}
 

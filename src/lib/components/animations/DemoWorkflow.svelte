@@ -31,7 +31,6 @@
 		}
 
 		get isActive() {
-			Ê
 			return this.state === "running"
 		}
 

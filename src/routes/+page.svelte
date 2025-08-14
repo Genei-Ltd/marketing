@@ -27,6 +27,7 @@
 	import SEOHead from "$lib/components/SEOHead.svelte"
 	import { generateHomepageMetadata } from "$lib/utils/seo"
 	import { generateHomepageSchemas } from "$lib/utils/structured-data"
+	import DemoCoreValue from "$components/animations/DemoCoreValue.svelte"
 
 	let {
 		form,
@@ -120,8 +121,8 @@
 			description="Delegate complex tasks in natural language to domain-specific agents that can count, search, summarise and cite."
 			buttonText="Explore Agents"
 			buttonHref="/book-a-demo">
-			<WildAnimationBox backgroundColor="bg-accent-4">
-				<DemoTranscriptClips />
+			<WildAnimationBox backgroundImage="/water/blue-1.png" backgroundColor="bg-accent-4">
+				<DemoCoreValue />
 			</WildAnimationBox>
 		</TwoSplit>
 		<TwoSplit
@@ -131,9 +132,11 @@
 			buttonText="Explore Workflows"
 			reverse
 			buttonHref="/book-a-demo">
-			<div class="bg-accent-3 flex items-center justify-center h-full mx-auto overflow-hidden">
-				<DemoFeatureReel />
-			</div>
+			<WildAnimationBox backgroundImage="/water/blue-1.png" backgroundColor="bg-accent-3">
+				<div class=" flex items-center justify-center h-full mx-auto overflow-hidden scale-120">
+					<DemoFeatureReel />
+				</div>
+			</WildAnimationBox>
 		</TwoSplit>
 		<TwoSplit
 			label="Integrations"
@@ -141,7 +144,7 @@
 			description="Upload your data from a growing range of file formats, languages and 3rd party tools to create a single unified source of truth."
 			buttonText="Explore Integrations"
 			buttonHref="/book-a-demo">
-			<WildAnimationBox backgroundColor="bg-accent-2">
+			<WildAnimationBox backgroundImage="/water/blue-1.png" backgroundColor="bg-accent-2">
 				<StaticDemoIntegrations />
 			</WildAnimationBox>
 		</TwoSplit>
@@ -153,7 +156,7 @@
 			reverse
 			buttonHref="/book-a-demo"
 			clearBackground={[false, true]}>
-			<WildAnimationBox backgroundColor="bg-accent-1">
+			<WildAnimationBox backgroundImage="/water/blue-1.png" backgroundColor="bg-accent-1">
 				<DemoWorkflowSharing />
 			</WildAnimationBox>
 		</TwoSplit>

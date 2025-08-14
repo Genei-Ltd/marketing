@@ -98,7 +98,8 @@
 	<div class="grid w-full h-full grid-cols-3 gap-4">
 		{#each currentWindow as integration, index (integration.id)}
 			{@const backIntegration = nextWindowIntegrations.get(index) || integration}
-			<div class="group h-full w-full [perspective:1000px] hover:scale-105 transition-transform duration-300">
+			<div
+				class="group h-full w-full [perspective:1000px] hover:scale-105 transition-transform duration-300 pointer-none">
 				<div
 					class="relative h-full w-full min-h-max [transform-style:preserve-3d] {flippingCards.has(index)
 						? 'card-flip'
@@ -106,12 +107,12 @@
 					<!-- Front of card -->
 					<div class="absolute h-full w-full [backface-visibility:hidden]">
 						<div
-							class="group card max-h-full relative flex flex-col items-center justify-between w-full h-full p-2 transition-all duration-300">
+							class="group card max-h-full relative flex flex-col items-center justify-around w-full h-full p-2 transition-all duration-300">
 							<!-- Logo -->
 							<img
 								src={integration.logo}
 								alt={integration.name}
-								class="max-h-2/3 object-contain size-24" />
+								class="max-h-2/5 max-w-2/5 saturate-0 group-hover:saturate-100 transition-all duration-300 object-contain size-24" />
 
 							<!-- Name -->
 							<div class=" text-sm font-medium leading-tight text-center">
@@ -123,16 +124,16 @@
 					<!-- Back of card (shows new integration during flip) -->
 					<div class="absolute h-full w-full [backface-visibility:hidden] [transform:rotateX(180deg)]">
 						<div
-							class="group card max-h-24 relative flex flex-col items-center justify-between w-full h-full p-2 transition-all duration-300">
+							class="group card max-h-full relative flex flex-col items-center justify-around w-full h-full p-2 transition-all duration-300">
 							<!-- Logo -->
 							<img
-								src={backIntegration.logo}
-								alt={backIntegration.name}
-								class="max-h-12 object-contain w-24 h-12" />
+								src={integration.logo}
+								alt={integration.name}
+								class="max-h-2/5 max-w-2/5 saturate-0 group-hover:saturate-100 transition-all duration-300 object-contain size-24" />
 
 							<!-- Name -->
 							<div class=" text-sm font-medium leading-tight text-center">
-								{backIntegration.name}
+								{integration.name}
 							</div>
 						</div>
 					</div>

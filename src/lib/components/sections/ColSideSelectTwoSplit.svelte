@@ -6,6 +6,8 @@
 
 	import { cn } from "$lib/utils.js"
 	import WildAnimationBox from "../../../routes/WildAnimationBox.svelte"
+	import DemoWorkflow from "$components/animations/DemoWorkflow.svelte"
+
 	// Define the features data structure
 	const features = [
 		{
@@ -13,7 +15,7 @@
 			title: "Open Ends",
 			description:
 				"Quickly understand target audiences perception, and uncover what resonates. Never miss or mix up another concept with CoLoop's automatic keyword labelling.",
-			demo: DemoConceptTesting,
+			demo: ConceptTesting,
 			image: "/water/blue-1.png",
 			bgColor: "bg-accent-1",
 		},
@@ -22,7 +24,7 @@
 			title: "Qualitative",
 			description:
 				"Analyze open-ended feedback to reveal customer sentiment. CoLoop enables scalable CX analysis to improve customer journeys and retention.",
-			demo: DemoInterviewAnalysis,
+			demo: InterviewAnalysis,
 			image: "/water/green-1.png",
 			bgColor: "bg-accent-2",
 		},
@@ -31,7 +33,7 @@
 			title: "Concept & Message Testing",
 			description:
 				"Unlock the competitive edge with deeper insights into unmet needs, differentiators and white space opportunities.",
-			demo: DemoInterviewAnalysis,
+			demo: Workflow,
 			image: "/water/blue-3.png",
 			bgColor: "bg-accent-3",
 		},
@@ -40,7 +42,7 @@
 			title: "Agentic Chat",
 			description:
 				"Uncover market trends, customer needs, and market opportunities with comprehensive market research.",
-			demo: DemoTranslation,
+			demo: Translation,
 			image: "/water/tan-1.png",
 			bgColor: "bg-accent-4",
 		},
@@ -48,6 +50,22 @@
 
 	let activeFeature = $state(features[0])
 </script>
+
+{#snippet ConceptTesting()}
+	<DemoConceptTesting />
+{/snippet}
+
+{#snippet InterviewAnalysis()}
+	<DemoInterviewAnalysis />
+{/snippet}
+
+{#snippet Translation()}
+	<DemoTranslation />
+{/snippet}
+
+{#snippet Workflow()}
+	<DemoWorkflow />
+{/snippet}
 
 <div class="lg:grid-cols-2 grid items-start w-full h-full grid-cols-1 gap-4">
 	<!-- Left side - Feature options -->

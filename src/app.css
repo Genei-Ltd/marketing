@@ -221,7 +221,7 @@
 	}
 
 	.card {
-		@apply bg-white backdrop-blur-sm  text-black border rounded shadow;
+		@apply bg-white  text-black  rounded-lg;
 	}
 
 	h1 {

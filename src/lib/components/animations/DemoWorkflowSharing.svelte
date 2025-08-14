@@ -6,18 +6,17 @@
 		IconMail,
 		IconLoader,
 		IconLock,
-		IconEye,
 		IconEdit,
-		IconCrown,
 		IconBell,
 		IconEditOff,
 		IconAddressBook,
 		IconSettings,
 	} from "@tabler/icons-svelte"
 	import { onMount } from "svelte"
-	import { fly, scale } from "svelte/transition"
+	import { fade, fly, scale, slide } from "svelte/transition"
 	import { quintOut, cubicInOut, elasticOut } from "svelte/easing"
 	import type { ComponentType } from "svelte"
+	import Box from "./Box.svelte"
 
 	// ============================================================================
 	// ANIMATION CONTROLLER (unchanged)
@@ -246,60 +245,53 @@
 	]
 
 	// ============================================================================
-	// STEP ANIMATIONS
+	// STEP ANIMATIONS - Simplified and cleaner
 	// ============================================================================
 
 	async function animateShareSetup(controller: AnimationController): Promise<void> {
 		try {
-			// Type email
+			// Type email character by character
 			await controller.delay(500)
 			const email = "alex@client-corp.com"
 			for (let i = 0; i <= email.length; i++) {
 				if (controller.signal.aborted) throw new Error("Animation cancelled")
 				animationState.shareAction.email = email.slice(0, i)
-				await controller.delay(80)
+				await controller.delay(60)
 			}
 
-			// Show access levels first
-			if (controller.signal.aborted) throw new Error("Animation cancelled")
+			// Show access levels
+			await controller.delay(800)
 			animationState.accessLevels = accessLevels
-			await controller.delay(300)
 
 			// Select guest access
-			await controller.delay(600)
-			animationState.shareAction.status = "selecting"
+			await controller.delay(1000)
 			animationState.selectedLevel = accessLevels.find((l) => l.id === "guest") || null
+			animationState.shareAction.status = "selecting"
 
 			// Show send button
 			await controller.delay(800)
 			animationState.shareAction.showSendButton = true
 
-			// Simulate send button click
-			await controller.delay(1200)
-			animationState.shareAction.status = "sending"
-
 			// Complete sharing
-			await controller.delay(600)
+			await controller.delay(1200)
 			animationState.shareAction.status = "complete"
-			animationState.shareAction.showSendButton = false
 
-			await controller.delay(1000)
+			await controller.delay(1500)
 		} catch (err) {
 			// Fallback
 			animationState.accessLevels = accessLevels
 			animationState.shareAction.email = "alex@client-corp.com"
 			animationState.selectedLevel = accessLevels.find((l) => l.id === "guest") || null
 			animationState.shareAction.status = "complete"
-			animationState.shareAction.showSendButton = false
 			throw err
 		}
 	}
 
 	async function animateInviteNotification(controller: AnimationController): Promise<void> {
 		try {
-			await controller.delay(500)
+			await controller.delay(600)
 			animationState.notification.visible = true
-			await controller.delay(2000)
+			await controller.delay(2500)
 		} catch (err) {
 			animationState.notification.visible = true
 			throw err
@@ -312,14 +304,14 @@
 			for (let i = 0; i < teamMembers.length; i++) {
 				if (controller.signal.aborted) throw new Error("Animation cancelled")
 				animationState.teamMembers = teamMembers.slice(0, i + 1)
-				await controller.delay(400)
+				await controller.delay(500)
 			}
 
-			// Highlight external member
-			await controller.delay(600)
+			// Highlight the new external member
+			await controller.delay(800)
 			animationState.highlightedMember = "alex"
 
-			await controller.delay(1500)
+			await controller.delay(2000)
 		} catch (err) {
 			animationState.teamMembers = teamMembers
 			animationState.highlightedMember = "alex"
@@ -346,27 +338,27 @@
 			id: "share-setup",
 			icon: IconShare,
 			title: "Share Project",
-			subtitle: "Setting up guest access permissions...",
-			loadingText: "Configuring project sharing",
-			completeText: "Share configuration completed",
+			subtitle: "Configure guest access permissions",
+			loadingText: "Setting up project sharing",
+			completeText: "Guest access configured",
 			execute: animateShareSetup,
 		},
 		{
 			id: "invite-notification",
 			icon: IconBell,
 			title: "Send Invitation",
-			subtitle: "Notifying external collaborator...",
-			loadingText: "Sending invitation notification",
-			completeText: "Invitation sent successfully",
+			subtitle: "Notify external collaborator",
+			loadingText: "Sending invitation",
+			completeText: "Invitation delivered",
 			execute: animateInviteNotification,
 		},
 		{
 			id: "access-grid",
 			icon: IconUsers,
-			title: "Team Access",
-			subtitle: "Managing project permissions...",
-			loadingText: "Loading team access controls",
-			completeText: "Access permissions updated",
+			title: "Team Overview",
+			subtitle: "Review project member access",
+			loadingText: "Loading team access",
+			completeText: "Team access updated",
 			execute: animateAccessGrid,
 		},
 	]
@@ -415,7 +407,7 @@
 				isLoading = false
 				isComplete = true
 
-				await controller.delay(3000)
+				await controller.delay(1500)
 
 				if (!controller.signal.aborted) {
 					if (stepIndex < steps.length - 1) {
@@ -423,7 +415,7 @@
 					} else {
 						setTimeout(() => {
 							restart = true
-						}, 4000)
+						}, 2000)
 					}
 				}
 			}
@@ -444,8 +436,8 @@
 			setTimeout(() => {
 				showCard = true
 				executeStep(currentStepIndex)
-			}, 100)
-		}, 500)
+			}, 150)
+		}, 400)
 	}
 
 	function resetAnimation() {
@@ -465,8 +457,8 @@
 				showCard = true
 				restart = false
 				startAnimation()
-			}, 100)
-		}, 500)
+			}, 150)
+		}, 400)
 	}
 
 	function startAnimation() {
@@ -492,292 +484,232 @@
 </script>
 
 <!-- ============================================================================ -->
-<!-- CLEAN VISUAL COMPONENTS (simplified and monotone)
+<!-- CLEAN WORKFLOW UI - Matches DemoCoreValue Style -->
 <!-- ============================================================================ -->
 
-<!-- Animated text bubble (professional layout) -->
-{#snippet animatedTextBubble(config: { header: string; text: string; showDot?: boolean })}
-	<div
-		class="card p-6"
-		in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
-		out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
-		<!-- Title -->
-		<div class="text-base font-semibold mb-1">Guest Access Setup</div>
-		<!-- Metadata -->
-		<div class="text-sm text-muted-foreground mb-4">
-			{config.header}
-		</div>
-		<!-- Content -->
-		<div class="text-sm leading-relaxed">
-			{config.text}
-			{#if config.showDot}
-				<span class="bg-muted size-2 animate-pulse inline-block ml-1 rounded-full"></span>
-			{/if}
-		</div>
-	</div>
-{/snippet}
-<!-- Static text bubble (professional layout) -->
-{#snippet textBubble(config: { header: string; text: string; showDot?: boolean })}
-	<div
-		class="card p-6"
-		in:fly={{ y: 20, duration: 30, easing: cubicInOut }}
-		out:fly={{ y: -20, duration: 30, easing: cubicInOut }}>
-		<!-- Title -->
-		<div class="text-base font-semibold mb-1">Share Link Generated</div>
-		<!-- Metadata -->
-		<div class="text-sm text-muted-foreground mb-4">
-			{config.header}
-		</div>
-		<!-- Content -->
-		<div class="text-sm leading-relaxed">
-			{config.text}
-			{#if config.showDot}
-				<span class="bg-muted size-2 animate-pulse inline-block ml-1 rounded-full"></span>
-			{/if}
-		</div>
-	</div>
-{/snippet}
-
-<!-- Access levels display (professional layout) -->
-{#snippet accessLevelsDisplay(levels: AccessLevel[], selectedLevel: AccessLevel | null)}
-	<div
-		class="card p-6 mt-4"
-		in:fly={{ y: 20, duration: 30, easing: cubicInOut }}
-		out:fly={{ y: -20, duration: 30, easing: cubicInOut }}>
-		<div class="grid grid-cols-2 gap-3 mb-4">
-			{#each levels as level (level.id)}
-				{@const IconComponent = level.icon}
-				{@const isSelected = selectedLevel?.id === level.id}
-				<div
-					class="flex items-center gap-3 p-4 rounded-lg border transition-all duration-200 {isSelected
-						? 'bg-muted border-foreground'
-						: 'border-border hover:border-muted-foreground'}"
-					in:fly={{ x: -10, duration: 30, delay: levels.indexOf(level) * 100, easing: quintOut }}>
-					<div class={level.color}>
-						<IconComponent class="size-5" />
-					</div>
-					<div class="flex-1 min-w-0">
-						<div class="text-sm font-medium">{level.name}</div>
-					</div>
-					{#if isSelected}
-						<div in:scale={{ duration: 200, easing: elasticOut }}>
-							<IconCheck class="size-4" />
-						</div>
-					{/if}
-				</div>
-			{/each}
-		</div>
-		<!-- Summary -->
-		<div class="text-xs text-muted-foreground">
-			{levels.length} permission levels • Guest selected
-		</div>
-	</div>
-{/snippet}
-
-<!-- Invitation notification (professional layout) -->
-{#snippet invitationNotification(visible: boolean, projectName: string, inviterName: string)}
-	{#if visible}
-		<div
-			class="card p-6 mx-auto"
-			in:fly={{ y: 20, duration: 500, easing: elasticOut }}
-			out:fly={{ y: -20, duration: 300, easing: cubicInOut }}>
-			<!-- Title -->
-			<div class="text-base font-semibold mb-1">Invitation Sent</div>
-			<!-- Metadata -->
-			<div class="text-sm text-muted-foreground mb-4">Guest notification delivered</div>
-			<!-- Content -->
-			<div class="flex items-start gap-3 mb-4">
-				<div class="bg-muted p-2 rounded-lg">
-					<IconMail class="size-4" />
-				</div>
-				<div class="flex-1 min-w-0">
-					<div class="text-sm font-medium mb-1">
-						You've been invited to view "{projectName}"
-					</div>
-					<div class="text-xs text-muted-foreground">
-						by {inviterName}
-					</div>
-				</div>
-				<div>
-					<IconCheck class="size-4" />
-				</div>
-			</div>
-			<!-- Footer -->
-			<div class="text-xs text-muted-foreground">Guest access • Read-only permissions</div>
-		</div>
-	{/if}
-{/snippet}
-
-<!-- Full-width send button (professional layout) -->
-{#snippet sendButton(isPressed: boolean)}
-	<div
-		class="card p-6"
-		in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
-		out:fly={{ y: -20, duration: 300, easing: cubicInOut }}>
-		<!-- Title -->
-		<div class="text-base font-semibold mb-1">Send Invitation</div>
-		<!-- Metadata -->
-		<div class="text-sm text-muted-foreground mb-6">Guest access will be sent to alex@client-corp.com</div>
-		<!-- Button -->
-		<button
-			type="button"
-			class="w-full bg-white text-background font-medium py-4 px-6 rounded-lg transition-all duration-200 ease-out
-			{isPressed ? 'scale-[0.98]' : 'active:scale-[0.98]'}"
-			disabled>
-			{#if isPressed}
-				<div class="flex items-center justify-center gap-2">
-					<IconLoader class="size-4 animate-spin" />
-					<span>Sending invitation...</span>
-				</div>
-			{:else}
-				<div class="flex items-center justify-center gap-2">
-					<IconMail class="size-4" />
-					<span>Send Guest Access</span>
-				</div>
-			{/if}
-		</button>
-		<!-- Footer info -->
-		<div class="text-xs text-muted-foreground mt-4 text-center">Guest permissions • Read-only access</div>
-	</div>
-{/snippet}
-
-<!-- Team members grid (professional layout) -->
-{#snippet teamMembersGrid(members: TeamMember[], highlightedId: string | null)}
-	{#if members.length > 0}
-		<div
-			class="card p-6"
-			in:fly={{ y: 20, duration: 400, easing: cubicInOut }}
-			out:fly={{ y: -20, duration: 500, easing: cubicInOut }}>
-			<!-- Title -->
-			<div class="text-base font-semibold mb-1">Team Access</div>
-			<!-- Metadata -->
-			<div class="text-sm text-muted-foreground mb-6">Manage project permissions and member access</div>
-			<!-- Members List -->
-			<div class="space-y-3 mb-4">
-				{#each members as member (member.id)}
-					{@const accessLevel = accessLevels.find((l) => l.id === member.accessLevel)}
-					{@const IconComponent = accessLevel?.icon ?? IconLoader}
-					{@const isHighlighted = highlightedId === member.id}
-					<div
-						class="flex items-center gap-4 p-3 rounded-lg border transition-all duration-300 {isHighlighted
-							? 'bg-muted border-foreground'
-							: 'border-border hover:border-muted-foreground'}"
-						in:fly={{ y: -20, duration: 30, delay: members.indexOf(member) * 100, easing: elasticOut }}>
-						<!-- Avatar -->
-						<div
-							class="relative w-10 h-10 rounded-full font-medium text-sm flex items-center justify-center {member.isExternal
-								? 'bg-muted text-foreground'
-								: 'bg-white text-background'}">
-							{member.name
-								.split(" ")
-								.map((n) => n[0])
-								.join("")}
-							{#if member.isExternal}
-								<div class="-bottom-0.5 -right-0.5 absolute">
-									<div
-										class="bg-white text-background flex items-center justify-center w-4 h-4 rounded-full"
-										in:scale={{ duration: 300, easing: elasticOut, delay: 500 }}>
-										<IconLock class="size-2.5" />
-									</div>
-								</div>
-							{/if}
-						</div>
-
-						<!-- Member Info -->
-						<div class="flex-1 min-w-0">
-							<div class="flex items-center gap-2 mb-0.5">
-								<span class="text-sm font-medium truncate">{member.name}</span>
-								{#if member.isExternal}
-									<span
-										class="bg-white text-background px-2 py-0.5 text-xs font-medium rounded-full"
-										in:scale={{ duration: 200, easing: elasticOut, delay: 600 }}>
-										External
-									</span>
-								{/if}
-							</div>
-							<div class="text-xs text-muted-foreground truncate">{member.email}</div>
-						</div>
-
-						<!-- Access Level -->
-						<div class="flex items-center gap-2 text-right">
-							<div class="text-xs text-muted-foreground">
-								{#if accessLevel}
-									{accessLevel.name}
-								{/if}
-							</div>
-							{#if accessLevel}
-								<div class={accessLevel.color}>
-									<IconComponent class="size-4" />
-								</div>
-							{/if}
-						</div>
-					</div>
-				{/each}
-			</div>
-			<!-- Footer Summary -->
-			<div class="text-xs text-muted-foreground">
-				{members.length} team members • {members.filter((m) => m.isExternal).length} external users
-			</div>
-		</div>
-	{/if}
-{/snippet}
-<div class="relative flex flex-col w-full">
+<div class="w-full h-full flex items-center justify-center">
 	{#if showCard}
 		<div
 			class="transition-all duration-500"
-			in:fly={{ y: 30, duration: 600, easing: quintOut }}
-			out:fly={{ y: -30, duration: 500, easing: cubicInOut }}>
-			{#if isLoading || animationState.isComplete}
-				{#if currentStep.id === "share-setup"}
-					{#if animationState.shareAction.email}
-						{@render animatedTextBubble({
-							header: "Guest Email • Project Sharing",
-							text: animationState.shareAction.email,
-							showDot: animationState.shareAction.status === "typing",
-						})}
-						{#if animationState.accessLevels.length > 0}
-							{@render accessLevelsDisplay(animationState.accessLevels, animationState.selectedLevel)}
+			in:slide={{ axis: "y", duration: 300, easing: quintOut }}
+			out:fade={{ duration: 200, delay: 100, easing: cubicInOut }}>
+			<!-- SHARE SETUP STEP -->
+			{#if currentStep?.id === "share-setup"}
+				<div
+					class="transition-all duration-300 w-full h-full flex items-center justify-center"
+					in:scale={{ duration: 300, easing: cubicInOut, start: 0.5 }}>
+					<Box class="h-full flex min-w-96 max-w-96 items-center justify-center">
+						<div class="space-y-6 w-full h-full relative">
+							<div class="text-left">
+								<h2 class="text-xl text-black leading-tight max-w-full mx-auto">
+									Share with External Guest
+								</h2>
+							</div>
+
+							<div class="space-y-4">
+								<!-- Email Input Field -->
+								<div class="space-y-2">
+									<label for="guest-email" class="text-sm font-medium text-gray-800"
+										>Email address</label>
+									<div class="relative">
+										<input
+											id="guest-email"
+											type="email"
+											class="w-full px-4 py-3 border border-gray-800 rounded-lg bg-white text-gray-800 text-sm"
+											value={animationState.shareAction.email}
+											placeholder="Enter email address"
+											readonly />
+										{#if animationState.shareAction.email && animationState.shareAction.status === "typing"}
+											<div class="absolute right-3 top-1/2 transform -translate-y-1/2">
+												<div class="w-1 h-5 bg-gray-800 animate-pulse"></div>
+											</div>
+										{/if}
+									</div>
+								</div>
+
+								<!-- Access Levels -->
+								{#if animationState.accessLevels.length > 0}
+									<div class="space-y-3" in:fade={{ duration: 300, delay: 200 }}>
+										<div class="text-sm font-medium text-gray-800">Access level</div>
+										<div class="grid grid-cols-2 gap-2">
+											{#each animationState.accessLevels.slice(0, 4) as level (level.id)}
+												{@const IconComponent = level.icon}
+												{@const isSelected = animationState.selectedLevel?.id === level.id}
+												<div
+													class="flex items-center gap-2 p-3 rounded-lg border transition-all duration-200 {isSelected
+														? 'border-black bg-gray-100'
+														: 'border-gray-300 hover:border-gray-500'}"
+													in:scale={{
+														duration: 200,
+														easing: quintOut,
+														delay: level.id === "guest" ? 400 : 100,
+													}}>
+													<IconComponent class="size-4 text-gray-800" />
+													<span class="text-sm text-gray-800">{level.name}</span>
+													{#if isSelected}
+														<div
+															class="ml-auto"
+															in:scale={{ duration: 200, easing: elasticOut }}>
+															<IconCheck class="size-4 text-black" />
+														</div>
+													{/if}
+												</div>
+											{/each}
+										</div>
+									</div>
+								{/if}
+
+								<!-- Send Button -->
+								{#if animationState.shareAction.showSendButton}
+									<div class="pt-2" in:fade={{ duration: 300, delay: 200 }}>
+										<div
+											class={`w-full bg-black text-white px-6 py-3 rounded-lg font-medium transition-all text-center ${
+												animationState.shareAction.status === "complete"
+													? "bg-black/70 scale-95"
+													: ""
+											}`}>
+											{#if animationState.shareAction.status === "complete"}
+												<div class="flex items-center justify-center gap-2">
+													<IconCheck class="size-4" />
+													<span>Invitation Sent</span>
+												</div>
+											{:else}
+												<div class="flex items-center justify-center gap-2">
+													<IconMail class="size-4" />
+													<span>Send Guest Access</span>
+												</div>
+											{/if}
+										</div>
+									</div>
+								{/if}
+							</div>
+						</div>
+					</Box>
+				</div>
+			{/if}
+
+			<!-- INVITE NOTIFICATION STEP -->
+			{#if currentStep?.id === "invite-notification"}
+				<div
+					class="transition-all duration-300 w-full h-full flex items-center justify-center"
+					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
+					<Box class="h-full flex items-center justify-center min-w-96 max-w-96">
+						{#if animationState.notification.visible}
+							<div class="space-y-4 w-full h-full relative" in:fade={{ duration: 400, delay: 200 }}>
+								<div class="text-left">
+									<h2 class="text-xl text-black leading-tight">Invitation Delivered</h2>
+								</div>
+
+								<!-- Notification Card -->
+								<div class="border border-gray-800 rounded-lg p-4 bg-gray-50">
+									<div class="flex items-start gap-3">
+										<div class="p-2 bg-black rounded-lg">
+											<IconMail class="size-5 text-white" />
+										</div>
+										<div class="flex-1">
+											<h3 class="text-sm font-semibold text-black mb-1">Project Invitation</h3>
+											<p class="text-sm text-gray-700 mb-2">
+												You've been invited to view "{animationState.notification.projectName}"
+											</p>
+											<p class="text-xs text-gray-600">
+												by {animationState.notification.inviterName}
+											</p>
+										</div>
+										<IconCheck class="size-5 text-black" />
+									</div>
+								</div>
+
+								<!-- Details -->
+								<div class="text-sm text-gray-600 space-y-1">
+									<div>• Guest access granted</div>
+									<div>• Read-only permissions</div>
+									<div>• Link expires in 30 days</div>
+								</div>
+							</div>
 						{/if}
-					{/if}
+					</Box>
+				</div>
+			{/if}
 
-					{#if animationState.shareAction.showSendButton}
-						{@render sendButton(animationState.shareAction.status === "sending")}
-					{/if}
+			<!-- ACCESS GRID STEP -->
+			{#if currentStep?.id === "access-grid"}
+				<div
+					class="transition-all duration-300 w-full h-full flex items-center justify-center"
+					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
+					<Box class="h-full flex items-center justify-center min-w-96 max-w-96">
+						<div class="space-y-4 w-full h-full relative">
+							<div class="text-left">
+								<h2 class="text-xl text-black leading-tight">Team Access Overview</h2>
+								<p class="text-sm text-gray-600 mt-1">
+									{animationState.teamMembers.length} members • {animationState.teamMembers.filter(
+										(m) => m.isExternal,
+									).length} external
+								</p>
+							</div>
 
-					{#if animationState.shareAction.status === "complete"}
-						{@render textBubble({
-							header: "Share Link • Generated",
-							text: "Guest access sent to alex@client-corp.com",
-						})}
-					{/if}
-				{/if}
+							<!-- Team Members List -->
+							<div class="space-y-2">
+								{#each animationState.teamMembers as member, index (member.id)}
+									{@const accessLevel = accessLevels.find((l) => l.id === member.accessLevel)}
+									{@const IconComponent = accessLevel?.icon ?? IconLoader}
+									{@const isHighlighted = animationState.highlightedMember === member.id}
+									<div
+										class="flex items-center gap-3 p-3 border rounded-lg transition-all duration-300 {isHighlighted
+											? 'border-black bg-gray-100'
+											: 'border-gray-300'}"
+										in:fly={{ y: 20, duration: 300, delay: index * 200, easing: quintOut }}>
+										<!-- Avatar -->
+										<div
+											class="relative w-8 h-8 rounded-full font-medium text-xs flex items-center justify-center {member.isExternal
+												? 'bg-gray-300 text-gray-800'
+												: 'bg-black text-white'}">
+											{member.name
+												.split(" ")
+												.map((n) => n[0])
+												.join("")}
+											{#if member.isExternal}
+												<div class="absolute -bottom-0.5 -right-0.5">
+													<div
+														class="bg-black text-white w-3 h-3 rounded-full flex items-center justify-center"
+														in:scale={{ duration: 300, easing: elasticOut, delay: 400 }}>
+														<IconLock class="size-1.5" />
+													</div>
+												</div>
+											{/if}
+										</div>
 
-				{#if currentStep.id === "invite-notification"}
-					{@render invitationNotification(
-						animationState.notification.visible,
-						animationState.notification.projectName,
-						animationState.notification.inviterName,
-					)}
-				{/if}
+										<!-- Member Info -->
+										<div class="flex-1 min-w-0">
+											<div class="flex items-center gap-2">
+												<span class="text-sm font-medium text-black truncate"
+													>{member.name}</span>
+												{#if member.isExternal && isHighlighted}
+													<span
+														class="bg-black text-white px-2 py-0.5 text-xs rounded-full"
+														in:scale={{ duration: 200, easing: elasticOut, delay: 600 }}>
+														Guest
+													</span>
+												{/if}
+											</div>
+											<div class="text-xs text-gray-600 truncate">{member.email}</div>
+										</div>
 
-				{#if currentStep.id === "access-grid"}
-					{@render teamMembersGrid(animationState.teamMembers, animationState.highlightedMember)}
-				{/if}
+										<!-- Access Level -->
+										<div class="flex items-center gap-1">
+											<span class="text-xs text-gray-600">
+												{accessLevel?.name ?? ""}
+											</span>
+											{#if IconComponent}
+												<IconComponent class="size-3 text-gray-600" />
+											{/if}
+										</div>
+									</div>
+								{/each}
+							</div>
+						</div>
+					</Box>
+				</div>
 			{/if}
 		</div>
 	{/if}
 </div>
-
-<style>
-	.animate-shimmer-once {
-		background: var(--muted);
-		color: var(--foreground);
-		animation: shine 1.5s infinite;
-	}
-
-	@keyframes shine {
-		to {
-			background-position: left;
-		}
-	}
-</style>
