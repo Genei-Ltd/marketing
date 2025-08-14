@@ -425,19 +425,17 @@ Clean, professional design for corporate audiences - keeping original functional
 			out:fade={{ duration: 200, delay: 100, easing: cubicInOut }}>
 			<!-- LIVE INTERVIEW STEP -->
 			{#if currentStep?.id === "live-interview"}
-				<div
-					class="transition-all duration-300 w-full h-full flex items-center justify-center"
-					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
-					<Box class="h-full flex w-full items-center justify-center">
-						<div class="space-y-4 w-full h-full relative">
+				<div class="transition-all duration-300 w-full h-full flex items-center justify-around">
+					<Box class="h-full flex w-full items-center justify-center min-h-96 min-w-96">
+						<div class="space-y-4 w-full h-full relative min-h-96 min-w-96">
 							<div class="text-left">
-								<h2 class="text-lg text-black leading-tight">Concept Testing Session</h2>
-								<p class="text-gray-600 text-sm">Live Interview Analysis</p>
+								<h2 class="text-xl text-black font-semibold leading-tight">Concept Testing Session</h2>
+								<p class="text-gray-600 text-md">Live Interview Analysis</p>
 							</div>
 
 							<!-- Concepts Grid -->
 							{#if animationState.concepts.length > 0}
-								<div class="grid grid-cols-6 gap-2" in:fade={{ duration: 400 }}>
+								<div class="grid grid-cols-6 gap-1 mt-8">
 									{#each animationState.concepts as concept, i (concept.id)}
 										<div
 											class="relative bg-white border border-gray-300 hover:border-gray-800 transition-all duration-300 rounded-lg overflow-hidden {concept.isHighlighted
@@ -445,19 +443,20 @@ Clean, professional design for corporate audiences - keeping original functional
 												: ''}"
 											in:fade={{ duration: 400, delay: i * 80 }}>
 											<!-- Concept letter badge -->
-											<div class="absolute top-2 left-2 z-10">
+											<div class="absolute -top-1 -left-1 z-10">
 												<div
-													class="bg-white border border-gray-300 text-black size-6 flex items-center justify-center rounded text-xs font-semibold">
+													class=" border size-6 flex items-center justify-center rounded-lg text-sm font-semibold {concept.isHighlighted
+														? 'bg-black text-white'
+														: 'bg-white text-black'}">
 													{concept.letter}
 												</div>
 											</div>
 
 											<!-- Highlighted indicator -->
 											{#if concept.isHighlighted}
-												<div class="absolute top-2 right-2 z-10">
+												<div class="absolute inset-0 flex items-center justify-center z-10">
 													<div
 														class="bg-black text-white size-6 flex items-center justify-center rounded-full">
-														<IconCheck class="size-3" />
 													</div>
 												</div>
 											{/if}
@@ -481,21 +480,34 @@ Clean, professional design for corporate audiences - keeping original functional
 
 							<!-- Live Transcription - Evidence Style -->
 							{#if animationState.showVideo}
-								<div class="mt-4">
-									<div class="text-left border-l-4 border-black pl-4" in:fade={{ duration: 400 }}>
-										<div class="flex items-center gap-2 mb-3">
-											<div class="size-2 bg-red-500 rounded-full animate-pulse"></div>
-											<span class="text-gray-600 text-xs font-medium"
-												>Live Interview Transcript</span>
+								<div class="mt-8">
+									<div
+										class="text-left border-l-4 border-black pl-4"
+										in:slide={{ axis: "y", duration: 300, easing: quintOut }}>
+										<div class="flex items-center gap-2 mb-2">
+											<div class="size-2 bg-black rounded-full animate-pulse"></div>
+											<span class="text-gray-600 text-xs font-medium">CoLoop Transcription</span>
 										</div>
 
 										<div class="text-sm leading-relaxed text-black">
-											<p class="mb-2">
-												<span class="bg-black text-white text-xs px-1.5 py-0.5 mr-2 rounded"
-													>P1</span>
-												<span class="font-bold text-black">Participant:</span>
+											<div class=" mb-2">
+												<p class="mb-1">
+													<!-- <span
+														class="bg-white text-black border border-black text-xs px-1.5 py-0.5 mr-1 rounded"
+														>R</span> -->
+													<span class="font-bold text-gray-600">Researcher</span>
+												</p>
+												<p class="ml-8 text-gray-800 text-sm">
+													Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+													quos.
+												</p>
+											</div>
+											<p class="mb-1">
+												<!-- <span class="bg-black text-white text-xs px-1.5 py-0.5 mr-1 rounded"
+													>P1</span> -->
+												<span class="font-bold text-gray-600">Participant</span>
 											</p>
-											<p class="ml-6 text-gray-800">
+											<p class="ml-8 text-gray-800 text-sm leading-relaxed">
 												{#if animationState.subtitleWords.length > 0}
 													{#each animationState.subtitleWords as word, i}
 														<span
@@ -509,11 +521,6 @@ Clean, professional design for corporate audiences - keeping original functional
 																class="text-gray-800">
 															</span>{/if}
 													{/each}
-													{#if animationState.currentWordIndex < animationState.subtitleWords.length - 1}
-														<span
-															class="inline-block w-1 h-4 ml-1 bg-black rounded-sm animate-pulse"
-														></span>
-													{/if}
 												{/if}
 											</p>
 										</div>
@@ -527,148 +534,120 @@ Clean, professional design for corporate audiences - keeping original functional
 
 			<!-- RESULTS ANALYSIS STEP -->
 			{#if currentStep?.id === "results-analysis"}
-				<div
-					class="transition-all duration-300 w-full h-full flex items-center justify-center"
-					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
-					<Box class="h-full flex w-full items-center justify-center">
-						<div class="space-y-4 w-full h-full relative">
-							<div class="text-left">
-								<h2 class="text-lg text-black leading-tight">Multi-Dimensional Analysis</h2>
-								<p class="text-gray-600 text-sm">Concept performance analysis</p>
+				<div class="transition-all duration-300 w-full h-full flex items-center justify-center">
+					<Box class="h-full flex w-full items-center justify-center min-h-96 min-w-96">
+						<div class="space-y-3 w-full h-full relative min-h-96 min-w-96">
+							<div class="text-left mb-8">
+								<h2 class="text-xl text-black font-semibold leading-tight">
+									Multi-Dimensional Analysis
+								</h2>
+								<p class="text-gray-600 text-md">Top performing concepts</p>
 							</div>
 
-							<!-- Results Table -->
+							<!-- Single Graph-Style Results Chart -->
 							{#if animationState.conceptResults.length > 0}
-								<div class="space-y-2" in:fade={{ duration: 400 }}>
-									{#each animationState.conceptResults as result, i}
-										{@const totalScore = result.clarity + result.impact + result.appeal}
-										{@const averageScore = Math.round(totalScore / 3)}
-										<div
-											class="bg-white border border-gray-300 rounded-lg p-3 transition-all duration-300 hover:border-gray-800 {i ===
-											0
-												? 'ring-2 ring-black border-black'
-												: ''}"
-											in:fade={{ duration: 400, delay: i * 100 }}>
-											<div class="flex items-center justify-between mb-2">
-												<div class="flex items-center gap-2">
-													<div
-														class="bg-white border border-gray-300 text-black size-6 flex items-center justify-center rounded text-xs font-semibold">
-														{result.letter}
-													</div>
-													<div>
-														<div class="text-black text-sm font-medium">
-															{result.concept}
-														</div>
-														<div class="text-gray-600 text-xs">
-															Score: {averageScore}%
-														</div>
-													</div>
-												</div>
-												{#if i === 0}
-													<div
-														class="bg-black text-white px-2 py-1 rounded text-xs font-medium">
-														Winner
-													</div>
-												{/if}
-											</div>
-
-											<div class="grid grid-cols-3 gap-3">
-												<!-- Clarity -->
-												<div class="space-y-1">
-													<div class="flex items-center justify-between">
-														<span class="text-gray-600 text-xs font-medium">Clarity</span>
-														<span class="text-black text-xs font-semibold"
-															>{result.clarity}%</span>
-													</div>
-													<div class="bg-gray-200 h-2 rounded-full overflow-hidden">
-														<div
-															class="bg-black h-full transition-all duration-700"
-															style="width: {result.clarity}%"
-															in:fade={{ duration: 600, delay: 200 + i * 100 }}>
-														</div>
-													</div>
-												</div>
-
-												<!-- Impact -->
-												<div class="space-y-1">
-													<div class="flex items-center justify-between">
-														<span class="text-gray-600 text-xs font-medium">Impact</span>
-														<span class="text-black text-xs font-semibold"
-															>{result.impact}%</span>
-													</div>
-													<div class="bg-gray-200 h-2 rounded-full overflow-hidden">
-														<div
-															class="bg-gray-700 h-full transition-all duration-700"
-															style="width: {result.impact}%"
-															in:fade={{ duration: 600, delay: 300 + i * 100 }}>
-														</div>
-													</div>
-												</div>
-
-												<!-- Appeal -->
-												<div class="space-y-1">
-													<div class="flex items-center justify-between">
-														<span class="text-gray-600 text-xs font-medium">Appeal</span>
-														<span class="text-black text-xs font-semibold"
-															>{result.appeal}%</span>
-													</div>
-													<div class="bg-gray-200 h-2 rounded-full overflow-hidden">
-														<div
-															class="bg-gray-500 h-full transition-all duration-700"
-															style="width: {result.appeal}%"
-															in:fade={{ duration: 600, delay: 400 + i * 100 }}>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									{/each}
-								</div>
-							{/if}
-
-							<!-- Insights Summary -->
-							{#if animationState.showChart && animationState.conceptResults.length > 0}
 								{@const topConcept = animationState.conceptResults[0]}
-								<div
-									class="bg-gray-100 border border-gray-800 rounded-lg p-4"
-									in:fade={{ duration: 400, delay: 200 }}>
-									<div class="flex items-center gap-2 mb-3">
-										<div
-											class="bg-black text-white size-6 flex items-center justify-center rounded-full">
-											<IconCheck class="size-3" />
+								<div class="bg-white border border-black rounded-lg p-4" in:fade={{ duration: 400 }}>
+									<!-- Winner Header -->
+									<div class="flex items-center justify-between mb-4">
+										<div class="flex items-center gap-3">
+											<div
+												class="bg-black text-white size-8 flex items-center justify-center rounded-lg text-base font-bold">
+												{topConcept.letter}
+											</div>
+											<div>
+												<div class="text-black text-base font-bold">{topConcept.concept}</div>
+												<div class="text-gray-600 text-xs">Highest Performing</div>
+											</div>
 										</div>
-										<div>
-											<div class="text-black text-sm font-semibold">Analysis Complete</div>
-											<div class="text-gray-600 text-xs">Key insights identified</div>
+										<div class="bg-black text-white px-3 py-1.5 rounded-lg text-xs font-semibold">
+											Appeal
 										</div>
 									</div>
 
-									<div class="space-y-2">
-										<div class="flex items-center gap-2">
-											<div
-												class="bg-white border border-gray-300 text-black size-6 flex items-center justify-center rounded text-xs font-semibold">
-												{topConcept.letter}
+									<!-- Winner Dimensional Bars -->
+									<div class="space-y-3 mb-5">
+										<div class="flex items-center gap-3" in:fade={{ duration: 400, delay: 200 }}>
+											<div class="text-black text-xs font-medium min-w-16">Clarity</div>
+											<div class="flex-1 relative">
+												<div
+													class="bg-gray-100 h-6 rounded-lg overflow-hidden border border-gray-200">
+													<div
+														class="h-full transition-all duration-1000 flex items-center justify-end pr-2 bg-gradient-to-r from-black to-gray-800"
+														style="width: {topConcept.clarity}%"
+														in:fade={{ duration: 800, delay: 400 }}>
+														<span class="text-white text-xs font-bold"
+															>{topConcept.clarity}%</span>
+													</div>
+												</div>
 											</div>
-											<span class="text-black font-medium">{topConcept.concept}</span>
-											<span class="text-gray-600">emerges as the strongest concept</span>
 										</div>
 
-										<div class="grid grid-cols-3 gap-2 text-xs">
-											<div class="flex items-center gap-2">
-												<div class="size-2 bg-black rounded-full"></div>
-												<span class="text-gray-600">Clarity:</span>
-												<span class="text-black font-medium">{topConcept.clarity}%</span>
+										<div class="flex items-center gap-3" in:fade={{ duration: 400, delay: 300 }}>
+											<div class="text-black text-xs font-medium min-w-16">Impact</div>
+											<div class="flex-1 relative">
+												<div
+													class="bg-gray-100 h-6 rounded-lg overflow-hidden border border-gray-200">
+													<div
+														class="h-full transition-all duration-1000 flex items-center justify-end pr-2 bg-gradient-to-r from-gray-700 to-gray-600"
+														style="width: {topConcept.impact}%"
+														in:fade={{ duration: 800, delay: 500 }}>
+														<span class="text-white text-xs font-bold"
+															>{topConcept.impact}%</span>
+													</div>
+												</div>
 											</div>
-											<div class="flex items-center gap-2">
-												<div class="size-2 bg-gray-700 rounded-full"></div>
-												<span class="text-gray-600">Impact:</span>
-												<span class="text-black font-medium">{topConcept.impact}%</span>
+										</div>
+
+										<div class="flex items-center gap-3" in:fade={{ duration: 400, delay: 400 }}>
+											<div class="text-black text-xs font-medium min-w-16">Appeal</div>
+											<div class="flex-1 relative">
+												<div
+													class="bg-gray-100 h-6 rounded-lg overflow-hidden border border-gray-200">
+													<div
+														class="h-full transition-all duration-1000 flex items-center justify-end pr-2 bg-gradient-to-r from-gray-500 to-gray-400"
+														style="width: {topConcept.appeal}%"
+														in:fade={{ duration: 800, delay: 600 }}>
+														<span class="text-white text-xs font-bold"
+															>{topConcept.appeal}%</span>
+													</div>
+												</div>
 											</div>
-											<div class="flex items-center gap-2">
-												<div class="size-2 bg-gray-500 rounded-full"></div>
-												<span class="text-gray-600">Appeal:</span>
-												<span class="text-black font-medium">{topConcept.appeal}%</span>
-											</div>
+										</div>
+									</div>
+
+									<!-- Other Concepts - Smaller Comparison Bars -->
+									<div class="border-t border-gray-200 pt-3">
+										<div class="text-black text-xs font-medium mb-2">Other Concepts</div>
+										<div class="space-y-1.5">
+											{#each animationState.conceptResults.slice(1, 4) as result, i}
+												{@const totalScore = result.clarity + result.impact + result.appeal}
+												{@const averageScore = Math.round(totalScore / 3)}
+												<div
+													class="flex items-center gap-2"
+													in:fade={{ duration: 400, delay: 700 + i * 100 }}>
+													<div class="flex items-center gap-1.5 min-w-16">
+														<div
+															class="border size-3 flex items-center justify-center rounded text-xs font-semibold bg-white text-black border-gray-300">
+															{result.letter}
+														</div>
+														<span class="text-black text-xs">{result.concept}</span>
+													</div>
+
+													<div class="flex-1 relative">
+														<div
+															class="bg-gray-100 h-3 rounded-full overflow-hidden border border-gray-200">
+															<div
+																class="h-full transition-all duration-800 bg-gradient-to-r from-gray-400 to-gray-300"
+																style="width: {averageScore}%"
+																in:fade={{ duration: 600, delay: 800 + i * 100 }}>
+															</div>
+														</div>
+													</div>
+													<span class="text-black text-xs font-medium min-w-8"
+														>{averageScore}%</span>
+												</div>
+											{/each}
 										</div>
 									</div>
 								</div>
