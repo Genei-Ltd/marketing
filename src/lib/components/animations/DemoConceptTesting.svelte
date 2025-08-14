@@ -1,12 +1,19 @@
+<!--
+ANIMATED CONCEPT TESTING WORKFLOW
+Shows live interview analysis and multi-dimensional concept evaluation
+Clean, professional design for corporate audiences - keeping original functionality
+-->
+
 <script lang="ts">
-	import { IconEye, IconChartPie, IconLoader, IconCheck } from "@tabler/icons-svelte"
 	import { onMount } from "svelte"
-	import { fly, scale, fade } from "svelte/transition"
-	import { quintOut, cubicInOut } from "svelte/easing"
+	import { IconEye, IconChartPie, IconCheck } from "@tabler/icons-svelte"
+	import { fade, fly, scale, slide } from "svelte/transition"
+	import { quintOut, cubicInOut, elasticOut } from "svelte/easing"
 	import type { ComponentType } from "svelte"
+	import Box from "./Box.svelte"
 
 	// ============================================================================
-	// ANIMATION CONTROLLER (unchanged)
+	// LAYER 1: ANIMATION PRIMITIVES (from DemoCoreValue)
 	// ============================================================================
 
 	type AnimationState = "idle" | "running" | "completed" | "cancelled" | "error"
@@ -76,7 +83,9 @@
 				}
 
 				const timeoutId = setTimeout(resolve, ms)
+
 				this.addCleanup(() => clearTimeout(timeoutId))
+
 				this.signal.addEventListener("abort", () => {
 					clearTimeout(timeoutId)
 					reject(new Error("Animation cancelled"))
@@ -86,7 +95,7 @@
 	}
 
 	// ============================================================================
-	// CONCEPT TESTING DATA MODELS
+	// LAYER 2: CENTRALIZED STATE MANAGEMENT
 	// ============================================================================
 
 	type Concept = {
@@ -106,13 +115,11 @@
 	type ConceptResult = {
 		concept: string
 		letter: string
-		clarity: number // Score out of 100
-		impact: number // Score out of 100
-		appeal: number // Score out of 100
-		color: string
+		clarity: number
+		impact: number
+		appeal: number
 	}
 
-	// Animation state
 	let animationState = $state({
 		// Step 1: Live Interview
 		concepts: <Concept[]>[],
@@ -128,9 +135,6 @@
 		isComplete: false,
 	})
 
-	// Transcript auto-scroll container
-	let transcriptRef = $state<HTMLElement | null>(null)
-
 	function resetAnimationState(stepId?: string) {
 		if (stepId === "live-interview") {
 			animationState.concepts = []
@@ -140,16 +144,14 @@
 			animationState.conceptResults = []
 			animationState.showChart = false
 		} else if (stepId === "results-analysis") {
-			// Keep concepts, reset only results data
 			animationState.conceptResults = []
 			animationState.showChart = false
 		}
-
 		animationState.isComplete = false
 	}
 
 	// ============================================================================
-	// DATA CONFIGURATION
+	// DATA CONFIGURATION (Original data preserved)
 	// ============================================================================
 
 	const conceptsData: Concept[] = [
@@ -163,6 +165,7 @@
 
 	const subtitleText =
 		"I like option A it really stands out and looks tasty. I find option E pretty boring. But i would pick up option A first."
+
 	const subtitleWordsData: SubtitleWord[] = (() => {
 		const words = subtitleText.split(" ")
 		const result: SubtitleWord[] = []
@@ -171,23 +174,19 @@
 			const word = words[i]
 			const lowerWord = word.toLowerCase()
 
-			// Check if this word is "option" and the next word is a letter
 			if (lowerWord === "option" && i + 1 < words.length) {
 				const nextWord = words[i + 1].toLowerCase()
 				if (nextWord === "a") {
-					// Combine "option" and "A" into one word
 					result.push({ text: `${word} ${words[i + 1]}`, isHighlighted: false, relatedConcept: "concept-a" })
-					i++ // Skip the next word since we've combined it
+					i++
 					continue
 				} else if (nextWord === "e") {
-					// Combine "option" and "E" into one word
 					result.push({ text: `${word} ${words[i + 1]}`, isHighlighted: false, relatedConcept: "concept-e" })
-					i++ // Skip the next word since we've combined it
+					i++
 					continue
 				}
 			}
 
-			// If not a combined option, add as regular word
 			result.push({ text: word, isHighlighted: false, relatedConcept: undefined })
 		}
 
@@ -195,16 +194,16 @@
 	})()
 
 	const conceptResultsData: ConceptResult[] = [
-		{ concept: "Summer", letter: "A", clarity: 80, impact: 90, appeal: 95, color: "#000" },
-		{ concept: "Tropical", letter: "C", clarity: 65, impact: 30, appeal: 70, color: "#333" },
-		{ concept: "Original", letter: "B", clarity: 82, impact: 25, appeal: 30, color: "#555" },
-		{ concept: "Cheese", letter: "D", clarity: 45, impact: 78, appeal: 62, color: "#888" },
-		{ concept: "Chili", letter: "E", clarity: 80, impact: 45, appeal: 85, color: "#aaa" },
-		{ concept: "Classic", letter: "F", clarity: 25, impact: 35, appeal: 30, color: "#ccc" },
+		{ concept: "Summer", letter: "A", clarity: 80, impact: 90, appeal: 95 },
+		{ concept: "Tropical", letter: "C", clarity: 65, impact: 30, appeal: 70 },
+		{ concept: "Original", letter: "B", clarity: 82, impact: 25, appeal: 30 },
+		{ concept: "Cheese", letter: "D", clarity: 45, impact: 78, appeal: 62 },
+		{ concept: "Chili", letter: "E", clarity: 80, impact: 45, appeal: 85 },
+		{ concept: "Classic", letter: "F", clarity: 25, impact: 35, appeal: 30 },
 	]
 
 	// ============================================================================
-	// STEP ANIMATIONS
+	// LAYER 3: STEP ANIMATION FUNCTIONS (Original logic preserved)
 	// ============================================================================
 
 	async function animateLiveInterview(controller: AnimationController): Promise<void> {
@@ -237,7 +236,6 @@
 					}
 				}
 
-				// Smoother timing for better readability
 				await controller.delay(word.relatedConcept ? 800 : 140)
 			}
 
@@ -254,16 +252,13 @@
 
 	async function animateResultsAnalysis(controller: AnimationController): Promise<void> {
 		try {
-			// Show results table first
 			await controller.delay(300)
 			animationState.conceptResults = [...conceptResultsData]
 			await controller.delay(1800)
 
-			// Then show insights summary
 			animationState.showChart = true
 			await controller.delay(1200)
 		} catch (err) {
-			// Fallback
 			animationState.conceptResults = [...conceptResultsData]
 			animationState.showChart = true
 			throw err
@@ -271,7 +266,7 @@
 	}
 
 	// ============================================================================
-	// STEP DEFINITIONS
+	// LAYER 4: STEP DEFINITIONS
 	// ============================================================================
 
 	type StepDefinition = {
@@ -289,7 +284,7 @@
 			id: "live-interview",
 			icon: IconEye,
 			title: "Live Interview Analysis",
-			subtitle: "Analyzing real-time concept preferences...",
+			subtitle: "Real-time concept preference analysis during interviews",
 			loadingText: "Processing concept feedback",
 			completeText: "Interview analysis completed",
 			execute: animateLiveInterview,
@@ -298,7 +293,7 @@
 			id: "results-analysis",
 			icon: IconChartPie,
 			title: "Multi-Dimensional Analysis",
-			subtitle: "Analyzing concepts across clarity, impact, and appeal dimensions...",
+			subtitle: "Analyzing concepts across clarity, impact, and appeal dimensions",
 			loadingText: "Compiling dimensional analysis",
 			completeText: "Analysis complete - Key insights identified",
 			execute: animateResultsAnalysis,
@@ -306,7 +301,7 @@
 	]
 
 	// ============================================================================
-	// EXECUTION ENGINE (same as other demos)
+	// LAYER 5: EXECUTION ENGINE (from DemoCoreValue)
 	// ============================================================================
 
 	let currentStepIndex = $state(0)
@@ -316,11 +311,6 @@
 	let showCard = $state(true)
 	let currentController: AnimationController | null = $state(null)
 	let isAnimationStarted = $state(false)
-
-	// STATIC DESIGN MODE - Set to true to disable animations and show all steps
-	// Perfect for design work: shows concepts grid, video player, results table, and pie charts
-	// all at once without any animations or delays
-	let staticDesignMode = $state(false) // Set to true for design work
 
 	let currentStep = $derived(steps[currentStepIndex])
 
@@ -378,8 +368,8 @@
 			setTimeout(() => {
 				showCard = true
 				executeStep(currentStepIndex)
-			}, 100)
-		}, 500)
+			}, 150)
+		}, 400)
 	}
 
 	function resetAnimation() {
@@ -399,8 +389,8 @@
 				showCard = true
 				restart = false
 				startAnimation()
-			}, 100)
-		}, 500)
+			}, 150)
+		}, 400)
 	}
 
 	function startAnimation() {
@@ -416,375 +406,277 @@
 		}
 	})
 
-	// Keep the transcript gently scrolled to the bottom as words reveal
-	$effect(() => {
-		void animationState.currentWordIndex
-		if (transcriptRef) {
-			transcriptRef.scrollTo({ top: transcriptRef.scrollHeight, behavior: "smooth" })
-		}
-	})
-
 	onMount(() => {
-		if (!staticDesignMode) {
-			setTimeout(() => {
-				startAnimation()
-			}, 500)
-		}
+		setTimeout(() => {
+			startAnimation()
+		}, 500)
 	})
 </script>
 
 <!-- ============================================================================ -->
-<!-- VISUAL COMPONENTS
+<!-- CLEAN CONCEPT TESTING UI - Original functionality with DemoCoreValue styling -->
 <!-- ============================================================================ -->
 
-<!-- Concepts grid display -->
-{#snippet conceptsGrid(concepts: Concept[])}
-	{#if concepts.length > 0}
-		<div class="w-full mt-6" in:fade={{ duration: 400 }} out:fade={{ duration: 200 }}>
-			<div class="text-muted-foreground mb-4 text-sm font-medium">
-				Testing {concepts.length} concept variants
-			</div>
-
-			<div class="grid w-full grid-cols-3 gap-3">
-				{#each concepts as concept, i (concept.id)}
-					<div
-						class="group relative bg-card border border-border/50 hover:border-border transition-all duration-300 rounded-lg overflow-hidden {concept.isHighlighted
-							? 'ring-2 ring-accent/30 border-accent/50'
-							: ''}"
-						in:fade={{ duration: 400, delay: i * 80 }}>
-						<!-- Concept letter badge -->
-						<div class="absolute top-3 left-3 z-10">
-							<div
-								class="bg-background/90 backdrop-blur-sm border border-border/50 text-foreground size-6 flex items-center justify-center rounded text-xs font-semibold">
-								{concept.letter}
-							</div>
-						</div>
-
-						<!-- Highlighted indicator -->
-						{#if concept.isHighlighted}
-							<div class="absolute top-3 right-3 z-10">
-								<div
-									class="bg-accent text-accent-foreground size-6 flex items-center justify-center rounded-full">
-									<IconCheck class="size-3" />
-								</div>
-							</div>
-						{/if}
-
-						<!-- Product image -->
-						<div class="aspect-square w-full bg-muted/20">
-							<img
-								src={concept.image}
-								alt="Concept {concept.letter}: {concept.name}"
-								class="object-cover w-full h-full" />
-						</div>
-
-						<!-- Concept name -->
-						<div class="p-3 pt-2">
-							<div class="text-sm font-medium text-foreground">{concept.name}</div>
-						</div>
-					</div>
-				{/each}
-			</div>
-		</div>
-	{/if}
-{/snippet}
-
-<!-- Live transcription display -->
-{#snippet videoPlayer(showVideo: boolean, subtitleWords: SubtitleWord[])}
-	{#if showVideo}
-		<div class="mt-6" in:fade={{ duration: 400 }} out:fade={{ duration: 200 }}>
-			<div class="bg-card border border-border/50 rounded-lg p-5">
-				<div class="flex items-center gap-2 mb-4">
-					<div class="size-2 bg-accent rounded-full animate-pulse"></div>
-					<span class="text-muted-foreground text-sm font-medium">Live interview transcription</span>
-				</div>
-
-				<div class="max-h-32 overflow-y-auto" bind:this={transcriptRef}>
-					{#if subtitleWords.length > 0}
-						<div class="text-base leading-relaxed">
-							{#each subtitleWords as word, i}
-								<span
-									class="transition-colors duration-300 {i <= animationState.currentWordIndex
-										? word.relatedConcept
-											? 'bg-accent/20 text-accent-foreground px-1.5 py-0.5 rounded-md font-medium'
-											: 'text-foreground'
-										: 'text-transparent'}">{word.text}</span>
-								{#if i < subtitleWords.length - 1}<span class="text-foreground/80"> </span>{/if}
-							{/each}
-							{#if animationState.currentWordIndex < subtitleWords.length - 1}
-								<span class="inline-block w-1 h-4 ml-1 bg-accent rounded-sm animate-pulse"></span>
-							{/if}
-						</div>
-					{/if}
-				</div>
-			</div>
-		</div>
-	{/if}
-{/snippet}
-
-<!-- Analysis results display -->
-{#snippet resultsTable(results: ConceptResult[])}
-	{#if results.length > 0}
-		<div class="mt-6" in:fade={{ duration: 400 }} out:fade={{ duration: 200 }}>
-			<div class="text-muted-foreground mb-4 text-sm font-medium">Concept performance analysis</div>
-
-			<div class="space-y-3">
-				{#each results as result, i}
-					{@const totalScore = result.clarity + result.impact + result.appeal}
-					{@const averageScore = Math.round(totalScore / 3)}
-					<div
-						class="bg-card border border-border/50 rounded-lg p-4 transition-all duration-300 hover:border-border {i ===
-						0
-							? 'ring-2 ring-accent/20 border-accent/30'
-							: ''}"
-						in:fade={{ duration: 400, delay: i * 100 }}>
-						<div class="flex items-center justify-between mb-3">
-							<div class="flex items-center gap-3">
-								<div
-									class="bg-background border border-border/50 text-foreground size-8 flex items-center justify-center rounded text-sm font-semibold">
-									{result.letter}
-								</div>
-								<div>
-									<div class="text-foreground font-medium">{result.concept}</div>
-									<div class="text-muted-foreground text-sm">Overall score: {averageScore}%</div>
-								</div>
-							</div>
-							{#if i === 0}
-								<div class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">
-									Top performer
-								</div>
-							{/if}
-						</div>
-
-						<div class="grid grid-cols-3 gap-4">
-							<!-- Clarity -->
-							<div class="space-y-2">
-								<div class="flex items-center justify-between">
-									<span class="text-muted-foreground text-xs font-medium">Clarity</span>
-									<span class="text-foreground text-xs font-semibold">{result.clarity}%</span>
-								</div>
-								<div class="bg-muted/30 h-2 rounded-full overflow-hidden">
-									<div
-										class="bg-accent h-full transition-all duration-700"
-										style="width: {result.clarity}%"
-										in:fade={{ duration: 600, delay: 200 + i * 100 }}>
-									</div>
-								</div>
-							</div>
-
-							<!-- Impact -->
-							<div class="space-y-2">
-								<div class="flex items-center justify-between">
-									<span class="text-muted-foreground text-xs font-medium">Impact</span>
-									<span class="text-foreground text-xs font-semibold">{result.impact}%</span>
-								</div>
-								<div class="bg-muted/30 h-2 rounded-full overflow-hidden">
-									<div
-										class="bg-accent-1 h-full transition-all duration-700"
-										style="width: {result.impact}%"
-										in:fade={{ duration: 600, delay: 300 + i * 100 }}>
-									</div>
-								</div>
-							</div>
-
-							<!-- Appeal -->
-							<div class="space-y-2">
-								<div class="flex items-center justify-between">
-									<span class="text-muted-foreground text-xs font-medium">Appeal</span>
-									<span class="text-foreground text-xs font-semibold">{result.appeal}%</span>
-								</div>
-								<div class="bg-muted/30 h-2 rounded-full overflow-hidden">
-									<div
-										class="bg-accent-2 h-full transition-all duration-700"
-										style="width: {result.appeal}%"
-										in:fade={{ duration: 600, delay: 400 + i * 100 }}>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				{/each}
-			</div>
-		</div>
-	{/if}
-{/snippet}
-
-<!-- Insights summary -->
-{#snippet pieChartDisplay(results: ConceptResult[], showChart: boolean)}
-	{#if showChart && results.length > 0}
-		{@const topConcept = results[0]}
-		<div class="mt-6" in:fade={{ duration: 400, delay: 200 }} out:fade={{ duration: 200 }}>
-			<div class="bg-accent/5 border border-accent/20 rounded-lg p-5">
-				<div class="flex items-center gap-3 mb-4">
-					<div class="bg-accent text-accent-foreground size-8 flex items-center justify-center rounded-full">
-						<IconCheck class="size-4" />
-					</div>
-					<div>
-						<div class="text-foreground font-semibold">Analysis Complete</div>
-						<div class="text-muted-foreground text-sm">Key insights identified</div>
-					</div>
-				</div>
-
-				<div class="space-y-3">
-					<div class="flex items-center gap-2">
-						<div
-							class="bg-background border border-border/50 text-foreground size-6 flex items-center justify-center rounded text-xs font-semibold">
-							{topConcept.letter}
-						</div>
-						<span class="text-foreground font-medium">{topConcept.concept}</span>
-						<span class="text-muted-foreground">emerges as the strongest concept</span>
-					</div>
-
-					<div class="grid grid-cols-3 gap-4 text-sm">
-						<div class="flex items-center gap-2">
-							<div class="size-2 bg-accent rounded-full"></div>
-							<span class="text-muted-foreground">Clarity:</span>
-							<span class="text-foreground font-medium">{topConcept.clarity}%</span>
-						</div>
-						<div class="flex items-center gap-2">
-							<div class="size-2 bg-accent-1 rounded-full"></div>
-							<span class="text-muted-foreground">Impact:</span>
-							<span class="text-foreground font-medium">{topConcept.impact}%</span>
-						</div>
-						<div class="flex items-center gap-2">
-							<div class="size-2 bg-accent-2 rounded-full"></div>
-							<span class="text-muted-foreground">Appeal:</span>
-							<span class="text-foreground font-medium">{topConcept.appeal}%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	{/if}
-{/snippet}
-
-<!-- ============================================================================ -->
-<!-- MAIN UI - SIMPLIFIED STATIC/ANIMATED MODE
-<!-- ============================================================================ -->
-
-<!-- 
-SIMPLE TOGGLE: Change 'staticDesignMode' to 'true' on line ~330 to see all steps without animations
-Perfect for design work - shows fully populated concepts, video, results table, and charts
--->
-
-{#if staticDesignMode}
-	<!-- STATIC DESIGN MODE - All steps visible with full data -->
-	<div class="relative flex flex-col w-full pl-12 space-y-12">
-		<!-- STEP 1: Live Interview Analysis -->
-		<div class="space-y-4">
-			<div class="absolute top-0 left-0 z-10">
+<div class="w-full h-full flex items-center justify-center">
+	{#if showCard}
+		<div
+			class="transition-all duration-500"
+			in:slide={{ axis: "y", duration: 300, easing: quintOut }}
+			out:fade={{ duration: 200, delay: 100, easing: cubicInOut }}>
+			<!-- LIVE INTERVIEW STEP -->
+			{#if currentStep?.id === "live-interview"}
 				<div
-					class="bg-accent text-accent-foreground flex items-center justify-center w-10 h-10 rounded-full shadow-lg">
-					<IconEye class="size-4" />
-				</div>
-			</div>
+					class="transition-all duration-300 w-full h-full flex items-center justify-center"
+					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
+					<Box class="h-full flex w-full items-center justify-center">
+						<div class="space-y-4 w-full h-full relative">
+							<div class="text-left">
+								<h2 class="text-lg text-black leading-tight">Concept Testing Session</h2>
+								<p class="text-gray-600 text-sm">Live Interview Analysis</p>
+							</div>
 
-			<div class="mb-4 space-y-2">
-				<h3 class="text-foreground text-xl font-semibold tracking-tight">Live Interview Analysis</h3>
-				<div class="text-muted-foreground text-sm">
-					Real-time concept preference analysis during user interviews
-				</div>
-			</div>
-
-			{@render conceptsGrid(conceptsData.map((c, i) => ({ ...c, isHighlighted: i === 0 || i === 4 })))}
-			{@render videoPlayer(
-				true,
-				subtitleWordsData.map((w) => ({ ...w, isHighlighted: true })),
-			)}
-		</div>
-
-		<!-- STEP 2: Results Analysis -->
-		<div class="space-y-4">
-			<div class="absolute left-0 z-10" style="top: 50rem;">
-				<div
-					class="bg-accent text-accent-foreground flex items-center justify-center w-10 h-10 rounded-full shadow-lg">
-					<IconChartPie class="size-4" />
-				</div>
-			</div>
-
-			<div class="mb-4 space-y-2">
-				<h3 class="text-foreground text-xl font-semibold tracking-tight">Multi-Dimensional Analysis</h3>
-				<div class="text-muted-foreground text-sm">
-					Comprehensive scoring across clarity, impact, and appeal dimensions
-				</div>
-			</div>
-
-			{@render resultsTable(conceptResultsData)}
-			{@render pieChartDisplay(conceptResultsData, true)}
-		</div>
-	</div>
-{:else}
-	<!-- ANIMATED MODE - Standard step-by-step animation -->
-	<div class="relative flex flex-col w-full pl-12 space-y-4">
-		<div class="absolute top-0 left-0 z-10">
-			<div
-				class="bg-accent text-accent-foreground relative flex items-center justify-center w-10 h-10 transition-all duration-300 rounded-full shadow-lg">
-				{#key currentStepIndex}
-					<div
-						in:scale={{ duration: 300, easing: quintOut, start: 0.8, delay: 100 }}
-						out:scale={{ duration: 200, easing: cubicInOut, start: 0.8 }}
-						class="absolute inset-0 flex items-center justify-center">
-						{#if currentStep.icon}
-							{@const IconComponent = currentStep.icon}
-							<IconComponent class="size-4" />
-						{:else}
-							<IconLoader class="size-4" />
-						{/if}
-					</div>
-				{/key}
-			</div>
-		</div>
-
-		{#if showCard}
-			<div
-				class="transition-all duration-400"
-				in:fly={{ y: 20, duration: 500, easing: quintOut }}
-				out:fly={{ y: -20, duration: 400, easing: cubicInOut }}>
-				<div class="mb-6 space-y-2">
-					<div in:fly={{ x: -20, duration: 400, easing: quintOut }}>
-						<h3 class="text-foreground text-xl font-semibold tracking-tight">{currentStep.title}</h3>
-					</div>
-
-					<div class="relative min-h-[1.25rem]">
-						{#key `${currentStep.id}-${isLoading}-${isComplete}`}
-							<div
-								class="absolute inset-0"
-								in:fly={{ x: -20, duration: 300, delay: 50, easing: quintOut }}
-								out:fly={{ x: 20, duration: 200, easing: cubicInOut }}>
-								<div class="text-sm leading-relaxed">
-									{#if animationState.isComplete}
-										<span class="text-accent flex items-center gap-2 font-medium">
-											<IconCheck class="size-3 flex-shrink-0" />
-											{currentStep.completeText}
-										</span>
-									{:else if isLoading}
-										<span class="text-muted-foreground flex items-center gap-2">
-											<div class="animate-spin flex-shrink-0">
-												<IconLoader class="size-3" />
+							<!-- Concepts Grid -->
+							{#if animationState.concepts.length > 0}
+								<div class="grid grid-cols-6 gap-2" in:fade={{ duration: 400 }}>
+									{#each animationState.concepts as concept, i (concept.id)}
+										<div
+											class="relative bg-white border border-gray-300 hover:border-gray-800 transition-all duration-300 rounded-lg overflow-hidden {concept.isHighlighted
+												? 'ring-2 ring-black border-black'
+												: ''}"
+											in:fade={{ duration: 400, delay: i * 80 }}>
+											<!-- Concept letter badge -->
+											<div class="absolute top-2 left-2 z-10">
+												<div
+													class="bg-white border border-gray-300 text-black size-6 flex items-center justify-center rounded text-xs font-semibold">
+													{concept.letter}
+												</div>
 											</div>
-											<span>{currentStep.loadingText}...</span>
-										</span>
-									{:else}
-										<span class="text-muted-foreground">{currentStep.subtitle}</span>
-									{/if}
+
+											<!-- Highlighted indicator -->
+											{#if concept.isHighlighted}
+												<div class="absolute top-2 right-2 z-10">
+													<div
+														class="bg-black text-white size-6 flex items-center justify-center rounded-full">
+														<IconCheck class="size-3" />
+													</div>
+												</div>
+											{/if}
+
+											<!-- Product image -->
+											<div class="aspect-square w-full bg-gray-50">
+												<img
+													src={concept.image}
+													alt="Concept {concept.letter}: {concept.name}"
+													class="object-cover w-full h-full" />
+											</div>
+
+											<!-- Concept name -->
+											<div class="p-2">
+												<div class="text-xs font-medium text-black">{concept.name}</div>
+											</div>
+										</div>
+									{/each}
 								</div>
-							</div>
-						{/key}
-					</div>
+							{/if}
+
+							<!-- Live Transcription - Evidence Style -->
+							{#if animationState.showVideo}
+								<div class="mt-4">
+									<div class="text-left border-l-4 border-black pl-4" in:fade={{ duration: 400 }}>
+										<div class="flex items-center gap-2 mb-3">
+											<div class="size-2 bg-red-500 rounded-full animate-pulse"></div>
+											<span class="text-gray-600 text-xs font-medium"
+												>Live Interview Transcript</span>
+										</div>
+
+										<div class="text-sm leading-relaxed text-black">
+											<p class="mb-2">
+												<span class="bg-black text-white text-xs px-1.5 py-0.5 mr-2 rounded"
+													>P1</span>
+												<span class="font-bold text-black">Participant:</span>
+											</p>
+											<p class="ml-6 text-gray-800">
+												{#if animationState.subtitleWords.length > 0}
+													{#each animationState.subtitleWords as word, i}
+														<span
+															class="transition-colors duration-300 {i <=
+															animationState.currentWordIndex
+																? word.relatedConcept
+																	? 'bg-black text-white px-1.5 py-0.5 rounded-md font-medium'
+																	: 'text-gray-800'
+																: 'text-transparent'}">{word.text}</span>
+														{#if i < animationState.subtitleWords.length - 1}<span
+																class="text-gray-800">
+															</span>{/if}
+													{/each}
+													{#if animationState.currentWordIndex < animationState.subtitleWords.length - 1}
+														<span
+															class="inline-block w-1 h-4 ml-1 bg-black rounded-sm animate-pulse"
+														></span>
+													{/if}
+												{/if}
+											</p>
+										</div>
+									</div>
+								</div>
+							{/if}
+						</div>
+					</Box>
 				</div>
+			{/if}
 
-				{#if isLoading || animationState.isComplete}
-					{#if currentStep.id === "live-interview"}
-						{@render conceptsGrid(animationState.concepts)}
-						{@render videoPlayer(animationState.showVideo, animationState.subtitleWords)}
-					{/if}
+			<!-- RESULTS ANALYSIS STEP -->
+			{#if currentStep?.id === "results-analysis"}
+				<div
+					class="transition-all duration-300 w-full h-full flex items-center justify-center"
+					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
+					<Box class="h-full flex w-full items-center justify-center">
+						<div class="space-y-4 w-full h-full relative">
+							<div class="text-left">
+								<h2 class="text-lg text-black leading-tight">Multi-Dimensional Analysis</h2>
+								<p class="text-gray-600 text-sm">Concept performance analysis</p>
+							</div>
 
-					{#if currentStep.id === "results-analysis"}
-						{@render resultsTable(animationState.conceptResults)}
-						{@render pieChartDisplay(animationState.conceptResults, animationState.showChart)}
-					{/if}
-				{/if}
-			</div>
-		{/if}
-	</div>
-{/if}
+							<!-- Results Table -->
+							{#if animationState.conceptResults.length > 0}
+								<div class="space-y-2" in:fade={{ duration: 400 }}>
+									{#each animationState.conceptResults as result, i}
+										{@const totalScore = result.clarity + result.impact + result.appeal}
+										{@const averageScore = Math.round(totalScore / 3)}
+										<div
+											class="bg-white border border-gray-300 rounded-lg p-3 transition-all duration-300 hover:border-gray-800 {i ===
+											0
+												? 'ring-2 ring-black border-black'
+												: ''}"
+											in:fade={{ duration: 400, delay: i * 100 }}>
+											<div class="flex items-center justify-between mb-2">
+												<div class="flex items-center gap-2">
+													<div
+														class="bg-white border border-gray-300 text-black size-6 flex items-center justify-center rounded text-xs font-semibold">
+														{result.letter}
+													</div>
+													<div>
+														<div class="text-black text-sm font-medium">
+															{result.concept}
+														</div>
+														<div class="text-gray-600 text-xs">
+															Score: {averageScore}%
+														</div>
+													</div>
+												</div>
+												{#if i === 0}
+													<div
+														class="bg-black text-white px-2 py-1 rounded text-xs font-medium">
+														Winner
+													</div>
+												{/if}
+											</div>
+
+											<div class="grid grid-cols-3 gap-3">
+												<!-- Clarity -->
+												<div class="space-y-1">
+													<div class="flex items-center justify-between">
+														<span class="text-gray-600 text-xs font-medium">Clarity</span>
+														<span class="text-black text-xs font-semibold"
+															>{result.clarity}%</span>
+													</div>
+													<div class="bg-gray-200 h-2 rounded-full overflow-hidden">
+														<div
+															class="bg-black h-full transition-all duration-700"
+															style="width: {result.clarity}%"
+															in:fade={{ duration: 600, delay: 200 + i * 100 }}>
+														</div>
+													</div>
+												</div>
+
+												<!-- Impact -->
+												<div class="space-y-1">
+													<div class="flex items-center justify-between">
+														<span class="text-gray-600 text-xs font-medium">Impact</span>
+														<span class="text-black text-xs font-semibold"
+															>{result.impact}%</span>
+													</div>
+													<div class="bg-gray-200 h-2 rounded-full overflow-hidden">
+														<div
+															class="bg-gray-700 h-full transition-all duration-700"
+															style="width: {result.impact}%"
+															in:fade={{ duration: 600, delay: 300 + i * 100 }}>
+														</div>
+													</div>
+												</div>
+
+												<!-- Appeal -->
+												<div class="space-y-1">
+													<div class="flex items-center justify-between">
+														<span class="text-gray-600 text-xs font-medium">Appeal</span>
+														<span class="text-black text-xs font-semibold"
+															>{result.appeal}%</span>
+													</div>
+													<div class="bg-gray-200 h-2 rounded-full overflow-hidden">
+														<div
+															class="bg-gray-500 h-full transition-all duration-700"
+															style="width: {result.appeal}%"
+															in:fade={{ duration: 600, delay: 400 + i * 100 }}>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									{/each}
+								</div>
+							{/if}
+
+							<!-- Insights Summary -->
+							{#if animationState.showChart && animationState.conceptResults.length > 0}
+								{@const topConcept = animationState.conceptResults[0]}
+								<div
+									class="bg-gray-100 border border-gray-800 rounded-lg p-4"
+									in:fade={{ duration: 400, delay: 200 }}>
+									<div class="flex items-center gap-2 mb-3">
+										<div
+											class="bg-black text-white size-6 flex items-center justify-center rounded-full">
+											<IconCheck class="size-3" />
+										</div>
+										<div>
+											<div class="text-black text-sm font-semibold">Analysis Complete</div>
+											<div class="text-gray-600 text-xs">Key insights identified</div>
+										</div>
+									</div>
+
+									<div class="space-y-2">
+										<div class="flex items-center gap-2">
+											<div
+												class="bg-white border border-gray-300 text-black size-6 flex items-center justify-center rounded text-xs font-semibold">
+												{topConcept.letter}
+											</div>
+											<span class="text-black font-medium">{topConcept.concept}</span>
+											<span class="text-gray-600">emerges as the strongest concept</span>
+										</div>
+
+										<div class="grid grid-cols-3 gap-2 text-xs">
+											<div class="flex items-center gap-2">
+												<div class="size-2 bg-black rounded-full"></div>
+												<span class="text-gray-600">Clarity:</span>
+												<span class="text-black font-medium">{topConcept.clarity}%</span>
+											</div>
+											<div class="flex items-center gap-2">
+												<div class="size-2 bg-gray-700 rounded-full"></div>
+												<span class="text-gray-600">Impact:</span>
+												<span class="text-black font-medium">{topConcept.impact}%</span>
+											</div>
+											<div class="flex items-center gap-2">
+												<div class="size-2 bg-gray-500 rounded-full"></div>
+												<span class="text-gray-600">Appeal:</span>
+												<span class="text-black font-medium">{topConcept.appeal}%</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							{/if}
+						</div>
+					</Box>
+				</div>
+			{/if}
+		</div>
+	{/if}
+</div>
