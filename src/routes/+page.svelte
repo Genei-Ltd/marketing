@@ -9,7 +9,6 @@
 	import type { Testimonial } from "$lib/server/connectors/notion-testimonials"
 
 	import EmailSubmit from "../lib/components/blocks/EmailSubmit.svelte"
-	import ColSideSelectTwoSplit from "../lib/components/sections/ColSideSelectTwoSplit.svelte"
 
 	import Card from "$components/blocks/Card.svelte"
 	import NakedCardSet from "$components/sections/NakedCardSet.svelte"
@@ -19,7 +18,6 @@
 	import Security from "$components/sections/Security.svelte"
 	import DemoWorkflowSharing from "$components/animations/DemoWorkflowSharing.svelte"
 	import StaticDemoIntegrations from "$components/animations/StaticDemoIntegrations.svelte"
-	import DemoTranscriptClips from "$components/animations/DemoTranscriptClips.svelte"
 	import DemoFeatureReel from "$components/animations/DemoFeatureReel.svelte"
 	import CarouselTestimonials from "$components/sections/CarouselTestimonials.svelte"
 

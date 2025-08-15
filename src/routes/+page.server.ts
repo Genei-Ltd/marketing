@@ -85,12 +85,23 @@ export const actions: Actions = {
 		}
 
 		try {
-			// Here you would typically:
-			// 1. Save to database
-			// 2. Send to email service
-			// 3. Add to CRM (like Attio)
-			// For now, we'll just log it
-			console.log("Email submitted:", email)
+			// https://hooks.zapier.com/hooks/catch/22350330/2xy2kin/
+			// curl -X POST https://hooks.zapier.com/hooks/catch/22350330/2xy2kin/ \
+			//   -H "Content-Type: application/json" \
+			//   -d '{"email":"user@example.com"}'
+			// Sends to this Zapier Zap to add to Active Campaign
+			// https://zapier.com/editor/292212448/published
+
+			const response = await fetch("https://hooks.zapier.com/hooks/catch/22350330/2xy2kin/", {
+				method: "POST",
+				body: JSON.stringify({ email }),
+			})
+
+			if (!response.ok) {
+				throw new Error("Failed to submit email")
+			}
+
+			console.log("Email submitted:", email, response)
 
 			return {
 				success: true,
