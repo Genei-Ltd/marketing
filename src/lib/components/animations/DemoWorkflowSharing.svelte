@@ -192,15 +192,15 @@
 			color: "",
 		},
 		{
-			id: "analyst",
-			name: "Analyst",
-			icon: IconEdit,
-			color: "",
-		},
-		{
 			id: "guest",
 			name: "Guest",
 			icon: IconAddressBook,
+			color: "",
+		},
+		{
+			id: "analyst",
+			name: "Analyst",
+			icon: IconEdit,
 			color: "",
 		},
 	]
@@ -512,24 +512,18 @@
 									<label for="guest-email" class="text-sm font-medium text-gray-800"
 										>Email address</label>
 									<div class="relative">
-										<input
+										<div
 											id="guest-email"
-											type="email"
-											class="w-full px-4 py-3 border border-gray-800 rounded-lg bg-white text-gray-800 text-sm"
-											value={animationState.shareAction.email}
-											placeholder="Enter email address"
-											readonly />
-										{#if animationState.shareAction.email && animationState.shareAction.status === "typing"}
-											<div class="absolute right-3 top-1/2 transform -translate-y-1/2">
-												<div class="w-1 h-5 bg-gray-800 animate-pulse"></div>
-											</div>
-										{/if}
+											class="w-full px-4 py-3 border border-gray-800 rounded-lg bg-white text-gray-800 text-sm h-12 flex items-center justify-start">
+											{animationState.shareAction.email}
+											<div class="w-1 h-5 bg-gray-800 animate-pulse rounded-full ml-1"></div>
+										</div>
 									</div>
 								</div>
 
 								<!-- Access Levels -->
 								{#if animationState.accessLevels.length > 0}
-									<div class="space-y-3" in:fade={{ duration: 300, delay: 200 }}>
+									<div class="space-y-3" in:slide={{ axis: "y", duration: 300, delay: 200 }}>
 										<div class="text-sm font-medium text-gray-800">Access level</div>
 										<div class="grid grid-cols-2 gap-2">
 											{#each animationState.accessLevels.slice(0, 4) as level (level.id)}
@@ -561,7 +555,7 @@
 
 								<!-- Send Button -->
 								{#if animationState.shareAction.showSendButton}
-									<div class="pt-2" in:fade={{ duration: 300, delay: 200 }}>
+									<div class="pt-2" in:slide={{ axis: "y", duration: 300, delay: 200 }}>
 										<div
 											class={`w-full bg-black text-white px-6 py-3 rounded-lg font-medium transition-all text-center ${
 												animationState.shareAction.status === "complete"
@@ -657,7 +651,7 @@
 										class="flex items-center gap-3 p-3 border rounded-lg transition-all duration-300 {isHighlighted
 											? 'border-black bg-gray-100'
 											: 'border-gray-300'}"
-										in:fly={{ y: 20, duration: 300, delay: index * 200, easing: quintOut }}>
+										in:slide={{ axis: "y", duration: 300, delay: index * 200, easing: quintOut }}>
 										<!-- Avatar -->
 										<div
 											class="relative w-8 h-8 rounded-full font-medium text-xs flex items-center justify-center {member.isExternal
@@ -699,9 +693,9 @@
 											<span class="text-xs text-gray-600">
 												{accessLevel?.name ?? ""}
 											</span>
-											{#if IconComponent}
+											<!-- {#if IconComponent}
 												<IconComponent class="size-3 text-gray-600" />
-											{/if}
+											{/if} -->
 										</div>
 									</div>
 								{/each}

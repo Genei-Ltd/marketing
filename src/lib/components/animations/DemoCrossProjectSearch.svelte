@@ -6,7 +6,7 @@ Clean, professional design for corporate audiences
 
 <script lang="ts">
 	import { onMount } from "svelte"
-	import { IconSearch, IconFileSearch, IconCheck, IconPointer, IconLocation } from "@tabler/icons-svelte"
+	import { IconSearch, IconFileSearch, IconLocation } from "@tabler/icons-svelte"
 	import { fade, fly, scale, slide } from "svelte/transition"
 	import { quintOut, cubicInOut, elasticOut } from "svelte/easing"
 	import type { ComponentType } from "svelte"
@@ -483,13 +483,14 @@ Clean, professional design for corporate audiences
 					class="w-full h-full flex items-start justify-start transition-all duration-300"
 					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
 					<div
-						class="transition-all transform w-full flex items-center justify-center bg-white rounded-xl shadow-md duration-500">
+						class="transition-all transform w-full flex items-center justify-center bg-white rounded-xl shadow-md duration-500"
+						transition:slide={{ axis: "y", duration: 300, easing: quintOut }}>
 						<div class="h-full flex items-start justify-start w-full p-6 transition-height duration-500">
 							<div class="space-y-3 w-full h-full relative transition-all duration-500">
 								<div class="text-left">
 									<h2
 										class={`text-lg text-black font-semibold leading-tight transition-all duration-800 ${
-											animationState.summaryWords.length > 0 ? "text-sm" : "text-lg"
+											animationState.summaryWords.length > 0 ? "text-sm" : "text-sm"
 										}`}>
 										Query: {searchQuery}
 									</h2>

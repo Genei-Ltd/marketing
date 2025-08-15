@@ -3,8 +3,6 @@
 	import * as Carousel from "$lib/components/ui/carousel/index.js"
 	import type { CarouselAPI } from "$lib/components/ui/carousel/context.js"
 	import TwoSplit from "$components/layouts/TwoSplit.svelte"
-	import DemoWorkflowAssetUpload from "$components/animations/DemoWorkflowAssetUpload.svelte"
-	import DemoInterviewAnalysis from "$components/animations/DemoInterviewAnalysis.svelte"
 	import ConceptTestingDemo from "$components/animations/DemoConceptTesting.svelte"
 	import Autoplay from "embla-carousel-autoplay"
 	import DemoCrossProjectSearch from "$components/animations/DemoCrossProjectSearch.svelte"
@@ -61,7 +59,7 @@
 		}}
 		plugins={[
 			Autoplay({
-				delay: 6000,
+				delay: 10000,
 				stopOnMouseEnter: true,
 				stopOnInteraction: true,
 			}),
@@ -103,7 +101,7 @@
 					buttonHref="/blog/concept-stimulus-testing"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundColor="bg-accent-2" backgroundImage="/water/blue-1.png">
+					<WildAnimationBox backgroundColor="bg-accent-2" backgroundImage="/water/brown-1.png">
 						<ConceptTestingDemo />
 					</WildAnimationBox>
 				</TwoSplit>
@@ -123,7 +121,7 @@
 					buttonHref="/blog/survey-analysis"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundColor="bg-accent-3" backgroundImage="/water/blue-1.png">
+					<WildAnimationBox backgroundColor="bg-accent-3" backgroundImage="/water/blue-2.png">
 						<DemoSurveyAnalysis />
 					</WildAnimationBox>
 				</TwoSplit>
@@ -143,7 +141,7 @@
 					buttonHref="/blog/research-agencies"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundColor="bg-accent-4" backgroundImage="/water/blue-1.png">
+					<WildAnimationBox backgroundColor="bg-accent-4" backgroundImage="/water/green-3.png">
 						<DemoClipCreation />
 					</WildAnimationBox>
 				</TwoSplit>

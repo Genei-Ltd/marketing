@@ -121,7 +121,7 @@
 			description="Delegate complex tasks in natural language to domain-specific agents that can count, search, summarise and cite."
 			buttonText="Explore Agents"
 			buttonHref="/book-a-demo">
-			<WildAnimationBox backgroundImage="/water/blue-1.png" backgroundColor="bg-accent-4">
+			<WildAnimationBox backgroundImage="/water/cream-1.png" backgroundColor="bg-accent-4">
 				<DemoCoreValue />
 			</WildAnimationBox>
 		</TwoSplit>
@@ -132,7 +132,7 @@
 			buttonText="Explore Workflows"
 			reverse
 			buttonHref="/book-a-demo">
-			<WildAnimationBox backgroundImage="/water/blue-1.png" backgroundColor="bg-accent-3">
+			<WildAnimationBox backgroundImage="/water/green-2.png" backgroundColor="bg-accent-3">
 				<div class=" flex items-center justify-center h-full mx-auto overflow-hidden scale-120">
 					<DemoFeatureReel />
 				</div>
@@ -156,7 +156,7 @@
 			reverse
 			buttonHref="/book-a-demo"
 			clearBackground={[false, true]}>
-			<WildAnimationBox backgroundImage="/water/blue-1.png" backgroundColor="bg-accent-1">
+			<WildAnimationBox backgroundImage="/water/cream-2.png" backgroundColor="bg-accent-1">
 				<DemoWorkflowSharing />
 			</WildAnimationBox>
 		</TwoSplit>

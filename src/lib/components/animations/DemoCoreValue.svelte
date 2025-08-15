@@ -13,7 +13,7 @@ Clean, professional design for corporate audiences
 		IconMessageQuestion,
 		IconAnalyze,
 		IconCheck,
-		IconPointer,
+		IconLocation,
 	} from "@tabler/icons-svelte"
 	import { fade, fly, scale, slide } from "svelte/transition"
 	import { quintOut, cubicInOut, elasticOut } from "svelte/easing"
@@ -524,7 +524,9 @@ Clean, professional design for corporate audiences
 								</div>
 								<div class="absolute bottom-4 -right-4 z-50">
 									<div class="animate-click" out:scale={{ duration: 500, easing: elasticOut }}>
-										<IconPointer fill="white" class="size-12 text-black drop-shadow-lg" />
+										<IconLocation
+											fill="white"
+											class="size-12 text-black drop-shadow-lg rotate-270" />
 									</div>
 								</div>
 							</div>
@@ -645,7 +647,9 @@ Clean, professional design for corporate audiences
 									<!-- cursor pointer icon -->
 									<div class="absolute top-4 right-8">
 										<div class="animate-click">
-											<IconPointer fill="white" class="size-12 text-black drop-shadow-lg" />
+											<IconLocation
+												fill="white"
+												class="size-12 text-black drop-shadow-lg rotate-270" />
 										</div>
 									</div>
 								{/if}

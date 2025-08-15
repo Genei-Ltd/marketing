@@ -18,12 +18,8 @@ ANIMATION STEPS:
 		IconPlaylist,
 		IconCheck,
 		IconPlayerPlay,
-		IconClock,
-		IconPointer,
 		IconSquare,
 		IconSquareCheck,
-		IconLocation,
-		IconLoader,
 	} from "@tabler/icons-svelte"
 	import { fade, fly, scale, slide } from "svelte/transition"
 	import { quintOut, cubicInOut } from "svelte/easing"
