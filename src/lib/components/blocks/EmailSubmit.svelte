@@ -6,6 +6,7 @@
 
 	import { enhance } from "$app/forms"
 	import { cn } from "$lib/utils"
+	import { goto } from "$app/navigation"
 
 	interface Props {
 		form?: any
@@ -33,6 +34,7 @@
 	$effect(() => {
 		if (form?.success) {
 			email = ""
+			goto("/book-a-demo?email=" + form.data.email)
 		}
 	})
 

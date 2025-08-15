@@ -95,6 +95,9 @@ export const actions: Actions = {
 			return {
 				success: true,
 				message: "Email submitted successfully!",
+				data: {
+					email,
+				},
 			}
 		} catch (error) {
 			console.error("Error submitting email:", error)

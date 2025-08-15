@@ -199,11 +199,14 @@
 			</div>
 		</div>
 
-		<div class="w-full mx-auto px-4 sm:px-6 lg:px-8 h-full mt-16 min-h-screen">
+		<div
+			class="w-full mx-auto px-4 sm:px-6 lg:px-8 h-full min-h-screen flex flex-col items-center justify-center max-w-6xl pb-16">
 			<!-- Main Form -->
-			<div class="h-full max-w-6xl mx-auto" in:slide={{ axis: "y", duration: 1000 }}>
+			<div
+				class="h-full w-full mx-auto flex flex-col items-center justify-center flex-1"
+				in:slide={{ axis: "y", duration: 1000 }}>
 				<div class="w-full h-full max-w-3xl mx-auto">
-					<div class="flex flex-col items-start justify-start mb-16">
+					<div class="flex flex-col items-center justify-center mb-16 text-center">
 						<h1 class="font-bold text-foreground mb-4 w-full">Book Your Demo</h1>
 						<p class="text-lg text-muted-foreground mx-auto w-full">
 							Get a personalized demonstration of CoLoop's research platform

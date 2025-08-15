@@ -260,7 +260,7 @@
 		<Card
 			title="By Insights Experts, for Insights Experts"
 			subtitle="Designed with insights leaders with agencies, household brands and research institutions."
-			image="/water/blue-3.png"
+			image="/wild/vault-mars.jpeg"
 			href="/demo"
 			cardHeight={96}
 			colSpan={2}
