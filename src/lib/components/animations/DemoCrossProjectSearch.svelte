@@ -6,7 +6,7 @@ Clean, professional design for corporate audiences
 
 <script lang="ts">
 	import { onMount } from "svelte"
-	import { IconSearch, IconFileSearch, IconCheck, IconPointer } from "@tabler/icons-svelte"
+	import { IconSearch, IconFileSearch, IconCheck, IconPointer, IconLocation } from "@tabler/icons-svelte"
 	import { fade, fly, scale, slide } from "svelte/transition"
 	import { quintOut, cubicInOut, elasticOut } from "svelte/easing"
 	import type { ComponentType } from "svelte"
@@ -464,7 +464,9 @@ Clean, professional design for corporate audiences
 										<!-- Pointer animation -->
 										<div class="absolute -bottom-2 right-2">
 											<div class="animate-click">
-												<IconPointer fill="white" class="size-8 text-black drop-shadow-lg" />
+												<IconLocation
+													fill="white"
+													class="size-8 text-black drop-shadow-lg rotate-270" />
 											</div>
 										</div>
 									{/if}
@@ -474,126 +476,130 @@ Clean, professional design for corporate audiences
 					</Box>
 				</div>
 			{/if}
-		</div>
 
-		{#if currentStep?.id === "search-results"}
-			<div class="w-full h-full flex items-start justify-start transition-all duration-300">
-				<!-- SEARCH RESULTS STEP -->
+			<!-- SEARCH RESULTS STEP -->
+			{#if currentStep?.id === "search-results"}
 				<div
-					class="transition-all transform w-full h-full flex items-center justify-center bg-white rounded-xl">
-					<div class="h-full flex items-start justify-start w-full p-6">
-						<div class="space-y-3 w-full h-full relative">
-							<div class="text-left">
-								<h2
-									class={`text-lg text-black font-semibold leading-tight transition-all duration-800 ${
-										animationState.summaryWords.length > 0 ? "text-sm" : "text-lg"
-									}`}>
-									Query: {searchQuery}
-								</h2>
-							</div>
-
-							<!-- Summary with Citations -->
-							{#if animationState.showResults}
-								<div class="bg-gray-200 rounded-lg p-3">
-									<div class="text-gray-800 leading-relaxed text-sm">
-										<!-- Word-by-word animated summary -->
-										{#if animationState.summaryWords.length > 0}
-											<div class="min-h-[3rem]">
-												{#each animationState.summaryWords as word, index}
-													<span
-														class="transition-opacity duration-200 {index <
-														animationState.visibleWords
-															? 'opacity-100'
-															: 'opacity-0'}">
-														{word}
-														<!-- Add citation 1 after "control." -->
-														{#if index === 9}
-															<span
-																class="bg-black font-semibold text-white text-center text-xs px-1.5 py-0.5 rounded ml-1"
-																>1</span>
-														{/if}
-														<!-- Add citation 2 after "transparency." -->
-														{#if index === 21}
-															<span
-																class="relative bg-black font-semibold text-white text-center text-xs px-1.5 py-0.5 rounded mx-1">
-																2
-																<!-- Animated cursor that moves over citation 2 -->
-																{#if animationState.showCursor}
-																	<span
-																		class="absolute ease-in-out top-1 left-1 z-50 -translate-y-[100px] -translate-x-[500px] animate-slideInFiles">
-																		<IconPointer
-																			fill="white"
-																			class="size-8 text-black drop-shadow-lg " />
-																	</span>
-																{/if}
-															</span>
-														{/if}
-														<!-- Add citation 3 after "integrated." -->
-														{#if index === 36}
-															<span
-																class=" bg-black font-semibold text-white text-center text-xs px-1.5 py-0.5 rounded ml-1"
-																>3
-															</span>
-														{/if}
-														{#if index < animationState.summaryWords.length - 1}{" "}{/if}
-													</span>
-												{/each}
-											</div>
-										{/if}
-									</div>
+					class="w-full h-full flex items-start justify-start transition-all duration-300"
+					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
+					<div
+						class="transition-all transform w-full flex items-center justify-center bg-white rounded-xl shadow-md duration-500">
+						<div class="h-full flex items-start justify-start w-full p-6 transition-height duration-500">
+							<div class="space-y-3 w-full h-full relative transition-all duration-500">
+								<div class="text-left">
+									<h2
+										class={`text-lg text-black font-semibold leading-tight transition-all duration-800 ${
+											animationState.summaryWords.length > 0 ? "text-sm" : "text-lg"
+										}`}>
+										Query: {searchQuery}
+									</h2>
 								</div>
 
-								<!-- Citations -->
-								{#if animationState.showCitations}
-									<div class="space-y-1.5 relative" in:fly={{ duration: 400, delay: 200 }}>
-										<div class="text-sm font-semibold text-gray-800 mb-1">Sources:</div>
-										{#each animationState.searchResults as result, index}
-											<div
-												id="citation-{result.id}"
-												class="border-l-2 border-gray-400 pl-2 transition-all duration-300 {animationState.activeCitationId ===
-												result.id
-													? 'bg-gray-100 rounded-r-lg pr-2 py-1 border-black'
-													: ''}"
-												in:fly={{
-													x: -10,
-													duration: 300,
-													delay: 200 + index * 200,
-													easing: quintOut,
-												}}>
-												<div class="flex items-start gap-2">
-													<span
-														class="bg-black text-white text-xs px-1 py-0.5 rounded font-bold flex-shrink-0 {animationState.activeCitationId ===
-														result.id
-															? 'ring-1 ring-black/30 bg-gray-800'
-															: ''}">
-														{index + 1}
-													</span>
-													<div class="flex-1">
-														<div class="text-xs text-gray-800 leading-tight mb-1">
-															"{result.text}"
-														</div>
-														<div class="flex items-center justify-between">
-															<div class="text-xs text-gray-600 truncate">
-																<span class="font-medium text-gray-800"
-																	>{result.projectName}</span>
+								<!-- Summary with Citations -->
+								{#if animationState.showResults}
+									<div
+										class="bg-gray-200 rounded-lg p-3"
+										in:slide={{ axis: "y", duration: 300, easing: quintOut }}>
+										<div class="text-gray-800 leading-relaxed text-sm">
+											<!-- Word-by-word animated summary -->
+											{#if animationState.summaryWords.length > 0}
+												<div class="min-h-[3rem]">
+													{#each animationState.summaryWords as word, index}
+														<span
+															class="transition-opacity duration-200 {index <
+															animationState.visibleWords
+																? 'opacity-100'
+																: 'opacity-0'}">
+															{word}
+															<!-- Add citation 1 after "control." -->
+															{#if index === 9}
+																<span
+																	class="bg-black font-semibold text-white text-center text-xs px-1.5 py-0.5 rounded ml-1"
+																	>1</span>
+															{/if}
+															<!-- Add citation 2 after "transparency." -->
+															{#if index === 21}
+																<span
+																	class="relative bg-black font-semibold text-white text-center text-xs px-1.5 py-0.5 rounded mx-1">
+																	2
+																	<!-- Animated cursor that moves over citation 2 -->
+																	{#if animationState.showCursor}
+																		<span
+																			class="absolute ease-in-out top-1 left-1 z-50 -translate-y-[100px] -translate-x-[500px] animate-slideInFiles">
+																			<IconLocation
+																				fill="white"
+																				class="size-8 text-black drop-shadow-lg rotate-270" />
+																		</span>
+																	{/if}
+																</span>
+															{/if}
+															<!-- Add citation 3 after "integrated." -->
+															{#if index === 36}
+																<span
+																	class=" bg-black font-semibold text-white text-center text-xs px-1.5 py-0.5 rounded ml-1"
+																	>3
+																</span>
+															{/if}
+															{#if index < animationState.summaryWords.length - 1}{" "}{/if}
+														</span>
+													{/each}
+												</div>
+											{/if}
+										</div>
+									</div>
+
+									<!-- Citations -->
+									{#if animationState.showCitations}
+										<div class="space-y-1.5 relative" in:fly={{ duration: 400, delay: 200 }}>
+											<div class="text-sm font-semibold text-gray-800 mb-1">Sources:</div>
+											{#each animationState.searchResults as result, index}
+												<div
+													id="citation-{result.id}"
+													class="border-l-2 border-gray-400 pl-2 transition-all duration-300 {animationState.activeCitationId ===
+													result.id
+														? 'bg-gray-100 rounded-r-lg pr-2 py-1 border-black'
+														: ''}"
+													in:fly={{
+														x: -10,
+														duration: 300,
+														delay: 200 + index * 200,
+														easing: quintOut,
+													}}>
+													<div class="flex items-start gap-2">
+														<span
+															class="bg-black text-white text-xs px-1 py-0.5 rounded font-bold flex-shrink-0 {animationState.activeCitationId ===
+															result.id
+																? 'ring-1 ring-black/30 bg-gray-800'
+																: ''}">
+															{index + 1}
+														</span>
+														<div class="flex-1">
+															<div class="text-xs text-gray-800 leading-tight mb-1">
+																"{result.text}"
 															</div>
-															<span
-																class="text-xs text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded flex-shrink-0">
-																{result.projectType}
-															</span>
+															<div class="flex items-center justify-between">
+																<div class="text-xs text-gray-600 truncate">
+																	<span class="font-medium text-gray-800"
+																		>{result.projectName}</span>
+																</div>
+																<span
+																	class="text-xs text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded flex-shrink-0">
+																	{result.projectType}
+																</span>
+															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-										{/each}
-									</div>
+											{/each}
+										</div>
+									{/if}
 								{/if}
-							{/if}
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		{/if}
+			{/if}
+		</div>
 	</div>
 {/if}
 

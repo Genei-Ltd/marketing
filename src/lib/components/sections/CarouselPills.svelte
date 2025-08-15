@@ -8,6 +8,8 @@
 	import ConceptTestingDemo from "$components/animations/DemoConceptTesting.svelte"
 	import Autoplay from "embla-carousel-autoplay"
 	import DemoCrossProjectSearch from "$components/animations/DemoCrossProjectSearch.svelte"
+	import DemoSurveyAnalysis from "$components/animations/DemoSurveyAnalysis.svelte"
+	import DemoClipCreation from "$components/animations/DemoClipCreation.svelte"
 	// Define the pill labels
 	const pillLabels = ["In-House Strategy Teams", "Concept & Stimulus Testing", "Survey Analysis", "Research Agencies"]
 
@@ -81,7 +83,7 @@
 					buttonHref="/blog/in-house-strategy-teams"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundColor="bg-accent-1">
+					<WildAnimationBox backgroundColor="bg-accent-1" backgroundImage="/water/blue-1.png">
 						<DemoCrossProjectSearch />
 					</WildAnimationBox>
 				</TwoSplit>
@@ -101,7 +103,7 @@
 					buttonHref="/blog/concept-stimulus-testing"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundColor="bg-accent-2">
+					<WildAnimationBox backgroundColor="bg-accent-2" backgroundImage="/water/blue-1.png">
 						<ConceptTestingDemo />
 					</WildAnimationBox>
 				</TwoSplit>
@@ -121,8 +123,8 @@
 					buttonHref="/blog/survey-analysis"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundColor="bg-accent-3	">
-						<DemoInterviewAnalysis />
+					<WildAnimationBox backgroundColor="bg-accent-3" backgroundImage="/water/blue-1.png">
+						<DemoSurveyAnalysis />
 					</WildAnimationBox>
 				</TwoSplit>
 			</Carousel.Item>
@@ -141,8 +143,8 @@
 					buttonHref="/blog/research-agencies"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundColor="bg-accent-4">
-						<DemoWorkflowAssetUpload />
+					<WildAnimationBox backgroundColor="bg-accent-4" backgroundImage="/water/blue-1.png">
+						<DemoClipCreation />
 					</WildAnimationBox>
 				</TwoSplit>
 			</Carousel.Item>

@@ -438,31 +438,31 @@ Clean, professional design for corporate audiences - keeping original functional
 								<div class="grid grid-cols-6 gap-1 mt-8">
 									{#each animationState.concepts as concept, i (concept.id)}
 										<div
-											class="relative bg-white border border-gray-300 hover:border-gray-800 transition-all duration-300 rounded-lg overflow-hidden {concept.isHighlighted
-												? 'ring-2 ring-black border-black'
-												: ''}"
+											class="relative border border-gray-300 hover:border-gray-800 transition-all duration-300 overflow-hidden rounded {concept.isHighlighted
+												? 'scale-110 border-black bg-black text-white'
+												: 'bg-white'}"
 											in:fade={{ duration: 400, delay: i * 80 }}>
 											<!-- Concept letter badge -->
 											<div class="absolute -top-1 -left-1 z-10">
 												<div
-													class=" border size-6 flex items-center justify-center rounded-lg text-sm font-semibold {concept.isHighlighted
+													class="  size-6 flex items-center justify-center rounded-full text-sm font-semibold {concept.isHighlighted
 														? 'bg-black text-white'
 														: 'bg-white text-black'}">
 													{concept.letter}
 												</div>
 											</div>
 
-											<!-- Highlighted indicator -->
+											<!-- Highlighted indicator
 											{#if concept.isHighlighted}
 												<div class="absolute inset-0 flex items-center justify-center z-10">
 													<div
 														class="bg-black text-white size-6 flex items-center justify-center rounded-full">
 													</div>
 												</div>
-											{/if}
+											{/if} -->
 
 											<!-- Product image -->
-											<div class="aspect-square w-full bg-gray-50">
+											<div class="aspect-square w-full">
 												<img
 													src={concept.image}
 													alt="Concept {concept.letter}: {concept.name}"
@@ -471,7 +471,7 @@ Clean, professional design for corporate audiences - keeping original functional
 
 											<!-- Concept name -->
 											<div class="p-2">
-												<div class="text-xs font-medium text-black">{concept.name}</div>
+												<div class="text-xs font-medium text-center">{concept.name}</div>
 											</div>
 										</div>
 									{/each}
@@ -482,47 +482,39 @@ Clean, professional design for corporate audiences - keeping original functional
 							{#if animationState.showVideo}
 								<div class="mt-8">
 									<div
-										class="text-left border-l-4 border-black pl-4"
+										class="text-left border-l-4 border-black pl-4 py-2 bg-gray-100 rounded"
 										in:slide={{ axis: "y", duration: 300, easing: quintOut }}>
-										<div class="flex items-center gap-2 mb-2">
-											<div class="size-2 bg-black rounded-full animate-pulse"></div>
-											<span class="text-gray-600 text-xs font-medium">CoLoop Transcription</span>
-										</div>
+										<!-- <div class="flex items-center gap-2 mb-4">
+											<div class="size-2 bg-red-600 rounded-full animate-pulse"></div>
+											<span class="text-gray-600 text-xs uppercase font-semibold"
+												>CoLoop Transcription</span>
+										</div> -->
 
 										<div class="text-sm leading-relaxed text-black">
+											<div class=" mb-4">
+												<p class=" text-sm text-gray-400 uppercase mb-1">Researcher:</p>
+												<p class=" text-gray-800">What option do you want to try first?</p>
+											</div>
+
 											<div class=" mb-2">
-												<p class="mb-1">
-													<!-- <span
-														class="bg-white text-black border border-black text-xs px-1.5 py-0.5 mr-1 rounded"
-														>R</span> -->
-													<span class="font-bold text-gray-600">Researcher</span>
-												</p>
-												<p class="ml-8 text-gray-800 text-sm">
-													Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-													quos.
+												<p class=" text-sm text-gray-400 uppercase mb-1">Participant:</p>
+												<p class=" text-black leading-relaxed">
+													{#if animationState.subtitleWords.length > 0}
+														{#each animationState.subtitleWords as word, i}
+															<span
+																class="transition-colors duration-300 {i <=
+																animationState.currentWordIndex
+																	? word.relatedConcept
+																		? 'bg-black text-white px-1.5 py-0.5 rounded-md font-medium'
+																		: 'text-gray-800'
+																	: 'text-transparent'}">{word.text}</span>
+															{#if i < animationState.subtitleWords.length - 1}<span
+																	class="text-gray-800">
+																</span>{/if}
+														{/each}
+													{/if}
 												</p>
 											</div>
-											<p class="mb-1">
-												<!-- <span class="bg-black text-white text-xs px-1.5 py-0.5 mr-1 rounded"
-													>P1</span> -->
-												<span class="font-bold text-gray-600">Participant</span>
-											</p>
-											<p class="ml-8 text-gray-800 text-sm leading-relaxed">
-												{#if animationState.subtitleWords.length > 0}
-													{#each animationState.subtitleWords as word, i}
-														<span
-															class="transition-colors duration-300 {i <=
-															animationState.currentWordIndex
-																? word.relatedConcept
-																	? 'bg-black text-white px-1.5 py-0.5 rounded-md font-medium'
-																	: 'text-gray-800'
-																: 'text-transparent'}">{word.text}</span>
-														{#if i < animationState.subtitleWords.length - 1}<span
-																class="text-gray-800">
-															</span>{/if}
-													{/each}
-												{/if}
-											</p>
 										</div>
 									</div>
 								</div>
@@ -547,7 +539,7 @@ Clean, professional design for corporate audiences - keeping original functional
 							<!-- Single Graph-Style Results Chart -->
 							{#if animationState.conceptResults.length > 0}
 								{@const topConcept = animationState.conceptResults[0]}
-								<div class="bg-white border border-black rounded-lg p-4" in:fade={{ duration: 400 }}>
+								<div class="bg-white border-l-4 border-black rounded p-4" in:fade={{ duration: 400 }}>
 									<!-- Winner Header -->
 									<div class="flex items-center justify-between mb-4">
 										<div class="flex items-center gap-3">
@@ -561,14 +553,14 @@ Clean, professional design for corporate audiences - keeping original functional
 											</div>
 										</div>
 										<div class="bg-black text-white px-3 py-1.5 rounded-lg text-xs font-semibold">
-											Appeal
+											Concept Testing
 										</div>
 									</div>
 
 									<!-- Winner Dimensional Bars -->
 									<div class="space-y-3 mb-5">
 										<div class="flex items-center gap-3" in:fade={{ duration: 400, delay: 200 }}>
-											<div class="text-black text-xs font-medium min-w-16">Clarity</div>
+											<div class="text-black text-sm font-medium min-w-16">Clarity</div>
 											<div class="flex-1 relative">
 												<div
 													class="bg-gray-100 h-6 rounded-lg overflow-hidden border border-gray-200">
@@ -584,7 +576,7 @@ Clean, professional design for corporate audiences - keeping original functional
 										</div>
 
 										<div class="flex items-center gap-3" in:fade={{ duration: 400, delay: 300 }}>
-											<div class="text-black text-xs font-medium min-w-16">Impact</div>
+											<div class="text-black text-sm font-medium min-w-16">Impact</div>
 											<div class="flex-1 relative">
 												<div
 													class="bg-gray-100 h-6 rounded-lg overflow-hidden border border-gray-200">
@@ -600,7 +592,7 @@ Clean, professional design for corporate audiences - keeping original functional
 										</div>
 
 										<div class="flex items-center gap-3" in:fade={{ duration: 400, delay: 400 }}>
-											<div class="text-black text-xs font-medium min-w-16">Appeal</div>
+											<div class="text-black text-sm font-medium min-w-16">Appeal</div>
 											<div class="flex-1 relative">
 												<div
 													class="bg-gray-100 h-6 rounded-lg overflow-hidden border border-gray-200">
@@ -644,8 +636,6 @@ Clean, professional design for corporate audiences - keeping original functional
 															</div>
 														</div>
 													</div>
-													<span class="text-black text-xs font-medium min-w-8"
-														>{averageScore}%</span>
 												</div>
 											{/each}
 										</div>
