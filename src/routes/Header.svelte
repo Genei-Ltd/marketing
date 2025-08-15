@@ -306,7 +306,7 @@
 					</NavigationMenu.Item>
 
 					<NavigationMenu.Item>
-						<Button variant="outline" size="default" href="/login" class="">Login</Button>
+						<Button variant="outline" size="default" href="/login" class="mr-2">Login</Button>
 					</NavigationMenu.Item>
 					<NavigationMenu.Item>
 						<Button variant="default" size="default" href="/demo" class="">Get CoLoop</Button>

@@ -93,7 +93,7 @@
 
 <div class="lg:px-10 relative flex flex-col items-center justify-center max-w-6xl px-6 mx-auto overflow-hidden">
 	<!-- CUSTOMER LOGOS  -->
-	<div class="lg:lg:mt-32 w-full mt-16 mb-16">
+	<div class="lg:mt-32 w-full mt-16 mb-16">
 		{@render section(
 			"400+ Research Teams trust CoLoop for qualitative analysis.",
 			"Trusted by the brands you trust",
@@ -354,10 +354,11 @@
 	</div>
 
 	<!-- PRODUCTS  -->
-	<div class="lg:mt-32 lg:mb-32 flex flex-col w-full h-full gap-16 mt-16 mb-16">
+	<!-- TODO: Add back in with new animations or statics  -->
+	<!-- <div class="lg:mt-32 lg:mb-32 flex flex-col w-full h-full gap-16 mt-16 mb-16">
 		{@render section("Products to run every kind of study, on any kind of data")}
 		<ColSideSelectTwoSplit />
-	</div>
+	</div> -->
 
 	<!-- COMPARISON  -->
 	<!-- <div class="lg:mt-32 lg:mb-32 flex flex-col w-full gap-16 mt-16 mb-16">

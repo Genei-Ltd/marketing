@@ -1,6 +1,7 @@
 import { MARKETING_BASE_URL, WEBSITE_NAME, WebsiteDescription, DEFAULT_OG_IMAGE } from "../../config"
 import type { Article } from "$lib/types/articles"
 import type { StructuredData } from "./seo"
+import type { SectionSlugPage } from "$lib/types/section-slug"
 
 /**
  * Generate Organization structured data (for site-wide use)
@@ -42,6 +43,23 @@ export function generateOrganizationSchema(): StructuredData {
 			minValue: 1,
 			maxValue: 50,
 		},
+	}
+}
+
+/**
+ * Generate Page structured data for section slug pages
+ */
+export function generatePageSchema(sectionSlugPage: SectionSlugPage): StructuredData {
+	return {
+		"@context": "https://schema.org",
+		"@type": "Page",
+		name: sectionSlugPage.title,
+		description: sectionSlugPage.seoDescription || "",
+		image: sectionSlugPage.coverImage || `${MARKETING_BASE_URL}${DEFAULT_OG_IMAGE}`,
+		author: sectionSlugPage.author || "",
+		datePublished: sectionSlugPage.publishedDate || "",
+		dateModified: sectionSlugPage.publishedDate || "",
+		keywords: [sectionSlugPage.title, "AI research", "insights", "articles"],
 	}
 }
 
@@ -316,4 +334,13 @@ export function generateCategoryPageSchemas(category: string): StructuredData[] 
 	]
 
 	return [generateOrganizationSchema(), generateCategoryPageSchema(category), generateBreadcrumbSchema(breadcrumbs)]
+}
+
+export function generateSectionSlugPageSchemas(sectionSlugPage: SectionSlugPage): StructuredData[] {
+	const breadcrumbs = [
+		{ name: "Home", url: MARKETING_BASE_URL },
+		{ name: sectionSlugPage.title, url: `${MARKETING_BASE_URL}/${sectionSlugPage.slug}` },
+	]
+
+	return [generateOrganizationSchema(), generatePageSchema(sectionSlugPage), generateBreadcrumbSchema(breadcrumbs)]
 }

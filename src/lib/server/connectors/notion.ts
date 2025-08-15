@@ -17,6 +17,7 @@ import type {
 // @ts-expect-error - SvelteKit environment import
 import { env } from "$env/dynamic/private"
 import type { Article } from "$lib/types/articles"
+import type { SectionSlugPage } from "$lib/types/section-slug"
 
 export class NotionConnector {
 	private client: Client
@@ -367,6 +368,68 @@ export async function getDatabaseRowsByGroup(
 		],
 	)
 	return response.results
+}
+
+export async function getDatabaseRowsBySectionAndSlug(databaseId: string, section: string, slug: string) {
+	const response = await notionConnector.queryDatabase(databaseId, {
+		and: [
+			{
+				property: "Section",
+				rich_text: {
+					equals: section,
+				},
+			},
+			{
+				property: "Slug",
+				rich_text: {
+					equals: slug,
+				},
+			},
+			{
+				property: "Status",
+				status: {
+					equals: "Published",
+				},
+			},
+		],
+	})
+	return response.results[0]
+}
+export async function transformNotionDBRowToSectionSlugPage(
+	notionDBItem: PageObjectResponse | PartialPageObjectResponse,
+): Promise<SectionSlugPage> {
+	if (!("properties" in notionDBItem)) {
+		return {} as SectionSlugPage
+	}
+	const props = notionDBItem.properties
+	const blocks = await notionConnector.getPageBlocks(notionDBItem.id)
+	const readingTime = calculateReadingTime(blocks)
+	return {
+		id: notionDBItem.id,
+		title: (notionConnector.getPropertyValue(props["Title"], "title") as string) || "",
+		author: (notionConnector.getPropertyValue(props["Author"], "rich_text") as string) || "",
+		slug: (notionConnector.getPropertyValue(props["Slug"], "rich_text") as string) || "",
+		companyLogo: (notionConnector.getPropertyValue(props["Company Logo"], "files") as string[])?.[0],
+		coverImage: (notionConnector.getPropertyValue(props["Cover Image"], "files") as string[])?.[0],
+		authorImage: (notionConnector.getPropertyValue(props["Author Image"], "files") as string[])?.[0],
+		publishedDate: (
+			notionConnector.getPropertyValue(props["Published Date"], "date") as {
+				start: string
+				end: string | null
+				time_zone: string | null
+			} | null
+		)?.start,
+		seoDescription: notionConnector.getPropertyValue(props["SEO Description"], "rich_text") as string | undefined,
+		status: (
+			notionConnector.getPropertyValue(props["Status"], "status") as {
+				id: string
+				name: string
+				color: string
+			} | null
+		)?.name,
+		blocks: [], // Will be populated separately when fetching page content,
+		readingTime: readingTime,
+	}
 }
 
 export async function getBlogPost(databaseId: string, slug: string) {

@@ -7,6 +7,7 @@ import {
 	BLOG_POST_OG_IMAGE,
 } from "../../config"
 import type { Article } from "$lib/types/articles"
+import type { SectionSlugPage } from "$lib/types/section-slug"
 
 export interface SEOMetadata {
 	title: string
@@ -34,6 +35,20 @@ export interface StructuredData {
 	"@context": string
 	"@type": string
 	[key: string]: unknown
+}
+
+export function generateSectionSlugPageMetadata(sectionSlugPage: SectionSlugPage): SEOMetadata {
+	return {
+		title: `${sectionSlugPage.title} - ${WEBSITE_NAME}`,
+		description: sectionSlugPage.seoDescription || "",
+		canonical: `${MARKETING_BASE_URL}/${sectionSlugPage.slug}`,
+		ogTitle: sectionSlugPage.title,
+		ogDescription: sectionSlugPage.seoDescription || "",
+		ogImage: sectionSlugPage.coverImage || `${MARKETING_BASE_URL}${DEFAULT_OG_IMAGE}`,
+		ogType: "website",
+		twitterCard: "summary_large_image",
+		keywords: [sectionSlugPage.title, "AI research", "insights", "articles"],
+	}
 }
 
 /**
