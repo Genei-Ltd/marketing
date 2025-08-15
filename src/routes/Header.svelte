@@ -11,12 +11,28 @@
 	let mobileMenuOpen = $state(false)
 	let openMobileSection = $state<string | null>(null)
 
+	import { page } from "$app/state"
+
+	let isBookDemoPage = $derived(page.url.pathname === "/book-a-demo")
+	let isScrollDown = $state(false)
+
 	function toggleMobileMenu() {
 		mobileMenuOpen = !mobileMenuOpen
+		isScrollDown = false
 	}
+
+	function handleScroll() {
+		isScrollDown = window.scrollY > 500
+	}
+
+	$effect(() => {
+		window.addEventListener("scroll", handleScroll)
+		return () => window.removeEventListener("scroll", handleScroll)
+	})
 
 	function toggleMobileSection(section: string) {
 		openMobileSection = openMobileSection === section ? null : section
+		isScrollDown = false
 	}
 
 	type ListItemProps = HTMLAttributes<HTMLAnchorElement> & {
@@ -107,7 +123,9 @@
 
 <div
 	class="  fixed left-0 right-0 top-0 z-[99] bg-card/30 shadow-sm w-full border-b border-border/50 backdrop-blur-md transition-all duration-300">
-	<div class="h-14 lg:px-10 flex items-center justify-between max-w-6xl px-6 mx-auto font-sans">
+	<div
+		class="h-14 lg:px-10 flex items-center justify-between px-6 mx-auto font-sans transition-all duration-300 cubic-bezier(0.165, 0.84, 0.44, 1)
+		{isBookDemoPage || isScrollDown ? 'max-w-full' : 'max-w-6xl'}">
 		<!-- Logo -->
 		<div class="flex items-center justify-start">
 			<a href="/" class="flex items-center gap-2">
