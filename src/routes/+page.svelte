@@ -162,19 +162,26 @@
 		</TwoSplit>
 	</div>
 </div>
-<div class="bg-primary text-primary-foreground lg:px-10 flex flex-col items-center justify-center w-full py-32">
+<div
+	class="bg-black text-white shadow-lg lg:px-10 flex flex-col items-center justify-center w-full py-32 relative overflow-hidden">
+	<img
+		src="/images/base-5.png"
+		alt="old man"
+		class="object-cover w-full h-full rounded absolute top-0 left-0 blur scale-110 opacity-50" />
+	<!-- <img src="/images/base-5.png" alt="old man" class="object-cover w-full h-full rounded " /> -->
 	<!-- TESTIMONIAL HIGHLIGHT  -->
-	<div class="lg:grid-cols-2 lg:gap-0 grid items-center justify-center max-w-6xl grid-cols-1 gap-16 px-6 mx-auto">
+	<div
+		class="lg:grid-cols-2 lg:gap-0 grid items-center justify-center max-w-6xl grid-cols-1 gap-16 px-6 mx-auto z-30">
 		<div class=" flex items-center justify-center">
-			<img src="/images/old-man.png" alt="old man" class="aspect-square object-cover w-full h-full rounded" />
+			<img src="/images/base.png" alt="old man" class="aspect-square object-cover w-full h-full rounded" />
 		</div>
 		<div class=" xl:p-lg lg:p-md p-sm flex flex-col items-start justify-center flex-1">
-			<blockquote class="text-primary-foreground text-balance mb-8 font-serif text-xl italic">
+			<blockquote class=" text-balance mb-8 font-serif text-xl italic drop-shadow-lg">
 				"This is the <span class="underline">most advanced tool we have encountered </span>, with the potential
 				to alter how we conduct and budget qualitative analyses significantly."
 			</blockquote>
-			<div class="text-primary-foreground font-sans text-sm">
-				<span class="text-primary-foreground block font-semibold">New Directions for Evaluation</span>
+			<div class=" font-sans text-sm">
+				<span class=" block font-semibold">New Directions for Evaluation</span>
 				<span class="block"
 					>Academic article published in New Directions for Evaluation, Volume 2023, Sabarre et al.
 				</span>
@@ -183,7 +190,8 @@
 	</div>
 </div>
 
-<div class="lg:px-10 relative flex flex-col items-center justify-center max-w-6xl px-6 mx-auto overflow-hidden">
+<div
+	class="lg:px-10 relative flex flex-col items-center justify-center max-w-6xl px-6 mx-auto overflow-hidden mt-16 mb-16">
 	<!-- STATISTICS & BENEFITS  -->
 	<div class="lg:mt-32 lg:mb-32 flex flex-col w-full mt-16 mb-16">
 		{@render section("Let us do the heavy lifting, you do the insights", "Researchers love CoLoop.")}
@@ -208,13 +216,13 @@
 
 <div class="lg:px-10 relative flex flex-col items-center justify-center h-full max-w-6xl px-6 mx-auto">
 	<!-- Testimonials -->
-	<div class="min-h-max w-full h-full overflow-hidden">
+	<div class="min-h-max w-full h-full overflow-hidden mt-16">
 		<div class="min-h-max lg:mb-32 hidden lg:flex flex-col w-full h-full max-w-6xl mx-auto mt-16 mb-16">
 			{#await data.testimonials}
 				<span class="text-foreground">Loading...</span>
 			{:then testimonials}
+				{@render section("What our customers say")}
 				<div class="h-full w-full mx-auto flex flex-col items-center justify-center">
-					{@render section("What our customers say")}
 					<CarouselTestimonials {testimonials} />
 				</div>
 			{:catch}
@@ -260,7 +268,7 @@
 		<Card
 			title="By Insights Experts, for Insights Experts"
 			subtitle="Designed with insights leaders with agencies, household brands and research institutions."
-			image="/images/base.png"
+			image="/wild/vault-mars.jpeg"
 			href="/book-a-demo"
 			cardHeight={96}
 			colSpan={2}

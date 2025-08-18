@@ -102,7 +102,7 @@
 	})
 </script>
 
-<div class="lg:py-24 w-full h-full self-center">
+<div class=" w-full h-full self-center">
 	<!-- Controls -->
 
 	<div class="text-muted-foreground mt-8 text-sm flex flex-row justify-between w-full items-center">
