@@ -93,8 +93,10 @@
 				&copy; {new Date().getFullYear()} CoLoop. All rights reserved.
 			</div>
 			<nav class="flex items-center gap-4 text-xs">
-				<a href="/terms" class="hover:text-primary hover:underline transition-colors">Terms of use</a>
-				<a href="/privacy" class="hover:text-primary hover:underline transition-colors">Privacy policy</a>
+				<a href="/legal/terms-of-service" class="hover:text-primary hover:underline transition-colors"
+					>Terms of service</a>
+				<a href="/legal/privacy-policy" class="hover:text-primary hover:underline transition-colors"
+					>Privacy policy</a>
 			</nav>
 			<div class="text-muted-foreground flex items-center gap-4 text-xs">
 				<Badge variant="default" class="opacity-60 flex items-center gap-2" href="https://trust.coloop.ai">

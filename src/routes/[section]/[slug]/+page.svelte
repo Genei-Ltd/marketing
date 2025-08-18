@@ -20,7 +20,7 @@
 <SEOHead metadata={seoMetadata} {structuredData} />
 
 <div class="flex flex-col gap-2 w-full lg:px-10 relative px-6 py-8 mx-auto bg-primary text-primary-foreground mt-14">
-	<div class="max-w-5xl lg:px-10 relative px-6 py-8 mx-auto w-full">
+	<div class="max-w-6xl lg:px-10 relative px-6 py-8 mx-auto w-full">
 		<Button
 			href="/"
 			variant="link"
@@ -54,12 +54,17 @@
 							</div>
 						{/if}
 					</div>
+					<div class="flex flex-col gap-2 text-center mt-16">
+						<h1 class="text-2xl font-bold font-serif text-balance">{sectionSlugPage.title}</h1>
+						<p class="text-sm text-muted-foreground">{sectionSlugPage.seoDescription}</p>
+					</div>
+				{:else}
+					<div class="flex flex-col gap-2 text-center my-16">
+						<h1 class="text-2xl font-bold font-serif text-balance">{sectionSlugPage.title}</h1>
+						<p class="text-sm text-muted-foreground">{sectionSlugPage.seoDescription}</p>
+					</div>
 				{/if}
 
-				<div class="flex flex-col gap-2 mt-16 text-center">
-					<h1 class="text-2xl font-bold font-serif text-balance">{sectionSlugPage.title}</h1>
-					<p class="text-sm text-gray-500">{sectionSlugPage.seoDescription}</p>
-				</div>
 				<div class="flex items-center gap-2">
 					{#if sectionSlugPage.authorImage}
 						<img
@@ -76,7 +81,7 @@
 	</div>
 </div>
 
-<div class="max-w-4xl lg:px-10 relative px-6 py-8 mx-auto flex flex-col gap-4">
+<div class="max-w-4xl lg:px-10 relative px-6 py-8 mx-auto flex flex-col gap-4 mt-16 mb-16">
 	{#await data.sectionSlugPageBlocks}
 		<div class="flex flex-col gap-2">
 			<Skeleton class="h-96 w-full" />
