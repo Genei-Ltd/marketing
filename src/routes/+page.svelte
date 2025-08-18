@@ -165,26 +165,29 @@
 <div
 	class="bg-black text-white shadow-lg lg:px-10 flex flex-col items-center justify-center w-full py-32 relative overflow-hidden">
 	<img
-		src="/images/base-5.png"
-		alt="old man"
-		class="object-cover w-full h-full rounded absolute top-0 left-0 blur scale-110 opacity-50" />
+		src="/images/base-6.png"
+		alt="Eric Schmidt"
+		class="object-cover w-full h-full rounded absolute top-0 left-0 blur scale-110 opacity-0 transition-all duration-600 ease-in-out hover:opacity-50" />
 	<!-- <img src="/images/base-5.png" alt="old man" class="object-cover w-full h-full rounded " /> -->
 	<!-- TESTIMONIAL HIGHLIGHT  -->
 	<div
 		class="lg:grid-cols-2 lg:gap-0 grid items-center justify-center max-w-6xl grid-cols-1 gap-16 px-6 mx-auto z-30">
 		<div class=" flex items-center justify-center">
-			<img src="/images/base.png" alt="old man" class="aspect-square object-cover w-full h-full rounded" />
+			<img src="/images/eric.webp" alt="Eric Schmidt" class="aspect-square object-cover w-full h-full rounded" />
 		</div>
 		<div class=" xl:p-lg lg:p-md p-sm flex flex-col items-start justify-center flex-1">
 			<blockquote class=" text-balance mb-8 font-serif text-xl italic drop-shadow-lg">
-				"This is the <span class="underline">most advanced tool we have encountered </span>, with the potential
-				to alter how we conduct and budget qualitative analyses significantly."
+				"if you're not using this technology, you're not going to be relevant compared to your peer groups and
+				your competitors and the people who want to be successful. <br />
+				<br />
+				<span class="underline">Adopt it, and adopt it fast.</span>"
 			</blockquote>
 			<div class=" font-sans text-sm">
-				<span class=" block font-semibold">New Directions for Evaluation</span>
-				<span class="block"
-					>Academic article published in New Directions for Evaluation, Volume 2023, Sabarre et al.
-				</span>
+				<span class=" block font-semibold">Eric Schmitt</span>
+				<a
+					href="https://www.businessinsider.com/eric-schmidt-ignore-ai-risk-irrelevance-workers-jobs-google-ted-2025-5"
+					class="block underline underline-offset-2 hover:underline-offset-4 transition-all duration-300 ease-in-out"
+					>Business Insider</a>
 			</div>
 		</div>
 	</div>

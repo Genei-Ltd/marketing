@@ -18,9 +18,9 @@
 				</a>
 			</div>
 
-			<div class="lg:grid-cols-5 lg:text-right grid grid-cols-2 col-span-5 gap-8 text-left">
+			<div class="lg:grid-cols-6 lg:text-right grid grid-cols-2 col-span-6 lg:gap-16 gap-8 text-left">
 				<div>
-					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Product</span>
+					<!-- <span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Product</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
 						<a href="/products/qualitative" class="hover:underline transition-colors">Qualitative</a>
 						<a href="/products/quantitative" class="hover:underline transition-colors">Open Ends</a>
@@ -28,18 +28,41 @@
 							>Agentic AI Chat
 						</a>
 						<a href="https://status.coloop.ai" class="hover:underline transition-colors">Concept Testing</a>
-					</nav>
+					</nav> -->
 				</div>
 
 				<div>
-					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Comparisons</span>
+					<!-- <span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Comparisons</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
 						<a href="/careers" class="hover:underline transition-colors">CoLoop Vs. ChatGPT</a>
 						<a href="/mission" class="hover:underline transition-colors">CoLoop Vs. Listenlabs</a>
 						<a href="/about" class="hover:underline transition-colors">CoLoop Vs. Claude</a>
 						<a href="/blog" class="hover:underline transition-colors">CoLoop Vs. Gemini</a>
 						<a href="/values" class="hover:underline transition-colors">CoLoop Vs. Grok</a>
-					</nav>
+					</nav> -->
+				</div>
+				<div>
+					<!-- <span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Industries</span>
+					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
+						<a href="/use-cases/pharmaceuticals" class="hover:underline transition-colors"
+						>Healthcare & Pharmaceuticals</a>
+						<a href="/use-cases/consumer-goods" class="hover:underline transition-colors">Consumer Goods</a>
+						<a href="/use-cases/media-and-entertainment" class="hover:underline transition-colors"
+						>Media & Entertainment</a>
+						<a href="/use-cases/industry-experts" class="hover:underline transition-colors"
+						>Industry Experts</a>
+						<a href="/use-cases/business-stakeholders" class="hover:underline transition-colors"
+						>Business Stakeholders</a>
+					</nav> -->
+				</div>
+				<div>
+					<!-- <span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Teams</span>
+					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
+						<a href="/use-cases/in-house-teams" class="hover:underline transition-colors">In-house Teams</a>
+						<a href="/use-cases/academics" class="hover:underline transition-colors">Academics</a>
+						<a href="/use-cases/independents" class="hover:underline transition-colors">Independents</a>
+						<a href="/use-cases/agencies" class="hover:underline transition-colors">Agencies</a>
+					</nav> -->
 				</div>
 				<div>
 					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Company</span>
@@ -52,29 +75,6 @@
 						<a href="/manifesto" class="hover:underline transition-colors">Manifesto</a> -->
 					</nav>
 				</div>
-				<!-- <div>
-					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Industries</span>
-					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
-						<a href="/use-cases/pharmaceuticals" class="hover:underline transition-colors"
-							>Healthcare & Pharmaceuticals</a>
-						<a href="/use-cases/consumer-goods" class="hover:underline transition-colors">Consumer Goods</a>
-						<a href="/use-cases/media-and-entertainment" class="hover:underline transition-colors"
-							>Media & Entertainment</a>
-						<a href="/use-cases/industry-experts" class="hover:underline transition-colors"
-							>Industry Experts</a>
-						<a href="/use-cases/business-stakeholders" class="hover:underline transition-colors"
-							>Business Stakeholders</a>
-					</nav>
-				</div>
-				<div>
-					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Teams</span>
-					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
-						<a href="/use-cases/in-house-teams" class="hover:underline transition-colors">In-house Teams</a>
-						<a href="/use-cases/academics" class="hover:underline transition-colors">Academics</a>
-						<a href="/use-cases/independents" class="hover:underline transition-colors">Independents</a>
-						<a href="/use-cases/agencies" class="hover:underline transition-colors">Agencies</a>
-					</nav>
-				</div> -->
 				<div>
 					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Resources</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
