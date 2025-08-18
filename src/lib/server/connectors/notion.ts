@@ -370,6 +370,20 @@ export async function getDatabaseRowsByGroup(
 	return response.results
 }
 
+export async function getAllSectionsSlugPages(databaseId: string) {
+	const response = await notionConnector.queryDatabase(databaseId, {
+		and: [
+			{
+				property: "Status",
+				status: {
+					equals: "Published",
+				},
+			},
+		],
+	})
+
+	return Promise.all(response.results.map((row) => transformNotionDBRowToSectionSlugPage(row as PageObjectResponse)))
+}
 export async function getDatabaseRowsBySectionAndSlug(databaseId: string, section: string, slug: string) {
 	const response = await notionConnector.queryDatabase(databaseId, {
 		and: [

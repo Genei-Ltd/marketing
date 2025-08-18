@@ -1,14 +1,23 @@
-import { getAllPublishedBlogPosts, transformDBRowsToArticles } from "$lib/server/connectors/notion"
+import {
+	getAllPublishedBlogPosts,
+	getAllSectionsSlugPages,
+	transformDBRowsToArticles,
+} from "$lib/server/connectors/notion"
 import { MARKETING_BASE_URL } from "../../config"
 import type { RequestHandler } from "@sveltejs/kit"
 
 export const GET: RequestHandler = async () => {
 	// Get all published blog posts
-	const DATABASE_ID = "2326a3daa35a80a19eaae5366b3b2a1d"
+	// https://www.notion.so/genei/2326a3daa35a80a19eaae5366b3b2a1d?v=2326a3daa35a8009953f000ce317ee31&source=copy_link
+	const BLOG_DATABASE_ID = "2326a3daa35a80a19eaae5366b3b2a1d"
+
+	// https://www.notion.so/genei/24f6a3daa35a803c92a8d70b526b2466?v=24f6a3daa35a81c4b104000c4e8ee5e2&source=copy_link
+	const SECTIONS_SLUG_DATABASE_ID = "24f6a3daa35a803c92a8d70b526b2466"
 
 	try {
-		const blogPosts = await getAllPublishedBlogPosts(DATABASE_ID)
+		const blogPosts = await getAllPublishedBlogPosts(BLOG_DATABASE_ID)
 		const articles = await transformDBRowsToArticles(blogPosts)
+		const sections = await getAllSectionsSlugPages(SECTIONS_SLUG_DATABASE_ID)
 
 		// Get unique categories for category pages
 		const categories = [...new Set(articles.flatMap((article) => article.category || []))]
@@ -33,13 +42,6 @@ export const GET: RequestHandler = async () => {
 	</url>
 	
 	<url>
-		<loc>${MARKETING_BASE_URL}/about</loc>
-		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.6</priority>
-	</url>
-	
-	<url>
 		<loc>${MARKETING_BASE_URL}/careers</loc>
 		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
 		<changefreq>daily</changefreq>
@@ -47,83 +49,24 @@ export const GET: RequestHandler = async () => {
 	</url>
 	
 	<url>
-		<loc>${MARKETING_BASE_URL}/support</loc>
+		<loc>${MARKETING_BASE_URL}/book-a-demo</loc>
 		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.6</priority>
 	</url>
-	
-	<url>
-		<loc>${MARKETING_BASE_URL}/values</loc>
-		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	
-	<url>
-		<loc>${MARKETING_BASE_URL}/mission</loc>
-		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	
-	<url>
-		<loc>${MARKETING_BASE_URL}/manifesto</loc>
-		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	
-	<!-- Product Pages -->
-	<url>
-		<loc>${MARKETING_BASE_URL}/products/qualitative</loc>
+
+
+	<!-- Section Pages -->	
+	${sections
+		.map((section) => {
+			return `	<url>
+		<loc>${MARKETING_BASE_URL}/${section.section}/${section.slug}</loc>
 		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
 		<changefreq>weekly</changefreq>
-		<priority>0.7</priority>
-	</url>
-	
-	<url>
-		<loc>${MARKETING_BASE_URL}/products/quantitative</loc>
-		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.7</priority>
-	</url>
-	
-	<url>
-		<loc>${MARKETING_BASE_URL}/products/agentic-ai-chat</loc>
-		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.7</priority>
-	</url>
-	
-	<!-- Use Case Pages -->
-	<url>
-		<loc>${MARKETING_BASE_URL}/use-cases/pharmaceutical</loc>
-		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-		<changefreq>monthly</changefreq>
 		<priority>0.6</priority>
-	</url>
-	
-	<url>
-		<loc>${MARKETING_BASE_URL}/use-cases/biotechnology</loc>
-		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.6</priority>
-	</url>
-	
-	<url>
-		<loc>${MARKETING_BASE_URL}/use-cases/healthcare</loc>
-		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.6</priority>
-	</url>
-	
-	<url>
-		<loc>${MARKETING_BASE_URL}/use-cases/consumer-goods</loc>
-		<lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.6</priority>
-	</url>
+	</url>`
+		})
+		.join("\n")}
 	
 	<!-- Blog Category Pages -->
 	${categories
