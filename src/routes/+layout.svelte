@@ -27,7 +27,7 @@
 				{@render children?.()}
 			</main>
 			{#if page.url.pathname === "/"}
-				<div class="snap-end">
+				<div class="lg:snap-end">
 					<Footer />
 				</div>
 			{:else}

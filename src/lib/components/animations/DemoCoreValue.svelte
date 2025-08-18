@@ -15,7 +15,7 @@ Clean, professional design for corporate audiences
 		IconCheck,
 		IconLocation,
 	} from "@tabler/icons-svelte"
-	import { fade, fly, scale, slide } from "svelte/transition"
+	import { fade, scale, slide } from "svelte/transition"
 	import { quintOut, cubicInOut, elasticOut } from "svelte/easing"
 	import type { ComponentType } from "svelte"
 	import Box from "./Box.svelte"
@@ -160,6 +160,12 @@ Clean, professional design for corporate audiences
 		visibleWords: 0,
 		isComplete: false,
 		currentStepId: "",
+		// Pointer animation state
+		showPointer: false,
+		pointerPosition: { x: 0, y: 0 },
+		currentPointerTarget: "",
+		highlightActive: false,
+		quoteVisible: false,
 	})
 
 	function resetAnimationState() {
@@ -168,15 +174,22 @@ Clean, professional design for corporate audiences
 		animationState.summaryWords = []
 		animationState.visibleWords = 0
 		animationState.isComplete = false
+		// Reset pointer state
+		animationState.showPointer = false
+		animationState.pointerPosition = { x: 0, y: 0 }
+		animationState.currentPointerTarget = ""
+		animationState.highlightActive = false
+		animationState.quoteVisible = false
 	}
 
 	// ============================================================================
 	// DATA CONFIGURATION
 	// ============================================================================
 
-	const questionText = "Which of the participants found the fifth option to be the more appealing?"
-	const summaryText =
-		"The fifth option was found to be the most appealing by 10 participants, while the fourth option was found to be the least appealing by 10 participants in the segment of women.  While the second option was found to be the least appealing by 10 participants. The first option was found to be the most appealing by 10 participants, while the sixth option was found to be the least appealing by 10 participants."
+	const questionText = "Summarise the top 3 reasons buyers go with ACME’s SaaS Solution over competitors."
+	const summaryText = `Ease of Use: Buyers describe ACME as “intuitive” and “simple to roll out,” with several noting staff were “up and running quickly” without heavy training. (mentioned by ~9 of 20 participants) [1][2][5][7] +5 more
+	Integration: Interviewees emphasized how smoothly ACME fit into existing CRM and ERP systems, avoiding the “headaches” they’d faced with competitors. (noted by ~7 of 20 participants) [11][8][9]+4 more
+	Pricing & ROI: Customers highlighted ACME’s transparent pricing and the sense of “getting value sooner,” contrasting it with hidden-fee models elsewhere. (raised by ~6 of 20 participants) [3][4][6]+3 more`
 
 	// ============================================================================
 	// LAYER 3: STEP ANIMATION FUNCTIONS
@@ -218,10 +231,35 @@ Clean, professional design for corporate audiences
 				}
 
 				animationState.visibleWords = i + 1
-				await controller.delay(50) // Show each word every 100ms
+				await controller.delay(15) // Show each word every 100ms
 			}
 
-			await controller.delay(2000) // Show complete summary
+			await controller.delay(1000) // Brief pause after complete summary
+
+			// Show pointer and animate to citation #2
+			animationState.showPointer = true
+			animationState.pointerPosition = { x: -500, y: -50 } // Start position
+			await controller.delay(300)
+
+			// Move pointer to citation #2 position (roughly where citation #2 would be)
+			animationState.pointerPosition = { x: 45, y: -30 } // Citation #2 position
+			animationState.currentPointerTarget = "citation-2"
+			await controller.delay(800)
+
+			// Trigger hover effects programmatically
+			animationState.highlightActive = true
+			animationState.quoteVisible = true
+			await controller.delay(2000) // Show hover effect for 2 seconds
+
+			// Move pointer away and hide effects
+			animationState.pointerPosition = { x: 400, y: -150 } // Move away
+			await controller.delay(500)
+
+			animationState.highlightActive = false
+			animationState.quoteVisible = false
+			animationState.showPointer = false
+
+			await controller.delay(500) // Final pause
 		} catch (err) {
 			// Graceful fallback
 			animationState.summaryWords = summaryText.split(" ")
@@ -294,8 +332,6 @@ Clean, professional design for corporate audiences
 	// ============================================================================
 
 	let currentStepIndex = $state(0)
-	let isLoading = $state(false)
-	let isComplete = $state(false)
 	let restart = $state(false)
 	let showCard = $state(true)
 	let currentController: AnimationController | null = $state(null)
@@ -320,9 +356,7 @@ Clean, professional design for corporate audiences
 		const controller = new AnimationController()
 		currentController = controller
 
-		// Update UI state
-		isLoading = true
-		isComplete = false
+		// Animation started
 
 		try {
 			// Execute the step's animation
@@ -331,8 +365,6 @@ Clean, professional design for corporate audiences
 			if (!controller.signal.aborted) {
 				// Mark complete
 				animationState.isComplete = true
-				isLoading = false
-				isComplete = true
 
 				// Pause before next step
 				await controller.delay(1500)
@@ -353,8 +385,6 @@ Clean, professional design for corporate audiences
 				console.warn("Animation failed:", err)
 				// Graceful fallback - show final state
 				animationState.isComplete = true
-				isLoading = false
-				isComplete = true
 			}
 		}
 	}
@@ -382,8 +412,6 @@ Clean, professional design for corporate audiences
 
 		setTimeout(() => {
 			currentStepIndex = 0
-			isLoading = false
-			isComplete = false
 			isAnimationStarted = false
 
 			setTimeout(() => {
@@ -416,6 +444,36 @@ Clean, professional design for corporate audiences
 		}, 500)
 	})
 </script>
+
+<!-- ============================================================================ -->
+<!-- ANIMATION STEP SELECTOR -->
+<!-- ============================================================================ -->
+{#if false}
+	<div class="relative z-50">
+		<div class="bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg p-3 shadow-lg">
+			<div class="flex gap-1">
+				{#each steps as step, index}
+					<button
+						class={`px-2 py-1 text-xs rounded transition-colors ${
+							currentStepIndex === index
+								? "bg-black text-white"
+								: "bg-gray-100 text-gray-600 hover:bg-gray-200"
+						}`}
+						onclick={() => {
+							if (currentController) {
+								currentController.cancel()
+							}
+							currentStepIndex = index
+							resetAnimationState()
+							executeStep(index)
+						}}>
+						{step.title}
+					</button>
+				{/each}
+			</div>
+		</div>
+	</div>
+{/if}
 
 <!-- ============================================================================ -->
 <!-- CLEAN WORKFLOW UI - Content Only -->
@@ -562,6 +620,10 @@ Clean, professional design for corporate audiences
 						animation: move 0.4s ease-out 0.8s forwards;
 					}
 
+					.animate-click-pointer {
+						animation: clickPointer 2s ease-in-out infinite;
+					}
+
 					@keyframes move {
 						0% {
 							transform: translateX(0px);
@@ -570,6 +632,19 @@ Clean, professional design for corporate audiences
 						100% {
 							transform: translateX(-500px);
 							opacity: 1;
+						}
+					}
+
+					@keyframes clickPointer {
+						0%,
+						50%,
+						100% {
+							transform: scale(1);
+							opacity: 1;
+						}
+						25% {
+							transform: scale(0.9);
+							opacity: 0.8;
 						}
 					}
 				</style>
@@ -653,104 +728,322 @@ Clean, professional design for corporate audiences
 					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
 					<Box class="h-full w-full flex items-center justify-center">
 						<div class="relative mx-auto w-full h-full min-w-96 max-w-96 min-h-96 max-h-96">
-							<h2 class="text-xl text-black font-semibold mb-6 leading-tight w-full">CoLoop Summary</h2>
+							<h2 class="text-xl text-black font-semibold mb-6 leading-tight w-full">
+								Top 3 Reasons Buyers Choose ACME’s SaaS Solution
+							</h2>
 							<div class="text-black leading-relaxed text-sm space-y-4 min-h-[12rem]">
-								<!-- Word-by-word animation with citations -->
+								<!-- Bullet point list with proper formatting -->
 								{#if animationState.summaryWords.length > 0}
-									{#each animationState.summaryWords as word, index}
-										<span
-											class="transition-opacity duration-200 {index < animationState.visibleWords
-												? 'opacity-100'
-												: 'opacity-0'}">
-											{word}
-											{#if index === 15}
+									<div class="space-y-2">
+										<!-- Ease of Use -->
+										<div class="flex items-start gap-3">
+											<div class="flex-1">
+												<span class="font-semibold text-black">Ease of Use: </span>
 												<span
-													class="bg-black font-semibold text-white text-center text-xs px-1.5 py-0.5 rounded"
-													>1</span>
-											{/if}
-											{#if index === 32 && animationState.isComplete}
-												<!-- Only show highlighting and popup after animation complete -->
-												<span class="relative inline">
-													<span
-														class="bg-yellow-200/60 px-1"
-														in:fly={{ x: -10, duration: 400, delay: 100, easing: quintOut }}
-														>while the fourth option was found to be the least appealing by
-														10 participants.</span>
-													<!-- Citation Number -->
-													<sup class="relative">
-														<span
-															class="bg-black animate-pulse font-semibold text-white text-center text-xs px-1.5 py-0.5 rounded"
-															in:scale={{ duration: 300, delay: 100, easing: quintOut }}
-															>2</span>
-														<!-- Citation Tooltip -->
-														<div
-															class="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full"
-															in:scale={{
-																duration: 300,
-																delay: 200,
-																easing: quintOut,
-															}}>
+													class="transition-opacity duration-200 {animationState.visibleWords >=
+													15
+														? 'opacity-100'
+														: 'opacity-0'}">
+													Buyers describe ACME as "intuitive" and "simple to roll out," with
+													several noting
+												</span>
+
+												<span
+													id="ease-highlight-text"
+													class="transition-all duration-300 {animationState.highlightActive
+														? 'bg-yellow-200/60 px-1'
+														: ''} {animationState.visibleWords >= 20
+														? 'opacity-100'
+														: 'opacity-0'} "
+													>staff were "up and running quickly" without heavy training.</span>
+												<span
+													class="text-gray-600 text-xs italic transition-opacity duration-200 {animationState.visibleWords >=
+													35
+														? 'opacity-100'
+														: 'opacity-0'}">
+													<!-- (mentioned by ~9/20 participants) -->
+													<span class="inline-flex gap-0.5 ml-1">
+														<span class="relative group">
 															<div
-																class="bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
-																Expert Interview.mp4
+																class="bg-black text-white text-xs px-1 py-0.5 rounded cursor-pointer hover:bg-gray-800">
+																1
+															</div>
+															<div
+																class="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
 																<div
-																	class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black">
+																	class="bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+																	Discussion Guide.pdf
+																	<div
+																		class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black">
+																	</div>
 																</div>
 															</div>
-														</div>
-													</sup>
+														</span>
+														<span class="relative group">
+															<div
+																id="citation-2"
+																class="bg-black text-white text-xs px-1 py-0.5 rounded cursor-pointer hover:bg-gray-800 {animationState.highlightActive
+																	? ' transition-all  duration-300 scale-120 transform '
+																	: ''}">
+																2
+															</div>
+															<div
+																class="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+																<div
+																	class="bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+																	Expert Interview.mp4
+																	<div
+																		class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black">
+																	</div>
+																</div>
+															</div>
+														</span>
+														<span class="relative group">
+															<div
+																class="bg-black text-white text-xs px-1 py-0.5 rounded cursor-pointer hover:bg-gray-800">
+																5
+															</div>
+															<div
+																class="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+																<div
+																	class="bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+																	Expert Interview (French).mov
+																	<div
+																		class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black">
+																	</div>
+																</div>
+															</div>
+														</span>
+														<span class="relative group">
+															<div
+																class="bg-black text-white text-xs px-1 py-0.5 rounded cursor-pointer hover:bg-gray-800">
+																7
+															</div>
+															<div
+																class="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+																<div
+																	class="bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+																	Customer Interview_3.mp4
+																	<div
+																		class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black">
+																	</div>
+																</div>
+															</div>
+														</span>
+														<span class="text-black text-xs ml-1">+5 more</span>
+													</span>
 												</span>
-											{:else if index === 32}
-												<!-- Show plain text during animation -->
-												while the fourth option was found to be the least appealing by 10 participants.
+											</div>
+										</div>
+
+										<!-- Integration -->
+										<div
+											class="flex items-start gap-3 transition-opacity duration-200 {animationState.visibleWords >=
+											45
+												? 'opacity-100'
+												: 'opacity-0'}">
+											<!-- <span class="text-black font-bold mt-1">•</span> -->
+											<div class="flex-1">
+												<span class="font-semibold text-black">Integration: </span>
 												<span
-													class="bg-black font-semibold text-white text-center text-xs px-1.5 py-0.5 rounded ml-1"
-													>2</span>
-											{/if}
-											{#if index === 45}
+													class="transition-opacity duration-200 {animationState.visibleWords >=
+													55
+														? 'opacity-100'
+														: 'opacity-0'}">
+													Interviewees emphasized how smoothly ACME fit into existing CRM and
+													ERP systems, avoiding the "headaches" they'd faced with competitors.
+												</span>
 												<span
-													class="bg-black font-semibold text-white text-center text-xs px-1.5 py-0.5 rounded"
-													>3</span>
-											{/if}
-											{#if index < animationState.summaryWords.length - 1}{" "}{/if}
-										</span>
-									{/each}
+													class="text-gray-600 text-xs italic transition-opacity duration-200 {animationState.visibleWords >=
+													65
+														? 'opacity-100'
+														: 'opacity-0'}">
+													<!-- (noted by ~7 of 20 participants) -->
+													<span class="inline-flex gap-0.5 ml-1">
+														<span class="relative group">
+															<div
+																class="bg-black text-white text-xs px-1 py-0.5 rounded cursor-pointer hover:bg-gray-800">
+																11
+															</div>
+															<div
+																class="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+																<div
+																	class="bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+																	Customer Survey_B2B.xlsx
+																	<div
+																		class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black">
+																	</div>
+																</div>
+															</div>
+														</span>
+														<span class="relative group">
+															<div
+																class="bg-black text-white text-xs px-1 py-0.5 rounded cursor-pointer hover:bg-gray-800">
+																8
+															</div>
+															<div
+																class="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+																<div
+																	class="bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+																	Focus Group Session 2.mp4
+																	<div
+																		class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black">
+																	</div>
+																</div>
+															</div>
+														</span>
+														<span class="relative group">
+															<div
+																class="bg-black text-white text-xs px-1 py-0.5 rounded cursor-pointer hover:bg-gray-800">
+																9
+															</div>
+															<div
+																class="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+																<div
+																	class="bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+																	Product Manager Interview.mov
+																	<div
+																		class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black">
+																	</div>
+																</div>
+															</div>
+														</span>
+														<span class="text-black text-xs ml-1">+4 more</span>
+													</span>
+												</span>
+											</div>
+										</div>
+
+										<!-- Pricing & ROI -->
+										<div
+											class="flex items-start gap-3 transition-opacity duration-200 {animationState.visibleWords >=
+											75
+												? 'opacity-100'
+												: 'opacity-0'}">
+											<!-- <span class="text-black font-bold mt-1">•</span> -->
+											<div class="flex-1">
+												<span class="font-semibold text-black">Pricing & ROI: </span>
+												<span
+													class="transition-opacity duration-200 {animationState.visibleWords >=
+													85
+														? 'opacity-100'
+														: 'opacity-0'}">
+													Customers highlighted ACME's transparent pricing and the sense of
+													"getting value sooner," contrasting it with hidden-fee models
+													elsewhere.
+												</span>
+												<span
+													class="text-gray-600 text-xs italic transition-opacity duration-200 {animationState.visibleWords >=
+													85
+														? 'opacity-100'
+														: 'opacity-0'}">
+													<!-- (raised by ~6 of 20 participants) -->
+													<span class="inline-flex gap-0.5 ml-1">
+														<span class="relative group">
+															<div
+																class="bg-black text-white text-xs px-1 py-0.5 rounded cursor-pointer hover:bg-gray-800">
+																3
+															</div>
+															<div
+																class="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+																<div
+																	class="bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+																	Pricing Strategy Report.pdf
+																	<div
+																		class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black">
+																	</div>
+																</div>
+															</div>
+														</span>
+														<span class="relative group">
+															<div
+																class="bg-black text-white text-xs px-1 py-0.5 rounded cursor-pointer hover:bg-gray-800">
+																4
+															</div>
+															<div
+																class="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+																<div
+																	class="bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+																	ROI Analysis Interview.mp3
+																	<div
+																		class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black">
+																	</div>
+																</div>
+															</div>
+														</span>
+														<span class="relative group">
+															<div
+																class="bg-black text-white text-xs px-1 py-0.5 rounded cursor-pointer hover:bg-gray-800">
+																6
+															</div>
+															<div
+																class="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+																<div
+																	class="bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+																	CFO Round Table.wav
+																	<div
+																		class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-black">
+																	</div>
+																</div>
+															</div>
+														</span>
+														<span class="text-black text-xs ml-1">+3 more</span>
+													</span>
+												</span>
+											</div>
+										</div>
+									</div>
 								{/if}
 
 								<div class="min-h-24 mt-6">
-									<!-- Referenced Quote -->
-									{#if animationState.isComplete && animationState.visibleWords >= animationState.summaryWords.length}
-										<div
-											class="text-left border-l-4 border-black pl-2"
-											in:fly={{ x: -20, duration: 400, delay: 100, easing: quintOut }}
-											out:fly={{ x: 20, duration: 300, easing: cubicInOut }}>
-											<p class="text-sm text-black flex flex-col gap-2">
-												<span class="font-medium text-gray-700 flex items-center gap-1">
-													<span class="bg-black text-white text-xs px-1.5 py-0.5 mr-1 rounded"
-														>2</span>
-													<span class="font-bold text-black">Researcher:</span>
-												</span>
-												<span class="font-medium text-gray-800 ml-4">
-													What do you think of the 4th option?
-												</span>
-											</p>
-											<p class="text-sm text-black flex flex-col gap-2">
-												<span class="font-medium text-gray-700">
-													<span class="bg-black text-white text-xs px-1.5 py-0.5 mr-1 rounded"
-														>2</span>
-													<span class="font-bold text-black">Speaker AB:</span>
-												</span>
+									<!-- Referenced Quote - shown when quoteVisible is true -->
+									<div
+										id="citation-quote"
+										class="text-left border-l-4 border-black pl-2 transition-all duration-400 {animationState.quoteVisible
+											? 'opacity-100 translate-x-0'
+											: 'opacity-0 translate-x-4'}"
+										style="pointer-events: none;">
+										<p class="text-sm text-black flex flex-col gap-2">
+											<span class="font-medium text-gray-700">
+												<span class="bg-black text-white text-xs px-1.5 py-0.5 mr-1 rounded"
+													>2</span>
+												<span class="font-bold text-black">Quote Reference</span>
+											</span>
 
-												<span class="font-medium text-gray-800 ml-4">
-													I think its great, very much my favorite.
-												</span>
-											</p>
-										</div>
-									{/if}
+											<span class="font-medium text-gray-800 ml-4">
+												Participant C: "Everyone was using it within 20 mins like they had been
+												using it for months."
+											</span>
+										</p>
+									</div>
 								</div>
 							</div>
 						</div>
 					</Box>
+
+					<!-- Animated pointer for citation interaction -->
+					{#if animationState.showPointer}
+						<div
+							class="absolute pointer-events-none z-50 transition-all duration-500 ease-out"
+							style="transform: translate({animationState.pointerPosition.x}px, {animationState
+								.pointerPosition.y}px)">
+							<div
+								class={animationState.currentPointerTarget === "citation-2"
+									? "animate-click-pointer"
+									: ""}>
+								<IconLocation fill="white" class="size-8 text-black drop-shadow-lg rotate-270" />
+							</div>
+						</div>
+					{/if}
+
+					<!-- Animated mouse pointer when animation is complete -->
+					<!-- {#if animationState.isComplete && animationState.visibleWords >= animationState.summaryWords.length && !animationState.showPointer}
+						<div class="absolute top-1/2 right-8 transform -translate-y-1/2 z-50">
+							<div class="animate-click-pointer">
+								<IconLocation fill="white" class="size-12 text-black drop-shadow-lg rotate-270" />
+							</div>
+						</div>
+					{/if} -->
 				</div>
 			{/if}
 		</div>

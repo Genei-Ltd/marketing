@@ -20,6 +20,7 @@
 	import StaticDemoIntegrations from "$components/animations/StaticDemoIntegrations.svelte"
 	import DemoFeatureReel from "$components/animations/DemoFeatureReel.svelte"
 	import CarouselTestimonials from "$components/sections/CarouselTestimonials.svelte"
+	import CustomerLogoCarousel from "$lib/components/CustomerLogoCarousel.svelte"
 
 	// SEO imports
 	import SEOHead from "$lib/components/SEOHead.svelte"
@@ -68,7 +69,7 @@
 <!-- HERO SECTION -->
 <div class="pb-96 max-h-300 relative top-0 z-10 w-full h-screen">
 	<img
-		src="/wild/coca-cola-4k-wide.jpg"
+		src="/hero/bb-coca-cola.jpg"
 		alt="Hero"
 		class="2xl:object-bottom-right object-center absolute top-0 z-10 object-cover xl:object-right w-full h-full opacity-100 transition-all duration-500 ease-in-out" />
 	<div
@@ -96,16 +97,7 @@
 			"400+ Research Teams trust CoLoop for qualitative analysis.",
 			"Trusted by the brands you trust",
 		)}
-		<div class="flex flex-row items-center justify-center gap-16 mt-8">
-			{#each Array.from({ length: 10 }, (_, i) => i) as index}
-				<div class="flex flex-col items-center justify-center">
-					<img
-						src={`/customer-logos/${index + 1}.png`}
-						alt="Logo"
-						class="opacity-80 min-w-18 brightness-200 contrast-0 grayscale dark:brightness-0 dark:contrast-0 dark:invert-0 object-contain w-24" />
-				</div>
-			{/each}
-		</div>
+		<CustomerLogoCarousel />
 	</div>
 
 	<!-- FIRST CTA -->
@@ -140,8 +132,8 @@
 		</TwoSplit>
 		<TwoSplit
 			label="Integrations"
-			heading="Streamlined Analysis in a single tool"
-			description="Upload your data from a growing range of file formats, languages and 3rd party tools to create a single unified source of truth."
+			heading="Consolidate Your Tools"
+			description="Uploads your data from a growing range of file formats, languages, 3rd party tools and custom APIs to create a single unified source of truth."
 			buttonText="Explore Integrations"
 			buttonHref="/book-a-demo">
 			<WildAnimationBox backgroundImage="/images/base-5.png" backgroundColor="bg-accent-2">
@@ -197,7 +189,7 @@
 	class="lg:px-10 relative flex flex-col items-center justify-center max-w-6xl px-6 mx-auto overflow-hidden mt-16 mb-16">
 	<!-- STATISTICS & BENEFITS  -->
 	<div class="lg:mt-32 lg:mb-32 flex flex-col w-full mt-16 mb-16">
-		{@render section("Let us do the heavy lifting, you do the insights", "Researchers love CoLoop.")}
+		{@render section("Future proof your AI strategy with professional grade tooling", "Researchers love CoLoop.")}
 		<NakedCardSet set="features" />
 	</div>
 </div>
@@ -211,7 +203,7 @@
 	<!-- SOLUTIONS -->
 	<div class=" min-h-200 flex flex-col items-center justify-center w-full mb-16">
 		<h4 class="text-balance text-md mb-4 font-medium tracking-wide text-center">From researchers to analysts</h4>
-		{@render section("There's a CoLoop for every team")}
+		{@render section("Solutions for all insight professionals")}
 		<CarouselPills />
 	</div>
 </div>
