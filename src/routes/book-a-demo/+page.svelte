@@ -150,11 +150,13 @@
 <div class="min-h-screen mt-14 h-full flex xl:flex-row flex-col">
 	{#if !showCalEmbed}
 		<!-- Header -->
-		<div class="text-left bg-primary py-16 mb-16 lg:justify-between max-h-screen">
-			<div class="lg:px-10 relative flex flex-col items-start justify-between max-w-6xl px-6 mx-auto h-full">
+		<div class="text-left bg-black py-16 mb-16 lg:justify-between max-h-screen relative">
+			<img src="/images/base.png" alt="CoLoop" class="absolute inset-0 object-cover w-full h-full opacity-60" />
+			<div class="bg-gradient-to-t from-black/50 to-black/0 absolute z-10 w-full h-full"></div>
+			<div class="lg:px-10 relative flex flex-col items-start justify-between max-w-4xl px-6 mx-auto h-full">
 				<div>
-					<h1 class="font-bold text-primary-foreground mb-4 w-full">300+ Teams Trust CoLoop</h1>
-					<p class="text-lg text-primary-foreground mx-auto w-full">
+					<h1 class="font-bold text-white mb-4 w-full">300+ Teams Trust CoLoop</h1>
+					<p class="text-lg text-white mx-auto w-full">
 						Get a personalized demonstration of CoLoop's research platform.
 					</p>
 				</div>
@@ -170,7 +172,7 @@
 				</div> -->
 
 				<!-- TESTIMONIAL QUOTE -->
-				<div class=" text-primary-foreground py-16">
+				<div class=" text-white py-16">
 					<!-- <div class=" flex items-center justify-center">
 							<img
 								src="/images/old-man.png"
@@ -178,20 +180,19 @@
 								class="aspect-square object-cover w-full h-full rounded" />
 						</div> -->
 					<div class=" flex flex-col items-start justify-center max-w-2xl">
-						<blockquote class="text-primary-foreground text-balance mb-8 font-serif text-xl">
+						<blockquote class="text-white text-balance mb-8 font-serif text-xl">
 							"CoLoop transformed how we approach qualitative research. What used to take our team weeks
 							now happens in days, and the insights are more actionable than ever."
 						</blockquote>
-						<div class="text-primary-foreground font-sans text-sm">
-							<span class="text-primary-foreground block font-semibold">Sarah Chen</span>
+						<div class="text-white font-sans text-sm">
+							<span class="text-white block font-semibold">Sarah Chen</span>
 							<span class="block">Head of User Research, TechCorp</span>
 						</div>
 					</div>
 				</div>
 
 				<div class=" flex-col items-start justify-start mb-16 lg:mb-0 hidden xl:flex">
-					<h1 class="font-bold text-foreground mb-4 w-full">Book Your Demo</h1>
-					<p class="text-md text-primary-foreground mx-auto w-full max-w-2xl">
+					<p class="text-md text-white mx-auto w-full max-w-2xl">
 						Join 300+ teams who've transformed their research workflow. See how CoLoop's AI-powered platform
 						can accelerate your insights discovery by 10x in just 30 minutes.
 					</p>

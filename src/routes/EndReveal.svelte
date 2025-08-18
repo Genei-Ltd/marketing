@@ -22,7 +22,7 @@
 						researchers millions of hours in research. Join us.
 					</span>
 
-					<Button class="mt-8" href="/demo">Get CoLoop</Button>
+					<Button class="mt-8" href="/book-a-demo">Get CoLoop</Button>
 				</div>
 			</div>
 		</div>

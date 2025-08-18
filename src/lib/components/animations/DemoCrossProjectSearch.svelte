@@ -462,8 +462,8 @@ Clean, professional design for corporate audiences
 									<!-- Search Button -->
 									{#if animationState.isComplete}
 										<!-- Pointer animation -->
-										<div class="absolute -bottom-2 right-2">
-											<div class="animate-click">
+										<div class="absolute -bottom-2 right-2 slide-in-pointer">
+											<div class="animate-click-pointer">
 												<IconLocation
 													fill="white"
 													class="size-8 text-black drop-shadow-lg rotate-270" />
@@ -551,7 +551,9 @@ Clean, professional design for corporate audiences
 
 									<!-- Citations -->
 									{#if animationState.showCitations}
-										<div class="space-y-1.5 relative" in:fly={{ duration: 400, delay: 200 }}>
+										<div
+											class="space-y-1.5 relative"
+											in:slide={{ axis: "y", duration: 400, delay: 200, easing: quintOut }}>
 											<div class="text-sm font-semibold text-gray-800 mb-1">Sources:</div>
 											{#each animationState.searchResults as result, index}
 												<div
@@ -605,35 +607,6 @@ Clean, professional design for corporate audiences
 {/if}
 
 <style>
-	.animate-clicked {
-		animation: clicked 0.5s ease-in-out;
-	}
-
-	@keyframes clicked {
-		from {
-			transform: scale(1);
-		}
-		to {
-			transform: scale(0.95);
-		}
-	}
-
-	.animate-click {
-		animation: click 0.5s ease-in-out forwards;
-	}
-
-	@keyframes click {
-		0% {
-			transform: scale(1.2);
-		}
-		50% {
-			transform: scale(1);
-		}
-		100% {
-			transform: scale(1.2);
-		}
-	}
-
 	.animate-slideInFiles {
 		animation: slideInFiles 1.2s ease-out forwards;
 	}

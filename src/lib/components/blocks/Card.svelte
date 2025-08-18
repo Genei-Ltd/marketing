@@ -17,10 +17,10 @@
 
 <div
 	class="group shadow col-span-{colSpan} row-span-{rowSpan} min-h-{cardHeight} bg-card {image
-		? 'text-card'
+		? 'text-white'
 		: 'text-card-foreground'} relative flex flex-col items-start justify-between overflow-hidden rounded transition-all duration-300 ease-in-out hover:shadow-xl">
 	{#if image}
-		<div class="from-primary/20 to-primary/50 bg-linear-to-t absolute inset-0 z-10 w-full h-full"></div>
+		<div class="from-black/20 to-black/50 bg-linear-to-t absolute inset-0 z-10 w-full h-full"></div>
 		<img
 			src={image}
 			alt={title}
@@ -42,7 +42,7 @@
 		</div>
 		<div class="flex flex-col items-end justify-end w-full gap-2">
 			{#if href}
-				<Button {href} variant="more" size="none" class="mt-auto">Read More</Button>
+				<Button {href} variant="more" size="none" class="mt-auto text-white">Read More</Button>
 			{/if}
 		</div>
 	</div>

@@ -10,6 +10,8 @@ ANIMATION STEPS:
 -->
 
 <script lang="ts">
+	import { IconLoader } from "@tabler/icons-svelte"
+
 	import { onMount } from "svelte"
 	import {
 		IconHighlight,
@@ -20,6 +22,7 @@ ANIMATION STEPS:
 		IconPlayerPlay,
 		IconSquare,
 		IconSquareCheck,
+		IconLocation,
 	} from "@tabler/icons-svelte"
 	import { fade, fly, scale, slide } from "svelte/transition"
 	import { quintOut, cubicInOut } from "svelte/easing"
@@ -314,8 +317,9 @@ ANIMATION STEPS:
 
 				// Move pointer to this checkbox position
 				animationState.pointerPosition = checkboxPositions[i]
+				await controller.delay(200)
 				animationState.currentPointerTarget = clipsToSelect[i]
-				await controller.delay(600)
+				await controller.delay(500)
 
 				// Click (select the checkbox)
 				animationState.selectedClipIds = [...animationState.selectedClipIds, clipsToSelect[i]]
@@ -336,7 +340,7 @@ ANIMATION STEPS:
 			animationState.createReelClicked = true
 
 			// Hide pointer and show final reel
-			await controller.delay(800)
+			await controller.delay(1200)
 			animationState.showPointer = false
 			animationState.showFinalReel = true
 
@@ -544,7 +548,7 @@ ANIMATION STEPS:
 <div class="w-full h-full flex items-center justify-center">
 	{#if showCard}
 		<div
-			class="transition-all duration-500"
+			class="transition-all duration-500 max-h-min w-full flex items-center justify-center"
 			in:slide={{ axis: "y", duration: 300, easing: quintOut }}
 			out:fade={{ duration: 200, delay: 100, easing: cubicInOut }}>
 			<!-- HIGHLIGHT MOMENT STEP -->
@@ -555,8 +559,8 @@ ANIMATION STEPS:
 					<Box class="h-full flex w-[500px] min-h-[400px] items-center justify-center">
 						<div class="space-y-6 w-full">
 							<div class="text-left">
-								<h2 class="text-2xl text-black leading-tight font-medium">Select Key Moment</h2>
-								<p class="text-gray-600 text-sm mt-1">Analyzing interview transcript</p>
+								<h2 class="text-2xl text-black leading-tight font-medium">Create a Clip</h2>
+								<p class="text-gray-600 text-sm mt-1">Select a key moment from the transcript</p>
 							</div>
 
 							<!-- Transcript Display -->
@@ -595,7 +599,7 @@ ANIMATION STEPS:
 										{#if animationState.isComplete}
 											<!-- Pointer animation -->
 											<div class="absolute top-4 right-2 slide-in-pointer">
-												<div class="animate-click">
+												<div class="animate-click-pointer">
 													<IconLocation
 														fill="white"
 														class="size-8 text-black drop-shadow-lg rotate-270" />
@@ -689,7 +693,7 @@ ANIMATION STEPS:
 										</div>
 										<div class="p-1">
 											<h4 class="text-black font-semibold text-sm leading-tight mb-1">
-												Generating new clip...
+												Generating clip...
 											</h4>
 											<div class="flex items-center justify-start text-xs text-gray-600">
 												<span class="text-gray-400">Loading...</span>
@@ -726,14 +730,16 @@ ANIMATION STEPS:
 												</div>
 
 												{#if clip.isNew}
-													<div class="absolute top-2 left-2 z-10">
+													<div
+														class="absolute top-2 left-2 z-10"
+														in:slide={{
+															axis: "y",
+															duration: 200,
+															easing: cubicInOut,
+															delay: 100,
+														}}>
 														<span
-															class="bg-white text-black px-2 py-1 text-xs rounded font-bold shadow-lg"
-															in:scale={{
-																duration: 200,
-																easing: cubicInOut,
-																delay: 400,
-															}}>
+															class="bg-white text-black px-2 py-1 text-xs rounded font-bold shadow-lg">
 															NEW
 														</span>
 													</div>
@@ -762,9 +768,10 @@ ANIMATION STEPS:
 			{#if currentStep?.id === "assemble-reel"}
 				<div
 					class="transition-all duration-300 w-full h-full flex items-center justify-center"
-					in:scale={{ duration: 300, easing: cubicInOut }}>
+					in:scale={{ duration: 300, easing: cubicInOut }}
+					out:slide={{ axis: "y", duration: 300, easing: cubicInOut, delay: 100 }}>
 					<Box class="h-full flex w-[500px] min-h-[400px] items-center justify-center relative">
-						<div class=" w-full flex flex-col">
+						<div class=" w-full flex flex-col transition-all duration-300 ease-in-out">
 							<div class="text-left">
 								<h2 class="text-2xl text-black leading-tight font-medium">Assemble Reel</h2>
 								<p class="text-gray-600 text-sm mt-1">Select clips for your reel</p>
@@ -784,7 +791,7 @@ ANIMATION STEPS:
 													: isTargeted
 														? 'scale-95'
 														: ''}"
-												in:fade={{ duration: 300, delay: index * 100 }}>
+												in:fade={{ duration: 300, delay: index * 200, easing: cubicInOut }}>
 												<!-- Checkbox -->
 												<div class="relative">
 													{#if isSelected}
@@ -824,19 +831,20 @@ ANIMATION STEPS:
 								</div>
 
 								<!-- Create Reel Button -->
-								<div class="relative mt-6" in:scale={{ duration: 300, easing: cubicInOut, start: 0.5 }}>
+								<div class="relative mt-6" in:scale={{ duration: 300, easing: cubicInOut }}>
 									<div
 										id="create-reel-button"
 										class={`w-full bg-black text-white px-6 py-3 rounded-lg font-medium text-center transition-all duration-200 ${
-											animationState.createReelClicked
+											animationState.createReelClicked ||
+											animationState.currentPointerTarget === "create-button"
 												? "animate-clicked"
-												: animationState.currentPointerTarget === "create-button"
-													? ""
-													: ""
+												: ""
 										}`}>
-										{#if animationState.createReelClicked}
-											<div class="flex items-center justify-center gap-2">
-												<IconCheck class="size-4" />
+										{#if animationState.createReelClicked || animationState.currentPointerTarget === "create-button"}
+											<div
+												class="flex items-center justify-center gap-2"
+												in:scale={{ duration: 300, easing: cubicInOut, delay: 300 }}>
+												<IconLoader class="size-4 animate-spin" />
 												<span>Creating Reel...</span>
 											</div>
 										{:else}
@@ -852,14 +860,14 @@ ANIMATION STEPS:
 							{#if animationState.showFinalReel}
 								<!-- Final Reel Player -->
 								<div
-									class="border border-black rounded-lg bg-black text-white p-4 mt-6"
-									in:scale={{ duration: 400, easing: cubicInOut }}>
+									class="border border-black rounded-lg bg-black text-white p-4 mt-6 transition-all duration-300 ease-in-out"
+									in:slide={{ axis: "y", duration: 400, easing: cubicInOut, delay: 300 }}>
 									<div class="flex items-center justify-between mb-3">
 										<div class="flex items-center gap-2">
 											<IconVideo class="size-5" />
 											<span class="font-semibold">Product Feedback Reel</span>
 										</div>
-										<div class="text-sm opacity-75">Total: 0:34</div>
+										<div class="text-sm opacity-75">0:34</div>
 									</div>
 									<div class="text-center py-6">
 										<div class="bg-white/10 inline-flex p-3 rounded-full mb-2">
@@ -877,7 +885,11 @@ ANIMATION STEPS:
 								class="absolute pointer-events-none z-50 transition-all duration-500 ease-out"
 								style="transform: translate({animationState.pointerPosition.x}px, {animationState
 									.pointerPosition.y}px)">
-								<div class="animate-click-pointer">
+								<div
+									class={animationState.createReelClicked ||
+									animationState.currentPointerTarget === "create-button"
+										? "animate-click-pointer"
+										: ""}>
 									<IconLocation fill="white" class="size-8 text-black drop-shadow-lg rotate-270" />
 								</div>
 							</div>
@@ -890,34 +902,6 @@ ANIMATION STEPS:
 </div>
 
 <style>
-	.animate-clicked {
-		animation: clicked 0.5s ease-in-out;
-	}
-
-	@keyframes clicked {
-		from {
-			transform: scale(1);
-		}
-		to {
-			transform: scale(0.95);
-		}
-	}
-
-	.animate-click {
-		animation: click 0.5s ease-in-out forwards;
-	}
-
-	@keyframes click {
-		0% {
-			transform: scale(1.2);
-		}
-		50% {
-			transform: scale(1);
-		}
-		100% {
-			transform: scale(1.2);
-		}
-	}
 	.slide-in-pointer {
 		animation: slide-in-pointer 1.2s ease-in-out forwards;
 	}
@@ -937,20 +921,6 @@ ANIMATION STEPS:
 		}
 		100% {
 			transform: translateX(300px);
-		}
-	}
-
-	.animate-click-pointer {
-		animation: clickPointer 0.6s ease-in-out infinite;
-	}
-
-	@keyframes clickPointer {
-		0%,
-		100% {
-			transform: scale(1);
-		}
-		50% {
-			transform: scale(1.1);
 		}
 	}
 </style>

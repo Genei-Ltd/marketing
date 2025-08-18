@@ -25,6 +25,6 @@
 	</div>
 	<img
 		alt="Castle moat"
-		src="/water/vista.png"
+		src="/images/base.png"
 		class=" absolute inset-0 z-10 object-cover object-center w-full h-full scale-110 opacity-50" />
 </div>

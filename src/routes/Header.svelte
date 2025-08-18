@@ -495,8 +495,8 @@
 
 				<!-- CTA Buttons -->
 				<div class="flex flex-col gap-2 pt-4">
-					<Button variant="outline" href="/login" class="justify-center w-full">Login</Button>
-					<Button variant="default" href="/demo" class="justify-center w-full">Get CoLoop</Button>
+					<Button variant="outline" href="https://app.coloop.ai" class="justify-center w-full">Login</Button>
+					<Button variant="default" href="/book-a-demo" class="justify-center w-full">Get CoLoop</Button>
 				</div>
 			</div>
 		</div>

@@ -58,7 +58,7 @@
 			<!-- Button -->
 			{#if showButton}
 				<Button
-					href={buttonHref}
+					href={buttonHref || "book-a-demo"}
 					variant={buttonVariant}
 					size="none"
 					class="group opacity-80 hover:opacity-100 lg:mt-16 inline-flex items-center mt-8 transition-opacity">

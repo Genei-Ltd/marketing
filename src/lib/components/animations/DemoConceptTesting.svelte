@@ -417,7 +417,7 @@ Clean, professional design for corporate audiences - keeping original functional
 <!-- CLEAN CONCEPT TESTING UI - Original functionality with DemoCoreValue styling -->
 <!-- ============================================================================ -->
 
-<div class="w-full h-full flex items-center justify-center">
+<div class="w-full h-full flex items-center justify-center transition-all duration-300 ease-in-out">
 	{#if showCard}
 		<div
 			class="transition-all duration-500"
@@ -425,9 +425,11 @@ Clean, professional design for corporate audiences - keeping original functional
 			out:fade={{ duration: 200, delay: 100, easing: cubicInOut }}>
 			<!-- LIVE INTERVIEW STEP -->
 			{#if currentStep?.id === "live-interview"}
-				<div class="transition-all duration-300 w-full h-full flex items-center justify-around">
-					<Box class="h-full flex w-full items-center justify-center min-h-96 min-w-96">
-						<div class="space-y-4 w-full h-full relative min-h-96 min-w-96">
+				<div class="transition-all duration-300 ease-in-out w-full h-full flex items-center justify-around">
+					<Box
+						class="h-full flex w-full items-center justify-center min-h-96 min-w-96 transition-all duration-300 ease-in-out">
+						<div
+							class="space-y-4 w-full h-full relative min-h-96 min-w-96 transition-all duration-300 ease-in-out">
 							<div class="text-left">
 								<h2 class="text-xl text-black font-semibold leading-tight">Concept Testing Session</h2>
 								<p class="text-gray-600 text-md">Live Interview Analysis</p>
@@ -435,10 +437,10 @@ Clean, professional design for corporate audiences - keeping original functional
 
 							<!-- Concepts Grid -->
 							{#if animationState.concepts.length > 0}
-								<div class="grid grid-cols-6 gap-1 mt-8">
+								<div class="grid grid-cols-6 gap-1 mt-8 transition-all duration-300 ease-in-out">
 									{#each animationState.concepts as concept, i (concept.id)}
 										<div
-											class="relative border border-gray-300 hover:border-gray-800 transition-all duration-300 overflow-hidden rounded {concept.isHighlighted
+											class="relative border border-gray-300 hover:border-gray-800 transition-all duration-300 ease-in-out overflow-hidden rounded {concept.isHighlighted
 												? 'scale-110 border-black bg-black text-white'
 												: 'bg-white'}"
 											in:fade={{ duration: 400, delay: i * 80 }}>
@@ -466,7 +468,7 @@ Clean, professional design for corporate audiences - keeping original functional
 												<img
 													src={concept.image}
 													alt="Concept {concept.letter}: {concept.name}"
-													class="object-cover w-full h-full" />
+													class="object-cover w-full h-full p-2" />
 											</div>
 
 											<!-- Concept name -->
@@ -483,7 +485,8 @@ Clean, professional design for corporate audiences - keeping original functional
 								<div class="mt-8">
 									<div
 										class="text-left border-l-4 border-black pl-4 py-2 bg-gray-100 rounded"
-										in:slide={{ axis: "y", duration: 300, easing: quintOut }}>
+										in:slide={{ axis: "y", duration: 300, easing: quintOut }}
+										out:fade={{ duration: 300, easing: quintOut, delay: 100 }}>
 										<!-- <div class="flex items-center gap-2 mb-4">
 											<div class="size-2 bg-red-600 rounded-full animate-pulse"></div>
 											<span class="text-gray-600 text-xs uppercase font-semibold"
@@ -492,13 +495,15 @@ Clean, professional design for corporate audiences - keeping original functional
 
 										<div class="text-sm leading-relaxed text-black">
 											<div class=" mb-4">
-												<p class=" text-sm text-gray-400 uppercase mb-1">Researcher:</p>
-												<p class=" text-gray-800">What option do you want to try first?</p>
+												<span class=" text-sm text-black mb-1 font-semibold">Researcher:</span>
+												<span class=" text-gray-800"
+													>So, of the options we have here, what option do you want to try
+													first?</span>
 											</div>
 
 											<div class=" mb-2">
-												<p class=" text-sm text-gray-400 uppercase mb-1">Participant:</p>
-												<p class=" text-black leading-relaxed">
+												<span class=" text-sm text-black mb-1 font-semibold">Participant:</span>
+												<span class=" text-black leading-relaxed">
 													{#if animationState.subtitleWords.length > 0}
 														{#each animationState.subtitleWords as word, i}
 															<span
@@ -513,7 +518,7 @@ Clean, professional design for corporate audiences - keeping original functional
 																</span>{/if}
 														{/each}
 													{/if}
-												</p>
+												</span>
 											</div>
 										</div>
 									</div>
@@ -526,9 +531,14 @@ Clean, professional design for corporate audiences - keeping original functional
 
 			<!-- RESULTS ANALYSIS STEP -->
 			{#if currentStep?.id === "results-analysis"}
-				<div class="transition-all duration-300 w-full h-full flex items-center justify-center">
-					<Box class="h-full flex w-full items-center justify-center min-h-96 min-w-96">
-						<div class="space-y-3 w-full h-full relative min-h-96 min-w-96">
+				<div
+					class="transition-all duration-300 ease-in-out w-full h-full flex items-center justify-center"
+					in:slide={{ axis: "y", duration: 300, easing: quintOut, delay: 100 }}
+					out:slide={{ axis: "x", duration: 300, easing: quintOut, delay: 100 }}>
+					<Box
+						class="h-full flex w-full items-center justify-center min-h-96 min-w-max transition-all duration-300 ease-in-out">
+						<div
+							class="space-y-3 w-full h-full relative transition-all duration-300 ease-in-out min-h-[400px] min-w-[400px]">
 							<div class="text-left mb-8">
 								<h2 class="text-xl text-black font-semibold leading-tight">
 									Multi-Dimensional Analysis
@@ -539,7 +549,9 @@ Clean, professional design for corporate audiences - keeping original functional
 							<!-- Single Graph-Style Results Chart -->
 							{#if animationState.conceptResults.length > 0}
 								{@const topConcept = animationState.conceptResults[0]}
-								<div class="bg-white border-l-4 border-black rounded p-4" in:fade={{ duration: 400 }}>
+								<div
+									class="bg-white border-l-4 border-black rounded p-4 transition-all duration-300 ease-in-out"
+									in:fade={{ duration: 400 }}>
 									<!-- Winner Header -->
 									<div class="flex items-center justify-between mb-4">
 										<div class="flex items-center gap-3">
@@ -581,7 +593,7 @@ Clean, professional design for corporate audiences - keeping original functional
 												<div
 													class="bg-gray-100 h-6 rounded-lg overflow-hidden border border-gray-200">
 													<div
-														class="h-full transition-all duration-1000 flex items-center justify-end pr-2 bg-gradient-to-r from-gray-700 to-gray-600"
+														class="h-full transition-all duration-1000 flex items-center justify-end pr-2 bg-gradient-to-r from-black to-gray-600"
 														style="width: {topConcept.impact}%"
 														in:fade={{ duration: 800, delay: 500 }}>
 														<span class="text-white text-xs font-bold"
@@ -597,7 +609,7 @@ Clean, professional design for corporate audiences - keeping original functional
 												<div
 													class="bg-gray-100 h-6 rounded-lg overflow-hidden border border-gray-200">
 													<div
-														class="h-full transition-all duration-1000 flex items-center justify-end pr-2 bg-gradient-to-r from-gray-500 to-gray-400"
+														class="h-full transition-all duration-1000 flex items-center justify-end pr-2 bg-gradient-to-r from-black to-gray-400"
 														style="width: {topConcept.appeal}%"
 														in:fade={{ duration: 800, delay: 600 }}>
 														<span class="text-white text-xs font-bold"

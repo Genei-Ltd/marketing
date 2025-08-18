@@ -121,7 +121,7 @@
 			description="Delegate complex tasks in natural language to domain-specific agents that can count, search, summarise and cite."
 			buttonText="Explore Agents"
 			buttonHref="/book-a-demo">
-			<WildAnimationBox backgroundImage="/water/cream-1.png" backgroundColor="bg-accent-4">
+			<WildAnimationBox backgroundImage="/images/base.png" backgroundColor="bg-accent-4">
 				<DemoCoreValue />
 			</WildAnimationBox>
 		</TwoSplit>
@@ -132,7 +132,7 @@
 			buttonText="Explore Workflows"
 			reverse
 			buttonHref="/book-a-demo">
-			<WildAnimationBox backgroundImage="/water/green-2.png" backgroundColor="bg-accent-3">
+			<WildAnimationBox backgroundImage="/images/base-6.png" backgroundColor="bg-accent-3">
 				<div class=" flex items-center justify-center h-full mx-auto overflow-hidden scale-120">
 					<DemoFeatureReel />
 				</div>
@@ -144,7 +144,7 @@
 			description="Upload your data from a growing range of file formats, languages and 3rd party tools to create a single unified source of truth."
 			buttonText="Explore Integrations"
 			buttonHref="/book-a-demo">
-			<WildAnimationBox backgroundImage="/water/blue-1.png" backgroundColor="bg-accent-2">
+			<WildAnimationBox backgroundImage="/images/base-5.png" backgroundColor="bg-accent-2">
 				<StaticDemoIntegrations />
 			</WildAnimationBox>
 		</TwoSplit>
@@ -156,7 +156,7 @@
 			reverse
 			buttonHref="/book-a-demo"
 			clearBackground={[false, true]}>
-			<WildAnimationBox backgroundImage="/water/cream-2.png" backgroundColor="bg-accent-1">
+			<WildAnimationBox backgroundImage="/images/base.png" backgroundColor="bg-accent-1">
 				<DemoWorkflowSharing />
 			</WildAnimationBox>
 		</TwoSplit>
@@ -169,13 +169,15 @@
 			<img src="/images/old-man.png" alt="old man" class="aspect-square object-cover w-full h-full rounded" />
 		</div>
 		<div class=" xl:p-lg lg:p-md p-sm flex flex-col items-start justify-center flex-1">
-			<blockquote class="text-primary-foreground text-balance mb-8 font-serif text-xl">
-				"When it comes to AI and technology, it’s all about learning by doing. You won’t figure everything out
-				right away, but the more you engage with it, the more opportunities you’ll see."
+			<blockquote class="text-primary-foreground text-balance mb-8 font-serif text-xl italic">
+				"This is the <span class="underline">most advanced tool we have encountered </span>, with the potential
+				to alter how we conduct and budget qualitative analyses significantly."
 			</blockquote>
 			<div class="text-primary-foreground font-sans text-sm">
-				<span class="text-primary-foreground block font-semibold">Tommi Laitio</span>
-				<span class="block">Former Executive Director, Culture and Leisure, City of Helsinki</span>
+				<span class="text-primary-foreground block font-semibold">New Directions for Evaluation</span>
+				<span class="block"
+					>Academic article published in New Directions for Evaluation, Volume 2023, Sabarre et al.
+				</span>
 			</div>
 		</div>
 	</div>
@@ -207,12 +209,12 @@
 <div class="lg:px-10 relative flex flex-col items-center justify-center h-full max-w-6xl px-6 mx-auto">
 	<!-- Testimonials -->
 	<div class="min-h-max w-full h-full overflow-hidden">
-		<div class="min-h-max lg:mb-32 hidden lg:flex flex-col w-full h-full max-w-6xl gap-16 mx-auto mt-16 mb-16">
-			{@render section("What our customers say")}
+		<div class="min-h-max lg:mb-32 hidden lg:flex flex-col w-full h-full max-w-6xl mx-auto mt-16 mb-16">
 			{#await data.testimonials}
-				<span class="text-foreground">Loading testimonials...</span>
+				<span class="text-foreground">Loading...</span>
 			{:then testimonials}
-				<div class="h-full w-full mx-auto flex items-center justify-center">
+				<div class="h-full w-full mx-auto flex flex-col items-center justify-center">
+					{@render section("What our customers say")}
 					<CarouselTestimonials {testimonials} />
 				</div>
 			{:catch}
@@ -258,8 +260,8 @@
 		<Card
 			title="By Insights Experts, for Insights Experts"
 			subtitle="Designed with insights leaders with agencies, household brands and research institutions."
-			image="/wild/vault-mars.jpeg"
-			href="/demo"
+			image="/images/base.png"
+			href="/book-a-demo"
 			cardHeight={96}
 			colSpan={2}
 			rowSpan={2} />
@@ -295,7 +297,7 @@
 								<img
 									src={`/security/${logo.toLowerCase()}.png`}
 									alt={logo}
-									class="object-cover w-full h-full" />
+									class="object-cover w-full h-full hover:scale-110 transition-transform duration-300 ease-out" />
 							</div>
 						</div>
 					{/each}
@@ -339,7 +341,7 @@
 	<!-- FINAL GET STARTED -->
 
 	<div
-		class="bg-accent-1 text-primary-foreground lg:px-10 lg:mt-32 lg:mb-32 relative flex flex-col items-center justify-center w-full px-6 py-32 mt-16 mb-16 overflow-hidden rounded shadow">
+		class="bg-black text-white lg:px-10 lg:mt-32 lg:mb-32 relative flex flex-col items-center justify-center w-full px-6 py-32 mt-16 mb-16 overflow-hidden rounded shadow">
 		<div class="relative z-20">
 			{@render section(
 				"Get Started with CoLoop Now",
@@ -347,8 +349,11 @@
 			)}
 			<EmailSubmit {form} placeholder="Enter your email address" buttonText="Get a demo" />
 		</div>
-		<img src="/wild/super-car.png" alt="Get Started" class="absolute inset-0 object-cover w-full h-full" />
-		<div class="bg-gradient-to-t from-primary/90 via-primary/70 to-transparent absolute z-10 w-full h-full"></div>
+		<img
+			src="/images/article-fallback.png"
+			alt="Get Started"
+			class="absolute inset-0 object-cover w-full h-full opacity-60" />
+		<div class="bg-gradient-to-t from-black/50 to-black/0 absolute z-10 w-full h-full"></div>
 	</div>
 
 	<!-- PRODUCTS  -->

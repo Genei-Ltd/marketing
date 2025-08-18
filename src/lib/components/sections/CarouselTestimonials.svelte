@@ -195,9 +195,9 @@
 							<div
 								class="w-full h-full absolute object-cover border border-border/30 bg-primary/10 rounded overflow-hidden">
 								<img
-									src={"/water/blue-3.png"}
+									src={"/images/base.png"}
 									alt={"Background"}
-									class="w-full h-full grayscale invert absolute object-cover" />
+									class="w-full h-full absolute object-cover" />
 							</div>
 
 							<!-- Gradient overlay over the image -->
@@ -215,7 +215,7 @@
 										transition:fly={{ x: 100, duration: 1000 }}
 										class="w-1/2 h-auto invert brightness-0 contrast-200 saturate-0 object-contain" />
 								{:else if testimonial.company}
-									<div class="text-primary-foreground/95 text-sm font-semibold tracking-tight">
+									<div class="text-white text-xl uppercase font-semibold tracking-tight">
 										{testimonial.company}
 									</div>
 								{/if}

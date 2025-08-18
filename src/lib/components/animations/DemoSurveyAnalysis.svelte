@@ -656,7 +656,7 @@ STEP 3: Insights Dashboard
 					class="transition-all duration-300 w-full h-full flex items-start justify-start"
 					in:slide={{ axis: "y", duration: 500, easing: quintOut }}>
 					<Box class="h-full w-full max-w-full flex items-start justify-start">
-						{#if animationState.responsesCoded}
+						<!-- {#if animationState.responsesCoded}
 							<div class="text-center pt-2" in:slide={{ axis: "y", duration: 300, delay: 400 }}>
 								<div
 									class="flex items-center justify-center rounded-lg gap-2 bg-black text-sm text-white">
@@ -664,7 +664,7 @@ STEP 3: Insights Dashboard
 									<span>Themes coded • {animationState.totalResponses} responses coded</span>
 								</div>
 							</div>
-						{/if}
+						{/if} -->
 						<div class="space-y-4 w-full h-full relative min-h-[500px] self-start">
 							<div class="text-left w-full mb-8">
 								<h2 class="text-xl text-black leading-tight font-semibold">Coding Open Ends</h2>
@@ -705,14 +705,14 @@ STEP 3: Insights Dashboard
 												<div class="flex flex-wrap gap-2">
 													{#each animationState.visibleThemes as theme, i}
 														<div
-															in:slide={{
-																axis: "x",
+															in:fly={{
+																x: 20,
 																duration: 400,
-																delay: 100,
-																easing: quintOut,
+																delay: 100 + i * 100,
+																easing: cubicInOut,
 															}}
 															class="flex items-center gap-1 px-2 py-1 rounded-full bg-black text-white text-xs">
-															<IconTag class="size-3" />
+															<IconTag class="size-3 hidden lg:block" />
 															<span>{theme}</span>
 														</div>
 													{/each}
@@ -730,7 +730,12 @@ STEP 3: Insights Dashboard
 										class="py-3 border-b-1 border-gray-300 text-sm leading-relaxed transition-all duration-300 {response.isHighlighted
 											? 'text-gray-700 '
 											: 'text-gray-900'}"
-										in:slide={{ axis: "y", duration: 300, delay: i * 100, easing: quintOut }}>
+										in:slide={{
+											axis: "y",
+											duration: 300,
+											delay: i * 100,
+											easing: cubicInOut,
+										}}>
 										<div class="flex items-start gap-2 justify-between">
 											<div class="flex-1">
 												<div
@@ -739,7 +744,11 @@ STEP 3: Insights Dashboard
 													{#if animationState.responsesCoded || response.isHighlighted}
 														<div
 															class="flex items-center gap-1 px-2 py-1 rounded-full text-xs flex-shrink-0 bg-black text-white"
-															in:fly={{ x: -20, duration: 200, easing: elasticOut }}>
+															in:fly={{
+																x: 20,
+																duration: 300,
+																easing: cubicInOut,
+															}}>
 															<IconTag class="size-3" />
 															<span class="capitalize">{response.theme}</span>
 														</div>
@@ -762,7 +771,7 @@ STEP 3: Insights Dashboard
 					class="transition-all duration-300 w-full max-w-full min-w-full h-full flex items-start justify-start"
 					in:slide={{ axis: "x", duration: 500, easing: quintOut }}>
 					<Box class="h-full w-full max-w-full min-w-full flex items-start justify-start">
-						<div class="space-y-4 w-full h-full relative min-h-[500px] min-w-[550px] pr-16">
+						<div class="space-y-4 w-full h-full relative min-h-[500px]">
 							<div class="text-left w-full mb-8">
 								<h2 class="text-xl text-black leading-tight w-full font-semibold">
 									Survey Analysis Complete
@@ -838,7 +847,7 @@ STEP 3: Insights Dashboard
 											<!-- Representative Quote -->
 											{#if i === 0}
 												<div
-													class="text-sm text-gray-600 italic py-1 p-2 mx-2 border-l-3 border-gray-400"
+													class="hidden lg:block text-sm text-gray-600 italic py-1 p-2 mx-2 border-l-3 border-gray-400"
 													in:fade={{ duration: 400, delay: 600 + i * 200 }}>
 													<div class="font-medium text-gray-700 mb-1">Quote:</div>
 													"{theme.representative}"

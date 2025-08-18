@@ -523,7 +523,9 @@ Clean, professional design for corporate audiences
 									</div>
 								</div>
 								<div class="absolute bottom-4 -right-4 z-50">
-									<div class="animate-click" out:scale={{ duration: 500, easing: elasticOut }}>
+									<div
+										class="animate-click-pointer"
+										out:scale={{ duration: 500, easing: elasticOut }}>
 										<IconLocation
 											fill="white"
 											class="size-12 text-black drop-shadow-lg rotate-270" />
@@ -554,21 +556,6 @@ Clean, professional design for corporate audiences
 
 					.animate-slideInFiles {
 						animation: slideInFiles 1.1s ease-out 0.8s forwards;
-					}
-
-					.animate-click {
-						animation: click 0.2s ease-out 0.4s forwards;
-					}
-
-					@keyframes click {
-						0% {
-							transform: scale(0.5);
-							opacity: 1;
-						}
-						100% {
-							transform: scale(1);
-							opacity: 1;
-						}
 					}
 
 					.animate-move {
@@ -646,7 +633,7 @@ Clean, professional design for corporate audiences
 								{#if animationState.isComplete}
 									<!-- cursor pointer icon -->
 									<div class="absolute top-4 right-8">
-										<div class="animate-click">
+										<div class="animate-click-pointer">
 											<IconLocation
 												fill="white"
 												class="size-12 text-black drop-shadow-lg rotate-270" />

@@ -18,7 +18,7 @@
 		<p class=" opacity-60">
 			Book a personalized demo to discover how CoLoop can accelerate your research and insights workflow.
 		</p>
-		<Button size="lg" variant="default" aria-label="Book a demo" href="/demo">
+		<Button size="lg" variant="default" aria-label="Book a demo" href="/book-a-demo">
 			<IconCalendarEvent class="size-4" />
 			Book demo
 		</Button>

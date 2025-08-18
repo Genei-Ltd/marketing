@@ -81,7 +81,7 @@
 					buttonHref="/blog/in-house-strategy-teams"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundColor="bg-accent-1" backgroundImage="/water/blue-1.png">
+					<WildAnimationBox backgroundColor="bg-black" backgroundImage="/images/base-6.png">
 						<DemoCrossProjectSearch />
 					</WildAnimationBox>
 				</TwoSplit>
@@ -101,7 +101,7 @@
 					buttonHref="/blog/concept-stimulus-testing"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundColor="bg-accent-2" backgroundImage="/water/brown-1.png">
+					<WildAnimationBox backgroundColor="bg-black" backgroundImage="/images/base-4.png">
 						<ConceptTestingDemo />
 					</WildAnimationBox>
 				</TwoSplit>
@@ -121,7 +121,7 @@
 					buttonHref="/blog/survey-analysis"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundColor="bg-accent-3" backgroundImage="/water/blue-2.png">
+					<WildAnimationBox backgroundColor="bg-black" backgroundImage="/images/base-5.png">
 						<DemoSurveyAnalysis />
 					</WildAnimationBox>
 				</TwoSplit>
@@ -141,7 +141,7 @@
 					buttonHref="/blog/research-agencies"
 					showButton={true}
 					reverse={false}>
-					<WildAnimationBox backgroundColor="bg-accent-4" backgroundImage="/water/green-3.png">
+					<WildAnimationBox backgroundColor="bg-black" backgroundImage="/images/base-2.png">
 						<DemoClipCreation />
 					</WildAnimationBox>
 				</TwoSplit>
