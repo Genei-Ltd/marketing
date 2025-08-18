@@ -31,16 +31,6 @@
 				</div>
 
 				<div>
-					<!-- <span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Comparisons</span>
-					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
-						<a href="/careers" class="hover:underline transition-colors">CoLoop Vs. ChatGPT</a>
-						<a href="/mission" class="hover:underline transition-colors">CoLoop Vs. Listenlabs</a>
-						<a href="/about" class="hover:underline transition-colors">CoLoop Vs. Claude</a>
-						<a href="/blog" class="hover:underline transition-colors">CoLoop Vs. Gemini</a>
-						<a href="/values" class="hover:underline transition-colors">CoLoop Vs. Grok</a>
-					</nav> -->
-				</div>
-				<div>
 					<!-- <span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Industries</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
 						<a href="/use-cases/pharmaceuticals" class="hover:underline transition-colors"
@@ -52,16 +42,26 @@
 						>Industry Experts</a>
 						<a href="/use-cases/business-stakeholders" class="hover:underline transition-colors"
 						>Business Stakeholders</a>
-					</nav> -->
+						</nav> -->
 				</div>
 				<div>
 					<!-- <span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Teams</span>
+						<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
+							<a href="/use-cases/in-house-teams" class="hover:underline transition-colors">In-house Teams</a>
+							<a href="/use-cases/academics" class="hover:underline transition-colors">Academics</a>
+							<a href="/use-cases/independents" class="hover:underline transition-colors">Independents</a>
+							<a href="/use-cases/agencies" class="hover:underline transition-colors">Agencies</a>
+							</nav> -->
+				</div>
+				<div>
+					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Comparisons</span>
 					<nav class="text-foreground flex flex-col gap-2 mt-4 text-sm">
-						<a href="/use-cases/in-house-teams" class="hover:underline transition-colors">In-house Teams</a>
-						<a href="/use-cases/academics" class="hover:underline transition-colors">Academics</a>
-						<a href="/use-cases/independents" class="hover:underline transition-colors">Independents</a>
-						<a href="/use-cases/agencies" class="hover:underline transition-colors">Agencies</a>
-					</nav> -->
+						<a href="/comparison/notebooklm" class="hover:underline transition-colors"
+							>CoLoop Vs. NotebookLM</a>
+						<a href="/comparison/chatgpt" class="hover:underline transition-colors">CoLoop Vs. ChatGPT</a>
+						<a href="/comparison/microsoft-copilot" class="hover:underline transition-colors"
+							>CoLoop Vs. Microsoft Copilot</a>
+					</nav>
 				</div>
 				<div>
 					<span class="text-muted-foreground text-xs font-medium tracking-wide uppercase">Company</span>
