@@ -375,7 +375,7 @@ export async function getDatabaseRowsBySectionAndSlug(databaseId: string, sectio
 		and: [
 			{
 				property: "Section",
-				rich_text: {
+				select: {
 					equals: section,
 				},
 			},
@@ -406,6 +406,7 @@ export async function transformNotionDBRowToSectionSlugPage(
 	const readingTime = calculateReadingTime(blocks)
 	return {
 		id: notionDBItem.id,
+		section: (notionConnector.getPropertyValue(props["Section"], "select") as string) || "",
 		title: (notionConnector.getPropertyValue(props["Title"], "title") as string) || "",
 		author: (notionConnector.getPropertyValue(props["Author"], "rich_text") as string) || "",
 		slug: (notionConnector.getPropertyValue(props["Slug"], "rich_text") as string) || "",

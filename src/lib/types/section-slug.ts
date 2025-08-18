@@ -1,5 +1,6 @@
 export type SectionSlugPage = {
 	id: string
+	section: string
 	title: string
 	author?: string
 	slug: string
