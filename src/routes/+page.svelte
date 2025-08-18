@@ -202,7 +202,9 @@
 <!-- MAX 7XL END -->
 <!-- FULL WIDTH START -->
 
-<div class="bg-primary text-primary-foreground lg:px-10 flex flex-col items-center justify-center w-full px-6 py-32">
+<div
+	id="concept-testing"
+	class="bg-primary text-primary-foreground lg:px-10 flex flex-col items-center justify-center w-full px-6 py-32">
 	<!-- SOLUTIONS -->
 	<div class=" min-h-200 flex flex-col items-center justify-center w-full mb-16">
 		<h4 class="text-balance text-md mb-4 font-medium tracking-wide text-center">From researchers to analysts</h4>

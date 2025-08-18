@@ -196,7 +196,7 @@
 										{#snippet child({ props })}
 											<a {...props} href="/product">
 												<img
-													src="/wild/vault.png"
+													src="/images/base-5.png"
 													alt="Resources"
 													aria-hidden="true"
 													class="absolute inset-0 z-0 object-cover w-full h-full pointer-events-none" />
@@ -233,7 +233,7 @@
 					</NavigationMenu.Item>
 
 					<NavigationMenu.Item>
-						<NavigationMenu.Trigger>Company type</NavigationMenu.Trigger>
+						<NavigationMenu.Trigger>Company</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
 							<ul class="grid w-[300px] gap-2 p-2">
 								{#each companyTypes as item}
@@ -402,7 +402,7 @@
 							toggleMobileSection("company")
 						}}
 						class="hover:text-primary hover:bg-secondary/20 flex items-center justify-between w-full px-2 py-2 font-medium text-left transition-colors rounded-md">
-						Company type
+						Company
 						<IconChevronDown
 							class={cn(
 								"size-4 transition-transform",
