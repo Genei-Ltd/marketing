@@ -50,6 +50,16 @@ export const actions: Actions = {
 		const validData = validation.data
 
 		// TODO: Save form data to your database/CRM here
+		const response = await fetch("https://hooks.zapier.com/hooks/catch/22350330/2xy2kin/", {
+			method: "POST",
+			body: JSON.stringify({ email: validData.email }),
+		})
+
+		if (!response.ok) {
+			throw new Error("Failed to submit email")
+		}
+
+		console.log("Email submitted:", validData.email, response)
 		console.log("Book demo form submission:", validData)
 
 		// Routing logic based on responses
