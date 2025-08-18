@@ -164,6 +164,141 @@
 					class="w-full h-full border rounded-lg"
 					allowfullscreen></iframe>
 			</div>
+		{:else if block.type === "table"}
+			<div class="my-8 overflow-x-auto">
+				{#if block.has_children && block.table}
+					{@const directChildren = (block as NotionBlock & { children?: NotionBlock[] }).children || []}
+					{@const tableRowsFromChildren = directChildren.filter(
+						(child: NotionBlock) => child.type === "table_row",
+					)}
+					{@const tableRows = typedBlocks.filter(
+						(b) =>
+							b.type === "table_row" &&
+							b.parent &&
+							"block_id" in b.parent &&
+							b.parent.block_id === block.id,
+					)}
+					{@const finalTableRows = tableRowsFromChildren.length > 0 ? tableRowsFromChildren : tableRows}
+					<div class="border border-border rounded-lg overflow-hidden bg-background shadow-sm">
+						<table class="w-full border-collapse">
+							{#if block.table.has_column_header && finalTableRows.length > 0}
+								{@const firstRow = finalTableRows[0]}
+								{#if firstRow.type === "table_row"}
+									<thead>
+										<tr class="bg-muted/60 border-b border-border">
+											{#each firstRow.table_row?.cells || [] as cell}
+												<th
+													class="px-6 py-4 text-left font-semibold text-foreground border-r border-border/50 last:border-r-0 tracking-wide text-sm uppercase">
+													{#each getRichTextWithFormatting(cell || []) as textItem}
+														{#if textItem.annotations?.bold}
+															<strong class="font-bold">{textItem.plain_text}</strong>
+														{:else if textItem.annotations?.italic}
+															<em>{textItem.plain_text}</em>
+														{:else if textItem.annotations?.code}
+															<code
+																class="bg-accent/20 text-accent-foreground text-xs px-2 py-1 rounded font-mono border border-border/30"
+																>{textItem.plain_text}</code>
+														{:else if textItem.annotations?.underline}
+															<u>{textItem.plain_text}</u>
+														{:else if textItem.annotations?.strikethrough}
+															<s>{textItem.plain_text}</s>
+														{:else if textItem.href}
+															<a
+																href={textItem.href}
+																class="text-brand hover:text-accent underline decoration-2 underline-offset-2 transition-colors duration-200"
+																target="_blank"
+																rel="noopener noreferrer">
+																{textItem.plain_text}
+															</a>
+														{:else}
+															{textItem.plain_text}
+														{/if}
+													{/each}
+												</th>
+											{/each}
+										</tr>
+									</thead>
+								{/if}
+							{/if}
+							<tbody>
+								{#each finalTableRows as row, rowIndex}
+									{#if row.type === "table_row" && !(rowIndex === 0 && block.table.has_column_header)}
+										<tr
+											class={`border-b border-border/30 last:border-b-0 hover:bg-muted/20 transition-colors duration-150 ${rowIndex % 2 === 0 ? "bg-background" : "bg-muted/10"}`}>
+											{#each row.table_row?.cells || [] as cell, cellIndex}
+												{#if cellIndex === 0 && block.table.has_row_header}
+													<td
+														class="px-6 py-4 font-semibold text-foreground bg-muted/40 border-r border-border/50 first:font-medium">
+														{#each getRichTextWithFormatting(cell || []) as textItem}
+															{#if textItem.annotations?.bold}
+																<strong class="font-bold">{textItem.plain_text}</strong>
+															{:else if textItem.annotations?.italic}
+																<em>{textItem.plain_text}</em>
+															{:else if textItem.annotations?.code}
+																<code
+																	class="bg-accent/20 text-accent-foreground text-xs px-2 py-1 rounded font-mono border border-border/30"
+																	>{textItem.plain_text}</code>
+															{:else if textItem.annotations?.underline}
+																<u>{textItem.plain_text}</u>
+															{:else if textItem.annotations?.strikethrough}
+																<s>{textItem.plain_text}</s>
+															{:else if textItem.href}
+																<a
+																	href={textItem.href}
+																	class="text-brand hover:text-accent underline decoration-2 underline-offset-2 transition-colors duration-200"
+																	target="_blank"
+																	rel="noopener noreferrer">
+																	{textItem.plain_text}
+																</a>
+															{:else}
+																{textItem.plain_text}
+															{/if}
+														{/each}
+													</td>
+												{:else}
+													<td
+														class="px-6 py-4 text-foreground border-r border-border/50 last:border-r-0 align-top">
+														{#each getRichTextWithFormatting(cell || []) as textItem}
+															{#if textItem.annotations?.bold}
+																<strong class="font-semibold text-foreground"
+																	>{textItem.plain_text}</strong>
+															{:else if textItem.annotations?.italic}
+																<em>{textItem.plain_text}</em>
+															{:else if textItem.annotations?.code}
+																<code
+																	class="bg-accent/20 text-accent-foreground text-xs px-2 py-1 rounded font-mono border border-border/30"
+																	>{textItem.plain_text}</code>
+															{:else if textItem.annotations?.underline}
+																<u>{textItem.plain_text}</u>
+															{:else if textItem.annotations?.strikethrough}
+																<s>{textItem.plain_text}</s>
+															{:else if textItem.href}
+																<a
+																	href={textItem.href}
+																	class="text-brand hover:text-accent underline decoration-2 underline-offset-2 transition-colors duration-200"
+																	target="_blank"
+																	rel="noopener noreferrer">
+																	{textItem.plain_text}
+																</a>
+															{:else}
+																{textItem.plain_text}
+															{/if}
+														{/each}
+													</td>
+												{/if}
+											{/each}
+										</tr>
+									{/if}
+								{/each}
+							</tbody>
+						</table>
+					</div>
+				{:else}
+					<div class="p-8 text-center text-muted-foreground bg-muted/20 rounded-lg border border-border">
+						<p class="text-sm font-medium">Table has no content</p>
+					</div>
+				{/if}
+			</div>
 		{:else}
 			<div class="p-2 my-4 text-sm text-gray-500">
 				<!-- Unsupported block type: {block.type} -->

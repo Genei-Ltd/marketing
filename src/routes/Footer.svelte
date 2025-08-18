@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { IconBrandTwitter, IconBrandLinkedin, IconShieldCheck, IconSun } from "@tabler/icons-svelte"
+	import { IconBrandTwitter, IconBrandLinkedin, IconShieldCheck } from "@tabler/icons-svelte"
 	import { Badge } from "$lib/components/ui/badge"
-	import { Button } from "$lib/components/ui/button"
-	import { toggleMode } from "$lib/utils/theme"
+	import ThemeModeToggle from "$lib/components/ui/ThemeModeToggle.svelte"
 </script>
 
 <footer class="text-muted-foreground mt-36 w-full py-8 text-sm">
@@ -118,10 +117,7 @@
 					class=" hover:text-primary transition-colors">
 					<IconBrandTwitter class="size-5" />
 				</a>
-				<Button variant="ghost" size="icon" aria-label="Toggle Dark Mode" onclick={toggleMode}>
-					<IconSun class="size-5" />
-					<!-- <IconMoon class="size-5" /> -->
-				</Button>
+				<ThemeModeToggle />
 			</div>
 		</div>
 	</div>
