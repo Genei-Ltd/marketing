@@ -44,17 +44,17 @@
 	const companyTypes = [
 		{
 			title: "Agency",
-			href: "#agency",
+			href: "#research-agencies",
 			description: "Solutions for agencies and consultants",
 		},
 		{
 			title: "In-house team",
-			href: "#in-house",
+			href: "#in-house-strategy-teams",
 			description: "Solutions for internal teams",
 		},
 		{
 			title: "Independent researcher",
-			href: "#independent",
+			href: "#independent-researchers",
 			description: "Solutions for independent researchers",
 		},
 	]
@@ -67,27 +67,27 @@
 		},
 		{
 			title: "Message testing",
-			href: "#message-testing",
+			href: "#concept-testing",
 			description: "Test marketing messages and communications",
 		},
 		{
 			title: "Brand positioning",
-			href: "#brand-positioning",
+			href: "#concept-testing",
 			description: "Research and refine brand positioning",
 		},
 		{
 			title: "Customer experience",
-			href: "#customer-experience",
+			href: "#concept-testing",
 			description: "Understand and improve customer experience",
 		},
 		{
 			title: "Market entry",
-			href: "#market-entry",
+			href: "#concept-testing",
 			description: "Research for entering new markets",
 		},
 		{
 			title: "Pricing research",
-			href: "#pricing-research",
+			href: "#concept-testing",
 			description: "Research pricing strategies and models",
 		},
 	]
@@ -194,7 +194,7 @@
 									<NavigationMenu.Link
 										class="relative flex flex-col justify-end w-full h-full p-6 overflow-hidden no-underline bg-transparent rounded-md outline-none select-none focus:shadow-md">
 										{#snippet child({ props })}
-											<a {...props} href="/product">
+											<a {...props} href="https://docs.coloop.ai/docs/">
 												<img
 													src="/images/base-5.png"
 													alt="Resources"
@@ -214,8 +214,8 @@
 									</NavigationMenu.Link>
 								</li>
 								{@render ListItem({
-									href: "/product",
-									title: "Product",
+									href: "https://docs.coloop.ai/docs/",
+									title: "Documentation",
 									content: "Learn how to use CoLoop effectively",
 								})}
 								{@render ListItem({
@@ -367,9 +367,9 @@
 					{#if openMobileSection === "product"}
 						<div class="pl-4 my-2 space-y-2">
 							<a
-								href="/product"
+								href="https://docs.coloop.ai/docs/"
 								class="hover:text-primary hover:bg-secondary/10 text-md block px-2 py-2 transition-colors rounded">
-								<div class="font-medium">Product</div>
+								<div class="font-medium">Documentation</div>
 								<div class="text-card-foreground opacity-80 text-sm">
 									Learn how to use CoLoop effectively
 								</div>

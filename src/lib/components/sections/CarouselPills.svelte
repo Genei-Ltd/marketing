@@ -74,6 +74,7 @@
 					: 'opacity-20'} transition-opacity  duration-300 ease-in-out"
 				onclick={() => api?.scrollTo(0)}>
 				<TwoSplit
+					id="in-house"
 					label="In-House Strategy Teams"
 					heading="Solutions for in-house strategy teams"
 					description="Build a knowledge base of your most valuable data and move from insight to influence"
@@ -94,6 +95,7 @@
 					: 'opacity-20'} transition-opacity  duration-300 ease-in-out"
 				onclick={() => api?.scrollTo(1)}>
 				<TwoSplit
+					id="concept-testing"
 					label="Concept & Stimulus Testing"
 					heading="Solutions for product, message & concept testing"
 					description="Test messages, concepts and products with machine precision and human empathy"
@@ -114,6 +116,7 @@
 					: 'opacity-20'} transition-opacity  duration-300 ease-in-out"
 				onclick={() => api?.scrollTo(2)}>
 				<TwoSplit
+					id="survey-analysis"
 					label="Survey Analysis"
 					heading="Solutions for analysing surveys"
 					description="Generate nuanced, actionable analysis from survey open ends with human level accuracy in minutes not days."
@@ -134,6 +137,7 @@
 					: 'opacity-20'} transition-opacity  duration-300 ease-in-out"
 				onclick={() => api?.scrollTo(3)}>
 				<TwoSplit
+					id="research-agencies"
 					label="Research Agencies"
 					heading="Solutions for research agencies & consultancies"
 					description="Cut manual effort, messy tool stacks and deliver unique strategic change to clients."
