@@ -82,9 +82,9 @@
 	{/if}
 
 	<!-- Structured Data -->
-	{#each structuredData as structuredSchema}
+	{#if structuredData.length > 0}
 		<script type="application/ld+json">
-			{JSON.stringify(structuredSchema)}
+			{JSON.stringify(structuredData.length === 1 ? structuredData[0] : structuredData.flat())}
 		</script>
-	{/each}
+	{/if}
 </svelte:head>
