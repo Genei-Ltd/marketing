@@ -169,18 +169,17 @@
 								? 'opacity-100 scale-100'
 								: 'opacity-40 scale-[0.98]'}">
 							<!-- Background gradient (original style) -->
-							<div
-								class="absolute inset-0 z-0 bg-gradient-to-t from-primary/90 via-primary/80 to-primary/70">
+							<div class="absolute inset-0 z-0 bg-gradient-to-t from-primary via-primary to-primary">
 							</div>
 
 							<div class="absolute inset-0 z-20 p-6 md:p-10 flex flex-col justify-end">
-								<div class="flex flex-col justify-end">
+								<div class="flex flex-col justify-end w-2/3 h-2/3">
 									<div class="flex flex-col justify-end">
 										<IconQuote
 											class="size-10 md:size-12 text-primary-foreground/30 -mb-2"
 											stroke={1} />
 										<blockquote
-											class="text-primary-foreground line-clamp-6 md:line-clamp-5 font-serif text-lg md:text-xl">
+											class="text-primary-foreground text-balance italic line-clamp-6 md:line-clamp-5 font-serif text-lg md:text-xl">
 											{testimonial.content}
 										</blockquote>
 										<div class="mt-6 text-primary-foreground/90 font-sans text-sm">
@@ -192,8 +191,7 @@
 							</div>
 						</div>
 						<div class="col-span-1 h-full relative">
-							<div
-								class="w-full h-full absolute object-cover border border-border/30 bg-primary/10 rounded overflow-hidden">
+							<div class="w-full h-full absolute object-cover rounded overflow-hidden">
 								<img
 									src={"/images/base.png"}
 									alt={"Background"}
@@ -202,7 +200,7 @@
 
 							<!-- Gradient overlay over the image -->
 							<div
-								class="absolute h-full w-full inset-0 z-20 rounded bg-gradient-to-tr from-background via-background/20 to-transparent pointer-events-none">
+								class="absolute h-full w-full inset-0 z-20 rounded bg-linear-15 from-black/50 via-black/20 to-transparent pointer-events-none">
 							</div>
 
 							<!-- Company logo or name centered -->
@@ -212,7 +210,8 @@
 									<img
 										src={testimonial.companyLogo}
 										alt={testimonial.company || "Company"}
-										transition:fly={{ x: 100, duration: 1000 }}
+										in:fly={{ x: 100, duration: 300 }}
+										out:fly={{ x: -100, duration: 300 }}
 										class="w-1/2 h-auto invert brightness-0 contrast-200 saturate-0 object-contain" />
 								{:else if testimonial.company}
 									<div class="text-white text-xl uppercase font-semibold tracking-tight">

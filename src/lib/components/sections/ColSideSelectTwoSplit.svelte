@@ -5,7 +5,7 @@
 	import { fly } from "svelte/transition"
 
 	import { cn } from "$lib/utils.js"
-	import WildAnimationBox from "../../../routes/WildAnimationBox.svelte"
+	import WildAnimationBox from "../animations/WildAnimationBox.svelte"
 	import DemoWorkflow from "$components/animations/DemoWorkflow.svelte"
 
 	// Define the features data structure

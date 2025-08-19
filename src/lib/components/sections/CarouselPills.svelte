@@ -1,5 +1,5 @@
 <script lang="ts">
-	import WildAnimationBox from "./../../../routes/WildAnimationBox.svelte"
+	import WildAnimationBox from "../animations/WildAnimationBox.svelte"
 	import * as Carousel from "$lib/components/ui/carousel/index.js"
 	import type { CarouselAPI } from "$lib/components/ui/carousel/context.js"
 	import TwoSplit from "$components/layouts/TwoSplit.svelte"

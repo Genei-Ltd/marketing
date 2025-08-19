@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Timeline from "../lib/components/sections/Timeline.svelte"
 
-	import WildAnimationBox from "./WildAnimationBox.svelte"
+	import WildAnimationBox from "../lib/components/animations/WildAnimationBox.svelte"
 
 	import BlogEndArtCard from "./../lib/components/blocks/BlogEndArtCard.svelte"
 
@@ -124,7 +124,7 @@
 			buttonText="Explore Workflows"
 			reverse
 			buttonHref="/book-a-demo">
-			<WildAnimationBox backgroundImage="/images/base-6.png" backgroundColor="bg-accent-3">
+			<WildAnimationBox backgroundImage="/images/base-6.png" backgroundColor="bg-accent-3" overrideScaleSm={90}>
 				<div class=" flex items-center justify-center h-full mx-auto overflow-hidden scale-120">
 					<DemoFeatureReel />
 				</div>
@@ -136,7 +136,7 @@
 			description="Uploads your data from a growing range of file formats, languages, 3rd party tools and custom APIs to create a single unified source of truth."
 			buttonText="Explore Integrations"
 			buttonHref="/book-a-demo">
-			<WildAnimationBox backgroundImage="/images/base-5.png" backgroundColor="bg-accent-2">
+			<WildAnimationBox backgroundImage="/images/base-5.png" backgroundColor="bg-accent-2" overrideScaleSm={90}>
 				<StaticDemoIntegrations />
 			</WildAnimationBox>
 		</TwoSplit>

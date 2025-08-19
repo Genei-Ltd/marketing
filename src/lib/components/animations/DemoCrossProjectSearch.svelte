@@ -425,7 +425,7 @@ Clean, professional design for corporate audiences
 				<div
 					class="transition-all duration-300 w-full h-full flex items-center justify-center rounded-xl overflow-hidden"
 					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
-					<Box class="h-full flex items-center justify-center min-w-96 max-w-96 mx-auto">
+					<Box class="h-full flex items-center justify-center min-w-96 max-w-full mx-auto">
 						<div class="space-y-6 w-full h-full relative">
 							<div class="text-left">
 								<h2 class="text-xl text-black leading-tight font-semibold">Search Across Projects</h2>
