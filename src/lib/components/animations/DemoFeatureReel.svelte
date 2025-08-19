@@ -43,21 +43,21 @@
 		class={cn(
 			"bg-white  rounded-full p-4 px-8 min-w-50 backdrop-blur-sm",
 			"flex flex-col items-center justify-center  text-center",
-			"hover:scale-105 transition-all duration-300 pointer-events-none",
+			" transition-all duration-300 pointer-events-none",
 		)}>
 		<h3 class="text-black text-md font-semibold">{item}</h3>
 	</div>
 {/snippet}
 
 <div
-	class="w-full mask-l-from-90% mask-r-from-90% relative h-full flex items-center justify-center flex-col gap-6 overflow-hidden">
+	class="w-full relative mask-l-from-90% mask-r-from-90% h-full flex items-center justify-center flex-col gap-6 overflow-hidden">
 	{#each featuresLists as features}
-		<Marquee direction="left" fade={true} pauseOnHover={true}>
+		<Marquee direction="left" pauseOnHover={true}>
 			{#each features as item}
 				{@render feature(item)}
 			{/each}
 		</Marquee>
-		<Marquee reverse={true} fade={true} pauseOnHover={true}>
+		<Marquee reverse={true} pauseOnHover={true}>
 			{#each features as item}
 				{@render feature(item)}
 			{/each}
