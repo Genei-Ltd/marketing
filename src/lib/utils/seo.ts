@@ -56,11 +56,11 @@ export function generateSectionSlugPageMetadata(sectionSlugPage: SectionSlugPage
  */
 export function generateHomepageMetadata(): SEOMetadata {
 	return {
-		title: `${WEBSITE_NAME} - AI-Powered Research & Insights Platform`,
+		title: `${WEBSITE_NAME} | AI-Powered Research & Insights Platform`,
 		description:
 			"Transform your research with AI-powered analysis. CoLoop helps insights teams analyze qualitative data, transcripts, and feedback faster with specialized AI agents and workflows.",
 		canonical: MARKETING_BASE_URL,
-		ogTitle: `${WEBSITE_NAME} - AI-Powered Research & Insights Platform`,
+		ogTitle: `${WEBSITE_NAME} | AI-Powered Research & Insights Platform`,
 		ogDescription:
 			"Transform your research with AI-powered analysis. CoLoop helps insights teams analyze qualitative data, transcripts, and feedback faster with specialized AI agents and workflows.",
 		ogImage: `${MARKETING_BASE_URL}${DEFAULT_OG_IMAGE}`,

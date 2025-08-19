@@ -69,83 +69,89 @@
 							{/if}
 						</div>
 					</div> -->
-					<div class="aspect-[16/10] w-full overflow-hidden rounded-lg relative">
-						{#if post.coverImage}
-							<div
-								class="bg-gradient-to-tl from-black/70 to-black/30 absolute inset-0 z-10 flex items-center justify-center p-4 lg:p-8 h-full">
+					<a href={"/blog/" + post.slug}>
+						<div class="aspect-[16/10] w-full overflow-hidden rounded-lg relative">
+							{#if post.coverImage}
 								<div
-									class="absolute inset-0 z-30 flex items-center justify-center flex-shrink-0 p-4 h-full">
-									{#if post.companyLogo}
-										<img
-											src={post.companyLogo}
-											alt={post.company || "Company"}
-											class="w-auto h-auto max-h-1/3 max-w-1/3 brightness-0 contrast-200 invert drop-shadow-[0_0_0_white] text-white" />
-									{:else if post.company}
-										<div
-											class="md:text-3xl text-2xl font-bold tracking-tight line-clamp-1 capitalize text-white">
-											{post.company}
-										</div>
-									{/if}
-								</div>
-							</div>
-						{:else if post.externalUrl}
-							<div
-								class="bg-gradient-to-tl from-black/70 to-black/30 absolute inset-0 z-10 flex items-end justify-start p-4 lg:p-8 h-full overflow-hidden">
-								<h1
-									class="text-white text-3xl text-balance justify-end items-end font-thin capitalize font-serif text-left line-clamp-3 leading-tight">
-									{post.title}
-								</h1>
-							</div>
-						{/if}
-						<img
-							src={post.externalUrl
-								? "/images/article-fallback.png"
-								: post.coverImage || "/images/fallback.png"}
-							alt={post.title}
-							loading="lazy"
-							class="group-hover:scale-110 animate-fade-in object-cover w-full h-full transition-all duration-500 ease-out opacity-0" />
-					</div>
-					<div class="relative z-10">
-						<div class=" text-primary-foreground relative flex flex-col justify-start h-full lg:px-2">
-							<!-- Content -->
-							<div class="flex flex-row justify-between flex-1 mt-4 mb-1">
-								<blockquote class=" text-primary-foreground line-clamp-2 text-lg font-medium">
-									{post.title}
-								</blockquote>
-								<div class="flex-shrink-0 hidden lg:block">
-									<Button
-										href={"/blog/" + post.slug}
-										variant="secondary"
-										class="text-secondary-foreground ">Read Article</Button>
-								</div>
-							</div>
-
-							<!-- Footer -->
-							<div class="flex items-end justify-between flex-shrink-0 gap-6">
-								<div class="flex-1 flex flex-row items-center justify-between">
-									<div class="flex-col">
-										<p class=" text-primary-foreground opacity-70 text-sm font-semibold">
-											{post.company}
-										</p>
-										<div class="opacity-70 flex flex-row gap-3">
-											{#if post.category}
-												{#each post.category as category}
-													<p class="text-primary-foreground text-sm capitalize">{category}</p>
-												{/each}
-											{/if}
-										</div>
+									class="bg-gradient-to-tl from-black/70 to-black/30 absolute inset-0 z-10 flex items-center justify-center p-4 lg:p-8 h-full">
+									<div
+										class="absolute inset-0 z-30 flex items-center justify-center flex-shrink-0 p-4 h-full">
+										{#if post.companyLogo}
+											<img
+												src={post.companyLogo}
+												alt={post.company || "Company"}
+												class="w-auto h-auto max-h-1/3 max-w-1/3 brightness-0 contrast-200 invert drop-shadow-[0_0_0_white] text-white" />
+										{:else if post.company}
+											<div
+												class="md:text-3xl text-2xl font-bold tracking-tight line-clamp-1 capitalize text-white">
+												{post.company}
+											</div>
+										{/if}
 									</div>
-									<div class="flex-shrink-0 block lg:hidden">
+								</div>
+							{:else if post.externalUrl}
+								<div
+									class="bg-gradient-to-tl from-black/70 to-black/30 absolute inset-0 z-10 flex items-end justify-start p-4 lg:p-8 h-full overflow-hidden">
+									<h1
+										class="text-white text-lg lg:text-3xl text-balance justify-end items-end font-thin capitalize font-serif text-left line-clamp-3 leading-tight">
+										{post.title}
+									</h1>
+								</div>
+							{/if}
+							<img
+								src={post.externalUrl
+									? "/images/article-fallback.png"
+									: post.coverImage || "/images/fallback.png"}
+								alt={post.title}
+								loading="lazy"
+								class="group-hover:scale-110 animate-fade-in object-cover w-full h-full transition-all duration-500 ease-out opacity-0" />
+						</div>
+						<div class="relative z-10">
+							<div class=" text-primary-foreground relative flex flex-col justify-start h-full lg:px-2">
+								<!-- Content -->
+								<div class="flex flex-row justify-between flex-1 mt-4 mb-1">
+									<blockquote
+										class=" text-primary-foreground line-clamp-2 text-md lg:text-lg font-medium">
+										{post.title}
+									</blockquote>
+									<div class="flex-shrink-0 hidden lg:block">
 										<Button
 											href={"/blog/" + post.slug}
 											variant="secondary"
-											size="sm"
 											class="text-secondary-foreground ">Read Article</Button>
+									</div>
+								</div>
+
+								<!-- Footer -->
+								<div class="flex items-end justify-between flex-shrink-0 gap-6">
+									<div class="flex-1 flex flex-row items-center justify-between">
+										<div class="flex-col">
+											<p class=" text-primary-foreground text-sm font-bold">
+												{post.company}
+											</p>
+											<div class="opacity-70 flex flex-row gap-3">
+												{#if post.category}
+													{#each post.category as category}
+														<p
+															class="text-primary-foreground text-sm capitalize font-medium">
+															{category}
+														</p>
+													{/each}
+												{/if}
+											</div>
+										</div>
+										<div class="flex-shrink-0 block lg:hidden">
+											<Button
+												href={"/blog/" + post.slug}
+												variant="secondary"
+												size="sm"
+												class="text-secondary-foreground ">Read Article</Button>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 				</Carousel.Item>
 			{/each}
 		</Carousel.Content>

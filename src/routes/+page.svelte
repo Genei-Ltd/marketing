@@ -83,9 +83,9 @@
 				class="xl:text-huge text-white text-balance drop-shadow-lg w-full sm:text-3xl md:text-4xl font-serif text-2xl leading-tight tracking-wide capitalize">
 				AI-powered analysis for human-powered insights
 			</h1>
-			<h2 class="text-white text-md md:text-xl mt-4 font-sans w-full tracking-wide capitalize">
+			<h1 class="text-white text-md md:text-xl mt-4 font-sans w-full tracking-wide capitalize">
 				Insights to Influence.
-			</h2>
+			</h1>
 		</div>
 	</div>
 </div>

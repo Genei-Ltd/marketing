@@ -4,7 +4,7 @@
 	import type { NotionBlock, NotionPageWithProperties } from "$lib/types/notion"
 	import { IconArrowLeft } from "@tabler/icons-svelte"
 	import { Skeleton } from "$components/ui/skeleton"
-	import { fly, scale } from "svelte/transition"
+	import { fly, scale, slide } from "svelte/transition"
 	import { cubicInOut } from "svelte/easing"
 	import SEOHead from "$lib/components/SEOHead.svelte"
 	import type { Article } from "$lib/types/articles"
@@ -126,8 +126,8 @@
 		{:then blogPostBlocks}
 			<div
 				class="mx-auto prose"
-				in:fly={{ y: 30, duration: 500, easing: cubicInOut, delay: 700 }}
-				out:fly={{ y: -30, duration: 500, easing: cubicInOut }}>
+				in:slide={{ axis: "y", duration: 500, easing: cubicInOut, delay: 700 }}
+				out:slide={{ axis: "y", duration: 500, easing: cubicInOut }}>
 				<NotionContent blocks={blogPostBlocks || []} />
 			</div>
 		{:catch}
