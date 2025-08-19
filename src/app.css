@@ -257,10 +257,21 @@
 	}
 
 	.animate-shimmer {
-		background:
-			linear-gradient(-45deg, #0000 40%, var(--popover) 50%, #0000 60%) right/300% 100%,
-			linear-gradient(45deg, var(--card), var(--card));
-		animation: shine 1.5s infinite;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.animate-shimmer::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(150deg, transparent 30%, var(--secondary) 50%, transparent 70%);
+		opacity: 0.2;
+		animation: shimmer-slide 2s infinite cubic-bezier(0.165, 0.84, 0.44, 1);
+		pointer-events: none;
 	}
 
 	.animate-shimmer-text {
@@ -271,12 +282,21 @@
 		background-clip: text;
 		-webkit-text-fill-color: transparent;
 		color: #000;
-		animation: shine 1.5s infinite;
+		animation: shine 1.5s infinite cubic-bezier(0.8, 0, 0.2, 0.9);
 	}
 
 	@keyframes shine {
 		to {
 			background-position: left;
+		}
+	}
+
+	@keyframes shimmer-slide {
+		0% {
+			left: -100%;
+		}
+		100% {
+			left: 100%;
 		}
 	}
 

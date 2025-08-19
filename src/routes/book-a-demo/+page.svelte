@@ -147,19 +147,30 @@
 		content="Book a personalized demo of CoLoop's research platform. Quick form to get started." />
 </svelte:head>
 
-<div class="min-h-screen mt-14 h-full flex xl:flex-row flex-col">
+<div class="min-h-screen mt-14 h-full flex xl:flex-row flex-col overflow-hidden relative">
 	{#if !showCalEmbed}
-		<!-- Header -->
-		<div class="text-left bg-black py-16 mb-16 lg:justify-between max-h-screen relative">
+		<!-- Header Section -->
+		<div class="text-left bg-black mb-14 lg:justify-between max-h-screen relative z-10 max-w-4xl">
 			<img src="/images/base.png" alt="CoLoop" class="absolute inset-0 object-cover w-full h-full opacity-60" />
 			<div class="bg-gradient-to-t from-black/50 to-black/0 absolute z-10 w-full h-full"></div>
-			<div class="lg:px-10 relative flex flex-col items-start justify-between max-w-4xl px-6 mx-auto h-full">
-				<div>
-					<h1 class="font-bold text-white mb-4 w-full">300+ Teams Trust CoLoop</h1>
-					<p class="text-lg text-white mx-auto w-full">
-						Get a personalized demonstration of CoLoop's research platform.
-					</p>
+			<div
+				class="lg:px-10 z-20 relative flex flex-col items-start justify-between px-6 mx-auto h-1/2 max-h-full my-16">
+				<h1 class="font-bold text-white mb-4 w-full">300+ Teams Trust CoLoop</h1>
+
+				<!-- TESTIMONIAL QUOTE -->
+				<div class=" text-white">
+					<div class=" flex flex-col items-start justify-center max-w-2xl">
+						<blockquote class="text-white text-balance italic font-serif text-lg lg:text-xl">
+							"CoLoop transformed how we approach qualitative research. What used to take our team weeks
+							now happens in days, and the insights are more actionable than ever."
+						</blockquote>
+						<div class="text-white font-sans text-md mt-4">
+							<span class="text-white block font-semibold">Researcher</span>
+							<!-- <span class="block">TechCorp</span> -->
+						</div>
+					</div>
 				</div>
+
 				<!-- <div class="w-full overflow-hidden h-128">
 					<Marquee fade direction="up" duration="20s" gap="3rem" numberOfCopies={3} class="h-full">
 						{#each new Array(16) as _, i}
@@ -170,43 +181,16 @@
 						{/each}
 					</Marquee>
 				</div> -->
-
-				<!-- TESTIMONIAL QUOTE -->
-				<div class=" text-white py-16">
-					<!-- <div class=" flex items-center justify-center">
-							<img
-								src="/images/old-man.png"
-								alt="customer testimonial"
-								class="aspect-square object-cover w-full h-full rounded" />
-						</div> -->
-					<div class=" flex flex-col items-start justify-center max-w-2xl">
-						<blockquote class="text-white text-balance mb-8 font-serif text-xl">
-							"CoLoop transformed how we approach qualitative research. What used to take our team weeks
-							now happens in days, and the insights are more actionable than ever."
-						</blockquote>
-						<div class="text-white font-sans text-sm">
-							<span class="text-white block font-semibold">Sarah Chen</span>
-							<span class="block">Head of User Research, TechCorp</span>
-						</div>
-					</div>
-				</div>
-
-				<div class=" flex-col items-start justify-start mb-16 lg:mb-0 hidden xl:flex">
-					<p class="text-md text-white mx-auto w-full max-w-2xl">
-						Join 300+ teams who've transformed their research workflow. See how CoLoop's AI-powered platform
-						can accelerate your insights discovery by 10x in just 30 minutes.
-					</p>
-				</div>
 			</div>
 		</div>
 
+		<!-- Main Form Section -->
 		<div
 			class="w-full mx-auto px-4 sm:px-6 lg:px-8 h-full min-h-screen flex flex-col items-center justify-center max-w-6xl pb-16">
-			<!-- Main Form -->
 			<div
 				class="h-full w-full mx-auto flex flex-col items-center justify-center flex-1"
 				in:slide={{ axis: "y", duration: 1000 }}>
-				<div class="w-full h-full max-w-3xl mx-auto">
+				<div class="w-full h-full max-w-3xl mx-auto mt-8">
 					<div class="flex flex-col items-center justify-center mb-16 text-center">
 						<h1 class="font-bold text-foreground mb-4 w-full">Book Your Demo</h1>
 						<p class="text-lg text-muted-foreground mx-auto w-full">
@@ -257,7 +241,7 @@
 									<label
 										class="flex items-center border border-border min-h-16 lg:min-h-24 rounded overflow-hidden cursor-pointer hover:bg-muted/50 transition-all duration-300 {teamType ===
 										option.id
-											? 'border-primary scale-95 '
+											? 'border-primary scale-95 bg-primary/20'
 											: ' hover:scale-102  transition-all duration-300'}">
 										<input
 											type="radio"
@@ -275,7 +259,7 @@
 											</div>
 											<div
 												class="flex-1 p-4 transition-all duration-300 {teamType === option.id
-													? 'bg-primary/10 '
+													? ' '
 													: ''}">
 												<div class="font-medium text-foreground text-sm">
 													{option.title}
@@ -316,7 +300,7 @@
 									<label
 										class="flex items-center border border-border min-h-16 lg:min-h-24 rounded overflow-hidden cursor-pointer hover:bg-muted/50 transition-all duration-300 {productInterest ===
 										option.id
-											? 'border-primary scale-95 '
+											? 'border-primary scale-95 bg-primary/20'
 											: ' hover:scale-102  transition-all duration-300'}">
 										<input
 											type="radio"
@@ -335,7 +319,7 @@
 											<div
 												class="flex-1 p-4 transition-all duration-300 {productInterest ===
 												option.id
-													? 'bg-primary/10 '
+													? ' '
 													: ''}">
 												<div class="font-medium text-foreground text-sm">
 													{option.title}
@@ -391,7 +375,9 @@
 							<Button
 								type="submit"
 								disabled={!canSubmit || isSubmitting}
-								class="w-full h-12 text-base font-semibold"
+								class="w-full h-12 text-base font-semibold {canSubmit
+									? 'cursor-pointer scale-105 animate-shimmer transition-all duration-200 ease-in-out hover:scale-106 active:scale-104 opacity-100'
+									: ''} "
 								size="lg">
 								{#if isSubmitting}
 									<IconLoader class="w-4 h-4 mr-2 animate-spin" />

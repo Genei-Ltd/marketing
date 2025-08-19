@@ -73,11 +73,11 @@
 					name="email"
 					bind:value={email}
 					{placeholder}
-					class="border-border bg-background text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20 w-full
+					class="border-border bg-background text-foreground placeholder:text-muted-foreground focus:border-brand focus:ring-brand/20 w-full
                          rounded-lg border px-4
                          py-3 transition-all duration-200 focus:ring-2 focus:outline-none
                          {form?.errors?.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : ''}
-                         {canSubmit ? 'border-green-300 focus:border-green-400' : ''}"
+                         {canSubmit ? 'border-green-600 focus:border-green-600 focus:ring-green-600/20' : ''}"
 					required
 					disabled={isSubmitting} />
 
@@ -85,11 +85,11 @@
 					type="submit"
 					disabled={!canSubmit}
 					class=" {canSubmit
-						? 'cursor-pointer'
-						: ''}  bg-primary text-primary-foreground flex h-12 min-h-max items-center justify-around rounded px-6 font-semibold w-full lg:w-auto">
+						? 'cursor-pointer scale-105 animate-shimmer transition-all duration-200 ease-in-out hover:scale-106 active:scale-104 opacity-100'
+						: ''}  bg-primary text-primary-foreground flex h-12 min-h-max items-center justify-around rounded-lg px-6 font-semibold w-full lg:w-auto">
 					{#if isSubmitting}
 						<div class="flex items-center justify-center gap-2">
-							<div class="animate-spin border-t-transparent w-4 h-4 border-2 border-white rounded-full">
+							<div class="animate-spin border-t-transparent w-4 h-4 border-2 border-brand rounded-full">
 							</div>
 							Submitting...
 						</div>
