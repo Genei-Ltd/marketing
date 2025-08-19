@@ -792,7 +792,7 @@ STEP 3: Insights Dashboard
 											<div class="flex items-center justify-between">
 												<div class="flex items-center gap-2 text-sm">
 													<div class="flex items-center">
-														<span class="font-medium">{theme.name}</span>
+														<span class="font-medium text-black">{theme.name}</span>
 													</div>
 												</div>
 												<span class=" text-gray-600 text-sm font-medium"

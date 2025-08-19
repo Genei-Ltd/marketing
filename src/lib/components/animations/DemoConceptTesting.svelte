@@ -442,7 +442,7 @@ Clean, professional design for corporate audiences - keeping original functional
 										<div
 											class="relative border border-gray-300 hover:border-gray-800 transition-all duration-300 ease-in-out overflow-hidden rounded {concept.isHighlighted
 												? 'scale-110 border-black bg-black text-white'
-												: 'bg-white'}"
+												: 'bg-white text-black'}"
 											in:fade={{ duration: 400, delay: i * 80 }}>
 											<!-- Concept letter badge -->
 											<div class="absolute -top-1 -left-1 z-10">

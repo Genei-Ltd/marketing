@@ -415,18 +415,18 @@ Clean, professional design for corporate audiences
 <!-- ============================================================================ -->
 
 {#if showCard}
-	<div class="w-full h-full flex items-center justify-center mx-auto">
+	<div class="w-full h-full flex items-center justify-center mx-auto min-w-full">
 		<div
-			class="transition-all duration-500 flex items-center justify-center mx-auto"
+			class="transition-all duration-500 flex items-center justify-center mx-auto w-full"
 			in:slide={{ axis: "y", duration: 300, easing: quintOut }}
 			out:fade={{ duration: 200, delay: 100, easing: cubicInOut }}>
 			<!-- SEARCH QUERY STEP -->
 			{#if currentStep?.id === "search-query"}
 				<div
-					class="transition-all duration-300 w-full h-full flex items-center justify-center rounded-xl overflow-hidden"
+					class="transition-all duration-300 w-full h-full flex items-center justify-center rounded-xl"
 					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
-					<Box class="h-full flex items-center justify-center min-w-96 max-w-full mx-auto">
-						<div class="space-y-6 w-full h-full relative">
+					<Box class="h-full flex items-center justify-center min-w-96 w-full lg:max-w-96 mx-auto">
+						<div class="space-y-6 w-full h-full relative transition-all duration-500">
 							<div class="text-left">
 								<h2 class="text-xl text-black leading-tight font-semibold">Search Across Projects</h2>
 								<p class="text-md text-gray-600 mt-1">Query all research projects</p>
@@ -436,7 +436,7 @@ Clean, professional design for corporate audiences
 							<div class="space-y-4">
 								<div class="relative">
 									<div
-										class="flex items-start gap-3 p-3 border border-gray-800 rounded-lg bg-white h-16">
+										class="flex items-start gap-3 p-3 border border-gray-800 rounded-lg bg-white h-16 w-full">
 										<div
 											class="flex-1 text-sm text-gray-800 min-h-[1.25rem] leading-relaxed line-clamp-2 text-left">
 											{animationState.typedQuery}
@@ -483,7 +483,7 @@ Clean, professional design for corporate audiences
 					class="w-full h-full flex items-start justify-start transition-all duration-300"
 					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
 					<div
-						class="transition-all transform w-full flex items-center justify-center bg-white rounded-xl shadow-md duration-500"
+						class="transition-all transform w-full min-w-full flex items-center justify-center bg-white rounded-xl shadow-md duration-500"
 						transition:slide={{ axis: "y", duration: 300, easing: quintOut }}>
 						<div class="h-full flex items-start justify-start w-full p-6 transition-height duration-500">
 							<div class="space-y-3 w-full h-full relative transition-all duration-500">

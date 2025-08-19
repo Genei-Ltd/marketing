@@ -5,7 +5,7 @@
 		backgroundColor = "bg-secondary",
 		children,
 		overrideScaleLg = 100,
-		overrideScaleSm = 60,
+		overrideScaleSm = 90,
 		overrideClass = "",
 	}: {
 		backgroundImage?: string
@@ -24,13 +24,17 @@
 			alt="Background"
 			class="opacity-80 absolute inset-0 object-cover w-full h-full scale-110 bg-black" />
 	{/if}
-	<div
-		class={cn(
-			`h-full z-10 w-full lg:w-5/6 lg:h-5/6 scale-${overrideScaleSm} lg:scale-${overrideScaleLg} transition-all duration-300 ease-in-out`,
-			overrideClass,
-		)}>
+	<div class={cn(` z-10  font-scale-50 w-5/6 h-5/6   transition-all duration-300 ease-in-out`, overrideClass)}>
 		{#if children}
 			{@render children?.()}
 		{/if}
 	</div>
 </div>
+
+<style>
+	@media (max-width: 1024px) {
+		.font-scale-50 {
+			zoom: 0.65;
+		}
+	}
+</style>
