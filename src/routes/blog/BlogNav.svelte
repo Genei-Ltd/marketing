@@ -17,7 +17,7 @@
 
 <nav aria-label="Blog categories">
 	<div
-		class="min-h-6 scrollbar-hide flex flex-row gap-4 mb-8 overflow-x-scroll capitalize"
+		class="min-h-6 flex flex-row gap-4 mb-8 capitalize flex-wrap"
 		in:fly={{ y: 10, duration: 300, easing: cubicInOut }}
 		out:fly={{ y: -10, duration: 300, easing: cubicInOut }}>
 		<div in:fly={{ y: 5, duration: 300, easing: cubicInOut, delay: 50 }}>

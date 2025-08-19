@@ -82,7 +82,7 @@
 	{/if}
 
 	<!-- Structured Data -->
-	{#if structuredData.length > 0}
+	{#if structuredData && structuredData.length > 0}
 		<script type="application/ld+json">
 			{JSON.stringify(structuredData.length === 1 ? structuredData[0] : structuredData.flat())}
 		</script>
