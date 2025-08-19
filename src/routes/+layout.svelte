@@ -1,6 +1,7 @@
 <script lang="ts">
 	//   import { ModeWatcher } from "mode-watcher"
 	import type { Snippet } from "svelte"
+	import type { LayoutData } from "./$types"
 
 	import "../app.css"
 	import EndReveal from "./EndReveal.svelte"
@@ -12,9 +13,10 @@
 
 	interface Props {
 		children?: Snippet
+		data: LayoutData
 	}
 
-	let { children }: Props = $props()
+	let { children, data }: Props = $props()
 </script>
 
 <!-- <ModeWatcher /> -->
@@ -28,10 +30,10 @@
 			</main>
 			{#if page.url.pathname === "/"}
 				<div class="lg:snap-end">
-					<Footer />
+					<Footer {data} />
 				</div>
 			{:else}
-				<Footer />
+				<Footer {data} />
 			{/if}
 		</div>
 

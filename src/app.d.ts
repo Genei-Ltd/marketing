@@ -3,8 +3,6 @@
 /// <reference types="svelte-clerk/env" />
 
 declare global {
-	const __COMMIT_HASH__: string
-
 	namespace App {
 		// interface Error {}
 		interface Locals {

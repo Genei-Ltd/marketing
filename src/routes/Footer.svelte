@@ -2,6 +2,8 @@
 	import { IconBrandTwitter, IconBrandLinkedin, IconShieldCheck } from "@tabler/icons-svelte"
 	import { Badge } from "$lib/components/ui/badge"
 	import ThemeModeToggle from "$lib/components/ui/ThemeModeToggle.svelte"
+	import type { LayoutData } from "./$types"
+	export let data: LayoutData
 </script>
 
 <footer class="text-muted-foreground mt-36 w-full py-8 text-sm">
@@ -91,7 +93,9 @@
 		<div class="md:flex-row lg:mt-36 flex flex-col items-center justify-between gap-4 mt-16">
 			<div class="text-muted-foreground flex flex-col gap-1 text-xs">
 				<div>&copy; {new Date().getFullYear()} CoLoop. All rights reserved.</div>
-				<div class="opacity-60">Build: {__COMMIT_HASH__}</div>
+				<div class="opacity-50">
+					{data.gitData.RAILWAY_GIT_COMMIT_SHA} | {data.gitData.RAILWAY_GIT_AUTHOR}
+				</div>
 			</div>
 			<nav class="flex items-center gap-4 text-xs">
 				<a href="/legal/terms-of-service" class="hover:text-primary hover:underline transition-colors"
