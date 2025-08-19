@@ -32,7 +32,7 @@
 </div>
 
 <style>
-	@media (max-width: 1024px) {
+	@media (max-width: 1280px) {
 		.font-scale-50 {
 			zoom: 0.65;
 		}
