@@ -8,7 +8,7 @@
 
 <footer class="text-muted-foreground mt-36 w-full py-8 text-sm">
 	<div class="lg:px-10 w-full max-w-6xl px-6 mx-auto">
-		<div class="lg:flex-row flex flex-col justify-between w-full">
+		<div class="lg:flex-row flex flex-col justify-between w-full border-t border-border/50 pt-8">
 			<div class="col-span-1">
 				<a href="/" class="lg:mb-4 flex items-center gap-2 mb-8">
 					<img
@@ -93,7 +93,7 @@
 		<div class="md:flex-row lg:mt-36 flex flex-col items-center justify-between gap-4 mt-16">
 			<div class="text-muted-foreground flex flex-col gap-1 text-xs">
 				<div>&copy; {new Date().getFullYear()} CoLoop. All rights reserved.</div>
-				<div class="opacity-50">
+				<div class="opacity-50 lg:text-left text-center">
 					{data.gitData.RAILWAY_GIT_COMMIT_SHA} | {data.gitData.RAILWAY_GIT_AUTHOR}
 				</div>
 			</div>

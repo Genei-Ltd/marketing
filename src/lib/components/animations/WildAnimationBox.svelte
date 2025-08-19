@@ -24,7 +24,11 @@
 			alt="Background"
 			class="opacity-80 absolute inset-0 object-cover w-full h-full scale-110 bg-black" />
 	{/if}
-	<div class={cn(` z-10  font-scale-50 w-5/6 h-5/6   transition-all duration-300 ease-in-out`, overrideClass)}>
+	<div
+		class={cn(
+			` z-10  font-scale-50 lg:w-5/6 lg:h-5/6 w-full h-full   transition-all duration-300 ease-in-out`,
+			overrideClass,
+		)}>
 		{#if children}
 			{@render children?.()}
 		{/if}
@@ -34,7 +38,11 @@
 <style>
 	@media (max-width: 1280px) {
 		.font-scale-50 {
-			zoom: 0.65;
+			width: 100%;
+			height: 100%;
+			/* zoom: 0.65; */
+			transform: scale(0.65);
+			transform-origin: center center;
 		}
 	}
 </style>
