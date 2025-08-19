@@ -480,7 +480,7 @@ Clean, professional design for corporate audiences
 			<!-- SEARCH RESULTS STEP -->
 			{#if currentStep?.id === "search-results"}
 				<div
-					class="w-full h-full flex items-start justify-start transition-all duration-300"
+					class="w-full h-full flex items-start justify-start transition-all duration-300 min-w-112"
 					in:scale={{ duration: 500, easing: elasticOut, start: 0.5 }}>
 					<div
 						class="transition-all transform w-full min-w-full flex items-center justify-center bg-white rounded-xl shadow-md duration-500"
