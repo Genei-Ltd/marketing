@@ -88,7 +88,7 @@
 												src={post.companyLogo}
 												alt={post.title}
 												loading="lazy"
-												class="h-fit z-20 w-auto max-w-xl brightness-0 contrast-200 invert drop-shadow-[0_0_0_white]" />
+												class="h-auto z-20 w-auto max-h-1/2 max-w-1/2 brightness-0 contrast-200 invert drop-shadow-[0_0_0_white]" />
 										</div>
 									{:else if post.externalUrl}
 										<div
