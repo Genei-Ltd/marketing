@@ -3,21 +3,23 @@
 /// <reference types="svelte-clerk/env" />
 
 declare global {
-  namespace App {
-    // interface Error {}
-    interface Locals {
-      clerk: {
-        auth: {
-          isSignedIn: boolean
-          [key: string]: any
-        }
-        client: ClerkClient
-      }
-    }
-    // interface PageData {}
-    // interface PageState {}
-    // interface Platform {}
-  }
+	const __COMMIT_HASH__: string
+
+	namespace App {
+		// interface Error {}
+		interface Locals {
+			clerk: {
+				auth: {
+					isSignedIn: boolean
+					[key: string]: any
+				}
+				client: ClerkClient
+			}
+		}
+		// interface PageData {}
+		// interface PageState {}
+		// interface Platform {}
+	}
 }
 
 export {}

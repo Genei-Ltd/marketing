@@ -89,8 +89,9 @@
 		</div>
 
 		<div class="md:flex-row lg:mt-36 flex flex-col items-center justify-between gap-4 mt-16">
-			<div class="text-muted-foreground text-xs">
-				&copy; {new Date().getFullYear()} CoLoop. All rights reserved.
+			<div class="text-muted-foreground flex flex-col gap-1 text-xs">
+				<div>&copy; {new Date().getFullYear()} CoLoop. All rights reserved.</div>
+				<div class="opacity-60">Build: {__COMMIT_HASH__}</div>
 			</div>
 			<nav class="flex items-center gap-4 text-xs">
 				<a href="/legal/terms-of-service" class="hover:text-primary hover:underline transition-colors"
