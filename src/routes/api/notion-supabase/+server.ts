@@ -23,7 +23,11 @@ export const POST: RequestHandler = async ({ request }) => {
         if (body.type === "page.properties_updated" || body.type === "page.content_updated") {
             const updatedPageId = body.entity.id
             // write 'processing' to notion table
-            await updatePageProperty(updatedPageId, "Status", "Processing")
+            await updatePageProperty(updatedPageId, "Status", {
+                "status": {
+                    "name": "Processing"
+                }
+            })
         
             // Receive a notion db row in page properties format
         
@@ -48,14 +52,26 @@ export const POST: RequestHandler = async ({ request }) => {
             await upsertBlogPost(articleWithBlocks)
         
             // write success to notion table
-            await updatePageProperty(updatedPageId, "updated_at", new Date().toISOString())
-            await updatePageProperty(updatedPageId, "Status", "Success")
+            await updatePageProperty(updatedPageId, "updated_at", {
+                "date": {
+                    "start": new Date().toISOString()
+                }
+            })
+            await updatePageProperty(updatedPageId, "Status", {
+                "status": {
+                    "name": "Success"
+                }
+            })
 
             return json({ message: "Success" })
         }
     } catch (error) {
         console.error(error)
-        await updatePageProperty(body.entity.id, "Status", "Error")
+        await updatePageProperty(body.entity.id, "Status", {
+            "status": {
+                "name": "Error"
+            }
+        })
         return json({ message: "Error" }, { status: 500 })
     }
 
