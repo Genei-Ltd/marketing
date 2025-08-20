@@ -12,6 +12,10 @@ import { upsertBlogPost } from "$lib/server/notion-supabase"
 export const POST: RequestHandler = async ({ request }) => {
     const body = await request.json()
     const headers = request.headers
+    
+    console.log("body", body)
+    console.log("headers", headers)
+
 	if (!(await isNotionWebhookValid(headers, body))) {
 		return json({ message: "Unauthorized" }, { status: 401 })
     }
@@ -22,7 +26,6 @@ export const POST: RequestHandler = async ({ request }) => {
     }
 
 	// if webhook is valid, get the body
-	console.log("body", body)
 
     try {
         // if webhook update type is 'page.properties_updated'
