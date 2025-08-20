@@ -9,12 +9,13 @@ import type { Article } from "$lib/types/articles"
 import { upsertBlogPost } from "$lib/server/notion-supabase"
 
 export const POST: RequestHandler = async ({ request }) => {
-	if (!(await isNotionWebhookValid(request))) {
+    const body = await request.json()
+    const headers = request.headers
+	if (!(await isNotionWebhookValid(headers, body))) {
 		return json({ message: "Unauthorized" }, { status: 401 })
 	}
 
 	// if webhook is valid, get the body
-	const body = await request.json()
 	console.log("body", body)
 
     try {

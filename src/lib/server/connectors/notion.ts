@@ -618,11 +618,24 @@ export async function transformPageToSimpleObject(page: PageObjectResponse): Pro
 // notion webhook validator
 import { createHmac, timingSafeEqual } from "crypto"
 
-export async function isNotionWebhookValid(request: Request): Promise<boolean> {
+export async function isNotionWebhookValid(headers: Headers, body: Body): Promise<boolean> {
 	// Retrieve the `verification_token` from the initial request
 	const verificationToken = env.NOTION_VERIFICATION_TOKEN
-	const headers = request.headers
-	const body = await request.json()
+
+    if (!verificationToken) {
+        console.error("No verification token found")
+        return false
+    }
+
+    if (!headers || !headers.get("X-Notion-Signature")) {
+        console.error("No X-Notion-Signature header found")
+        return false
+    }
+
+    if (!body ) {
+        console.error("No body found")
+        return false
+    }
 
 	const calculatedSignature = `sha256=${createHmac("sha256", verificationToken).update(JSON.stringify(body)).digest("hex")}`
 
