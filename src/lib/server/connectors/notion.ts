@@ -561,6 +561,17 @@ export async function getDatabaseSchemaMultiSelectOptionsForProperty(
 	return []
 }
 
+/**
+ * Update a page property
+ * @param pageId - The Notion page ID
+ * @param property - The property name to update
+ * @param value - The value to update the property with
+ * the value needs to be in the format of the property type
+ * for example:
+ * { "status": { "name": "Processing" } }
+ * @returns The updated property value
+ */
+
 export async function updatePageProperty(pageId: string, property: string, value: any): Promise<any> {
 	try {
 		return await notionConnector.updatePageProperty(pageId, property, value)
