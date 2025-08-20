@@ -21,11 +21,11 @@ export const POST: RequestHandler = async ({ request }) => {
     try {
         // if webhook update type is 'page.properties_updated'
         if (body.type === "page.properties_updated" || body.type === "page.content_updated") {
+            const updatedPageId = body.entity.id
             // write 'processing' to notion table
-            await updatePageProperty(body.data.object.id, "Status", "Processing")
+            await updatePageProperty(updatedPageId, "Status", "Processing")
         
             // Receive a notion db row in page properties format
-            const updatedPageId = body.entity.id
         
             // const page = await getPage(updatedPageId)
             const dbRowPage = await notionConnector.getPage(updatedPageId)
@@ -49,13 +49,13 @@ export const POST: RequestHandler = async ({ request }) => {
         
             // write success to notion table
             await updatePageProperty(updatedPageId, "updated_at", new Date().toISOString())
-            await updatePageProperty(body.data.object.id, "Status", "Success")
+            await updatePageProperty(updatedPageId, "Status", "Success")
 
             return json({ message: "Success" })
         }
     } catch (error) {
         console.error(error)
-        await updatePageProperty(body.data.object.id, "Status", "Error")
+        await updatePageProperty(body.entity.id, "Status", "Error")
         return json({ message: "Error" }, { status: 500 })
     }
 
@@ -68,7 +68,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	// if webhook update type is 'page.content_updated'
 	if (body.type === "page.content_updated") {
 		// write 'in progress' to notion table
-		updatePageProperty(body.data.object.id, "status", "in progress")
+		updatePageProperty(body.entity.id, "status", "in progress")
 
 		// Receive a notion db row in page content format
 
