@@ -44,17 +44,17 @@
 	const companyTypes = [
 		{
 			title: "Agency",
-			href: "#research-agencies",
+			href: "/#research-agencies",
 			description: "Solutions for agencies and consultants",
 		},
 		{
 			title: "In-house team",
-			href: "#in-house-strategy-teams",
+			href: "/#in-house-strategy-teams",
 			description: "Solutions for internal teams",
 		},
 		{
 			title: "Independent researcher",
-			href: "#independent-researchers",
+			href: "/#independent-researchers",
 			description: "Solutions for independent researchers",
 		},
 	]
@@ -62,32 +62,32 @@
 	const useCases = [
 		{
 			title: "Concept testing",
-			href: "#concept-testing",
+			href: "/#concept-testing",
 			description: "Test and validate new concepts",
 		},
 		{
 			title: "Message testing",
-			href: "#concept-testing",
+			href: "/#concept-testing",
 			description: "Test marketing messages and communications",
 		},
 		{
 			title: "Brand positioning",
-			href: "#concept-testing",
+			href: "/#concept-testing",
 			description: "Research and refine brand positioning",
 		},
 		{
 			title: "Customer experience",
-			href: "#concept-testing",
+			href: "/#concept-testing",
 			description: "Understand and improve customer experience",
 		},
 		{
 			title: "Market entry",
-			href: "#concept-testing",
+			href: "/#concept-testing",
 			description: "Research for entering new markets",
 		},
 		{
 			title: "Pricing research",
-			href: "#concept-testing",
+			href: "/#concept-testing",
 			description: "Research pricing strategies and models",
 		},
 	]
