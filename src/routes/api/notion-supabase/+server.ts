@@ -9,10 +9,11 @@ import type { Article } from "$lib/types/articles"
 import { upsertBlogPost } from "$lib/server/notion-supabase"
 
 
+
 export const POST: RequestHandler = async ({ request }) => {
     const body = await request.json()
     const headers = request.headers
-    
+
     console.log("body", body)
     console.log("headers", headers)
 
@@ -21,7 +22,7 @@ export const POST: RequestHandler = async ({ request }) => {
     }
     
     // if its a bot then we return a successful end of the function
-    if (body.entity.authors.some((author: { type: string }) => author.type === 'bot')) {
+    if (body.authors.some((author: { type: string }) => author.type === 'bot')) {
         return json({ message: "Success: No change from bot" })
     }
 
