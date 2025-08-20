@@ -1,15 +1,31 @@
+import type { Article } from "$lib/types/articles"
 import { supabase } from "./connectors/supabase"
+import type { Database } from "../../../database.types"
 
-function transformNotionBlogPostToSupabaseBlogPost(notionBlogPost: NotionBlogPost): BlogPost {
-	// return {
-	// 	id: notionBlogPost.id,
-	// 	title: notionBlogPost.title,
-	// 	content: notionBlogPost.content,
-	// }
+type SupabaseBlogPost = Database["public"]["Tables"]["blogs"]["Insert"]
+
+function transformArticleToSupabaseBlogPost(article: Article): SupabaseBlogPost {
+	return {
+		author_name: article.author,
+		author_image: article.authorImage || null,
+		company_name: article.company || null,
+		company_logo_image: article.companyLogo || null,
+		category: article.category || null,
+		group: article.group || null,
+		external_url: article.externalUrl || null,
+		published_date: article.publishedDate || null,
+		seo_description: article.seoDescription || null,
+		status: article.status || null,
+		cover_image: article.coverImage || null,
+		slug: article.slug,
+		title: article.title || null,
+	}
 }
 
-export async function upsertBlogPost(blogPost: BlogPost) {
-	const { data, error } = await supabase.from("blog_posts").upsert(blogPost).select()
+export async function upsertBlogPost(blogPost: Article) {
+	const blog_as_supabase = transformArticleToSupabaseBlogPost(blogPost)
+
+	const { data, error } = await supabase.from("blogs").upsert(blog_as_supabase).select()
 
 	if (error) {
 		console.error(error)
@@ -20,7 +36,7 @@ export async function upsertBlogPost(blogPost: BlogPost) {
 }
 
 export async function getBlogPost(slug: string) {
-	const { data, error } = await supabase.from("blog_posts").select("*").eq("slug", slug).single()
+	const { data, error } = await supabase.from("blogs").select("*").eq("slug", slug).single()
 
 	if (error) {
 		console.error(error)

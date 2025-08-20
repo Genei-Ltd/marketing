@@ -615,5 +615,30 @@ export async function transformPageToSimpleObject(page: PageObjectResponse): Pro
 	}
 }
 
+// notion webhook validator
+import { createHmac, timingSafeEqual } from "crypto"
+
+export async function isNotionWebhookValid(request: Request): Promise<boolean> {
+	// Retrieve the `verification_token` from the initial request
+	const verificationToken = env.NOTION_VERIFICATION_TOKEN
+	const headers = request.headers
+	const body = await request.json()
+
+	const calculatedSignature = `sha256=${createHmac("sha256", verificationToken).update(JSON.stringify(body)).digest("hex")}`
+
+	const isTrustedPayload = timingSafeEqual(
+		Buffer.from(calculatedSignature),
+		Buffer.from(headers.get("X-Notion-Signature") || ""),
+	)
+
+	if (isTrustedPayload) {
+		return true
+	}
+
+	// default ignore event
+	console.error("Notion webhook is not valid")
+	return false
+}
+
 // Export a singleton instance
 export const notionConnector = new NotionConnector()
