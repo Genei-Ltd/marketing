@@ -43,7 +43,7 @@
 			icon: IconDeviceDesktopCode,
 			title: "Live Support & Training",
 			description:
-				"White glove support to support adoption, maximise value and transform your team to AI first experts.",
+				"White glove support to drive adoption, maximise value and transform your team to AI first experts.",
 		},
 		{
 			icon: IconHeartHandshake,
@@ -57,7 +57,7 @@
 		},
 		{
 			icon: IconScale,
-			title: "2x more likely to recommend that ChatGPT",
+			title: "2x more likely to recommend CoLoop over ChatGPT",
 			description: "Robust, industry-standard protection with zero training on your data.",
 		},
 	]
@@ -71,7 +71,7 @@
 			icon: IconDeviceDesktopCode,
 			title: "Live Support & Training",
 			description:
-				"White glove support to support adoption, maximise value and transform your team to AI first experts.",
+				"White glove support to drive adoption, maximise value and transform your team to AI first experts.",
 		},
 		{
 			icon: IconScale,

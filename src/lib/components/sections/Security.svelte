@@ -44,7 +44,7 @@
 		},
 		{
 			icon: IconDatabase,
-			title: "End to end encryption",
+			title: "End-to-end encryption",
 		},
 		{
 			icon: IconShield,
@@ -70,7 +70,7 @@
 			</div> -->
 			<div class="flex flex-col gap-6">
 				<div class="flex flex-col gap-2 mb-8">
-					<span class=" text-balance leading-tighter font-serif text-3xl">Enterprise Grade Security</span>
+					<span class=" text-balance leading-tighter font-serif text-3xl">Enterprise-grade Security</span>
 					<span class=" opacity-90 text-md">Trusted by the largest global brands and agencies</span>
 				</div>
 

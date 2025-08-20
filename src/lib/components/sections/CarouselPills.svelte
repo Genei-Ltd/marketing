@@ -77,7 +77,7 @@
 					id="in-house"
 					label="In-House Strategy Teams"
 					heading="Solutions for in-house strategy teams"
-					description="Build a knowledge base of your most valuable data and move from insight to influence"
+					description="Build a knowledge base of your most valuable data and move from Insights to Influence"
 					buttonText="Solutions for in-house strategy teams"
 					buttonHref="/blog/in-house-strategy-teams"
 					showButton={true}
@@ -119,7 +119,7 @@
 					id="survey-analysis"
 					label="Survey Analysis"
 					heading="Solutions for analysing surveys"
-					description="Generate nuanced, actionable analysis from survey open ends with human level accuracy in minutes not days."
+					description="Generate nuanced, actionable analysis from survey open ends with human-level accuracy in minutes not days."
 					buttonText="Solutions for analysing surveys"
 					buttonHref="/blog/survey-analysis"
 					showButton={true}

@@ -186,7 +186,7 @@ Clean, professional design for corporate audiences
 	// DATA CONFIGURATION
 	// ============================================================================
 
-	const questionText = "Summarise the top 3 reasons buyers go with ACME’s SaaS Solution over competitors."
+	const questionText = "Summarize the top 3 reasons buyers go with ACME’s SaaS Solution over competitors."
 	const summaryText = `Ease of Use: Buyers describe ACME as “intuitive” and “simple to roll out,” with several noting staff were “up and running quickly” without heavy training. (mentioned by ~9 of 20 participants) [1][2][5][7] +5 more
 	Integration: Interviewees emphasized how smoothly ACME fit into existing CRM and ERP systems, avoiding the “headaches” they’d faced with competitors. (noted by ~7 of 20 participants) [11][8][9]+4 more
 	Pricing & ROI: Customers highlighted ACME’s transparent pricing and the sense of “getting value sooner,” contrasting it with hidden-fee models elsewhere. (raised by ~6 of 20 participants) [3][4][6]+3 more`

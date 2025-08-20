@@ -9,7 +9,7 @@
 		<div class="from-primary bg-gradient-to-t to-primary/50 absolute inset-0">
 			<div class="text-secondary flex flex-col items-center justify-center w-full h-full">
 				<h1 class="text-secondary font-sans lg:text-[100px] text-2xl font-light tracking-tight drop-shadow">
-					Insight to Influence.
+					Insights to Influence.
 				</h1>
 				<h1
 					class=" text-secondary text-center lg:-mt-4 font-serif lg:text-[90px] text-2xl font-extralight tracking-tighter italic drop-shadow">

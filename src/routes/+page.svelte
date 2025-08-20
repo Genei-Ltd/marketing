@@ -110,7 +110,7 @@
 		<TwoSplit
 			label="Analysis Agents"
 			heading="Specialized for Insights"
-			description="Delegate complex tasks in natural language to domain-specific agents that can count, search, summarise and cite."
+			description="Delegate complex tasks in natural language to domain-specific agents that can count, search, summarize and cite."
 			buttonText="Explore Agents"
 			buttonHref="/book-a-demo">
 			<WildAnimationBox backgroundImage="/images/base.png" backgroundColor="bg-accent-4">
@@ -120,7 +120,7 @@
 		<TwoSplit
 			label="Workflows"
 			heading="Streamline Your Analysis"
-			description="Precise purpose built workflows for transcription, translation, content analysis, clip reels and more."
+			description="Purpose-built workflows for transcription, translation, content analysis, clip reels and more."
 			buttonText="Explore Workflows"
 			reverse
 			buttonHref="/book-a-demo">
@@ -133,7 +133,7 @@
 		<TwoSplit
 			label="Integrations"
 			heading="Consolidate Your Tools"
-			description="Uploads your data from a growing range of file formats, languages, 3rd party tools and custom APIs to create a single unified source of truth."
+			description="Upload your data from a growing range of file formats, languages, 3rd party tools and custom APIs to create a single unified source of truth."
 			buttonText="Explore Integrations"
 			buttonHref="/book-a-demo">
 			<WildAnimationBox backgroundImage="/images/base-5.png" backgroundColor="bg-accent-2" overrideScaleSm={90}>
@@ -175,7 +175,7 @@
 				<span class="underline">Adopt it, and adopt it fast.</span>"
 			</blockquote>
 			<div class=" font-sans text-sm">
-				<span class=" block font-semibold">Eric Schmitt</span>
+				<span class=" block font-semibold">Eric Schmidt</span>
 				<a
 					href="https://www.businessinsider.com/eric-schmidt-ignore-ai-risk-irrelevance-workers-jobs-google-ted-2025-5"
 					class="block underline underline-offset-2 hover:underline-offset-4 transition-all duration-300 ease-in-out"
@@ -189,7 +189,7 @@
 	class="lg:px-10 relative flex flex-col items-center justify-center max-w-6xl px-6 mx-auto overflow-hidden mt-16 mb-16">
 	<!-- STATISTICS & BENEFITS  -->
 	<div class="lg:mt-32 lg:mb-32 flex flex-col w-full mt-16 mb-16">
-		{@render section("Future proof your AI strategy with professional grade tooling", "Researchers love CoLoop.")}
+		{@render section("Future-proof your AI strategy with professional-grade tooling", "Researchers love CoLoop.")}
 		<NakedCardSet set="features" />
 	</div>
 </div>
@@ -248,7 +248,7 @@
 			icon: IconDeviceDesktopCode,
 			title: "Live Support & Training",
 			description:
-				"White glove support to support adoption, maximise value and transform your team to AI first experts.",
+				"White glove support to drive adoption, maximise value and transform your team to AI first experts.",
 		},
 		{
 			icon: IconScale,
@@ -339,7 +339,7 @@
 <div class="lg:px-10 relative flex flex-col items-center justify-center max-w-6xl px-6 mx-auto">
 	<!-- ORG TRANSFORMATION TIMELINE -->
 	<div class="lg:mt-32 lg:mb-32 w-full mt-16 mb-16">
-		{@render section("Transform your team to an AI native team")}
+		{@render section("Transform your team to an AI-first experts")}
 		<Timeline></Timeline>
 	</div>
 

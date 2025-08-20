@@ -50,10 +50,10 @@
 			</div>
 			<div class="px-4">
 				<div class="text-foreground opacity-80 mb-4 text-sm font-semibold uppercase">Month 3</div>
-				<h4 class="mb-2 text-lg font-semibold">AI-Native Transformation</h4>
+				<h4 class="mb-2 text-lg font-semibold">AI-first Transformation</h4>
 				<p class="text-muted-foreground text-md">
 					Your team operates independently with AI-powered workflows. We review outcomes, optimize processes,
-					and celebrate your transformation to AI-native research.
+					and celebrate your transformation to AI-first research.
 				</p>
 			</div>
 		</div>
@@ -102,10 +102,10 @@
 					3
 				</div>
 				<div class="flex-1 pt-2">
-					<h4 class="mb-2 text-lg font-semibold">Month 3: AI-Native Transformation</h4>
+					<h4 class="mb-2 text-lg font-semibold">Month 3: AI-first Transformation</h4>
 					<p class="text-muted-foreground text-base">
 						Your team operates independently with AI-powered workflows. We review outcomes, optimize
-						processes, and celebrate your transformation to AI-native research.
+						processes, and celebrate your transformation to AI-first research.
 					</p>
 				</div>
 			</div>

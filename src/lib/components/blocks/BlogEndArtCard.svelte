@@ -6,7 +6,7 @@
 	<div
 		class="text-balance pt-xl relative z-30 flex flex-col items-center justify-center flex-1 w-full h-full px-8 text-center">
 		<h2 class="md:text-4xl text-primary drop-shadow-sm mb-4 font-serif text-3xl font-medium">
-			Insights to influence.
+			Insights to Influence.
 		</h2>
 		<p class=" lg:w-1/2 w-full mb-8 text-base">
 			Join thousands who trust CoLoop to leverage AI for insights that matter. Start your trial today.
