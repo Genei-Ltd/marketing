@@ -6,11 +6,11 @@ export const APP_DOMAIN: string = "app.coloop.ai"
 export const SUPPORT_EMAIL: string = "support@coloop.ai"
 export const DOCS_URL: string = "https://docs.coloop.ai"
 
-export const WebsiteDescription: string = "Ai Research for Insights Teams."
+export const WebsiteDescription: string = "AI research copilot for insights teams."
 export const LOGO: string = "/logo.png"
 
 // SEO and Social Media Images
-export const DEFAULT_OG_IMAGE: string = "/images/og-image.png"
-export const BLOG_OG_IMAGE: string = "/images/blog-og.png"
-export const BLOG_CATEGORY_OG_IMAGE: string = "/images/blog-category-og.png"
-export const BLOG_POST_OG_IMAGE: string = "/images/blog-post-og.png"
+export const DEFAULT_OG_IMAGE: string = "/og/og-image.png"
+export const BLOG_OG_IMAGE: string = "/og/blog-og.png"
+export const BLOG_CATEGORY_OG_IMAGE: string = "/og/blog-category-og.png"
+export const BLOG_POST_OG_IMAGE: string = "/og/blog-post-og.png"
