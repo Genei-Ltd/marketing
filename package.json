@@ -58,7 +58,6 @@
 		"@supabase/supabase-js": "^2.55.0",
 		"@tabler/icons-svelte": "^3.33.0",
 		"base64-arraybuffer": "^1.0.2",
-		"crypto": "^1.0.1",
 		"embla-carousel-autoplay": "^8.6.0",
 		"mini-svg-data-uri": "^1.4.4",
 		"prodia": "^1.6.0",
