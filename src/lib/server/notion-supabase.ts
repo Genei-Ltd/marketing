@@ -25,7 +25,7 @@ function transformArticleToSupabaseBlogPost(article: Article): SupabaseBlogPost 
 export async function upsertBlogPost(blogPost: Article) {
 	const blog_as_supabase = transformArticleToSupabaseBlogPost(blogPost)
 
-	const { data, error } = await supabase.from("blogs").upsert(blog_as_supabase).select()
+	const { data, error } = await supabase.from("blogs").upsert(blog_as_supabase).eq("slug", blogPost.slug).select()
 
 	if (error) {
 		console.error(error)
