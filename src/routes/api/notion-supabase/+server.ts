@@ -3,15 +3,45 @@ import { X_INTERNAL_API_KEY } from "$env/static/private"
 import { transformNotionDBRowToArticle } from "$lib/server/connectors/notion"
 
 export const POST: RequestHandler = async ({ request }) => {
-	if (request.headers.get("x-internal-api-key") !== X_INTERNAL_API_KEY) {
-		return json({ message: "Unauthorized" }, { status: 401 })
-	}
+	// if (request.headers.get("x-internal-api-key") !== X_INTERNAL_API_KEY) {
+	// 	return json({ message: "Unauthorized" }, { status: 401 })
+	// }
 
 	// if webhook update type is 'page.properties_updated'
 
+	// Receive a notion db row in page properties format
+
+	// write 'in progress' to notion table
+
+	// Transform notion db row in page properties format to supabase object
+	// transformNotionDBRowToArticle
+
+	// Upsert the supabase object with the page content
+
+	// Return the supabase object
+
+	// write success to notion table
+
+	// ------------------------------------------------------------
+
 	// if webhook update type is 'page.content_updated'
 
+	// Receive a notion db row in page content format
+
+	// write 'in progress' to notion table
+
+	// Transform notion db row in page content format to supabase object
+	// transformNotionDBRowToArticle
+
+	// Upsert the supabase object with the page content
+
+	// Return the supabase object
+
+	// write success to notion table
+
+	// ------------------------------------------------------------
 	// if webhook update type is 'file_upload.completed'
+	// Leave this for now but we will put the image uploader for the bucket here
 
 	// Receive a notion db row in page properties format
 
