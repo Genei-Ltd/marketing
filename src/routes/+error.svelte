@@ -1,5 +1,6 @@
 <script>
 	import { page } from "$app/state"
+	import Button from "$components/ui/button/button.svelte"
 </script>
 
 <div class="flex min-h-screen items-center justify-center relative overflow-hidden">
@@ -29,12 +30,9 @@
 					{page?.error?.message}
 				</span>
 			</p>
-			<div class="mt-16">
-				<a
-					href="/"
-					class="text-primary-foreground bg-primary hover:bg-primary/90 inline-block rounded-lg px-8 py-3 font-semibold transition-colors">
-					Home
-				</a>
+			<div class="mt-16 flex items-center justify-center gap-4 flex-row">
+				<Button variant="outline" size="lg" href="/">Go home</Button>
+				<Button variant="default" size="lg" href="/blog">Check out our blog</Button>
 			</div>
 		</div>
 	</div>
