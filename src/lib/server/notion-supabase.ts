@@ -25,15 +25,15 @@ function transformArticleToSupabaseBlogPost(article: Article): SupabaseBlogPost 
 }
 
 export async function upsertBlogPost(blogPost: Article) {
-	console.log("about to upsert blog post:", blogPost.title)
-	console.log("with content:", blogPost.blocks?.length)
+	// console.log("about to upsert blog post:", blogPost.title)
+	// console.log("with content:", blogPost.blocks?.length)
 
 	
 	const blog_as_supabase = transformArticleToSupabaseBlogPost(blogPost)
 
-	console.log("blog_as_supabase", JSON.stringify(blog_as_supabase, null, 2).slice(0, 100))
-	const { data, error } = await supabaseAdmin.from("blogs").upsert(blog_as_supabase, {
-		onConflict: "slug",
+	// console.log("blog_as_supabase", JSON.stringify(blog_as_supabase, null, 2).slice(0, 100))
+	const { data, error } = await supabaseAdmin.from("blogs").upsert(blog_as_supabase, { 
+		onConflict: "slug,external_url" 
 	}).select()
 
 	if (error) {
