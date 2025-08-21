@@ -8,16 +8,6 @@ import {
 import type { Article } from "$lib/types/articles"
 import { upsertBlogPost } from "$lib/server/notion-supabase"
 
-function isValidJSON(str:any) {
-  try {
-    JSON.parse(str)
-    return true
-  } catch {
-    return false
-  }
-}
-
-
 export const POST: RequestHandler = async ({ request }) => {
     const body = await request.json()
     const headers = request.headers
@@ -52,32 +42,25 @@ export const POST: RequestHandler = async ({ request }) => {
             // const page = await getPage(updatedPageId)
             const dbRowPage = await notionConnector.getPage(updatedPageId)
             // const notionDBRow = dbRowPage as PageObjectResponse
-            console.log("dbRowPage", dbRowPage)
+            // console.log("dbRowPage", dbRowPage)
         
             // Transform notion db row in page properties format to supabase object
             const article: Article = await transformNotionDBRowToArticle(dbRowPage)
-            console.log("article", article)
+            // console.log("article", article)
         
             
             const pageBlocks = await notionConnector.getPageBlocksWithChildren(updatedPageId)
-            console.log("pageBlocks", pageBlocks)
+            // console.log("pageBlocks", pageBlocks)
 
-            const strigifiedBlocks = JSON.stringify(pageBlocks)
-            console.log("strigifiedBlocks", strigifiedBlocks)
-
-            // validate if pageBlocks is valid JSON
-            if (!isValidJSON(strigifiedBlocks)) {
-                console.error("strigifiedBlocks is not valid JSON")
-                return json({message: "Error: strigifiedBlocks is not valid JSON"}, {status: 500})
-            }
-
+            // Store blocks directly as JSONB array - no stringification needed!
             const articleWithBlocks = {
                 ...article,
-                blocks: strigifiedBlocks
+                blocks: pageBlocks
             }
         
             // Upsert the supabase object with the page content
-            await upsertBlogPost(articleWithBlocks)
+            const supabaseBlogPost = await upsertBlogPost(articleWithBlocks)
+            console.log("returned selected fields from supabaseBlogPost", JSON.stringify(supabaseBlogPost, null, 2).slice(0, 100))
         
             // write success to notion table
             await updatePageProperty(updatedPageId, "updated_at", {

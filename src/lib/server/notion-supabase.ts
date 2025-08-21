@@ -20,6 +20,7 @@ function transformArticleToSupabaseBlogPost(article: Article): SupabaseBlogPost 
 		cover_image: article.coverImage || null,
 		slug: article.slug,
 		title: article.title || null,
+		blocks: (article.blocks as Database['public']['Tables']['blogs']['Insert']['blocks']) || null,
 	}
 }
 
@@ -30,7 +31,7 @@ export async function upsertBlogPost(blogPost: Article) {
 	
 	const blog_as_supabase = transformArticleToSupabaseBlogPost(blogPost)
 
-	console.log("blog_as_supabase", blog_as_supabase)
+	console.log("blog_as_supabase", JSON.stringify(blog_as_supabase, null, 2).slice(0, 100))
 	const { data, error } = await supabaseAdmin.from("blogs").upsert(blog_as_supabase, {
 		onConflict: "slug",
 	}).select()
