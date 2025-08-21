@@ -8,6 +8,14 @@ import {
 import type { Article } from "$lib/types/articles"
 import { upsertBlogPost } from "$lib/server/notion-supabase"
 
+function isValidJSON(str:any) {
+  try {
+    JSON.parse(str)
+    return true
+  } catch {
+    return false
+  }
+}
 
 
 export const POST: RequestHandler = async ({ request }) => {
@@ -53,6 +61,12 @@ export const POST: RequestHandler = async ({ request }) => {
             
             const pageBlocks = await notionConnector.getPageBlocksWithChildren(updatedPageId)
             console.log("pageBlocks", pageBlocks)
+
+            // validate if pageBlocks is valid JSON
+            if (!isValidJSON(pageBlocks)) {
+                console.error("pageBlocks is not valid JSON")
+                return json({message: "Error: pageBlocks is not valid JSON"}, {status: 500})
+            }
 
             const articleWithBlocks = {
                 ...article,
