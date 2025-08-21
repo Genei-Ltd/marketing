@@ -62,15 +62,18 @@ export const POST: RequestHandler = async ({ request }) => {
             const pageBlocks = await notionConnector.getPageBlocksWithChildren(updatedPageId)
             console.log("pageBlocks", pageBlocks)
 
+            const strigifiedBlocks = JSON.stringify(pageBlocks)
+            console.log("strigifiedBlocks", strigifiedBlocks)
+
             // validate if pageBlocks is valid JSON
-            if (!isValidJSON(pageBlocks)) {
-                console.error("pageBlocks is not valid JSON")
-                return json({message: "Error: pageBlocks is not valid JSON"}, {status: 500})
+            if (!isValidJSON(strigifiedBlocks)) {
+                console.error("strigifiedBlocks is not valid JSON")
+                return json({message: "Error: strigifiedBlocks is not valid JSON"}, {status: 500})
             }
 
             const articleWithBlocks = {
                 ...article,
-                blocks: pageBlocks
+                blocks: strigifiedBlocks
             }
         
             // Upsert the supabase object with the page content
