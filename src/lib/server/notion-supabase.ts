@@ -26,6 +26,7 @@ function transformArticleToSupabaseBlogPost(article: Article): SupabaseBlogPost 
 export async function upsertBlogPost(blogPost: Article) {
 	const blog_as_supabase = transformArticleToSupabaseBlogPost(blogPost)
 
+	console.log("blog_as_supabase", blog_as_supabase)
 	const { data, error } = await supabaseAdmin.from("blogs").upsert(blog_as_supabase, {
 		onConflict: "slug",
 	}).select()
