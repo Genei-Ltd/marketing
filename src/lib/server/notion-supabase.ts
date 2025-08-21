@@ -1,6 +1,7 @@
 import type { Article } from "$lib/types/articles"
 import { supabase } from "./connectors/supabase"
 import type { Database } from "../../../database.types"
+import { supabaseAdmin } from "./connectors/supabase"
 
 type SupabaseBlogPost = Database["public"]["Tables"]["blogs"]["Insert"]
 
@@ -25,7 +26,7 @@ function transformArticleToSupabaseBlogPost(article: Article): SupabaseBlogPost 
 export async function upsertBlogPost(blogPost: Article) {
 	const blog_as_supabase = transformArticleToSupabaseBlogPost(blogPost)
 
-	const { data, error } = await supabase.from("blogs").upsert(blog_as_supabase, {
+	const { data, error } = await supabaseAdmin.from("blogs").upsert(blog_as_supabase, {
 		onConflict: "slug",
 	}).select()
 
