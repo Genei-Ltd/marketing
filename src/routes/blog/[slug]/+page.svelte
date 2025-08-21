@@ -16,8 +16,8 @@
 		seoMetadata: SEOMetadata
 		structuredData: unknown[]
 		// Streamed data (promises that resolve after page loads)
-		blogPostBlocks: Promise<NotionBlock[]>
-		blogPostMetadata: Promise<NotionPageWithProperties>
+		// blogPostBlocks: Promise<NotionBlock[]>
+		// blogPostMetadata: Promise<NotionPageWithProperties>
 	}
 
 	let { data }: { data: PageData } = $props()
@@ -36,76 +36,84 @@
 		Back
 	</Button>
 	<article class="space-y-8">
-		<!-- Article header - Available immediately from server -->
-		<div class="lg:mb-24 flex flex-col gap-4 mb-16 text-left">
-			<h1
-				class="lg:pr-32 text-balance pr-0 font-serif font-medium text-3xl"
-				in:fly={{ x: -10, duration: 300, easing: cubicInOut, delay: 200 }}
-				out:fly={{ x: 10, duration: 500, easing: cubicInOut }}>
-				{data.article.title}
-			</h1>
+		{#await data.article}
+			<div class="space-y-4">
+				<Skeleton class="w-full h-4" />
+				<Skeleton class="w-5/6 h-4" />
+				<Skeleton class="w-4/5 h-4" />
+			</div>
+		{:then article}
+			<div class="lg:mb-24 flex flex-col gap-4 mb-16 text-left">
+				<h1
+					class="lg:pr-32 text-balance pr-0 font-serif font-medium text-3xl"
+					in:fly={{ x: -10, duration: 300, easing: cubicInOut, delay: 200 }}
+					out:fly={{ x: 10, duration: 500, easing: cubicInOut }}>
+					{article.title}
+				</h1>
 
-			<div
-				class="flex items-center justify-start gap-4"
-				in:fly={{ x: -10, duration: 300, easing: cubicInOut, delay: 400 }}
-				out:fly={{ x: 10, duration: 500, easing: cubicInOut }}>
-				{#if data.article.authorImage}
-					<img
-						src={data.article.authorImage}
-						alt={data.article.author}
-						class="bg-primary object-cover object-center w-10 h-10 rounded-full"
-						in:scale={{ duration: 300, easing: cubicInOut, delay: 200, start: 0.8 }} />
-				{:else}
-					<div class="bg-muted w-10 h-10 overflow-hidden rounded-full"></div>
-				{/if}
-				<div>
-					{#if data.article.author}
-						<p
-							class="text-foreground text-base font-medium"
-							in:fly={{ y: 5, duration: 300, easing: cubicInOut, delay: 250 }}>
-							{data.article.author}
-						</p>
+				<div
+					class="flex items-center justify-start gap-4"
+					in:fly={{ x: -10, duration: 300, easing: cubicInOut, delay: 400 }}
+					out:fly={{ x: 10, duration: 500, easing: cubicInOut }}>
+					{#if article.authorImage}
+						<img
+							src={article.authorImage}
+							alt={article.author}
+							class="bg-primary object-cover object-center w-10 h-10 rounded-full"
+							in:scale={{ duration: 300, easing: cubicInOut, delay: 200, start: 0.8 }} />
+					{:else}
+						<div class="bg-muted w-10 h-10 overflow-hidden rounded-full"></div>
 					{/if}
-					{#if data.article.publishedDate}
-						<span
-							class="text-muted-foreground text-sm"
-							in:fly={{ y: 5, duration: 300, easing: cubicInOut, delay: 250 }}>
-							Published on {new Date(data.article.publishedDate).toLocaleDateString("en-US", {
-								year: "numeric",
-								month: "long",
-								day: "numeric",
-							})}
-							{#if data.article.readingTime}
-								• {data.article.readingTime} min read
-							{/if}
-						</span>
-					{/if}
+					<div>
+						{#if article.author}
+							<p
+								class="text-foreground text-base font-medium"
+								in:fly={{ y: 5, duration: 300, easing: cubicInOut, delay: 250 }}>
+								{article.author}
+							</p>
+						{/if}
+						{#if article.publishedDate}
+							<span
+								class="text-muted-foreground text-sm"
+								in:fly={{ y: 5, duration: 300, easing: cubicInOut, delay: 250 }}>
+								Published on {new Date(article.publishedDate).toLocaleDateString("en-US", {
+									year: "numeric",
+									month: "long",
+									day: "numeric",
+								})}
+								{#if article.readingTime}
+									• {article.readingTime} min read
+								{/if}
+							</span>
+						{/if}
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<!-- Cover image - Available immediately from server -->
-		{#if data.article.coverImage}
-			<div class="aspect-video bg-primary object-cover w-full overflow-hidden rounded relative">
-				<img
-					src={data.article.coverImage}
-					alt={data.article.title}
-					class="aspect-video bg-primary object-cover w-full overflow-hidden rounded"
-					in:fly={{ y: 20, duration: 400, easing: cubicInOut, delay: 600 }}
-					out:fly={{ y: -20, duration: 500, easing: cubicInOut }} />
-				{#if data.article.companyLogo}
-					<div
-						class="bg-gradient-to-tl from-black/60 to-black/30 absolute inset-0 z-10 flex items-center justify-center p-4">
-						<img
-							src={data.article.companyLogo}
-							alt={data.article.company}
-							class="relative inset-0 w-1/2 h-1/2 object-contain brightness-0 contrast-200 invert" />
-					</div>
-				{/if}
-			</div>
-		{/if}
+			<!-- Cover image - Available immediately from server -->
+			{#if article.coverImage}
+				<div
+					class="aspect-video bg-primary object-cover w-full overflow-hidden rounded relative"
+					in:scale={{ duration: 400, easing: cubicInOut }}
+					out:scale={{ duration: 500, easing: cubicInOut }}>
+					<img
+						src={article.coverImage}
+						alt={article.title}
+						class="aspect-video bg-primary object-cover w-full overflow-hidden rounded" />
+					{#if article.companyLogo}
+						<div
+							class="bg-gradient-to-tl from-black/60 to-black/30 absolute inset-0 z-10 flex items-center justify-center p-4">
+							<img
+								src={article.companyLogo}
+								alt={article.company}
+								class="relative inset-0 w-1/2 h-1/2 object-contain brightness-0 contrast-200 invert" />
+						</div>
+					{/if}
+				</div>
+			{/if}
+		{/await}
 
-		{#await data.blogPostBlocks}
+		{#await data.article.blocks}
 			<div class="space-y-4">
 				<div class="space-y-3">
 					<Skeleton class="w-full h-4" />
@@ -123,12 +131,12 @@
 					<Skeleton class="w-3/5 h-4" />
 				</div>
 			</div>
-		{:then blogPostBlocks}
+		{:then articleBlocks}
 			<div
 				class="mx-auto prose"
 				in:slide={{ axis: "y", duration: 500, easing: cubicInOut, delay: 700 }}
 				out:slide={{ axis: "y", duration: 500, easing: cubicInOut }}>
-				<NotionContent blocks={blogPostBlocks || []} />
+				<NotionContent blocks={articleBlocks || []} />
 			</div>
 		{:catch}
 			<div class="py-16 text-center" in:fly={{ y: 20, duration: 300, easing: cubicInOut }}>

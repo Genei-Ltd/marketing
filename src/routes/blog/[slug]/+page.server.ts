@@ -4,6 +4,7 @@ import { generateBlogPostMetadata } from "$lib/utils/seo"
 import { generateBlogPostSchemas } from "$lib/utils/structured-data"
 import { error } from "@sveltejs/kit"
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints"
+import { getBlogPostBySlug } from "$lib/server/connectors/supabase"
 
 export const load = async ({ params }: { params: { slug: string } }) => {
 	const DATABASE_ID = "2326a3daa35a80a19eaae5366b3b2a1d"
@@ -15,31 +16,39 @@ export const load = async ({ params }: { params: { slug: string } }) => {
 	const { slug } = params
 
 	try {
-		// Get blog post metadata from Notion (fast - needed for SEO)
-		const blogPostMetadata = await getBlogPost(DATABASE_ID, slug)
 
-		if (!blogPostMetadata) {
+		const blogPost = await getBlogPostBySlug(slug)
+
+		if (!blogPost) {
 			throw error(404, `Blog post with slug "${slug}" not found`)
 		}
 
+
+		// Get blog post metadata from Notion (fast - needed for SEO)
+		// const blogPostMetadata = await getBlogPost(DATABASE_ID, slug)
+
+		// if (!blogPostMetadata) {
+		// 	throw error(404, `Blog post with slug "${slug}" not found`)
+		// }
+
 		// Transform Notion data to Article format (fast - needed for SEO)
-		const article = await transformNotionDBRowToArticle(blogPostMetadata as PageObjectResponse)
+		// const article = await transformNotionDBRowToArticle(blogPostMetadata as PageObjectResponse)
 
 		// Generate SEO metadata and structured data on the server (fast - needed immediately)
-		const seoMetadata = generateBlogPostMetadata(article)
-		const structuredData = generateBlogPostSchemas(article)
+		const seoMetadata = generateBlogPostMetadata(blogPost)
+		const structuredData = generateBlogPostSchemas(blogPost)
 
 		// Stream the heavy content blocks (slow - can load after page renders)
-		const blogPostBlocks = notionConnector.getPageBlocksWithChildren(blogPostMetadata.id)
+		// const blogPostBlocks = notionConnector.getPageBlocksWithChildren(blogPostMetadata.id)
 
 		return {
 			// Immediate data for SEO and initial render
-			article,
 			seoMetadata,
 			structuredData,
 			// Streamed promises for content
-			blogPostMetadata,
-			blogPostBlocks,
+			article: blogPost,
+			// blogPostMetadata,
+			// blogPostBlocks,
 		}
 	} catch (err) {
 		console.error(`Error loading blog post "${slug}":`, err)
