@@ -139,7 +139,8 @@
 				<img
 					src={block.image.type === "external" ? block.image.external.url : block.image.file.url}
 					alt={extractRichText(block.image?.caption || [])}
-					class="rounded-lg shadow-md" />
+					class="rounded-lg shadow-md bg-black"
+					loading="lazy" />
 				{#if extractRichText(block.image?.caption).length > 0}
 					<p class="mt-2 text-sm text-center text-gray-500">
 						{extractRichText(block.image.caption)}
