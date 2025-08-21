@@ -50,6 +50,7 @@ export const POST: RequestHandler = async ({ request }) => {
             const article: Article = await transformNotionDBRowToArticle(dbRowPage)
             console.log("article", article)
         
+            
             const pageBlocks = await notionConnector.getPageBlocksWithChildren(updatedPageId)
             console.log("pageBlocks", pageBlocks)
 

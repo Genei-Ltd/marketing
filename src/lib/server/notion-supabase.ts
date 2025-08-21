@@ -24,6 +24,10 @@ function transformArticleToSupabaseBlogPost(article: Article): SupabaseBlogPost 
 }
 
 export async function upsertBlogPost(blogPost: Article) {
+	console.log("about to upsert blog post:", blogPost.title)
+	console.log("with content:", blogPost.blocks?.length)
+
+	
 	const blog_as_supabase = transformArticleToSupabaseBlogPost(blogPost)
 
 	console.log("blog_as_supabase", blog_as_supabase)
