@@ -33,7 +33,7 @@ export const POST: RequestHandler = async ({ request }) => {
         if (body.type === "page.properties_updated" || body.type === "page.content_updated") {
             const updatedPageId = body.entity.id
             // write 'processing' to notion table
-            await updatePageProperty(updatedPageId, "Status", {
+            await updatePageProperty(updatedPageId, "Supabase Status", {
                 "status": {
                     "name": "Processing"
                 }
@@ -67,7 +67,7 @@ export const POST: RequestHandler = async ({ request }) => {
                     "start": new Date().toISOString()
                 }
             })
-            await updatePageProperty(updatedPageId, "Status", {
+            await updatePageProperty(updatedPageId, "Supabase Status", {
                 "status": {
                     "name": "Success"
                 }
@@ -77,7 +77,7 @@ export const POST: RequestHandler = async ({ request }) => {
         }
     } catch (error) {
         console.error(error)
-        await updatePageProperty(body.entity.id, "Status", {
+        await updatePageProperty(body.entity.id, "Supabase Status", {
             "status": {
                 "name": "Error"
             }
