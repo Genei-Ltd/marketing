@@ -33,7 +33,7 @@ export async function upsertBlogPost(blogPost: Article) {
 
 	// console.log("blog_as_supabase", JSON.stringify(blog_as_supabase, null, 2).slice(0, 100))
 	const { data, error } = await supabaseAdmin.from("blogs").upsert(blog_as_supabase, { 
-		onConflict: "slug,external_url"
+		onConflict: "slug"
 	}).select()
 
 	if (error) {
