@@ -1,3 +1,5 @@
+import type { BlockObjectResponse } from "@notionhq/client"
+
 export type Article = {
 	id?: string
 	title: string
@@ -22,7 +24,7 @@ export type Article = {
 		type: "external"
 		external: { url: string }
 	} | null
-	blocks?: unknown[]
+	blocks?: BlockObjectResponse[]
 }
 
 // {

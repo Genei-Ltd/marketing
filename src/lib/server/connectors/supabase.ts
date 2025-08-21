@@ -3,11 +3,12 @@ import {  PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_PUBLISHABLE_KEY } from "$env/stat
 import { SECRET_SUPABASE_API_KEY } from "$env/static/private"
 import type { Database } from "../../../../database.types"
 import type { Article } from "$lib/types/articles"
+import type { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints"
 
 export const supabase = createClient<Database>(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_PUBLISHABLE_KEY)
 
 
-export const supabaseAdmin = createClient(
+export const supabaseAdmin = createClient<Database>(
   PUBLIC_SUPABASE_URL,
   SECRET_SUPABASE_API_KEY,
   { auth: { persistSession: false,
@@ -73,24 +74,24 @@ function convertSupabaseToArticle(data: SupabaseBlogPost): Article {
 		seoDescription: data.seo_description || undefined,
 		status: data.status || undefined,
 		externalUrl: data.external_url || undefined,
-		blocks: data.blocks || []
+		blocks: data.blocks as BlockObjectResponse[] || []
 	}
 	return article
 }
 
 // get all published blogposts
 // I dont think we ned this
-export async function getAllPublishedBlogPosts() {
+export async function getAllPublishedBlogPosts(): Promise<Article[]> {
 	const { data, error } = await supabase.from("blogs").select("*").eq("status", "Published")
 	if (error) {
 		console.error(error)
-		return null
+		return []
 	}
-	return data
+	return data.map(convertSupabaseToArticle)
 }
 
 // get blogposts by category 
-export async function getDatabaseRowsByGroup(group: string, category?: string[]) {
+export async function getDatabaseRowsByGroup(group: string, category?: string[]): Promise<Article[]> {
 	const query = supabase.from("blogs").select("*").eq("status", "Published")
 	if (category && category.length > 0) {
 		query.overlaps("category", category)
@@ -101,7 +102,7 @@ export async function getDatabaseRowsByGroup(group: string, category?: string[])
 	const { data, error } = await query
 	if (error) {
 		console.error(error)
-		return null
+		return []
 	}
 	return data.map(convertSupabaseToArticle)
 }

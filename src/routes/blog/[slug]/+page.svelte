@@ -1,20 +1,19 @@
 <script lang="ts">
 	import NotionContent from "$components/NotionContent.svelte"
 	import Button from "$components/ui/button/button.svelte"
-	import type { NotionBlock, NotionPageWithProperties } from "$lib/types/notion"
 	import { IconArrowLeft } from "@tabler/icons-svelte"
 	import { Skeleton } from "$components/ui/skeleton"
 	import { fly, scale, slide } from "svelte/transition"
 	import { cubicInOut } from "svelte/easing"
 	import SEOHead from "$lib/components/SEOHead.svelte"
 	import type { Article } from "$lib/types/articles"
-	import type { SEOMetadata } from "$lib/utils/seo"
+	import type { SEOMetadata, StructuredData } from "$lib/utils/seo"
 
 	interface PageData {
 		// Immediate data (available on first render)
 		article: Article
 		seoMetadata: SEOMetadata
-		structuredData: unknown[]
+		structuredData: StructuredData[]
 		// Streamed data (promises that resolve after page loads)
 		// blogPostBlocks: Promise<NotionBlock[]>
 		// blogPostMetadata: Promise<NotionPageWithProperties>

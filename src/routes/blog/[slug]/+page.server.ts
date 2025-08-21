@@ -1,17 +1,15 @@
 // get the slug from the url then get the blog post from the database
-import { getBlogPost, notionConnector, transformNotionDBRowToArticle } from "$lib/server/connectors/notion"
 import { generateBlogPostMetadata } from "$lib/utils/seo"
 import { generateBlogPostSchemas } from "$lib/utils/structured-data"
 import { error } from "@sveltejs/kit"
-import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints"
 import { getBlogPostBySlug } from "$lib/server/connectors/supabase"
 
 export const load = async ({ params }: { params: { slug: string } }) => {
-	const DATABASE_ID = "2326a3daa35a80a19eaae5366b3b2a1d"
+	// const DATABASE_ID = "2326a3daa35a80a19eaae5366b3b2a1d"
 
-	if (!DATABASE_ID) {
-		throw error(500, "Please set your Notion database ID in the server file")
-	}
+	// if (!DATABASE_ID) {
+	// 	throw error(500, "Please set your Notion database ID in the server file")
+	// }
 
 	const { slug } = params
 
