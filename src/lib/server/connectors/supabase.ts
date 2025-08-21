@@ -92,7 +92,7 @@ export async function getAllPublishedBlogPosts(): Promise<Article[]> {
 
 // get blogposts by category 
 export async function getDatabaseRowsByGroup(group: string, category?: string[]): Promise<Article[]> {
-	const query = supabase.from("blogs").select("*").eq("status", "Published")
+	const query = supabase.from("blogs").select("*").eq("status", "Published").order("published_date", { ascending: false })
 	if (category && category.length > 0) {
 		query.overlaps("category", category)
 	}
