@@ -13,12 +13,12 @@ function transformArticleToSupabaseBlogPost(article: Article): SupabaseBlogPost 
 		company_logo_image: article.companyLogo || null,
 		category: article.category || null,
 		group: article.group || null,
-		external_url: article.externalUrl || null,
+		external_url: article.externalUrl || "",
 		published_date: article.publishedDate || null,
 		seo_description: article.seoDescription || null,
 		status: article.status || null,
 		cover_image: article.coverImage || null,
-		slug: article.slug,
+		slug: article.slug || "",
 		title: article.title || null,
 		blocks: (article.blocks as Database['public']['Tables']['blogs']['Insert']['blocks']) || null,
 	}
@@ -28,12 +28,18 @@ export async function upsertBlogPost(blogPost: Article) {
 	// console.log("about to upsert blog post:", blogPost.title)
 	// console.log("with content:", blogPost.blocks?.length)
 
-	
 	const blog_as_supabase = transformArticleToSupabaseBlogPost(blogPost)
 
+	// Business logic: external_url takes precedence over slug
+	const conflictField = blog_as_supabase.external_url && blog_as_supabase.external_url !== "" 
+		? "external_url" 
+		: "slug"
+
+	// console.log(`Upserting with conflict on: ${conflictField}`)
 	// console.log("blog_as_supabase", JSON.stringify(blog_as_supabase, null, 2).slice(0, 100))
+	
 	const { data, error } = await supabaseAdmin.from("blogs").upsert(blog_as_supabase, { 
-		onConflict: "slug,external_url"
+		onConflict: conflictField
 	}).select()
 
 	if (error) {
